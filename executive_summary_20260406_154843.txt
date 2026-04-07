@@ -1,0 +1,135 @@
+============================================================
+         EXECUTIVE SUMMARY - L2 REGRESSION
+============================================================
+Report: general_report_20260406_154843.csv
+Generated: 2026-04-06 15:49:07
+
+--- Overall ---
+  Total: 216 tests | 118 PASS | 30 FAIL | 68 MISSING | 54.6% pass rate
+
+============================================================
+  OWNER: Emmanuel
+============================================================
+  Total: 72 tests | 37 PASS | 9 FAIL | 26 MISSING | 51.4% pass rate
+
+  Failing tests (9):
+    [nio_d2d-a0-26ww14a] pard2d1misc / atspeed_edt_bypass_low_internal_serial_scan
+    [nio_d2d-a0-26ww14a] pard2d1misc / atspeed_edt_edt_low_internal_serial_scan
+    [nio_d2d-a0-26ww14a] pard2d1misc / ijtag_basic_tap_tests_rw_access
+    [nio_mc-a0-26ww15a] parmcmse / atspeed_edt_bypass_low_internal_serial_scan
+    [nio_mc-a0-26ww15a] parmcmse / atspeed_edt_edt_low_internal_serial_scan
+    [nio_uio-a0-26ww11a] parmiofblprxfcrarbmux / atspeed_edt_bypass_low_internal_serial_scan
+    [nio_uio-a0-26ww11a] parmiofblprxfcrarbmux / atspeed_edt_edt_low_internal_serial_scan
+    [nio_uio-a0-26ww11a] parmiopcie6tridelldp_uio_0 / atspeed_edt_bypass_low_internal_serial_scan
+    [nio_uio-a0-26ww11a] parmiopcie6tridelldp_uio_0 / atspeed_edt_edt_low_internal_serial_scan
+
+  Missing tests (26):
+    [nio_d2d-a0-26ww14a] pard2d1misc / scan_ctlr_stuckat_edt_bypass_low_internal_scandump
+    [nio_d2d-a0-26ww14a] pard2d1misc / stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off
+    [nio_uio-a0-26ww11a] parmiofblprxfcrarbmux / scan_ctlr_stuckat_edt_bypass_low_internal_scandump
+    [nio_uio-a0-26ww11a] parmiofblprxfcrarbmux / stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off
+    [nio_uio-a0-26ww11a] parmiofblpvnpipeac_uio_0 / atspeed_edt_bypass_low_internal_serial_scan
+    [nio_uio-a0-26ww11a] parmiofblpvnpipeac_uio_0 / atspeed_edt_edt_low_internal_serial_scan
+    [nio_uio-a0-26ww11a] parmiofblpvnpipeac_uio_0 / ijtag_basic_tap_tests_rw_access
+    [nio_uio-a0-26ww11a] parmiofblpvnpipeac_uio_0 / scan_ctlr_stuckat_edt_bypass_low_internal_scandump
+    [nio_uio-a0-26ww11a] parmiofblpvnpipeac_uio_0 / stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off
+    [nio_uio-a0-26ww11a] parmiofblpvnpipeac_uio_0 / stuckat_edt_bypass_low_internal_serial_chain
+    [nio_uio-a0-26ww11a] parmiofblpvnpipeac_uio_0 / stuckat_edt_bypass_low_internal_serial_scan
+    [nio_uio-a0-26ww11a] parmiofblpvnpipeac_uio_0 / stuckat_edt_edt_low_internal_serial_chain
+    [nio_uio-a0-26ww11a] parmiofblpvnpipeac_uio_0 / stuckat_edt_edt_low_internal_serial_scan
+    [nio_uio-a0-26ww11a] parmioiommu_uio_0 / atspeed_edt_bypass_low_internal_serial_scan
+    [nio_uio-a0-26ww11a] parmioiommu_uio_0 / atspeed_edt_edt_low_internal_serial_scan
+    [nio_uio-a0-26ww11a] parmioiommu_uio_0 / ijtag_basic_tap_tests_rw_access
+    [nio_uio-a0-26ww11a] parmioiommu_uio_0 / scan_ctlr_stuckat_edt_bypass_low_internal_scandump
+    [nio_uio-a0-26ww11a] parmioiommu_uio_0 / stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off
+    [nio_uio-a0-26ww11a] parmioiommu_uio_0 / stuckat_edt_bypass_low_internal_serial_chain
+    [nio_uio-a0-26ww11a] parmioiommu_uio_0 / stuckat_edt_bypass_low_internal_serial_scan
+    [nio_uio-a0-26ww11a] parmioiommu_uio_0 / stuckat_edt_edt_low_internal_serial_chain
+    [nio_uio-a0-26ww11a] parmioiommu_uio_0 / stuckat_edt_edt_low_internal_serial_scan
+    [nio_uio-a0-26ww11a] parmiopcie6tridelldp_uio_0 / scan_ctlr_stuckat_edt_bypass_low_internal_scandump
+    [nio_uio-a0-26ww11a] parmiopcie6tridelldp_uio_0 / stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off
+    [nio_uio-a0-26ww11a] parmiopcie6ttidecee_uio_0 / scan_ctlr_stuckat_edt_bypass_low_internal_scandump
+    [nio_uio-a0-26ww11a] parmiopcie6ttidecee_uio_0 / stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off
+
+============================================================
+  OWNER: Mario
+============================================================
+  Total: 72 tests | 44 PASS | 7 FAIL | 21 MISSING | 61.1% pass rate
+
+  Failing tests (7):
+    [nio_d2d-a0-26ww14a] pard2d1chnl / ijtag_basic_tap_tests_rw_access
+    [nio_mc-a0-26ww15a] parmccore / atspeed_edt_bypass_low_internal_serial_scan
+    [nio_mc-a0-26ww15a] parmccore / atspeed_edt_edt_low_internal_serial_scan
+    [nio_uio-a0-26ww11a] parmioitc_uio_0 / atspeed_edt_bypass_low_internal_serial_scan
+    [nio_uio-a0-26ww11a] parmioitc_uio_0 / atspeed_edt_edt_low_internal_serial_scan
+    [nio_uio-a0-26ww11a] parmiopcie6ttcore_uio_0 / atspeed_edt_bypass_low_internal_serial_scan
+    [nio_uio-a0-26ww11a] parmiopcie6ttcore_uio_0 / atspeed_edt_edt_low_internal_serial_scan
+
+  Missing tests (21):
+    [nio_d2d-a0-26ww14a] pard2d1chnl / scan_ctlr_stuckat_edt_bypass_low_internal_scandump
+    [nio_d2d-a0-26ww14a] pard2d1chnl / stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off
+    [nio_uio-a0-26ww11a] parmiocxltx_uio_0 / atspeed_edt_bypass_low_internal_serial_scan
+    [nio_uio-a0-26ww11a] parmiocxltx_uio_0 / atspeed_edt_edt_low_internal_serial_scan
+    [nio_uio-a0-26ww11a] parmiocxltx_uio_0 / ijtag_basic_tap_tests_rw_access
+    [nio_uio-a0-26ww11a] parmiocxltx_uio_0 / scan_ctlr_stuckat_edt_bypass_low_internal_scandump
+    [nio_uio-a0-26ww11a] parmiocxltx_uio_0 / stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off
+    [nio_uio-a0-26ww11a] parmiocxltx_uio_0 / stuckat_edt_bypass_low_internal_serial_chain
+    [nio_uio-a0-26ww11a] parmiocxltx_uio_0 / stuckat_edt_bypass_low_internal_serial_scan
+    [nio_uio-a0-26ww11a] parmiocxltx_uio_0 / stuckat_edt_edt_low_internal_serial_chain
+    [nio_uio-a0-26ww11a] parmiocxltx_uio_0 / stuckat_edt_edt_low_internal_serial_scan
+    [nio_uio-a0-26ww11a] parmiofblptx / scan_ctlr_stuckat_edt_bypass_low_internal_scandump
+    [nio_uio-a0-26ww11a] parmiofblptx / stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off
+    [nio_uio-a0-26ww11a] parmiohap_uio_0 / scan_ctlr_stuckat_edt_bypass_low_internal_scandump
+    [nio_uio-a0-26ww11a] parmiohap_uio_0 / stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off
+    [nio_uio-a0-26ww11a] parmioitc_uio_0 / scan_ctlr_stuckat_edt_bypass_low_internal_scandump
+    [nio_uio-a0-26ww11a] parmioitc_uio_0 / stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off
+    [nio_uio-a0-26ww11a] parmiopcie6ttcore_uio_0 / scan_ctlr_stuckat_edt_bypass_low_internal_scandump
+    [nio_uio-a0-26ww11a] parmiopcie6ttcore_uio_0 / stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off
+    [nio_uio-a0-26ww11a] parmiostaticmux_uio_0 / scan_ctlr_stuckat_edt_bypass_low_internal_scandump
+    [nio_uio-a0-26ww11a] parmiostaticmux_uio_0 / stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off
+
+============================================================
+  OWNER: Mauricio
+============================================================
+  Total: 72 tests | 37 PASS | 14 FAIL | 21 MISSING | 51.4% pass rate
+
+  Failing tests (14):
+    [nio_mc-a0-26ww15a] parmcmisc / atspeed_edt_bypass_low_internal_serial_scan
+    [nio_mc-a0-26ww15a] parmcmisc / atspeed_edt_edt_low_internal_serial_scan
+    [nio_mc-a0-26ww15a] parmcmisc / ijtag_basic_tap_tests_rw_access
+    [nio_uio-a0-26ww11a] parmioasf_uio_0 / ijtag_basic_tap_tests_rw_access
+    [nio_uio-a0-26ww11a] parmiocpc_uio_0 / atspeed_edt_bypass_low_internal_serial_scan
+    [nio_uio-a0-26ww11a] parmiocpc_uio_0 / atspeed_edt_edt_low_internal_serial_scan
+    [nio_uio-a0-26ww11a] parmiocxlrx_uio_0 / atspeed_edt_bypass_low_internal_serial_scan
+    [nio_uio-a0-26ww11a] parmiocxlrx_uio_0 / atspeed_edt_edt_low_internal_serial_scan
+    [nio_uio-a0-26ww11a] parmiootc_uio_0 / atspeed_edt_bypass_low_internal_serial_scan
+    [nio_uio-a0-26ww11a] parmiootc_uio_0 / atspeed_edt_edt_low_internal_serial_scan
+    [nio_uio-a0-26ww11a] parmiopcie6trcore_uio_0 / atspeed_edt_bypass_low_internal_serial_scan
+    [nio_uio-a0-26ww11a] parmiopcie6trcore_uio_0 / atspeed_edt_edt_low_internal_serial_scan
+    [nio_uio-a0-26ww11a] parmioula_uio_0 / atspeed_edt_bypass_low_internal_serial_scan
+    [nio_uio-a0-26ww11a] parmioula_uio_0 / atspeed_edt_edt_low_internal_serial_scan
+
+  Missing tests (21):
+    [nio_mc-a0-26ww15a] parmemdfi0 / atspeed_edt_bypass_low_internal_serial_scan
+    [nio_mc-a0-26ww15a] parmemdfi0 / atspeed_edt_edt_low_internal_serial_scan
+    [nio_mc-a0-26ww15a] parmemdfi0 / ijtag_basic_tap_tests_rw_access
+    [nio_mc-a0-26ww15a] parmemdfi0 / scan_ctlr_stuckat_edt_bypass_low_internal_scandump
+    [nio_mc-a0-26ww15a] parmemdfi0 / stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off
+    [nio_mc-a0-26ww15a] parmemdfi0 / stuckat_edt_bypass_low_internal_serial_chain
+    [nio_mc-a0-26ww15a] parmemdfi0 / stuckat_edt_bypass_low_internal_serial_scan
+    [nio_mc-a0-26ww15a] parmemdfi0 / stuckat_edt_edt_low_internal_serial_chain
+    [nio_mc-a0-26ww15a] parmemdfi0 / stuckat_edt_edt_low_internal_serial_scan
+    [nio_uio-a0-26ww11a] parmioasf_uio_0 / scan_ctlr_stuckat_edt_bypass_low_internal_scandump
+    [nio_uio-a0-26ww11a] parmioasf_uio_0 / stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off
+    [nio_uio-a0-26ww11a] parmiocpc_uio_0 / scan_ctlr_stuckat_edt_bypass_low_internal_scandump
+    [nio_uio-a0-26ww11a] parmiocpc_uio_0 / stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off
+    [nio_uio-a0-26ww11a] parmiocxlrx_uio_0 / scan_ctlr_stuckat_edt_bypass_low_internal_scandump
+    [nio_uio-a0-26ww11a] parmiocxlrx_uio_0 / stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off
+    [nio_uio-a0-26ww11a] parmiootc_uio_0 / scan_ctlr_stuckat_edt_bypass_low_internal_scandump
+    [nio_uio-a0-26ww11a] parmiootc_uio_0 / stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off
+    [nio_uio-a0-26ww11a] parmiopcie6trcore_uio_0 / scan_ctlr_stuckat_edt_bypass_low_internal_scandump
+    [nio_uio-a0-26ww11a] parmiopcie6trcore_uio_0 / stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off
+    [nio_uio-a0-26ww11a] parmioula_uio_0 / scan_ctlr_stuckat_edt_bypass_low_internal_scandump
+    [nio_uio-a0-26ww11a] parmioula_uio_0 / stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off
+
+============================================================
