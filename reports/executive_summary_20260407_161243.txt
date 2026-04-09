@@ -1,0 +1,60 @@
+============================================================
+         EXECUTIVE SUMMARY - L2 REGRESSION
+
+============================================================
+Report: general_report_20260407_161243.csv (2026-04-07 16:12:43)
+Compared to: general_report_20260407_155559.csv (2026-04-07 15:55:59)
+Generated: 2026-04-07 16:13:00
+
+============================================================
+  OVERALL
+============================================================
+  Total: 216 tests | 115 PASS | 29 FAIL | 72 MISSING | 53.2% pass rate
+
+  Status changes vs previous report: 26
+    Emmanuel: 16 change(s)
+      [nio_mc-a0-26ww15a] parmcmse / atspeed_edt_bypass_low_internal_serial_scan: MISSING -> FAIL
+      [nio_mc-a0-26ww15a] parmcmse / atspeed_edt_edt_low_internal_serial_scan: MISSING -> FAIL
+      [nio_mc-a0-26ww15a] parmcmse / ijtag_basic_tap_tests_rw_access: PASS -> MISSING
+      [nio_mc-a0-26ww15a] parmcmse / stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off: MISSING -> PASS
+      [nio_mc-a0-26ww15a] parmcmse / stuckat_edt_bypass_low_internal_serial_chain: MISSING -> PASS
+      [nio_mc-a0-26ww15a] parmcmse / stuckat_edt_bypass_low_internal_serial_scan: MISSING -> PASS
+      [nio_mc-a0-26ww15a] parmcmse / stuckat_edt_edt_low_internal_serial_chain: MISSING -> PASS
+      [nio_mc-a0-26ww15a] parmcmse / stuckat_edt_edt_low_internal_serial_scan: MISSING -> PASS
+      [nio_mc-a0-26ww15a] parmemsram / atspeed_edt_bypass_low_internal_serial_scan: MISSING -> PASS
+      [nio_mc-a0-26ww15a] parmemsram / atspeed_edt_edt_low_internal_serial_scan: MISSING -> PASS
+      [nio_mc-a0-26ww15a] parmemsram / ijtag_basic_tap_tests_rw_access: PASS -> MISSING
+      [nio_mc-a0-26ww15a] parmemsram / stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off: MISSING -> PASS
+      [nio_mc-a0-26ww15a] parmemsram / stuckat_edt_bypass_low_internal_serial_chain: MISSING -> PASS
+      [nio_mc-a0-26ww15a] parmemsram / stuckat_edt_bypass_low_internal_serial_scan: MISSING -> PASS
+      [nio_mc-a0-26ww15a] parmemsram / stuckat_edt_edt_low_internal_serial_chain: MISSING -> PASS
+      [nio_mc-a0-26ww15a] parmemsram / stuckat_edt_edt_low_internal_serial_scan: MISSING -> PASS
+    Mario: 8 change(s)
+      [nio_mc-a0-26ww15a] parmccore / atspeed_edt_bypass_low_internal_serial_scan: MISSING -> FAIL
+      [nio_mc-a0-26ww15a] parmccore / atspeed_edt_edt_low_internal_serial_scan: MISSING -> FAIL
+      [nio_mc-a0-26ww15a] parmccore / ijtag_basic_tap_tests_rw_access: PASS -> MISSING
+      [nio_mc-a0-26ww15a] parmccore / stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off: MISSING -> PASS
+      [nio_mc-a0-26ww15a] parmccore / stuckat_edt_bypass_low_internal_serial_chain: MISSING -> PASS
+      [nio_mc-a0-26ww15a] parmccore / stuckat_edt_bypass_low_internal_serial_scan: MISSING -> PASS
+      [nio_mc-a0-26ww15a] parmccore / stuckat_edt_edt_low_internal_serial_chain: MISSING -> PASS
+      [nio_mc-a0-26ww15a] parmccore / stuckat_edt_edt_low_internal_serial_scan: MISSING -> PASS
+    Mauricio: 2 change(s)
+      [nio_mc-a0-26ww15a] parmcmisc / ijtag_basic_tap_tests_rw_access: FAIL -> MISSING
+      [nio_mc-a0-26ww15a] parmcmisc / stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off: MISSING -> PASS
+
+============================================================
+  OWNER: Emmanuel
+============================================================
+  Total: 72 tests | 35 PASS | 9 FAIL | 28 MISSING | 48.6% pass rate
+
+============================================================
+  OWNER: Mario
+============================================================
+  Total: 72 tests | 43 PASS | 7 FAIL | 22 MISSING | 59.7% pass rate
+
+============================================================
+  OWNER: Mauricio
+============================================================
+  Total: 72 tests | 37 PASS | 13 FAIL | 22 MISSING | 51.4% pass rate
+
+============================================================

@@ -2,8 +2,19 @@
 import csv
 import os
 import re
+import subprocess
 import sys
 from pathlib import Path
+
+# --- Remote SSH Configuration ---
+REMOTE_HOST = "sccc06381314.zsc24.intel.com"
+REMOTE_USER = "eaarayag"
+REMOTE_WORK_DIR = "/nfs/site/disks/nwp_dft_fe_002/eaarayag/scripts"
+
+# --- Local Configuration ---
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+ROOT_DIR = os.path.dirname(SCRIPT_DIR)
+WEEKLY_REPORT_DIR = os.path.join(ROOT_DIR, "weekly_report")
 
 def parse_l2_regression_report(file_path, output_csv='regression_results.csv'):
     """
@@ -197,7 +208,8 @@ def discover_models(base_path):
         return []
 
 
-def main():
+def run_remote_parsing():
+    """Run on the remote zsc24 machine: discover models, parse reports, write CSVs."""
     base_path = "/nfs/site/disks/nwp_vmgr_testresults_006/NWP_DFT_Regressions"
 
     # Auto-discover all available models
@@ -246,6 +258,58 @@ def main():
 
     print(f"\n{'='*80}")
     print(f"Done. Processed {len(validated)} model(s), skipped {len(skipped)}.")
+
+
+def run_from_windows():
+    """Run from Windows: upload script to zsc24, execute remotely, download CSVs."""
+    remote = f"{REMOTE_USER}@{REMOTE_HOST}"
+    script_path = os.path.abspath(__file__)
+
+    # Ensure local weekly_report directory exists
+    os.makedirs(WEEKLY_REPORT_DIR, exist_ok=True)
+
+    # Step 1: Upload this script to the remote working directory
+    print(f"Uploading script to {remote}:{REMOTE_WORK_DIR}/")
+    scp_up = subprocess.run([
+        "scp", script_path,
+        f"{remote}:{REMOTE_WORK_DIR}/parse_l2_regression.py",
+    ])
+    if scp_up.returncode != 0:
+        print(f"Error: SCP upload failed (exit code {scp_up.returncode}).")
+        sys.exit(scp_up.returncode)
+
+    # Step 2: Run the script remotely with --remote flag
+    print(f"\nRunning parser on {REMOTE_HOST}...")
+    ssh_cmd = subprocess.run([
+        "ssh", remote,
+        f"cd {REMOTE_WORK_DIR} && python3 parse_l2_regression.py --remote",
+    ])
+    if ssh_cmd.returncode != 0:
+        print(f"Error: Remote parsing failed (exit code {ssh_cmd.returncode}).")
+        sys.exit(ssh_cmd.returncode)
+
+    # Step 3: Download all generated CSVs to local weekly_report folder
+    print(f"\nDownloading CSVs to {WEEKLY_REPORT_DIR}/")
+    scp_down = subprocess.run([
+        "scp", f"{remote}:{REMOTE_WORK_DIR}/*.csv",
+        WEEKLY_REPORT_DIR,
+    ])
+    if scp_down.returncode != 0:
+        print(f"Error: SCP download failed (exit code {scp_down.returncode}).")
+        sys.exit(scp_down.returncode)
+
+    # Count downloaded files
+    csvs = [f for f in os.listdir(WEEKLY_REPORT_DIR) if f.endswith('.csv')]
+    print(f"\nDone. {len(csvs)} CSV file(s) in {WEEKLY_REPORT_DIR}/")
+
+
+def main():
+    if '--remote' in sys.argv:
+        # Running on the zsc24 machine — parse reports and write CSVs
+        run_remote_parsing()
+    else:
+        # Running from Windows — orchestrate via SSH/SCP
+        run_from_windows()
 
 # Entry point: only run main() when executed directly (not when imported)
 if __name__ == "__main__":
