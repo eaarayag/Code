@@ -14,7 +14,7 @@ scripts/
 config/
   email_config.ini         — SMTP/sender/recipient settings
 weekly_report/             — Per-model regression CSVs (populated by parse_l2_regression.py)
-reports/                   — Generated general_report and executive_summary files
+reports/                   — Generated general_report and executive_summary files (HTML + CSV)
 ```
 
 ## Pipeline Steps
@@ -35,14 +35,17 @@ python report_l2.py
 ```
 Prompts the user to select one model per category (nio_mc, nio_uio, nio_d2d) from what's available in `weekly_report/`. Generates:
 - `reports/general_report_TIMESTAMP.csv` — consolidated test results with ownership
-- `reports/executive_summary_TIMESTAMP.txt` — per-owner pass/fail/missing breakdown
+- `reports/general_report_TIMESTAMP.html` — styled HTML version of the general report
+- `reports/executive_summary_TIMESTAMP.html` — styled HTML executive summary with status changes
+- `reports/index.html` — report history index page (auto-regenerated)
+Then commits and pushes `reports/` and `weekly_report/` to GitHub.
 
 ### Step 3 — Send email
 ```powershell
 cd scripts
-python send_email.py --subject "SUBJECT" --body-file ../reports/executive_summary_TIMESTAMP.txt --attach ../reports/general_report_TIMESTAMP.csv
+python send_email.py --subject "SUBJECT" --body-file ../reports/executive_summary_TIMESTAMP.html --attach ../reports/general_report_TIMESTAMP.html
 ```
-Sends the executive summary as body with the general report attached. Use `--dry-run` to preview without sending.
+Sends the executive summary as HTML email body with the HTML general report attached. Use `--dry-run` to preview without sending.
 
 ## Important Details
 
@@ -57,6 +60,7 @@ Sends the executive summary as body with the general report attached. Use `--dry
 - DO NOT run `send_email.py` without `--dry-run` unless the user confirms they want to send.
 - DO NOT skip the parsing step — `weekly_report/` must have CSVs before running `report_l2.py`.
 - When running the full pipeline, always run steps sequentially (parse → report → email).
+- **GitHub Pages** serves reports at `https://eaarayag.github.io/Code/reports/index.html`. The executive summary footer links there.
 
 ## Answering Questions
 
