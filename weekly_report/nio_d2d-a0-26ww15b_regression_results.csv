@@ -1,0 +1,4 @@
+test_name,test_status,test_result
+pard2d1uladda1_stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,PASS,PASS
+pard2d1chnl_stuckat_edt_edt_low_internal_serial_chain,PASS,PASS
+pard2d1chnl_stuckat_edt_bypass_low_internal_serial_scan,PASS,PASS
