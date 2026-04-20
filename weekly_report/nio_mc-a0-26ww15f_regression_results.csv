@@ -30,3 +30,5 @@ parmcmisc_stuckat_edt_bypass_low_internal_serial_chain,PASS,PASS
 parmemsram_stuckat_edt_edt_low_internal_serial_chain,PASS,PASS
 parmemsram_atspeed_edt_bypass_low_internal_serial_scan,PASS,PASS
 parmccore_ijtag_basic_tap_tests_rw_access,PASS,PASS
+parmemphy_ijtag_basic_tap_tests_rw_access,FAIL,"Fail, RequiredText not found"
+parmcmisc_ijtag_basic_tap_tests_rw_access,FAIL,Error between simulated and expected patterns
