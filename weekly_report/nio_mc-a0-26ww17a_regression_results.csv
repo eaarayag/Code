@@ -1,0 +1,4 @@
+test_name,test_status,test_result
+parmemsram_stuckat_edt_bypass_low_internal_serial_scan,PASS,PASS
+parmemphy_ijtag_basic_tap_tests_rw_access,FAIL,"Fail, RequiredText not found"
+parmccore_stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,PASS,PASS
