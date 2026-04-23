@@ -6,6 +6,7 @@
 import csv
 import glob
 import os
+import subprocess
 import sys
 from datetime import datetime
 
@@ -15,10 +16,12 @@ ROOT_DIR = os.path.dirname(SCRIPT_DIR)                        # Project root (pa
 OWNERSHIP_FILE = os.path.join(SCRIPT_DIR, "ownership.txt")    # Maps test prefixes to owners
 WEEKLY_REPORT_DIR = os.path.join(ROOT_DIR, "weekly_report")   # Folder with per-model regression CSVs
 REPORTS_DIR = os.path.join(ROOT_DIR, "reports")                # Folder for generated reports
+PARSE_SCRIPT = os.path.join(SCRIPT_DIR, "parse_l2_regression.py")  # Parser script path
 os.makedirs(REPORTS_DIR, exist_ok=True)
 TIMESTAMP = datetime.now().strftime("%Y%m%d_%H%M%S")          # Timestamp for output filename
 OUTPUT_REPORT = os.path.join(REPORTS_DIR, f"general_report_{TIMESTAMP}.csv")  # Final consolidated report
 GITHUB_PAGES_INDEX = "https://eaarayag.github.io/Code/reports/index.html"     # Report history on GitHub Pages
+GITHUB_PAGES_BASE = "https://eaarayag.github.io/Code/reports/"               # Base URL for individual reports
 
 
 def load_ownership(filepath):
@@ -74,9 +77,38 @@ def list_available_models(category):
     return [extract_model_from_filename(f) for f in files]
 
 
-def prompt_model_selection(category):
+def fetch_remote_models():
+    """Call parse_l2_regression.py --list-models and return all available model names.
+    Falls back to None (local CSVs will be used) if the remote call fails."""
+    try:
+        result = subprocess.run(
+            [sys.executable, PARSE_SCRIPT, "--list-models"],
+            capture_output=True, text=True, timeout=120
+        )
+        if result.returncode == 0:
+            models = [ln.strip() for ln in result.stdout.splitlines() if ln.strip()]
+            if models:
+                return models
+    except Exception as e:
+        print(f"Warning: Remote model fetch failed ({e}). Falling back to local CSVs.")
+    return None
+
+
+def parse_selected_models(selected_models):
+    """Call parse_l2_regression.py --models=... to parse only the selected models."""
+    models_str = ",".join(selected_models)
+    subprocess.run(
+        [sys.executable, PARSE_SCRIPT, f"--models={models_str}"],
+        check=True
+    )
+
+
+def prompt_model_selection(category, remote_models=None):
     """Show available models for a category and let the user pick one (or skip)."""
-    models = list_available_models(category)
+    if remote_models is not None:
+        models = sorted([m for m in remote_models if m.startswith(category)])
+    else:
+        models = list_available_models(category)
     if not models:
         print(f"  No models found for '{category}'. Skipping.")
         return None
@@ -522,16 +554,51 @@ def generate_executive_summary(report_path):
     # ── Metadata ──
     h.append('<tr><td style="padding:20px 32px 16px;border-bottom:1px solid #e0e0e0;">')
     h.append(f'<table width="100%" cellpadding="0" cellspacing="0" border="0">')
+    report_html_name = os.path.basename(report_path).replace('.csv', '.html')
+    report_html_url = GITHUB_PAGES_BASE + report_html_name
     h.append(f'<tr><td style="font-size:14px;color:#444;{FONT}padding:3px 0;">'
-             f'<b>Report:</b> {html_mod.escape(os.path.basename(report_path))}</td>')
+             f'<b>Report:</b> <a href="{report_html_url}" style="color:#0071c5;text-decoration:none;">{html_mod.escape(report_html_name)}</a></td>')
     h.append(f'<td align="right" style="font-size:13px;color:#888;{FONT}padding:3px 0;">{html_mod.escape(report_date)}</td></tr>')
     if prev_report_path:
+        prev_html_name = os.path.basename(prev_report_path).replace('.csv', '.html')
+        prev_html_url = GITHUB_PAGES_BASE + prev_html_name
         h.append(f'<tr><td style="font-size:14px;color:#444;{FONT}padding:3px 0;">'
-                 f'<b>Compared to:</b> {html_mod.escape(os.path.basename(prev_report_path))}</td>')
+                 f'<b>Compared to:</b> <a href="{prev_html_url}" style="color:#0071c5;text-decoration:none;">{html_mod.escape(prev_html_name)}</a></td>')
         h.append(f'<td align="right" style="font-size:13px;color:#888;{FONT}padding:3px 0;">{html_mod.escape(prev_date)}</td></tr>')
     h.append(f'<tr><td colspan="2" style="font-size:12px;color:#999;{FONT}padding:8px 0 0;">'
              f'Generated: {html_mod.escape(generated)}</td></tr>')
     h.append('</table></td></tr>')
+
+    # ── Selected Models ──
+    models_used = sorted(set(r['model'] for r in rows))
+    prev_models = sorted(set(r['model'] for r in prev_data.values())) if prev_data else []
+    new_models = set(models_used) - set(prev_models)
+    h.append('<tr><td style="padding:16px 32px 8px;">')
+    h.append(f'<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:8px;"><tr><td style="{FONT}">')
+    h.append(f'<span style="font-size:14px;font-weight:bold;color:#333;{FONT}">SELECTED MODELS</span>')
+    h.append('</td></tr></table>')
+    h.append('<table cellpadding="0" cellspacing="0" border="0">')
+    for model in models_used:
+        # Determine category label
+        if 'nio_mc' in model:
+            cat_label, cat_color = 'MC', '#0071c5'
+        elif 'nio_uio' in model:
+            cat_label, cat_color = 'UIO', '#6a1b9a'
+        elif 'nio_d2d' in model:
+            cat_label, cat_color = 'D2D', '#00695c'
+        else:
+            cat_label, cat_color = '?', '#555'
+        is_new = model in new_models
+        h.append(f'<tr><td style="padding:4px 0;{FONT}">')
+        h.append(f'<span style="display:inline-block;background-color:{cat_color};color:#ffffff;font-size:11px;'
+                 f'font-weight:bold;padding:2px 8px;{FONT}">{cat_label}</span> ')
+        h.append(f'<span style="font-size:13px;color:#333;{MONO}">{html_mod.escape(model)}</span>')
+        if is_new:
+            h.append(f' <span style="display:inline-block;background-color:#ff6f00;color:#ffffff;font-size:10px;'
+                     f'font-weight:bold;padding:1px 6px;{FONT}">NEW</span>')
+        h.append('</td></tr>')
+    h.append('</table>')
+    h.append('</td></tr>')
 
     # ── Overall stats cards ──
     h.append('<tr><td style="padding:24px 32px 16px;">')
@@ -636,6 +703,8 @@ def generate_executive_summary(report_path):
     if prev_report_path:
         lines.append(f"Compared to: {os.path.basename(prev_report_path)} ({prev_date})")
     lines.append(f"Generated: {generated}")
+    lines.append("")
+    lines.append(f"  Models: {', '.join(models_used)}")
     lines.append("")
     lines.append("=" * 60)
     lines.append("  OVERALL")
@@ -850,7 +919,7 @@ def git_commit_and_push():
 
 
 def main():
-    # Step 1: Let user select one model per category
+    # Step 1: Let user select one model per category from local CSVs
     categories = ['nio_mc', 'nio_uio', 'nio_d2d']
     print("\n--- Model Selection ---")
     selected = []
@@ -865,17 +934,17 @@ def main():
 
     print(f"\nSelected models: {', '.join(selected)}")
 
-    # Step 3: Generate consolidated general report for selected models only
+    # Step 2: Generate consolidated general report for selected models only
     generate_general_report_for_models(selected)
 
-    # Step 4: Generate executive summary per owner
+    # Step 3: Generate executive summary per owner
     if os.path.isfile(OUTPUT_REPORT):
         generate_executive_summary(OUTPUT_REPORT)
 
-    # Step 5: Regenerate index page with all reports
+    # Step 4: Regenerate index page with all reports
     generate_index_html()
 
-    # Step 6: Commit and push reports to GitHub
+    # Step 5: Commit and push reports to GitHub
     git_commit_and_push()
 
 

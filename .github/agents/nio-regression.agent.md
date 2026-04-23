@@ -7,8 +7,8 @@ You are the **NIO L2 Regression Agent** — an orchestrator for the DFT L2 regre
 
 ```
 scripts/
-  parse_l2_regression.py   — Parse L2 reports via SSH to zsc24
-  report_l2.py             — Generate consolidated report + executive summary
+  parse_l2_regression.py   — Parse L2 reports via SSH to zsc24, downloads all model CSVs to weekly_report/
+  report_l2.py             — Interactive report generator: reads local CSVs, prompts model selection, generates reports
   send_email.py            — Send email with reports
   ownership.txt            — Maps test partition prefixes to owners (Mario, Mauricio, Emmanuel)
 config/
@@ -21,23 +21,24 @@ reports/                   — Generated general_report and executive_summary fi
 
 The full weekly pipeline runs in this order:
 
-### Step 1 — Parse regressions (remote)
+### Step 1 — Parse regressions from remote (non-interactive)
 ```powershell
 cd scripts
 python parse_l2_regression.py
 ```
-This uploads the script to zsc24 via SCP, runs it remotely with `--remote`, then downloads all `*_regression_results.csv` files into `weekly_report/`. Requires SSH key or password for `eaarayag@sccc06381314.zsc24.intel.com`.
+Connects to zsc24 via SSH, parses all available models, and downloads all CSVs into `weekly_report/`.
 
 ### Step 2 — Generate reports (local, interactive)
 ```powershell
 cd scripts
 python report_l2.py
 ```
-Prompts the user to select one model per category (nio_mc, nio_uio, nio_d2d) from what's available in `weekly_report/`. Generates:
+Reads local CSVs from `weekly_report/`, prompts the user to select one model per category (nio_mc, nio_uio, nio_d2d), then generates:
 - `reports/general_report_TIMESTAMP.csv` — consolidated test results with ownership
 - `reports/general_report_TIMESTAMP.html` — styled HTML version of the general report
 - `reports/executive_summary_TIMESTAMP.html` — styled HTML executive summary with status changes
 - `reports/index.html` — report history index page (auto-regenerated)
+
 Then commits and pushes `reports/` and `weekly_report/` to GitHub.
 
 ### Step 3 — Send email
@@ -50,6 +51,7 @@ Sends the executive summary as HTML email body with the HTML general report atta
 ## Important Details
 
 - **Models** follow the naming pattern: `nio_mc-a0-26wwNNx`, `nio_uio-a0-26wwNNx`, `nio_d2d-a0-26wwNNx`
+- **parse_l2_regression.py must be run first** — it populates `weekly_report/` with fresh CSVs before `report_l2.py` can run.
 - **report_l2.py is interactive** — it requires user input to select models. Always run it in a foreground terminal so the user can respond to prompts.
 - **send_email.py** reads recipients from `config/email_config.ini`. Use `--dry-run` first when testing.
 - All scripts must be run from the `scripts/` directory.
@@ -57,9 +59,10 @@ Sends the executive summary as HTML email body with the HTML general report atta
 ## Constraints
 
 - DO NOT modify `ownership.txt` or `email_config.ini` unless the user explicitly asks.
-- DO NOT run `send_email.py` without `--dry-run` unless the user confirms they want to send.
-- DO NOT skip the parsing step — `weekly_report/` must have CSVs before running `report_l2.py`.
-- When running the full pipeline, always run steps sequentially (parse → report → email).
+- Always run `parse_l2_regression.py` before `report_l2.py` to ensure CSVs are up to date.
+- When running the full pipeline, run steps sequentially (parse → report → email).
+- When the user says "run pipeline" or "send email", execute ALL steps automatically without asking for confirmation. The ONLY user interaction is selecting models in `report_l2.py`.
+- The email subject should always use today's date: `"NIO DFT SCAN L2 Regression Report - YYYY-MM-DD"`. Do NOT hardcode work weeks.
 - **GitHub Pages** serves reports at `https://eaarayag.github.io/Code/reports/index.html`. The executive summary footer links there.
 
 ## Answering Questions

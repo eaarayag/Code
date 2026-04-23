@@ -208,7 +208,15 @@ def discover_models(base_path):
         return []
 
 
-def run_remote_parsing():
+def list_remote_models():
+    """Print available model names to stdout (one per line). No parsing."""
+    base_path = "/nfs/site/disks/nwp_vmgr_testresults_006/NWP_DFT_Regressions"
+    models = discover_models(base_path)
+    for m in models:
+        print(m)
+
+
+def run_remote_parsing(model_filter=None):
     """Run on the remote zsc24 machine: discover models, parse reports, write CSVs."""
     base_path = "/nfs/site/disks/nwp_vmgr_testresults_006/NWP_DFT_Regressions"
 
@@ -221,7 +229,15 @@ def run_remote_parsing():
         _print_available_models(base_path)
         return
 
-    print(f"Found {len(model_names)} model(s): {', '.join(model_names)}\n")
+    # Filter to only requested models if specified
+    if model_filter:
+        model_names = [m for m in model_names if m in model_filter]
+        if not model_names:
+            print(f"None of the requested models were found: {model_filter}")
+            return
+        print(f"Processing {len(model_names)} model(s): {', '.join(model_names)}\n")
+    else:
+        print(f"Found {len(model_names)} model(s): {', '.join(model_names)}\n")
 
     # Validate each model has a report file, skip those that don't
     validated = {}  # model_name -> input_file path
@@ -260,7 +276,27 @@ def run_remote_parsing():
     print(f"Done. Processed {len(validated)} model(s), skipped {len(skipped)}.")
 
 
-def run_from_windows():
+def run_list_models_from_windows():
+    """SSH to zsc24 and print available model names to stdout. No parsing."""
+    remote = f"{REMOTE_USER}@{REMOTE_HOST}"
+    script_path = os.path.abspath(__file__)
+
+    scp_up = subprocess.run([
+        "scp", script_path,
+        f"{remote}:{REMOTE_WORK_DIR}/parse_l2_regression.py",
+    ])
+    if scp_up.returncode != 0:
+        print(f"Error: SCP upload failed (exit code {scp_up.returncode}).", file=sys.stderr)
+        sys.exit(scp_up.returncode)
+
+    ssh_cmd = subprocess.run([
+        "ssh", remote,
+        f"cd {REMOTE_WORK_DIR} && python3 parse_l2_regression.py --remote --list-models",
+    ])
+    sys.exit(ssh_cmd.returncode)
+
+
+def run_from_windows(models=None):
     """Run from Windows: upload script to zsc24, execute remotely, download CSVs."""
     remote = f"{REMOTE_USER}@{REMOTE_HOST}"
     script_path = os.path.abspath(__file__)
@@ -278,25 +314,36 @@ def run_from_windows():
         print(f"Error: SCP upload failed (exit code {scp_up.returncode}).")
         sys.exit(scp_up.returncode)
 
-    # Step 2: Run the script remotely with --remote flag
+    # Step 2: Run the script remotely — parse only requested models if specified
     print(f"\nRunning parser on {REMOTE_HOST}...")
-    ssh_cmd = subprocess.run([
-        "ssh", remote,
-        f"cd {REMOTE_WORK_DIR} && python3 parse_l2_regression.py --remote",
-    ])
+    remote_cmd = f"cd {REMOTE_WORK_DIR} && python3 parse_l2_regression.py --remote"
+    if models:
+        remote_cmd += f" --models={','.join(models)}"
+    ssh_cmd = subprocess.run(["ssh", remote, remote_cmd])
     if ssh_cmd.returncode != 0:
         print(f"Error: Remote parsing failed (exit code {ssh_cmd.returncode}).")
         sys.exit(ssh_cmd.returncode)
 
-    # Step 3: Download all generated CSVs to local weekly_report folder
+    # Step 3: Download generated CSVs to local weekly_report folder
     print(f"\nDownloading CSVs to {WEEKLY_REPORT_DIR}/")
-    scp_down = subprocess.run([
-        "scp", f"{remote}:{REMOTE_WORK_DIR}/*.csv",
-        WEEKLY_REPORT_DIR,
-    ])
-    if scp_down.returncode != 0:
-        print(f"Error: SCP download failed (exit code {scp_down.returncode}).")
-        sys.exit(scp_down.returncode)
+    if models:
+        # Download only the specific model CSVs
+        for model in models:
+            csv_name = f"{model}_regression_results.csv"
+            scp_down = subprocess.run([
+                "scp", f"{remote}:{REMOTE_WORK_DIR}/{csv_name}",
+                WEEKLY_REPORT_DIR,
+            ])
+            if scp_down.returncode != 0:
+                print(f"Warning: Could not download {csv_name} (exit code {scp_down.returncode}).")
+    else:
+        scp_down = subprocess.run([
+            "scp", f"{remote}:{REMOTE_WORK_DIR}/*.csv",
+            WEEKLY_REPORT_DIR,
+        ])
+        if scp_down.returncode != 0:
+            print(f"Error: SCP download failed (exit code {scp_down.returncode}).")
+            sys.exit(scp_down.returncode)
 
     # Count downloaded files
     csvs = [f for f in os.listdir(WEEKLY_REPORT_DIR) if f.endswith('.csv')]
@@ -304,12 +351,25 @@ def run_from_windows():
 
 
 def main():
-    if '--remote' in sys.argv:
-        # Running on the zsc24 machine — parse reports and write CSVs
-        run_remote_parsing()
+    list_models_only = '--list-models' in sys.argv
+    remote = '--remote' in sys.argv
+
+    models_arg = None
+    for arg in sys.argv[1:]:
+        if arg.startswith('--models='):
+            models_arg = arg.split('=', 1)[1].split(',')
+            break
+
+    if remote:
+        if list_models_only:
+            list_remote_models()
+        else:
+            run_remote_parsing(model_filter=models_arg)
     else:
-        # Running from Windows — orchestrate via SSH/SCP
-        run_from_windows()
+        if list_models_only:
+            run_list_models_from_windows()
+        else:
+            run_from_windows(models=models_arg)
 
 # Entry point: only run main() when executed directly (not when imported)
 if __name__ == "__main__":
