@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIO DFT L2 Test Status Tracker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .container-main {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            border-bottom: 3px solid #0d6efd;
+            padding-bottom: 10px;
+        }
+        
+        .metadata {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .controls button {
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+        
+        .search-box {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        table {
+            font-size: 13px;
+            margin-top: 20px;
+        }
+        
+        thead {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+        
+        th {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+            vertical-align: middle;
+        }
+        
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            vertical-align: middle;
+        }
+        
+        .partition-col {
+            font-weight: 500;
+            max-width: 150px;
+            word-break: break-word;
+        }
+        
+        .test-case-col {
+            max-width: 300px;
+            word-break: break-word;
+            font-size: 12px;
+        }
+        
+        .status-pass {
+            background-color: #d4edda;
+            color: #155724;
+            font-weight: 600;
+            text-align: center;
+            padding: 6px;
+            border-radius: 4px;
+        }
+        
+        .status-fail {
+            background-color: #f8d7da;
+            color: #721c24;
+            font-weight: 600;
+            text-align: center;
+            padding: 6px;
+            border-radius: 4px;
+        }
+        
+        .status-missing {
+            background-color: #fff3cd;
+            color: #856404;
+            font-weight: 600;
+            text-align: center;
+            padding: 6px;
+            border-radius: 4px;
+        }
+        
+        .editable-cell {
+            cursor: pointer;
+            position: relative;
+            background-color: #fffacd;
+            min-height: 32px;
+            padding: 8px !important;
+        }
+        
+        .editable-cell:hover {
+            background-color: #ffffaa;
+            box-shadow: inset 0 0 2px rgba(0,0,0,0.1);
+        }
+        
+        .editable-cell input {
+            width: 100%;
+            padding: 4px;
+            border: 1px solid #0d6efd;
+            border-radius: 3px;
+            font-size: 13px;
+        }
+        
+        .editable-cell input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.25);
+        }
+        
+        .stats {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-box {
+            background-color: #f8f9fa;
+            padding: 12px 16px;
+            border-radius: 4px;
+            border-left: 4px solid #0d6efd;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+        }
+        
+        .stat-value {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .stat-pass { border-left-color: #28a745; }
+        .stat-fail { border-left-color: #dc3545; }
+        .stat-missing { border-left-color: #ffc107; }
+        
+        .toast-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .filter-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-badge {
+            background-color: #e9ecef;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .filter-badge button {
+            background: none;
+            border: none;
+            padding: 0;
+            color: #666;
+            cursor: pointer;
+            font-size: 16px;
+            line-height: 1;
+        }
+        
+        .filter-badge button:hover {
+            color: #333;
+        }
+        
+        tbody tr:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .table-wrapper {
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-main">
+        <h1>🧪 NIO DFT L2 Test Status Tracker</h1>
+        <div class="metadata">
+            <span id="reportDate"></span> | 
+            <span id="totalRows"></span> test cases
+        </div>
+        
+        <div class="stats" id="statsContainer">
+            <div class="stat-box stat-pass">
+                <div class="stat-label">✓ Passed</div>
+                <div class="stat-value" id="statPass">0</div>
+            </div>
+            <div class="stat-box stat-fail">
+                <div class="stat-label">✗ Failed</div>
+                <div class="stat-value" id="statFail">0</div>
+            </div>
+            <div class="stat-box stat-missing">
+                <div class="stat-label">⊘ Missing</div>
+                <div class="stat-value" id="statMissing">0</div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <input type="text" id="searchBox" class="form-control search-box" placeholder="🔍 Search by partition or test case...">
+            <button class="btn btn-primary btn-sm" onclick="resetFilters()">Reset</button>
+            <button class="btn btn-success btn-sm" onclick="exportToCSV()">📥 Export CSV</button>
+            <button class="btn btn-warning btn-sm" onclick="clearAllEdits()">Clear Edits</button>
+        </div>
+        
+        <div id="filterDisplay" class="filter-controls"></div>
+        
+        <div class="table-wrapper">
+            <table class="table table-hover table-sm" id="dataTable">
+                <thead>
+                    <tr>
+                        <th style="width: 12%;">Partition</th>
+                        <th style="width: 40%;">Test Case</th>
+                        <th style="width: 10%;">Status ✎</th>
+                        <th style="width: 18%;">HSDES ✎</th>
+                        <th style="width: 20%;">Comments ✎</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script>
+        // CSV data embedded directly
+        const csvData = `partition,test_type,status,owner,model
+parmioinf3e,[NWP] scan: edten cont proxy,,NWP,subfcnorthcap
+parmioinf3e,[NWP] TAP: iJTAG R/W,,NWP,subfcnorthcap
+parmioinf3e,[NWP] scan: edtbyp stuckat proxy,,NWP,subfcnorthcap
+parmioinf3e,[NWP] scan: scandump,,NWP,subfcnorthcap
+parmioinf3e,[NWP] scan: edten stuckat proxy,,NWP,subfcnorthcap
+parmioinf3e,[NWP] scan: edtbyp cont proxy,,NWP,subfcnorthcap
+parmioinf3e,[NWP] scan: edten atspeed proxy,,NWP,subfcnorthcap
+parmioinf3e,[NWP] scan: Burnin,,NWP,subfcnorthcap
+parmioinf3w,[NWP] scan: edten cont proxy,,NWP,subfcnorthcap
+parmioinf3w,[NWP] TAP: iJTAG R/W,,NWP,subfcnorthcap
+parmioinf3w,[NWP] scan: edtbyp stuckat proxy,,NWP,subfcnorthcap
+parmioinf3w,[NWP] scan: scandump,,NWP,subfcnorthcap
+parmioinf3w,[NWP] scan: edten stuckat proxy,,NWP,subfcnorthcap
+parmioinf3w,[NWP] scan: edtbyp cont proxy,,NWP,subfcnorthcap
+parmioinf3w,[NWP] scan: edten atspeed proxy,,NWP,subfcnorthcap
+parmioinf3w,[NWP] scan: Burnin,,NWP,subfcnorthcap
+parocs,[NWP] scan: edten cont proxy,,NWP,subfcsouthcap
+parocs,[NWP] TAP: iJTAG R/W,,NWP,subfcsouthcap
+parocs,[NWP] scan: edtbyp stuckat proxy,,NWP,subfcsouthcap
+parocs,[NWP] scan: scandump,,NWP,subfcsouthcap
+parocs,[NWP] scan: edten stuckat proxy,,NWP,subfcsouthcap
+parocs,[NWP] scan: edtbyp cont proxy,,NWP,subfcsouthcap
+parocs,[NWP] scan: edten atspeed proxy,,NWP,subfcsouthcap
+parocs,[NWP] scan: Burnin,,NWP,subfcsouthcap
+paridfttop,[NWP] scan: edten cont proxy,,NWP,subfcsouthcap
+paridfttop,[NWP] TAP: iJTAG R/W,,NWP,subfcsouthcap
+paridfttop,[NWP] scan: edtbyp stuckat proxy,,NWP,subfcsouthcap
+paridfttop,[NWP] scan: scandump,,NWP,subfcsouthcap
+paridfttop,[NWP] scan: edten stuckat proxy,,NWP,subfcsouthcap
+paridfttop,[NWP] scan: edtbyp cont proxy,,NWP,subfcsouthcap
+paridfttop,[NWP] scan: edten atspeed proxy,,NWP,subfcsouthcap
+paridfttop,[NWP] scan: Burnin,,NWP,subfcsouthcap
+parrclk,[NWP] scan: edtbyp cont proxy,,NWP,subfcsouthcap
+parrclk,[NWP] scan: edten cont proxy,,NWP,subfcsouthcap
+parrclk,[NWP] TAP: iJTAG R/W,,NWP,subfcsouthcap
+parrclk,[NWP] scan: edtbyp stuckat proxy,,NWP,subfcsouthcap
+parrclk,[NWP] scan: scandump,,NWP,subfcsouthcap
+parrclk,[NWP] scan: edten stuckat proxy,,NWP,subfcsouthcap
+parrclk,[NWP] scan: edten atspeed proxy,,NWP,subfcsouthcap
+parrclk,[NWP] scan: Burnin,,NWP,subfcsouthcap
+paroobip,[NWP] scan: edten cont proxy,,NWP,subfcsouthcap
+paroobip,[NWP] TAP: iJTAG R/W,,NWP,subfcsouthcap
+paroobip,[NWP] scan: edtbyp stuckat proxy,,NWP,subfcsouthcap
+paroobip,[NWP] scan: scandump,,NWP,subfcsouthcap
+paroobip,[NWP] scan: edten stuckat proxy,,NWP,subfcsouthcap
+paroobip,[NWP] scan: edten atspeed proxy,,NWP,subfcsouthcap
+paroobip,[NWP] scan: edtbyp cont proxy,,NWP,subfcsouthcap
+paroobip,[NWP] scan: Burnin,,NWP,subfcsouthcap
+pars3m,[NWP] scan: edtbyp cont proxy,,NWP,subfcsouthcap
+pars3m,[NWP] scan: edten cont proxy,,NWP,subfcsouthcap
+pars3m,[NWP] TAP: iJTAG R/W,,NWP,subfcsouthcap
+pars3m,[NWP] scan: edtbyp stuckat proxy,,NWP,subfcsouthcap
+pars3m,[NWP] scan: scandump,,NWP,subfcsouthcap
+pars3m,[NWP] scan: edten stuckat proxy,,NWP,subfcsouthcap
+pars3m,[NWP] scan: edten atspeed proxy,,NWP,subfcsouthcap
+pars3m,[NWP] scan: Burnin,,NWP,subfcsouthcap
+parmioinf1w,[NWP] scan: edten cont proxy,,NWP,subfcnorthcap
+parmioinf1w,[NWP] TAP: iJTAG R/W,,NWP,subfcnorthcap
+parmioinf1w,[NWP] scan: edtbyp stuckat proxy,,NWP,subfcnorthcap
+parmioinf1w,[NWP] scan: scandump,,NWP,subfcnorthcap
+parmioinf1w,[NWP] scan: edten stuckat proxy,,NWP,subfcnorthcap
+parmioinf1w,[NWP] scan: edtbyp cont proxy,,NWP,subfcnorthcap
+parmioinf1w,[NWP] scan: edten atspeed proxy,,NWP,subfcnorthcap
+parmioinf1w,[NWP] scan: Burnin,,NWP,subfcnorthcap
+parmioinf2w,[NWP] scan: edten cont proxy,,NWP,subfcnorthcap
+parmioinf2w,[NWP] TAP: iJTAG R/W,,NWP,subfcnorthcap
+parmioinf2w,[NWP] scan: edtbyp stuckat proxy,,NWP,subfcnorthcap
+parmioinf2w,[NWP] scan: scandump,,NWP,subfcnorthcap
+parmioinf2w,[NWP] scan: edten stuckat proxy,,NWP,subfcnorthcap
+parmioinf2w,[NWP] scan: edtbyp cont proxy,,NWP,subfcnorthcap
+parmioinf2w,[NWP] scan: edten atspeed proxy,,NWP,subfcnorthcap
+parmioinf2w,[NWP] scan: Burnin,,NWP,subfcnorthcap
+parsocrasip,[NWP] scan: edtbyp cont proxy,,NWP,subfcsouthcap
+parsocrasip,[NWP] scan: edten cont proxy,,NWP,subfcsouthcap
+parsocrasip,[NWP] scan: edtbyp stuckat proxy,,NWP,subfcsouthcap
+parsocrasip,[NWP] scan: scandump,,NWP,subfcsouthcap
+parsocrasip,[NWP] scan: edten stuckat proxy,,NWP,subfcsouthcap
+parsocrasip,[NWP] scan: edten atspeed proxy,,NWP,subfcsouthcap
+parsocrasip,[NWP] scan: Burnin,,NWP,subfcsouthcap
+parseinf0,[NWP] scan: edtbyp cont proxy,,NWP,subfcsouthcap
+parseinf0,[NWP] scan: edten cont proxy,,NWP,subfcsouthcap
+parseinf0,[NWP] TAP: iJTAG R/W,,NWP,subfcsouthcap
+parseinf0,[NWP] scan: edtbyp stuckat proxy,,NWP,subfcsouthcap
+parseinf0,[NWP] scan: scandump,,NWP,subfcsouthcap
+parseinf0,[NWP] scan: edten stuckat proxy,,NWP,subfcsouthcap
+parseinf0,[NWP] scan: edten atspeed proxy,,NWP,subfcsouthcap
+parseinf0,[NWP] scan: Burnin,,NWP,subfcsouthcap
+parmioinf2e,[NWP] scan: edten cont proxy,,NWP,subfcnorthcap
+parmioinf2e,[NWP] TAP: iJTAG R/W,,NWP,subfcnorthcap
+parmioinf2e,[NWP] scan: edtbyp stuckat proxy,,NWP,subfcnorthcap
+parmioinf2e,[NWP] scan: scandump,,NWP,subfcnorthcap
+parmioinf2e,[NWP] scan: edten stuckat proxy,,NWP,subfcnorthcap
+parmioinf2e,[NWP] scan: edten atspeed proxy,,NWP,subfcnorthcap
+parmioinf2e,[NWP] scan: edtbyp cont proxy,,NWP,subfcnorthcap
+parmioinf2e,[NWP] scan: Burnin,,NWP,subfcnorthcap
+parmioinf1e,[NWP] scan: edten cont proxy,,NWP,subfcnorthcap
+parmioinf1e,[NWP] TAP: iJTAG R/W,,NWP,subfcnorthcap
+parmioinf1e,[NWP] scan: edtbyp stuckat proxy,,NWP,subfcnorthcap
+parmioinf1e,[NWP] scan: scandump,,NWP,subfcnorthcap
+parmioinf1e,[NWP] scan: edten stuckat proxy,,NWP,subfcnorthcap
+parmioinf1e,[NWP] scan: edtbyp cont proxy,,NWP,subfcnorthcap
+parmioinf1e,[NWP] scan: edten atspeed proxy,,NWP,subfcnorthcap
+parmioinf1e,[NWP] scan: Burnin,,NWP,subfcnorthcap
+parmioinf0,[NWP] scan: edten cont proxy,,NWP,subfcnorthcap
+parmioinf0,[NWP] TAP: iJTAG R/W,,NWP,subfcnorthcap
+parmioinf0,[NWP] scan: edtbyp stuckat proxy,,NWP,subfcnorthcap
+parmioinf0,[NWP] scan: scandump,,NWP,subfcnorthcap
+parmioinf0,[NWP] scan: edten stuckat proxy,,NWP,subfcnorthcap
+parmioinf0,[NWP] scan: edtbyp cont proxy,,NWP,subfcnorthcap
+parmioinf0,[NWP] scan: edten atspeed proxy,,NWP,subfcnorthcap
+parmioinf0,[NWP] scan: Burnin,,NWP,subfcnorthcap
+pard2d1misc,atspeed_edt_bypass_low_internal_serial_scan,PASS,Emmanuel,nio_d2d-a0-26ww17b
+pard2d1misc,atspeed_edt_edt_low_internal_serial_scan,PASS,Emmanuel,nio_d2d-a0-26ww17b
+pard2d1misc,ijtag_basic_tap_tests_rw_access,FAIL,Emmanuel,nio_d2d-a0-26ww17b
+pard2d1misc,pard2d1misc_ub_i_ult_scan_ctlr_stuckat_edt_bypass_low_internal_scandump,PASS,Emmanuel,nio_d2d-a0-26ww17b
+pard2d1misc,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,PASS,Emmanuel,nio_d2d-a0-26ww17b
+pard2d1misc,stuckat_edt_bypass_low_internal_serial_chain,PASS,Emmanuel,nio_d2d-a0-26ww17b
+pard2d1misc,stuckat_edt_bypass_low_internal_serial_scan,PASS,Emmanuel,nio_d2d-a0-26ww17b
+pard2d1misc,stuckat_edt_edt_low_internal_serial_chain,PASS,Emmanuel,nio_d2d-a0-26ww17b
+pard2d1misc,stuckat_edt_edt_low_internal_serial_scan,PASS,Emmanuel,nio_d2d-a0-26ww17b
+parmcmse,atspeed_edt_bypass_low_internal_serial_scan,PASS,Emmanuel,nio_mc-a0-26ww17b
+parmcmse,atspeed_edt_edt_low_internal_serial_scan,PASS,Emmanuel,nio_mc-a0-26ww17b
+parmcmse,ijtag_basic_tap_tests_rw_access,PASS,Emmanuel,nio_mc-a0-26ww17b
+parmcmse,parmcmse_ub_i_ult_scan_ctlr_stuckat_edt_bypass_low_internal_scandump,PASS,Emmanuel,nio_mc-a0-26ww17b
+parmcmse,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,PASS,Emmanuel,nio_mc-a0-26ww17b
+parmcmse,stuckat_edt_bypass_low_internal_serial_chain,PASS,Emmanuel,nio_mc-a0-26ww17b
+parmcmse,stuckat_edt_bypass_low_internal_serial_scan,PASS,Emmanuel,nio_mc-a0-26ww17b
+parmcmse,stuckat_edt_edt_low_internal_serial_chain,PASS,Emmanuel,nio_mc-a0-26ww17b
+parmcmse,stuckat_edt_edt_low_internal_serial_scan,PASS,Emmanuel,nio_mc-a0-26ww17b
+parmemsram,atspeed_edt_bypass_low_internal_serial_scan,PASS,Emmanuel,nio_mc-a0-26ww17b
+parmemsram,atspeed_edt_edt_low_internal_serial_scan,PASS,Emmanuel,nio_mc-a0-26ww17b
+parmemsram,ijtag_basic_tap_tests_rw_access,PASS,Emmanuel,nio_mc-a0-26ww17b
+parmemsram,parmemsram_ub_i_ult_scan_ctlr_stuckat_edt_bypass_low_internal_scandump,PASS,Emmanuel,nio_mc-a0-26ww17b
+parmemsram,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,PASS,Emmanuel,nio_mc-a0-26ww17b
+parmemsram,stuckat_edt_bypass_low_internal_serial_chain,PASS,Emmanuel,nio_mc-a0-26ww17b
+parmemsram,stuckat_edt_bypass_low_internal_serial_scan,PASS,Emmanuel,nio_mc-a0-26ww17b
+parmemsram,stuckat_edt_edt_low_internal_serial_chain,PASS,Emmanuel,nio_mc-a0-26ww17b
+parmemsram,stuckat_edt_edt_low_internal_serial_scan,PASS,Emmanuel,nio_mc-a0-26ww17b
+parmiofblprxfcrarbmux,atspeed_edt_bypass_low_internal_serial_scan,PASS,Emmanuel,nio_uio-a0-26ww17a
+parmiofblprxfcrarbmux,atspeed_edt_edt_low_internal_serial_scan,PASS,Emmanuel,nio_uio-a0-26ww17a
+parmiofblprxfcrarbmux,ijtag_basic_tap_tests_rw_access,PASS,Emmanuel,nio_uio-a0-26ww17a
+parmiofblprxfcrarbmux,parmiofblprxfcrarbmux_ub_i_ult_scan_ctlr_stuckat_edt_bypass_low_internal_scandump,PASS,Emmanuel,nio_uio-a0-26ww17a
+parmiofblprxfcrarbmux,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,PASS,Emmanuel,nio_uio-a0-26ww17a
+parmiofblprxfcrarbmux,stuckat_edt_bypass_low_internal_serial_chain,PASS,Emmanuel,nio_uio-a0-26ww17a
+parmiofblprxfcrarbmux,stuckat_edt_bypass_low_internal_serial_scan,PASS,Emmanuel,nio_uio-a0-26ww17a
+parmiofblprxfcrarbmux,stuckat_edt_edt_low_internal_serial_chain,PASS,Emmanuel,nio_uio-a0-26ww17a
+parmiofblprxfcrarbmux,stuckat_edt_edt_low_internal_serial_scan,PASS,Emmanuel,nio_uio-a0-26ww17a
+parmiofblpvnpipeac_uio_0,atspeed_edt_bypass_low_internal_serial_scan,MISSING,Emmanuel,nio_uio-a0-26ww17a
+parmiofblpvnpipeac_uio_0,atspeed_edt_edt_low_internal_serial_scan,MISSING,Emmanuel,nio_uio-a0-26ww17a
+parmiofblpvnpipeac_uio_0,ijtag_basic_tap_tests_rw_access,MISSING,Emmanuel,nio_uio-a0-26ww17a
+parmiofblpvnpipeac_uio_0,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,MISSING,Emmanuel,nio_uio-a0-26ww17a
+parmiofblpvnpipeac_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,MISSING,Emmanuel,nio_uio-a0-26ww17a
+parmiofblpvnpipeac_uio_0,stuckat_edt_bypass_low_internal_serial_chain,MISSING,Emmanuel,nio_uio-a0-26ww17a
+parmiofblpvnpipeac_uio_0,stuckat_edt_bypass_low_internal_serial_scan,MISSING,Emmanuel,nio_uio-a0-26ww17a
+parmiofblpvnpipeac_uio_0,stuckat_edt_edt_low_internal_serial_chain,MISSING,Emmanuel,nio_uio-a0-26ww17a
+parmiofblpvnpipeac_uio_0,stuckat_edt_edt_low_internal_serial_scan,MISSING,Emmanuel,nio_uio-a0-26ww17a
+parmioiommu_uio_0,atspeed_edt_bypass_low_internal_serial_scan,MISSING,Emmanuel,nio_uio-a0-26ww17a
+parmioiommu_uio_0,atspeed_edt_edt_low_internal_serial_scan,MISSING,Emmanuel,nio_uio-a0-26ww17a
+parmioiommu_uio_0,ijtag_basic_tap_tests_rw_access,PASS,Emmanuel,nio_uio-a0-26ww17a
+parmioiommu_uio_0,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,MISSING,Emmanuel,nio_uio-a0-26ww17a
+parmioiommu_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,MISSING,Emmanuel,nio_uio-a0-26ww17a
+parmioiommu_uio_0,stuckat_edt_bypass_low_internal_serial_chain,MISSING,Emmanuel,nio_uio-a0-26ww17a
+parmioiommu_uio_0,stuckat_edt_bypass_low_internal_serial_scan,MISSING,Emmanuel,nio_uio-a0-26ww17a
+parmioiommu_uio_0,stuckat_edt_edt_low_internal_serial_chain,MISSING,Emmanuel,nio_uio-a0-26ww17a
+parmioiommu_uio_0,stuckat_edt_edt_low_internal_serial_scan,MISSING,Emmanuel,nio_uio-a0-26ww17a
+parmiopcie6tridelldp_uio_0,atspeed_edt_bypass_low_internal_serial_scan,PASS,Emmanuel,nio_uio-a0-26ww17a
+parmiopcie6tridelldp_uio_0,atspeed_edt_edt_low_internal_serial_scan,PASS,Emmanuel,nio_uio-a0-26ww17a
+parmiopcie6tridelldp_uio_0,ijtag_basic_tap_tests_rw_access,PASS,Emmanuel,nio_uio-a0-26ww17a
+parmiopcie6tridelldp_uio_0,parmiopcie6tridelldp_uio_0_ub_i_ult_scan_ctlr_stuckat_edt_bypass_low_internal_scandump,PASS,Emmanuel,nio_uio-a0-26ww17a
+parmiopcie6tridelldp_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,PASS,Emmanuel,nio_uio-a0-26ww17a
+parmiopcie6tridelldp_uio_0,stuckat_edt_bypass_low_internal_serial_chain,PASS,Emmanuel,nio_uio-a0-26ww17a
+parmiopcie6tridelldp_uio_0,stuckat_edt_bypass_low_internal_serial_scan,PASS,Emmanuel,nio_uio-a0-26ww17a
+parmiopcie6tridelldp_uio_0,stuckat_edt_edt_low_internal_serial_chain,PASS,Emmanuel,nio_uio-a0-26ww17a
+parmiopcie6tridelldp_uio_0,stuckat_edt_edt_low_internal_serial_scan,PASS,Emmanuel,nio_uio-a0-26ww17a
+parmiopcie6ttidecee_uio_0,atspeed_edt_bypass_low_internal_serial_scan,PASS,Emmanuel,nio_uio-a0-26ww17a
+parmiopcie6ttidecee_uio_0,atspeed_edt_edt_low_internal_serial_scan,PASS,Emmanuel,nio_uio-a0-26ww17a
+parmiopcie6ttidecee_uio_0,ijtag_basic_tap_tests_rw_access,PASS,Emmanuel,nio_uio-a0-26ww17a
+parmiopcie6ttidecee_uio_0,parmiopcie6ttidecee_uio_0_ub_i_ult_scan_ctlr_stuckat_edt_bypass_low_internal_scandump,PASS,Emmanuel,nio_uio-a0-26ww17a
+parmiopcie6ttidecee_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,PASS,Emmanuel,nio_uio-a0-26ww17a
+parmiopcie6ttidecee_uio_0,stuckat_edt_bypass_low_internal_serial_chain,PASS,Emmanuel,nio_uio-a0-26ww17a
+parmiopcie6ttidecee_uio_0,stuckat_edt_bypass_low_internal_serial_scan,PASS,Emmanuel,nio_uio-a0-26ww17a
+parmiopcie6ttidecee_uio_0,stuckat_edt_edt_low_internal_serial_chain,PASS,Emmanuel,nio_uio-a0-26ww17a
+parmiopcie6ttidecee_uio_0,stuckat_edt_edt_low_internal_serial_scan,PASS,Emmanuel,nio_uio-a0-26ww17a
+pard2d1chnl,atspeed_edt_bypass_low_internal_serial_scan,PASS,Mario,nio_d2d-a0-26ww17b
+pard2d1chnl,atspeed_edt_edt_low_internal_serial_scan,PASS,Mario,nio_d2d-a0-26ww17b
+pard2d1chnl,ijtag_basic_tap_tests_rw_access,FAIL,Mario,nio_d2d-a0-26ww17b
+pard2d1chnl,pard2d1chnl_ub_i_ult_scan_ctlr_stuckat_edt_bypass_low_internal_scandump,PASS,Mario,nio_d2d-a0-26ww17b
+pard2d1chnl,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,PASS,Mario,nio_d2d-a0-26ww17b
+pard2d1chnl,stuckat_edt_bypass_low_internal_serial_chain,PASS,Mario,nio_d2d-a0-26ww17b
+pard2d1chnl,stuckat_edt_bypass_low_internal_serial_scan,PASS,Mario,nio_d2d-a0-26ww17b
+pard2d1chnl,stuckat_edt_edt_low_internal_serial_chain,PASS,Mario,nio_d2d-a0-26ww17b
+pard2d1chnl,stuckat_edt_edt_low_internal_serial_scan,PASS,Mario,nio_d2d-a0-26ww17b
+parmccore,atspeed_edt_bypass_low_internal_serial_scan,PASS,Mario,nio_mc-a0-26ww17b
+parmccore,atspeed_edt_edt_low_internal_serial_scan,PASS,Mario,nio_mc-a0-26ww17b
+parmccore,ijtag_basic_tap_tests_rw_access,PASS,Mario,nio_mc-a0-26ww17b
+parmccore,parmccore_ub_i_ult_scan_ctlr_stuckat_edt_bypass_low_internal_scandump,PASS,Mario,nio_mc-a0-26ww17b
+parmccore,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,PASS,Mario,nio_mc-a0-26ww17b
+parmccore,stuckat_edt_bypass_low_internal_serial_chain,PASS,Mario,nio_mc-a0-26ww17b
+parmccore,stuckat_edt_bypass_low_internal_serial_scan,PASS,Mario,nio_mc-a0-26ww17b
+parmccore,stuckat_edt_edt_low_internal_serial_chain,PASS,Mario,nio_mc-a0-26ww17b
+parmccore,stuckat_edt_edt_low_internal_serial_scan,PASS,Mario,nio_mc-a0-26ww17b
+parmiocxltx_uio_0,atspeed_edt_bypass_low_internal_serial_scan,MISSING,Mario,nio_uio-a0-26ww17a
+parmiocxltx_uio_0,atspeed_edt_edt_low_internal_serial_scan,MISSING,Mario,nio_uio-a0-26ww17a
+parmiocxltx_uio_0,ijtag_basic_tap_tests_rw_access,MISSING,Mario,nio_uio-a0-26ww17a
+parmiocxltx_uio_0,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,MISSING,Mario,nio_uio-a0-26ww17a
+parmiocxltx_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,MISSING,Mario,nio_uio-a0-26ww17a
+parmiocxltx_uio_0,stuckat_edt_bypass_low_internal_serial_chain,MISSING,Mario,nio_uio-a0-26ww17a
+parmiocxltx_uio_0,stuckat_edt_bypass_low_internal_serial_scan,MISSING,Mario,nio_uio-a0-26ww17a
+parmiocxltx_uio_0,stuckat_edt_edt_low_internal_serial_chain,MISSING,Mario,nio_uio-a0-26ww17a
+parmiocxltx_uio_0,stuckat_edt_edt_low_internal_serial_scan,MISSING,Mario,nio_uio-a0-26ww17a
+parmiofblptx,atspeed_edt_bypass_low_internal_serial_scan,PASS,Mario,nio_uio-a0-26ww17a
+parmiofblptx,atspeed_edt_edt_low_internal_serial_scan,PASS,Mario,nio_uio-a0-26ww17a
+parmiofblptx,ijtag_basic_tap_tests_rw_access,PASS,Mario,nio_uio-a0-26ww17a
+parmiofblptx,parmiofblptx_ub_i_ult_scan_ctlr_stuckat_edt_bypass_low_internal_scandump,PASS,Mario,nio_uio-a0-26ww17a
+parmiofblptx,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,PASS,Mario,nio_uio-a0-26ww17a
+parmiofblptx,stuckat_edt_bypass_low_internal_serial_chain,PASS,Mario,nio_uio-a0-26ww17a
+parmiofblptx,stuckat_edt_bypass_low_internal_serial_scan,PASS,Mario,nio_uio-a0-26ww17a
+parmiofblptx,stuckat_edt_edt_low_internal_serial_chain,PASS,Mario,nio_uio-a0-26ww17a
+parmiofblptx,stuckat_edt_edt_low_internal_serial_scan,PASS,Mario,nio_uio-a0-26ww17a
+parmiohap_uio_0,atspeed_edt_bypass_low_internal_serial_scan,PASS,Mario,nio_uio-a0-26ww17a
+parmiohap_uio_0,atspeed_edt_edt_low_internal_serial_scan,PASS,Mario,nio_uio-a0-26ww17a
+parmiohap_uio_0,ijtag_basic_tap_tests_rw_access,PASS,Mario,nio_uio-a0-26ww17a
+parmiohap_uio_0,parmiohap_uio_0_ub_i_ult_scan_ctlr_stuckat_edt_bypass_low_internal_scandump,PASS,Mario,nio_uio-a0-26ww17a
+parmiohap_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,PASS,Mario,nio_uio-a0-26ww17a
+parmiohap_uio_0,stuckat_edt_bypass_low_internal_serial_chain,PASS,Mario,nio_uio-a0-26ww17a
+parmiohap_uio_0,stuckat_edt_bypass_low_internal_serial_scan,PASS,Mario,nio_uio-a0-26ww17a
+parmiohap_uio_0,stuckat_edt_edt_low_internal_serial_chain,PASS,Mario,nio_uio-a0-26ww17a
+parmiohap_uio_0,stuckat_edt_edt_low_internal_serial_scan,PASS,Mario,nio_uio-a0-26ww17a
+parmioitc_uio_0,atspeed_edt_bypass_low_internal_serial_scan,PASS,Mario,nio_uio-a0-26ww17a
+parmioitc_uio_0,atspeed_edt_edt_low_internal_serial_scan,PASS,Mario,nio_uio-a0-26ww17a
+parmioitc_uio_0,ijtag_basic_tap_tests_rw_access,PASS,Mario,nio_uio-a0-26ww17a
+parmioitc_uio_0,parmioitc_uio_0_ub_i_ult_scan_ctlr_stuckat_edt_bypass_low_internal_scandump,PASS,Mario,nio_uio-a0-26ww17a
+parmioitc_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,PASS,Mario,nio_uio-a0-26ww17a
+parmioitc_uio_0,stuckat_edt_bypass_low_internal_serial_chain,PASS,Mario,nio_uio-a0-26ww17a
+parmioitc_uio_0,stuckat_edt_bypass_low_internal_serial_scan,PASS,Mario,nio_uio-a0-26ww17a
+parmioitc_uio_0,stuckat_edt_edt_low_internal_serial_chain,PASS,Mario,nio_uio-a0-26ww17a
+parmioitc_uio_0,stuckat_edt_edt_low_internal_serial_scan,PASS,Mario,nio_uio-a0-26ww17a
+parmiopcie6ttcore_uio_0,atspeed_edt_bypass_low_internal_serial_scan,PASS,Mario,nio_uio-a0-26ww17a
+parmiopcie6ttcore_uio_0,atspeed_edt_edt_low_internal_serial_scan,PASS,Mario,nio_uio-a0-26ww17a
+parmiopcie6ttcore_uio_0,ijtag_basic_tap_tests_rw_access,PASS,Mario,nio_uio-a0-26ww17a
+parmiopcie6ttcore_uio_0,parmiopcie6ttcore_uio_0_ub_i_ult_scan_ctlr_stuckat_edt_bypass_low_internal_scandump,PASS,Mario,nio_uio-a0-26ww17a
+parmiopcie6ttcore_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,PASS,Mario,nio_uio-a0-26ww17a
+parmiopcie6ttcore_uio_0,stuckat_edt_bypass_low_internal_serial_chain,PASS,Mario,nio_uio-a0-26ww17a
+parmiopcie6ttcore_uio_0,stuckat_edt_bypass_low_internal_serial_scan,PASS,Mario,nio_uio-a0-26ww17a
+parmiopcie6ttcore_uio_0,stuckat_edt_edt_low_internal_serial_chain,PASS,Mario,nio_uio-a0-26ww17a
+parmiopcie6ttcore_uio_0,stuckat_edt_edt_low_internal_serial_scan,PASS,Mario,nio_uio-a0-26ww17a
+parmiostaticmux_uio_0,atspeed_edt_bypass_low_internal_serial_scan,PASS,Mario,nio_uio-a0-26ww17a
+parmiostaticmux_uio_0,atspeed_edt_edt_low_internal_serial_scan,PASS,Mario,nio_uio-a0-26ww17a
+parmiostaticmux_uio_0,ijtag_basic_tap_tests_rw_access,PASS,Mario,nio_uio-a0-26ww17a
+parmiostaticmux_uio_0,parmiostaticmux_uio_0_ub_i_ult_scan_ctlr_stuckat_edt_bypass_low_internal_scandump,PASS,Mario,nio_uio-a0-26ww17a
+parmiostaticmux_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,PASS,Mario,nio_uio-a0-26ww17a
+parmiostaticmux_uio_0,stuckat_edt_bypass_low_internal_serial_chain,PASS,Mario,nio_uio-a0-26ww17a
+parmiostaticmux_uio_0,stuckat_edt_bypass_low_internal_serial_scan,PASS,Mario,nio_uio-a0-26ww17a
+parmiostaticmux_uio_0,stuckat_edt_edt_low_internal_serial_chain,PASS,Mario,nio_uio-a0-26ww17a
+parmiostaticmux_uio_0,stuckat_edt_edt_low_internal_serial_scan,PASS,Mario,nio_uio-a0-26ww17a
+parmcmisc,atspeed_edt_bypass_low_internal_serial_scan,MISSING,Mauricio,nio_mc-a0-26ww17b
+parmcmisc,atspeed_edt_edt_low_internal_serial_scan,MISSING,Mauricio,nio_mc-a0-26ww17b
+parmcmisc,ijtag_basic_tap_tests_rw_access,FAIL,Mauricio,nio_mc-a0-26ww17b
+parmcmisc,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,MISSING,Mauricio,nio_mc-a0-26ww17b
+parmcmisc,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,MISSING,Mauricio,nio_mc-a0-26ww17b
+parmcmisc,stuckat_edt_bypass_low_internal_serial_chain,MISSING,Mauricio,nio_mc-a0-26ww17b
+parmcmisc,stuckat_edt_bypass_low_internal_serial_scan,MISSING,Mauricio,nio_mc-a0-26ww17b
+parmcmisc,stuckat_edt_edt_low_internal_serial_chain,MISSING,Mauricio,nio_mc-a0-26ww17b
+parmcmisc,stuckat_edt_edt_low_internal_serial_scan,MISSING,Mauricio,nio_mc-a0-26ww17b
+parmemdfi0,atspeed_edt_bypass_low_internal_serial_scan,MISSING,Mauricio,nio_mc-a0-26ww17b
+parmemdfi0,atspeed_edt_edt_low_internal_serial_scan,MISSING,Mauricio,nio_mc-a0-26ww17b
+parmemdfi0,ijtag_basic_tap_tests_rw_access,MISSING,Mauricio,nio_mc-a0-26ww17b
+parmemdfi0,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,MISSING,Mauricio,nio_mc-a0-26ww17b
+parmemdfi0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,MISSING,Mauricio,nio_mc-a0-26ww17b
+parmemdfi0,stuckat_edt_bypass_low_internal_serial_chain,MISSING,Mauricio,nio_mc-a0-26ww17b
+parmemdfi0,stuckat_edt_bypass_low_internal_serial_scan,MISSING,Mauricio,nio_mc-a0-26ww17b
+parmemdfi0,stuckat_edt_edt_low_internal_serial_chain,MISSING,Mauricio,nio_mc-a0-26ww17b
+parmemdfi0,stuckat_edt_edt_low_internal_serial_scan,MISSING,Mauricio,nio_mc-a0-26ww17b
+parmioasf_uio_0,atspeed_edt_bypass_low_internal_serial_scan,PASS,Mauricio,nio_uio-a0-26ww17a
+parmioasf_uio_0,atspeed_edt_edt_low_internal_serial_scan,PASS,Mauricio,nio_uio-a0-26ww17a
+parmioasf_uio_0,ijtag_basic_tap_tests_rw_access,FAIL,Mauricio,nio_uio-a0-26ww17a
+parmioasf_uio_0,parmioasf_uio_0_ub_i_ult_scan_ctlr_stuckat_edt_bypass_low_internal_scandump,PASS,Mauricio,nio_uio-a0-26ww17a
+parmioasf_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,PASS,Mauricio,nio_uio-a0-26ww17a
+parmioasf_uio_0,stuckat_edt_bypass_low_internal_serial_chain,PASS,Mauricio,nio_uio-a0-26ww17a
+parmioasf_uio_0,stuckat_edt_bypass_low_internal_serial_scan,PASS,Mauricio,nio_uio-a0-26ww17a
+parmioasf_uio_0,stuckat_edt_edt_low_internal_serial_chain,PASS,Mauricio,nio_uio-a0-26ww17a
+parmioasf_uio_0,stuckat_edt_edt_low_internal_serial_scan,PASS,Mauricio,nio_uio-a0-26ww17a
+parmiocpc_uio_0,atspeed_edt_bypass_low_internal_serial_scan,PASS,Mauricio,nio_uio-a0-26ww17a
+parmiocpc_uio_0,atspeed_edt_edt_low_internal_serial_scan,PASS,Mauricio,nio_uio-a0-26ww17a
+parmiocpc_uio_0,ijtag_basic_tap_tests_rw_access,PASS,Mauricio,nio_uio-a0-26ww17a
+parmiocpc_uio_0,parmiocpc_uio_0_ub_i_ult_scan_ctlr_stuckat_edt_bypass_low_internal_scandump,PASS,Mauricio,nio_uio-a0-26ww17a
+parmiocpc_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,PASS,Mauricio,nio_uio-a0-26ww17a
+parmiocpc_uio_0,stuckat_edt_bypass_low_internal_serial_chain,PASS,Mauricio,nio_uio-a0-26ww17a
+parmiocpc_uio_0,stuckat_edt_bypass_low_internal_serial_scan,PASS,Mauricio,nio_uio-a0-26ww17a
+parmiocpc_uio_0,stuckat_edt_edt_low_internal_serial_chain,PASS,Mauricio,nio_uio-a0-26ww17a
+parmiocpc_uio_0,stuckat_edt_edt_low_internal_serial_scan,PASS,Mauricio,nio_uio-a0-26ww17a
+parmiocxlrx_uio_0,atspeed_edt_bypass_low_internal_serial_scan,PASS,Mauricio,nio_uio-a0-26ww17a
+parmiocxlrx_uio_0,atspeed_edt_edt_low_internal_serial_scan,PASS,Mauricio,nio_uio-a0-26ww17a
+parmiocxlrx_uio_0,ijtag_basic_tap_tests_rw_access,PASS,Mauricio,nio_uio-a0-26ww17a
+parmiocxlrx_uio_0,parmiocxlrx_uio_0_ub_i_ult_scan_ctlr_stuckat_edt_bypass_low_internal_scandump,PASS,Mauricio,nio_uio-a0-26ww17a
+parmiocxlrx_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,PASS,Mauricio,nio_uio-a0-26ww17a
+parmiocxlrx_uio_0,stuckat_edt_bypass_low_internal_serial_chain,PASS,Mauricio,nio_uio-a0-26ww17a
+parmiocxlrx_uio_0,stuckat_edt_bypass_low_internal_serial_scan,PASS,Mauricio,nio_uio-a0-26ww17a
+parmiocxlrx_uio_0,stuckat_edt_edt_low_internal_serial_chain,PASS,Mauricio,nio_uio-a0-26ww17a
+parmiocxlrx_uio_0,stuckat_edt_edt_low_internal_serial_scan,PASS,Mauricio,nio_uio-a0-26ww17a
+parmiootc_uio_0,atspeed_edt_bypass_low_internal_serial_scan,PASS,Mauricio,nio_uio-a0-26ww17a
+parmiootc_uio_0,atspeed_edt_edt_low_internal_serial_scan,PASS,Mauricio,nio_uio-a0-26ww17a
+parmiootc_uio_0,ijtag_basic_tap_tests_rw_access,PASS,Mauricio,nio_uio-a0-26ww17a
+parmiootc_uio_0,parmiootc_uio_0_ub_i_ult_scan_ctlr_stuckat_edt_bypass_low_internal_scandump,PASS,Mauricio,nio_uio-a0-26ww17a
+parmiootc_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,PASS,Mauricio,nio_uio-a0-26ww17a
+parmiootc_uio_0,stuckat_edt_bypass_low_internal_serial_chain,PASS,Mauricio,nio_uio-a0-26ww17a
+parmiootc_uio_0,stuckat_edt_bypass_low_internal_serial_scan,PASS,Mauricio,nio_uio-a0-26ww17a
+parmiootc_uio_0,stuckat_edt_edt_low_internal_serial_chain,PASS,Mauricio,nio_uio-a0-26ww17a
+parmiootc_uio_0,stuckat_edt_edt_low_internal_serial_scan,PASS,Mauricio,nio_uio-a0-26ww17a
+parmiopcie6trcore_uio_0,atspeed_edt_bypass_low_internal_serial_scan,PASS,Mauricio,nio_uio-a0-26ww17a
+parmiopcie6trcore_uio_0,atspeed_edt_edt_low_internal_serial_scan,PASS,Mauricio,nio_uio-a0-26ww17a
+parmiopcie6trcore_uio_0,ijtag_basic_tap_tests_rw_access,PASS,Mauricio,nio_uio-a0-26ww17a
+parmiopcie6trcore_uio_0,parmiopcie6trcore_uio_0_ub_i_ult_scan_ctlr_stuckat_edt_bypass_low_internal_scandump,PASS,Mauricio,nio_uio-a0-26ww17a
+parmiopcie6trcore_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,PASS,Mauricio,nio_uio-a0-26ww17a
+parmiopcie6trcore_uio_0,stuckat_edt_bypass_low_internal_serial_chain,PASS,Mauricio,nio_uio-a0-26ww17a
+parmiopcie6trcore_uio_0,stuckat_edt_bypass_low_internal_serial_scan,PASS,Mauricio,nio_uio-a0-26ww17a
+parmiopcie6trcore_uio_0,stuckat_edt_edt_low_internal_serial_chain,PASS,Mauricio,nio_uio-a0-26ww17a
+parmiopcie6trcore_uio_0,stuckat_edt_edt_low_internal_serial_scan,PASS,Mauricio,nio_uio-a0-26ww17a
+parmioula_uio_0,atspeed_edt_bypass_low_internal_serial_scan,PASS,Mauricio,nio_uio-a0-26ww17a
+parmioula_uio_0,atspeed_edt_edt_low_internal_serial_scan,PASS,Mauricio,nio_uio-a0-26ww17a
+parmioula_uio_0,ijtag_basic_tap_tests_rw_access,PASS,Mauricio,nio_uio-a0-26ww17a
+parmioula_uio_0,parmioula_uio_0_ub_i_ult_scan_ctlr_stuckat_edt_bypass_low_internal_scandump,PASS,Mauricio,nio_uio-a0-26ww17a
+parmioula_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,PASS,Mauricio,nio_uio-a0-26ww17a
+parmioula_uio_0,stuckat_edt_bypass_low_internal_serial_chain,PASS,Mauricio,nio_uio-a0-26ww17a
+parmioula_uio_0,stuckat_edt_bypass_low_internal_serial_scan,PASS,Mauricio,nio_uio-a0-26ww17a
+parmioula_uio_0,stuckat_edt_edt_low_internal_serial_chain,PASS,Mauricio,nio_uio-a0-26ww17a
+parmioula_uio_0,stuckat_edt_edt_low_internal_serial_scan,PASS,Mauricio,nio_uio-a0-26ww17a`;
+
+        let allData = [];
+        let originalData = [];
+        let filteredData = [];
+        let currentFilter = { text: '', status: null };
+
+        function parseCSV(csv) {
+            const lines = csv.trim().split('\n');
+            const headers = lines[0].split(',');
+            const data = [];
+
+            for (let i = 1; i < lines.length; i++) {
+                const obj = {};
+                const currentLine = lines[i].split(',');
+
+                for (let j = 0; j < headers.length; j++) {
+                    obj[headers[j]] = currentLine[j];
+                }
+                data.push(obj);
+            }
+            return data;
+        }
+
+        function initializeData() {
+            allData = parseCSV(csvData);
+            originalData = JSON.parse(JSON.stringify(allData));
+
+            // Load saved edits from localStorage
+            const saved = localStorage.getItem('testTrackerEdits');
+            if (saved) {
+                const edits = JSON.parse(saved);
+                allData.forEach((row, idx) => {
+                    const key = `${row.partition}|${row.test_type}`;
+                    if (edits[key]) {
+                        row.hsdes = edits[key].hsdes || '';
+                        row.comments = edits[key].comments || '';
+                    }
+                });
+            } else {
+                allData.forEach(row => {
+                    row.hsdes = '';
+                    row.comments = '';
+                });
+            }
+
+            filteredData = JSON.parse(JSON.stringify(allData));
+            document.getElementById('totalRows').textContent = allData.length;
+            updateStats();
+            renderTable();
+        }
+
+        function updateStats() {
+            const pass = allData.filter(r => r.status === 'PASS').length;
+            const fail = allData.filter(r => r.status === 'FAIL').length;
+            const missing = allData.filter(r => r.status === 'MISSING').length;
+
+            document.getElementById('statPass').textContent = pass;
+            document.getElementById('statFail').textContent = fail;
+            document.getElementById('statMissing').textContent = missing;
+        }
+
+        function getStatusClass(status) {
+            switch (status) {
+                case 'PASS': return 'status-pass';
+                case 'FAIL': return 'status-fail';
+                case 'MISSING': return 'status-missing';
+                default: return '';
+            }
+        }
+
+        function renderTable() {
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
+
+            filteredData.forEach((row, idx) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="partition-col">${row.partition}</td>
+                    <td class="test-case-col">${row.test_type}</td>
+                    <td class="editable-cell" data-idx="${idx}" data-field="status">${row.status || ''}</td>
+                    <td class="editable-cell" data-idx="${idx}" data-field="hsdes">${row.hsdes}</td>
+                    <td class="editable-cell" data-idx="${idx}" data-field="comments">${row.comments}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            // Add event listeners to editable cells
+            document.querySelectorAll('.editable-cell').forEach(cell => {
+                cell.addEventListener('click', editCell);
+            });
+        }
+
+        function editCell(e) {
+            const cell = e.target;
+            const idx = parseInt(cell.dataset.idx);
+            const field = cell.dataset.field;
+            const currentValue = cell.textContent;
+
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.value = currentValue;
+            cell.textContent = '';
+            cell.appendChild(input);
+            input.focus();
+
+            function saveEdit() {
+                const newValue = input.value;
+                filteredData[idx][field] = newValue;
+
+                // Also update in allData
+                const rowInAll = allData.findIndex(r => 
+                    r.partition === filteredData[idx].partition && 
+                    r.test_type === filteredData[idx].test_type
+                );
+                if (rowInAll !== -1) {
+                    allData[rowInAll][field] = newValue;
+                }
+
+                cell.textContent = newValue;
+                saveEditsToStorage();
+                showToast(`${field.toUpperCase()} saved`);
+                updateStats();
+            }
+
+            input.addEventListener('blur', saveEdit);
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') saveEdit();
+                if (e.key === 'Escape') {
+                    cell.textContent = currentValue;
+                }
+            });
+        }
+
+        function saveEditsToStorage() {
+            const edits = {};
+            allData.forEach(row => {
+                const key = `${row.partition}|${row.test_type}`;
+                edits[key] = {
+                    hsdes: row.hsdes,
+                    comments: row.comments
+                };
+            });
+            localStorage.setItem('testTrackerEdits', JSON.stringify(edits));
+        }
+
+        function filterTable() {
+            const searchText = document.getElementById('searchBox').value.toLowerCase();
+
+            filteredData = allData.filter(row => {
+                const matchText = !searchText || 
+                    row.partition.toLowerCase().includes(searchText) ||
+                    row.test_type.toLowerCase().includes(searchText);
+
+                const matchStatus = !currentFilter.status || row.status === currentFilter.status;
+
+                return matchText && matchStatus;
+            });
+
+            updateFilterDisplay();
+            renderTable();
+        }
+
+        function updateFilterDisplay() {
+            const display = document.getElementById('filterDisplay');
+            const filters = [];
+
+            if (document.getElementById('searchBox').value) {
+                filters.push(`Search: "${document.getElementById('searchBox').value}"`);
+            }
+            if (currentFilter.status) {
+                filters.push(`Status: ${currentFilter.status}`);
+            }
+
+            if (filters.length > 0) {
+                display.innerHTML = filters.map(f => 
+                    `<div class="filter-badge">${f} <button onclick="removeFilter()">✕</button></div>`
+                ).join('');
+            } else {
+                display.innerHTML = '';
+            }
+        }
+
+        function resetFilters() {
+            document.getElementById('searchBox').value = '';
+            currentFilter = { text: '', status: null };
+            filterTable();
+        }
+
+        function removeFilter() {
+            resetFilters();
+        }
+
+        function exportToCSV() {
+            let csv = 'partition,test_case,status,hsdes,comments\n';
+            
+            filteredData.forEach(row => {
+                const partition = `"${row.partition}"`;
+                const testCase = `"${row.test_type}"`;
+                const status = row.status;
+                const hsdes = `"${row.hsdes.replace(/"/g, '""')}"`;
+                const comments = `"${row.comments.replace(/"/g, '""')}"`;
+                
+                csv += `${partition},${testCase},${status},${hsdes},${comments}\n`;
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `test_status_${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+            window.URL.revokeObjectURL(url);
+            showToast('CSV exported');
+        }
+
+        function clearAllEdits() {
+            if (confirm('Clear all HSDES and Comments entries? This cannot be undone.')) {
+                allData.forEach(row => {
+                    row.hsdes = '';
+                    row.comments = '';
+                });
+                filteredData = JSON.parse(JSON.stringify(allData));
+                localStorage.removeItem('testTrackerEdits');
+                renderTable();
+                showToast('All edits cleared');
+            }
+        }
+
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className = 'alert alert-info alert-dismissible fade show';
+            toast.style.margin = '0';
+            toast.innerHTML = `${message} <button type="button" class="btn-close" data-bs-dismiss="alert"></button>`;
+            
+            const container = document.getElementById('toastContainer');
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+
+        document.getElementById('searchBox').addEventListener('input', filterTable);
+
+        document.getElementById('reportDate').textContent = new Date().toLocaleDateString('en-US', { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+
+        initializeData();
+    </script>
+</body>
+</html>
