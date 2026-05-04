@@ -1,0 +1,360 @@
+partition,model,test_case,status,owner,source
+parmioinf3e,SOC,[NWP] scan: edten cont proxy,BLOCKED,Mario Alpizar,subfcnorthcap
+parmioinf3e,SOC,[NWP] TAP: iJTAG R/W,BLOCKED,Mario Alpizar,subfcnorthcap
+parmioinf3e,SOC,[NWP] scan: edtbyp stuckat proxy,BLOCKED,Mario Alpizar,subfcnorthcap
+parmioinf3e,SOC,[NWP] scan: scandump,BLOCKED,Mario Alpizar,subfcnorthcap
+parmioinf3e,SOC,[NWP] scan: edten stuckat proxy,BLOCKED,Mario Alpizar,subfcnorthcap
+parmioinf3e,SOC,[NWP] scan: edtbyp cont proxy,BLOCKED,Mario Alpizar,subfcnorthcap
+parmioinf3e,SOC,[NWP] scan: edten atspeed proxy,BLOCKED,Mario Alpizar,subfcnorthcap
+parmioinf3e,SOC,[NWP] scan: Burnin,BLOCKED,Mario Alpizar,subfcnorthcap
+parmioinf3w,SOC,[NWP] scan: edten cont proxy,BLOCKED,Mario Alpizar,subfcnorthcap
+parmioinf3w,SOC,[NWP] TAP: iJTAG R/W,BLOCKED,Mario Alpizar,subfcnorthcap
+parmioinf3w,SOC,[NWP] scan: edtbyp stuckat proxy,BLOCKED,Mario Alpizar,subfcnorthcap
+parmioinf3w,SOC,[NWP] scan: scandump,BLOCKED,Mario Alpizar,subfcnorthcap
+parmioinf3w,SOC,[NWP] scan: edten stuckat proxy,BLOCKED,Mario Alpizar,subfcnorthcap
+parmioinf3w,SOC,[NWP] scan: edtbyp cont proxy,BLOCKED,Mario Alpizar,subfcnorthcap
+parmioinf3w,SOC,[NWP] scan: edten atspeed proxy,BLOCKED,Mario Alpizar,subfcnorthcap
+parmioinf3w,SOC,[NWP] scan: Burnin,BLOCKED,Mario Alpizar,subfcnorthcap
+parocs,SOC,[NWP] scan: edten cont proxy,BLOCKED,Mauricio Segura,subfcsouthcap
+parocs,SOC,[NWP] TAP: iJTAG R/W,BLOCKED,Mauricio Segura,subfcsouthcap
+parocs,SOC,[NWP] scan: edtbyp stuckat proxy,BLOCKED,Mauricio Segura,subfcsouthcap
+parocs,SOC,[NWP] scan: scandump,BLOCKED,Mauricio Segura,subfcsouthcap
+parocs,SOC,[NWP] scan: edten stuckat proxy,BLOCKED,Mauricio Segura,subfcsouthcap
+parocs,SOC,[NWP] scan: edtbyp cont proxy,BLOCKED,Mauricio Segura,subfcsouthcap
+parocs,SOC,[NWP] scan: edten atspeed proxy,BLOCKED,Mauricio Segura,subfcsouthcap
+parocs,SOC,[NWP] scan: Burnin,BLOCKED,Mauricio Segura,subfcsouthcap
+paridfttop,SOC,[NWP] scan: edten cont proxy,BLOCKED,Mauricio Segura,subfcsouthcap
+paridfttop,SOC,[NWP] TAP: iJTAG R/W,BLOCKED,Mauricio Segura,subfcsouthcap
+paridfttop,SOC,[NWP] scan: edtbyp stuckat proxy,BLOCKED,Mauricio Segura,subfcsouthcap
+paridfttop,SOC,[NWP] scan: scandump,BLOCKED,Mauricio Segura,subfcsouthcap
+paridfttop,SOC,[NWP] scan: edten stuckat proxy,BLOCKED,Mauricio Segura,subfcsouthcap
+paridfttop,SOC,[NWP] scan: edtbyp cont proxy,BLOCKED,Mauricio Segura,subfcsouthcap
+paridfttop,SOC,[NWP] scan: edten atspeed proxy,BLOCKED,Mauricio Segura,subfcsouthcap
+paridfttop,SOC,[NWP] scan: Burnin,BLOCKED,Mauricio Segura,subfcsouthcap
+parrclk,SOC,[NWP] scan: edtbyp cont proxy,BLOCKED,Mauricio Segura,subfcsouthcap
+parrclk,SOC,[NWP] scan: edten cont proxy,BLOCKED,Mauricio Segura,subfcsouthcap
+parrclk,SOC,[NWP] TAP: iJTAG R/W,BLOCKED,Mauricio Segura,subfcsouthcap
+parrclk,SOC,[NWP] scan: edtbyp stuckat proxy,BLOCKED,Mauricio Segura,subfcsouthcap
+parrclk,SOC,[NWP] scan: scandump,BLOCKED,Mauricio Segura,subfcsouthcap
+parrclk,SOC,[NWP] scan: edten stuckat proxy,BLOCKED,Mauricio Segura,subfcsouthcap
+parrclk,SOC,[NWP] scan: edten atspeed proxy,BLOCKED,Mauricio Segura,subfcsouthcap
+parrclk,SOC,[NWP] scan: Burnin,BLOCKED,Mauricio Segura,subfcsouthcap
+paroobip,SOC,[NWP] scan: edten cont proxy,BLOCKED,Mauricio Segura,subfcsouthcap
+paroobip,SOC,[NWP] TAP: iJTAG R/W,BLOCKED,Mauricio Segura,subfcsouthcap
+paroobip,SOC,[NWP] scan: edtbyp stuckat proxy,BLOCKED,Mauricio Segura,subfcsouthcap
+paroobip,SOC,[NWP] scan: scandump,BLOCKED,Mauricio Segura,subfcsouthcap
+paroobip,SOC,[NWP] scan: edten stuckat proxy,BLOCKED,Mauricio Segura,subfcsouthcap
+paroobip,SOC,[NWP] scan: edten atspeed proxy,BLOCKED,Mauricio Segura,subfcsouthcap
+paroobip,SOC,[NWP] scan: edtbyp cont proxy,BLOCKED,Mauricio Segura,subfcsouthcap
+paroobip,SOC,[NWP] scan: Burnin,BLOCKED,Mauricio Segura,subfcsouthcap
+pars3m,SOC,[NWP] scan: edtbyp cont proxy,BLOCKED,Mauricio Segura,subfcsouthcap
+pars3m,SOC,[NWP] scan: edten cont proxy,BLOCKED,Mauricio Segura,subfcsouthcap
+pars3m,SOC,[NWP] TAP: iJTAG R/W,BLOCKED,Mauricio Segura,subfcsouthcap
+pars3m,SOC,[NWP] scan: edtbyp stuckat proxy,BLOCKED,Mauricio Segura,subfcsouthcap
+pars3m,SOC,[NWP] scan: scandump,BLOCKED,Mauricio Segura,subfcsouthcap
+pars3m,SOC,[NWP] scan: edten stuckat proxy,BLOCKED,Mauricio Segura,subfcsouthcap
+pars3m,SOC,[NWP] scan: edten atspeed proxy,BLOCKED,Mauricio Segura,subfcsouthcap
+pars3m,SOC,[NWP] scan: Burnin,BLOCKED,Mauricio Segura,subfcsouthcap
+parmioinf1w,SOC,[NWP] scan: edten cont proxy,BLOCKED,Mario Alpizar,subfcnorthcap
+parmioinf1w,SOC,[NWP] TAP: iJTAG R/W,BLOCKED,Mario Alpizar,subfcnorthcap
+parmioinf1w,SOC,[NWP] scan: edtbyp stuckat proxy,BLOCKED,Mario Alpizar,subfcnorthcap
+parmioinf1w,SOC,[NWP] scan: scandump,BLOCKED,Mario Alpizar,subfcnorthcap
+parmioinf1w,SOC,[NWP] scan: edten stuckat proxy,BLOCKED,Mario Alpizar,subfcnorthcap
+parmioinf1w,SOC,[NWP] scan: edtbyp cont proxy,BLOCKED,Mario Alpizar,subfcnorthcap
+parmioinf1w,SOC,[NWP] scan: edten atspeed proxy,BLOCKED,Mario Alpizar,subfcnorthcap
+parmioinf1w,SOC,[NWP] scan: Burnin,BLOCKED,Mario Alpizar,subfcnorthcap
+parmioinf2w,SOC,[NWP] scan: edten cont proxy,OPEN,Mario Alpizar,subfcnorthcap
+parmioinf2w,SOC,[NWP] TAP: iJTAG R/W,OPEN,Mario Alpizar,subfcnorthcap
+parmioinf2w,SOC,[NWP] scan: edtbyp stuckat proxy,OPEN,Mario Alpizar,subfcnorthcap
+parmioinf2w,SOC,[NWP] scan: scandump,OPEN,Mario Alpizar,subfcnorthcap
+parmioinf2w,SOC,[NWP] scan: edten stuckat proxy,OPEN,Mario Alpizar,subfcnorthcap
+parmioinf2w,SOC,[NWP] scan: edtbyp cont proxy,OPEN,Mario Alpizar,subfcnorthcap
+parmioinf2w,SOC,[NWP] scan: edten atspeed proxy,OPEN,Mario Alpizar,subfcnorthcap
+parmioinf2w,SOC,[NWP] scan: Burnin,OPEN,Mario Alpizar,subfcnorthcap
+parsocrasip,SOC,[NWP] scan: edtbyp cont proxy,OPEN,Mauricio Segura,subfcsouthcap
+parsocrasip,SOC,[NWP] scan: edten cont proxy,OPEN,Mauricio Segura,subfcsouthcap
+parsocrasip,SOC,[NWP] scan: edtbyp stuckat proxy,OPEN,Mauricio Segura,subfcsouthcap
+parsocrasip,SOC,[NWP] scan: scandump,OPEN,Mauricio Segura,subfcsouthcap
+parsocrasip,SOC,[NWP] scan: edten stuckat proxy,OPEN,Mauricio Segura,subfcsouthcap
+parsocrasip,SOC,[NWP] scan: edten atspeed proxy,OPEN,Mauricio Segura,subfcsouthcap
+parsocrasip,SOC,[NWP] scan: Burnin,OPEN,Mauricio Segura,subfcsouthcap
+parseinf0,SOC,[NWP] scan: edtbyp cont proxy,BLOCKED,Mauricio Segura,subfcsouthcap
+parseinf0,SOC,[NWP] scan: edten cont proxy,BLOCKED,Mauricio Segura,subfcsouthcap
+parseinf0,SOC,[NWP] TAP: iJTAG R/W,BLOCKED,Mauricio Segura,subfcsouthcap
+parseinf0,SOC,[NWP] scan: edtbyp stuckat proxy,BLOCKED,Mauricio Segura,subfcsouthcap
+parseinf0,SOC,[NWP] scan: scandump,BLOCKED,Mauricio Segura,subfcsouthcap
+parseinf0,SOC,[NWP] scan: edten stuckat proxy,BLOCKED,Mauricio Segura,subfcsouthcap
+parseinf0,SOC,[NWP] scan: edten atspeed proxy,BLOCKED,Mauricio Segura,subfcsouthcap
+parseinf0,SOC,[NWP] scan: Burnin,BLOCKED,Mauricio Segura,subfcsouthcap
+parmioinf2e,SOC,[NWP] scan: edten cont proxy,OPEN,Mario Alpizar,subfcnorthcap
+parmioinf2e,SOC,[NWP] TAP: iJTAG R/W,OPEN,Mario Alpizar,subfcnorthcap
+parmioinf2e,SOC,[NWP] scan: edtbyp stuckat proxy,OPEN,Mario Alpizar,subfcnorthcap
+parmioinf2e,SOC,[NWP] scan: scandump,OPEN,Mario Alpizar,subfcnorthcap
+parmioinf2e,SOC,[NWP] scan: edten stuckat proxy,OPEN,Mario Alpizar,subfcnorthcap
+parmioinf2e,SOC,[NWP] scan: edten atspeed proxy,OPEN,Mario Alpizar,subfcnorthcap
+parmioinf2e,SOC,[NWP] scan: edtbyp cont proxy,OPEN,Mario Alpizar,subfcnorthcap
+parmioinf2e,SOC,[NWP] scan: Burnin,OPEN,Mario Alpizar,subfcnorthcap
+parmioinf1e,SOC,[NWP] scan: edten cont proxy,BLOCKED,Mario Alpizar,subfcnorthcap
+parmioinf1e,SOC,[NWP] TAP: iJTAG R/W,BLOCKED,Mario Alpizar,subfcnorthcap
+parmioinf1e,SOC,[NWP] scan: edtbyp stuckat proxy,BLOCKED,Mario Alpizar,subfcnorthcap
+parmioinf1e,SOC,[NWP] scan: scandump,BLOCKED,Mario Alpizar,subfcnorthcap
+parmioinf1e,SOC,[NWP] scan: edten stuckat proxy,BLOCKED,Mario Alpizar,subfcnorthcap
+parmioinf1e,SOC,[NWP] scan: edtbyp cont proxy,BLOCKED,Mario Alpizar,subfcnorthcap
+parmioinf1e,SOC,[NWP] scan: edten atspeed proxy,BLOCKED,Mario Alpizar,subfcnorthcap
+parmioinf1e,SOC,[NWP] scan: Burnin,BLOCKED,Mario Alpizar,subfcnorthcap
+parmioinf0,SOC,[NWP] scan: edten cont proxy,OPEN,Mario Alpizar,subfcnorthcap
+parmioinf0,SOC,[NWP] TAP: iJTAG R/W,OPEN,Mario Alpizar,subfcnorthcap
+parmioinf0,SOC,[NWP] scan: edtbyp stuckat proxy,OPEN,Mario Alpizar,subfcnorthcap
+parmioinf0,SOC,[NWP] scan: scandump,OPEN,Mario Alpizar,subfcnorthcap
+parmioinf0,SOC,[NWP] scan: edten stuckat proxy,OPEN,Mario Alpizar,subfcnorthcap
+parmioinf0,SOC,[NWP] scan: edtbyp cont proxy,OPEN,Mario Alpizar,subfcnorthcap
+parmioinf0,SOC,[NWP] scan: edten atspeed proxy,OPEN,Mario Alpizar,subfcnorthcap
+parmioinf0,SOC,[NWP] scan: Burnin,OPEN,Mario Alpizar,subfcnorthcap
+pargpiod2d,SOC,[NWP] scan: edten cont proxy,BLOCKED,Emmanuel Araya,subfcsouthcap
+pargpiod2d,SOC,[NWP] TAP: iJTAG R/W,BLOCKED,Emmanuel Araya,subfcsouthcap
+pargpiod2d,SOC,[NWP] scan: edtbyp stuckat proxy,BLOCKED,Emmanuel Araya,subfcsouthcap
+pargpiod2d,SOC,[NWP] scan: scandump,BLOCKED,Emmanuel Araya,subfcsouthcap
+pargpiod2d,SOC,[NWP] scan: edten stuckat proxy,BLOCKED,Emmanuel Araya,subfcsouthcap
+pargpiod2d,SOC,[NWP] scan: edtbyp cont proxy,BLOCKED,Emmanuel Araya,subfcsouthcap
+pargpiod2d,SOC,[NWP] scan: edten atspeed proxy,BLOCKED,Emmanuel Araya,subfcsouthcap
+pargpiod2d,SOC,[NWP] scan: Burnin,BLOCKED,Emmanuel Araya,subfcsouthcap
+parscfhaasf,SOC,[NWP] scan: edten cont proxy,OPEN,Emmanuel Araya,subfcmem
+parscfhaasf,SOC,[NWP] TAP: iJTAG R/W,OPEN,Emmanuel Araya,subfcmem
+parscfhaasf,SOC,[NWP] scan: edtbyp stuckat proxy,OPEN,Emmanuel Araya,subfcmem
+parscfhaasf,SOC,[NWP] scan: scandump,OPEN,Emmanuel Araya,subfcmem
+parscfhaasf,SOC,[NWP] scan: edten stuckat proxy,OPEN,Emmanuel Araya,subfcmem
+parscfhaasf,SOC,[NWP] scan: edtbyp cont proxy,OPEN,Emmanuel Araya,subfcmem
+parscfhaasf,SOC,[NWP] scan: edten atspeed proxy,OPEN,Emmanuel Araya,subfcmem
+parscfhaasf,SOC,[NWP] scan: Burnin,OPEN,Emmanuel Araya,subfcmem
+parscfhsf,SOC,[NWP] scan: edten cont proxy,BLOCKED,Emmanuel Araya,subfcmem
+parscfhsf,SOC,[NWP] TAP: iJTAG R/W,BLOCKED,Emmanuel Araya,subfcmem
+parscfhsf,SOC,[NWP] scan: edtbyp stuckat proxy,BLOCKED,Emmanuel Araya,subfcmem
+parscfhsf,SOC,[NWP] scan: scandump,BLOCKED,Emmanuel Araya,subfcmem
+parscfhsf,SOC,[NWP] scan: edten stuckat proxy,BLOCKED,Emmanuel Araya,subfcmem
+parscfhsf,SOC,[NWP] scan: edtbyp cont proxy,BLOCKED,Emmanuel Araya,subfcmem
+parscfhsf,SOC,[NWP] scan: edten atspeed proxy,BLOCKED,Emmanuel Araya,subfcmem
+parscfhsf,SOC,[NWP] scan: Burnin,BLOCKED,Emmanuel Araya,subfcmem
+parscfmvf,SOC,[NWP] scan: edten cont proxy,BLOCKED,Emmanuel Araya,subfcmem
+parscfmvf,SOC,[NWP] TAP: iJTAG R/W,BLOCKED,Emmanuel Araya,subfcmem
+parscfmvf,SOC,[NWP] scan: edtbyp stuckat proxy,BLOCKED,Emmanuel Araya,subfcmem
+parscfmvf,SOC,[NWP] scan: scandump,BLOCKED,Emmanuel Araya,subfcmem
+parscfmvf,SOC,[NWP] scan: edten stuckat proxy,BLOCKED,Emmanuel Araya,subfcmem
+parscfmvf,SOC,[NWP] scan: edtbyp cont proxy,BLOCKED,Emmanuel Araya,subfcmem
+parscfmvf,SOC,[NWP] scan: edten atspeed proxy,BLOCKED,Emmanuel Araya,subfcmem
+parscfmvf,SOC,[NWP] scan: Burnin,BLOCKED,Emmanuel Araya,subfcmem
+parscfmemmisc,SOC,[NWP] scan: edten cont proxy,OPEN,Emmanuel Araya,subfcmem
+parscfmemmisc,SOC,[NWP] TAP: iJTAG R/W,OPEN,Emmanuel Araya,subfcmem
+parscfmemmisc,SOC,[NWP] scan: edtbyp stuckat proxy,OPEN,Emmanuel Araya,subfcmem
+parscfmemmisc,SOC,[NWP] scan: scandump,OPEN,Emmanuel Araya,subfcmem
+parscfmemmisc,SOC,[NWP] scan: edten stuckat proxy,OPEN,Emmanuel Araya,subfcmem
+parscfmemmisc,SOC,[NWP] scan: edtbyp cont proxy,OPEN,Emmanuel Araya,subfcmem
+parscfmemmisc,SOC,[NWP] scan: edten atspeed proxy,OPEN,Emmanuel Araya,subfcmem
+parscfmemmisc,SOC,[NWP] scan: Burnin,OPEN,Emmanuel Araya,subfcmem
+parseinf2,SOC,[NWP] scan: edtbyp cont proxy,OPEN,Emmanuel Araya,subfcsouthcap
+parseinf2,SOC,[NWP] scan: edten cont proxy,OPEN,Emmanuel Araya,subfcsouthcap
+parseinf2,SOC,[NWP] TAP: iJTAG R/W,OPEN,Emmanuel Araya,subfcsouthcap
+parseinf2,SOC,[NWP] scan: edtbyp stuckat proxy,OPEN,Emmanuel Araya,subfcsouthcap
+parseinf2,SOC,[NWP] scan: scandump,OPEN,Emmanuel Araya,subfcsouthcap
+parseinf2,SOC,[NWP] scan: edten stuckat proxy,OPEN,Emmanuel Araya,subfcsouthcap
+parseinf2,SOC,[NWP] scan: edten atspeed proxy,OPEN,Emmanuel Araya,subfcsouthcap
+parseinf2,SOC,[NWP] scan: Burnin,OPEN,Emmanuel Araya,subfcsouthcap
+parseinf1,SOC,[NWP] scan: edtbyp cont proxy,BLOCKED,Emmanuel Araya,subfcsouthcap
+parseinf1,SOC,[NWP] scan: edten cont proxy,BLOCKED,Emmanuel Araya,subfcsouthcap
+parseinf1,SOC,[NWP] TAP: iJTAG R/W,BLOCKED,Emmanuel Araya,subfcsouthcap
+parseinf1,SOC,[NWP] scan: edtbyp stuckat proxy,BLOCKED,Emmanuel Araya,subfcsouthcap
+parseinf1,SOC,[NWP] scan: scandump,BLOCKED,Emmanuel Araya,subfcsouthcap
+parseinf1,SOC,[NWP] scan: edten stuckat proxy,BLOCKED,Emmanuel Araya,subfcsouthcap
+parseinf1,SOC,[NWP] scan: edten atspeed proxy,BLOCKED,Emmanuel Araya,subfcsouthcap
+parseinf1,SOC,[NWP] scan: Burnin,BLOCKED,Emmanuel Araya,subfcsouthcap
+pard2d1misc,D2D,[NWP] scan: edten atspeed proxy,PASS,Emmanuel Araya,nio_d2d-a0-26ww17b
+pard2d1misc,D2D,[NWP] TAP: iJTAG R/W,FAIL,Emmanuel Araya,nio_d2d-a0-26ww17b
+pard2d1misc,D2D,[NWP] scan: scandump,PASS,Emmanuel Araya,nio_d2d-a0-26ww17b
+pard2d1misc,D2D,[NWP] scan: Burnin,PASS,Emmanuel Araya,nio_d2d-a0-26ww17b
+pard2d1misc,D2D,[NWP] scan: edtbyp cont proxy,PASS,Emmanuel Araya,nio_d2d-a0-26ww17b
+pard2d1misc,D2D,[NWP] scan: edtbyp stuckat proxy,PASS,Emmanuel Araya,nio_d2d-a0-26ww17b
+pard2d1misc,D2D,[NWP] scan: edten cont proxy,PASS,Emmanuel Araya,nio_d2d-a0-26ww17b
+pard2d1misc,D2D,[NWP] scan: edten stuckat proxy,PASS,Emmanuel Araya,nio_d2d-a0-26ww17b
+parmcmse,MC,[NWP] scan: edten atspeed proxy,PASS,Emmanuel Araya,nio_mc-a0-26ww17b
+parmcmse,MC,[NWP] TAP: iJTAG R/W,PASS,Emmanuel Araya,nio_mc-a0-26ww17b
+parmcmse,MC,[NWP] scan: scandump,PASS,Emmanuel Araya,nio_mc-a0-26ww17b
+parmcmse,MC,[NWP] scan: Burnin,PASS,Emmanuel Araya,nio_mc-a0-26ww17b
+parmcmse,MC,[NWP] scan: edtbyp cont proxy,PASS,Emmanuel Araya,nio_mc-a0-26ww17b
+parmcmse,MC,[NWP] scan: edtbyp stuckat proxy,PASS,Emmanuel Araya,nio_mc-a0-26ww17b
+parmcmse,MC,[NWP] scan: edten cont proxy,PASS,Emmanuel Araya,nio_mc-a0-26ww17b
+parmcmse,MC,[NWP] scan: edten stuckat proxy,PASS,Emmanuel Araya,nio_mc-a0-26ww17b
+parmemsram,MC,[NWP] scan: edten atspeed proxy,PASS,Emmanuel Araya,nio_mc-a0-26ww17b
+parmemsram,MC,[NWP] TAP: iJTAG R/W,PASS,Emmanuel Araya,nio_mc-a0-26ww17b
+parmemsram,MC,[NWP] scan: scandump,PASS,Emmanuel Araya,nio_mc-a0-26ww17b
+parmemsram,MC,[NWP] scan: Burnin,PASS,Emmanuel Araya,nio_mc-a0-26ww17b
+parmemsram,MC,[NWP] scan: edtbyp cont proxy,PASS,Emmanuel Araya,nio_mc-a0-26ww17b
+parmemsram,MC,[NWP] scan: edtbyp stuckat proxy,PASS,Emmanuel Araya,nio_mc-a0-26ww17b
+parmemsram,MC,[NWP] scan: edten cont proxy,PASS,Emmanuel Araya,nio_mc-a0-26ww17b
+parmemsram,MC,[NWP] scan: edten stuckat proxy,PASS,Emmanuel Araya,nio_mc-a0-26ww17b
+parmiofblprxfcrarbmux,UIO,[NWP] scan: edten atspeed proxy,PASS,Emmanuel Araya,nio_uio-a0-26ww17a
+parmiofblprxfcrarbmux,UIO,[NWP] TAP: iJTAG R/W,PASS,Emmanuel Araya,nio_uio-a0-26ww17a
+parmiofblprxfcrarbmux,UIO,[NWP] scan: scandump,PASS,Emmanuel Araya,nio_uio-a0-26ww17a
+parmiofblprxfcrarbmux,UIO,[NWP] scan: Burnin,PASS,Emmanuel Araya,nio_uio-a0-26ww17a
+parmiofblprxfcrarbmux,UIO,[NWP] scan: edtbyp cont proxy,PASS,Emmanuel Araya,nio_uio-a0-26ww17a
+parmiofblprxfcrarbmux,UIO,[NWP] scan: edtbyp stuckat proxy,PASS,Emmanuel Araya,nio_uio-a0-26ww17a
+parmiofblprxfcrarbmux,UIO,[NWP] scan: edten cont proxy,PASS,Emmanuel Araya,nio_uio-a0-26ww17a
+parmiofblprxfcrarbmux,UIO,[NWP] scan: edten stuckat proxy,PASS,Emmanuel Araya,nio_uio-a0-26ww17a
+parmiofblpvnpipeac_uio_0,UIO,[NWP] scan: edten atspeed proxy,BLOCKED,Emmanuel Araya,nio_uio-a0-26ww17a
+parmiofblpvnpipeac_uio_0,UIO,[NWP] TAP: iJTAG R/W,BLOCKED,Emmanuel Araya,nio_uio-a0-26ww17a
+parmiofblpvnpipeac_uio_0,UIO,[NWP] scan: scandump,BLOCKED,Emmanuel Araya,nio_uio-a0-26ww17a
+parmiofblpvnpipeac_uio_0,UIO,[NWP] scan: Burnin,BLOCKED,Emmanuel Araya,nio_uio-a0-26ww17a
+parmiofblpvnpipeac_uio_0,UIO,[NWP] scan: edtbyp cont proxy,BLOCKED,Emmanuel Araya,nio_uio-a0-26ww17a
+parmiofblpvnpipeac_uio_0,UIO,[NWP] scan: edtbyp stuckat proxy,BLOCKED,Emmanuel Araya,nio_uio-a0-26ww17a
+parmiofblpvnpipeac_uio_0,UIO,[NWP] scan: edten cont proxy,BLOCKED,Emmanuel Araya,nio_uio-a0-26ww17a
+parmiofblpvnpipeac_uio_0,UIO,[NWP] scan: edten stuckat proxy,BLOCKED,Emmanuel Araya,nio_uio-a0-26ww17a
+parmioiommu_uio_0,UIO,[NWP] scan: edten atspeed proxy,BLOCKED,Emmanuel Araya,nio_uio-a0-26ww17a
+parmioiommu_uio_0,UIO,[NWP] TAP: iJTAG R/W,PASS,Emmanuel Araya,nio_uio-a0-26ww17a
+parmioiommu_uio_0,UIO,[NWP] scan: scandump,BLOCKED,Emmanuel Araya,nio_uio-a0-26ww17a
+parmioiommu_uio_0,UIO,[NWP] scan: Burnin,BLOCKED,Emmanuel Araya,nio_uio-a0-26ww17a
+parmioiommu_uio_0,UIO,[NWP] scan: edtbyp cont proxy,BLOCKED,Emmanuel Araya,nio_uio-a0-26ww17a
+parmioiommu_uio_0,UIO,[NWP] scan: edtbyp stuckat proxy,BLOCKED,Emmanuel Araya,nio_uio-a0-26ww17a
+parmioiommu_uio_0,UIO,[NWP] scan: edten cont proxy,BLOCKED,Emmanuel Araya,nio_uio-a0-26ww17a
+parmioiommu_uio_0,UIO,[NWP] scan: edten stuckat proxy,BLOCKED,Emmanuel Araya,nio_uio-a0-26ww17a
+parmiopcie6tridelldp_uio_0,UIO,[NWP] scan: edten atspeed proxy,PASS,Emmanuel Araya,nio_uio-a0-26ww17a
+parmiopcie6tridelldp_uio_0,UIO,[NWP] TAP: iJTAG R/W,PASS,Emmanuel Araya,nio_uio-a0-26ww17a
+parmiopcie6tridelldp_uio_0,UIO,[NWP] scan: scandump,PASS,Emmanuel Araya,nio_uio-a0-26ww17a
+parmiopcie6tridelldp_uio_0,UIO,[NWP] scan: Burnin,PASS,Emmanuel Araya,nio_uio-a0-26ww17a
+parmiopcie6tridelldp_uio_0,UIO,[NWP] scan: edtbyp cont proxy,PASS,Emmanuel Araya,nio_uio-a0-26ww17a
+parmiopcie6tridelldp_uio_0,UIO,[NWP] scan: edtbyp stuckat proxy,PASS,Emmanuel Araya,nio_uio-a0-26ww17a
+parmiopcie6tridelldp_uio_0,UIO,[NWP] scan: edten cont proxy,PASS,Emmanuel Araya,nio_uio-a0-26ww17a
+parmiopcie6tridelldp_uio_0,UIO,[NWP] scan: edten stuckat proxy,PASS,Emmanuel Araya,nio_uio-a0-26ww17a
+parmiopcie6ttidecee_uio_0,UIO,[NWP] scan: edten atspeed proxy,PASS,Emmanuel Araya,nio_uio-a0-26ww17a
+parmiopcie6ttidecee_uio_0,UIO,[NWP] TAP: iJTAG R/W,PASS,Emmanuel Araya,nio_uio-a0-26ww17a
+parmiopcie6ttidecee_uio_0,UIO,[NWP] scan: scandump,PASS,Emmanuel Araya,nio_uio-a0-26ww17a
+parmiopcie6ttidecee_uio_0,UIO,[NWP] scan: Burnin,PASS,Emmanuel Araya,nio_uio-a0-26ww17a
+parmiopcie6ttidecee_uio_0,UIO,[NWP] scan: edtbyp cont proxy,PASS,Emmanuel Araya,nio_uio-a0-26ww17a
+parmiopcie6ttidecee_uio_0,UIO,[NWP] scan: edtbyp stuckat proxy,PASS,Emmanuel Araya,nio_uio-a0-26ww17a
+parmiopcie6ttidecee_uio_0,UIO,[NWP] scan: edten cont proxy,PASS,Emmanuel Araya,nio_uio-a0-26ww17a
+parmiopcie6ttidecee_uio_0,UIO,[NWP] scan: edten stuckat proxy,PASS,Emmanuel Araya,nio_uio-a0-26ww17a
+pard2d1chnl,D2D,[NWP] scan: edten atspeed proxy,PASS,Mario Alpizar,nio_d2d-a0-26ww17b
+pard2d1chnl,D2D,[NWP] TAP: iJTAG R/W,FAIL,Mario Alpizar,nio_d2d-a0-26ww17b
+pard2d1chnl,D2D,[NWP] scan: scandump,PASS,Mario Alpizar,nio_d2d-a0-26ww17b
+pard2d1chnl,D2D,[NWP] scan: Burnin,PASS,Mario Alpizar,nio_d2d-a0-26ww17b
+pard2d1chnl,D2D,[NWP] scan: edtbyp cont proxy,PASS,Mario Alpizar,nio_d2d-a0-26ww17b
+pard2d1chnl,D2D,[NWP] scan: edtbyp stuckat proxy,PASS,Mario Alpizar,nio_d2d-a0-26ww17b
+pard2d1chnl,D2D,[NWP] scan: edten cont proxy,PASS,Mario Alpizar,nio_d2d-a0-26ww17b
+pard2d1chnl,D2D,[NWP] scan: edten stuckat proxy,PASS,Mario Alpizar,nio_d2d-a0-26ww17b
+parmccore,MC,[NWP] scan: edten atspeed proxy,PASS,Mario Alpizar,nio_mc-a0-26ww17b
+parmccore,MC,[NWP] TAP: iJTAG R/W,PASS,Mario Alpizar,nio_mc-a0-26ww17b
+parmccore,MC,[NWP] scan: scandump,PASS,Mario Alpizar,nio_mc-a0-26ww17b
+parmccore,MC,[NWP] scan: Burnin,PASS,Mario Alpizar,nio_mc-a0-26ww17b
+parmccore,MC,[NWP] scan: edtbyp cont proxy,PASS,Mario Alpizar,nio_mc-a0-26ww17b
+parmccore,MC,[NWP] scan: edtbyp stuckat proxy,PASS,Mario Alpizar,nio_mc-a0-26ww17b
+parmccore,MC,[NWP] scan: edten cont proxy,PASS,Mario Alpizar,nio_mc-a0-26ww17b
+parmccore,MC,[NWP] scan: edten stuckat proxy,PASS,Mario Alpizar,nio_mc-a0-26ww17b
+parmiocxltx_uio_0,UIO,[NWP] scan: edten atspeed proxy,BLOCKED,Mario Alpizar,nio_uio-a0-26ww17a
+parmiocxltx_uio_0,UIO,[NWP] TAP: iJTAG R/W,BLOCKED,Mario Alpizar,nio_uio-a0-26ww17a
+parmiocxltx_uio_0,UIO,[NWP] scan: scandump,BLOCKED,Mario Alpizar,nio_uio-a0-26ww17a
+parmiocxltx_uio_0,UIO,[NWP] scan: Burnin,BLOCKED,Mario Alpizar,nio_uio-a0-26ww17a
+parmiocxltx_uio_0,UIO,[NWP] scan: edtbyp cont proxy,BLOCKED,Mario Alpizar,nio_uio-a0-26ww17a
+parmiocxltx_uio_0,UIO,[NWP] scan: edtbyp stuckat proxy,BLOCKED,Mario Alpizar,nio_uio-a0-26ww17a
+parmiocxltx_uio_0,UIO,[NWP] scan: edten cont proxy,BLOCKED,Mario Alpizar,nio_uio-a0-26ww17a
+parmiocxltx_uio_0,UIO,[NWP] scan: edten stuckat proxy,BLOCKED,Mario Alpizar,nio_uio-a0-26ww17a
+parmiofblptx,UIO,[NWP] scan: edten atspeed proxy,PASS,Mario Alpizar,nio_uio-a0-26ww17a
+parmiofblptx,UIO,[NWP] TAP: iJTAG R/W,PASS,Mario Alpizar,nio_uio-a0-26ww17a
+parmiofblptx,UIO,[NWP] scan: scandump,PASS,Mario Alpizar,nio_uio-a0-26ww17a
+parmiofblptx,UIO,[NWP] scan: Burnin,PASS,Mario Alpizar,nio_uio-a0-26ww17a
+parmiofblptx,UIO,[NWP] scan: edtbyp cont proxy,PASS,Mario Alpizar,nio_uio-a0-26ww17a
+parmiofblptx,UIO,[NWP] scan: edtbyp stuckat proxy,PASS,Mario Alpizar,nio_uio-a0-26ww17a
+parmiofblptx,UIO,[NWP] scan: edten cont proxy,PASS,Mario Alpizar,nio_uio-a0-26ww17a
+parmiofblptx,UIO,[NWP] scan: edten stuckat proxy,PASS,Mario Alpizar,nio_uio-a0-26ww17a
+parmiohap_uio_0,UIO,[NWP] scan: edten atspeed proxy,PASS,Mario Alpizar,nio_uio-a0-26ww17a
+parmiohap_uio_0,UIO,[NWP] TAP: iJTAG R/W,PASS,Mario Alpizar,nio_uio-a0-26ww17a
+parmiohap_uio_0,UIO,[NWP] scan: scandump,PASS,Mario Alpizar,nio_uio-a0-26ww17a
+parmiohap_uio_0,UIO,[NWP] scan: Burnin,PASS,Mario Alpizar,nio_uio-a0-26ww17a
+parmiohap_uio_0,UIO,[NWP] scan: edtbyp cont proxy,PASS,Mario Alpizar,nio_uio-a0-26ww17a
+parmiohap_uio_0,UIO,[NWP] scan: edtbyp stuckat proxy,PASS,Mario Alpizar,nio_uio-a0-26ww17a
+parmiohap_uio_0,UIO,[NWP] scan: edten cont proxy,PASS,Mario Alpizar,nio_uio-a0-26ww17a
+parmiohap_uio_0,UIO,[NWP] scan: edten stuckat proxy,PASS,Mario Alpizar,nio_uio-a0-26ww17a
+parmioitc_uio_0,UIO,[NWP] scan: edten atspeed proxy,PASS,Mario Alpizar,nio_uio-a0-26ww17a
+parmioitc_uio_0,UIO,[NWP] TAP: iJTAG R/W,PASS,Mario Alpizar,nio_uio-a0-26ww17a
+parmioitc_uio_0,UIO,[NWP] scan: scandump,PASS,Mario Alpizar,nio_uio-a0-26ww17a
+parmioitc_uio_0,UIO,[NWP] scan: Burnin,PASS,Mario Alpizar,nio_uio-a0-26ww17a
+parmioitc_uio_0,UIO,[NWP] scan: edtbyp cont proxy,PASS,Mario Alpizar,nio_uio-a0-26ww17a
+parmioitc_uio_0,UIO,[NWP] scan: edtbyp stuckat proxy,PASS,Mario Alpizar,nio_uio-a0-26ww17a
+parmioitc_uio_0,UIO,[NWP] scan: edten cont proxy,PASS,Mario Alpizar,nio_uio-a0-26ww17a
+parmioitc_uio_0,UIO,[NWP] scan: edten stuckat proxy,PASS,Mario Alpizar,nio_uio-a0-26ww17a
+parmiopcie6ttcore_uio_0,UIO,[NWP] scan: edten atspeed proxy,PASS,Mario Alpizar,nio_uio-a0-26ww17a
+parmiopcie6ttcore_uio_0,UIO,[NWP] TAP: iJTAG R/W,PASS,Mario Alpizar,nio_uio-a0-26ww17a
+parmiopcie6ttcore_uio_0,UIO,[NWP] scan: scandump,PASS,Mario Alpizar,nio_uio-a0-26ww17a
+parmiopcie6ttcore_uio_0,UIO,[NWP] scan: Burnin,PASS,Mario Alpizar,nio_uio-a0-26ww17a
+parmiopcie6ttcore_uio_0,UIO,[NWP] scan: edtbyp cont proxy,PASS,Mario Alpizar,nio_uio-a0-26ww17a
+parmiopcie6ttcore_uio_0,UIO,[NWP] scan: edtbyp stuckat proxy,PASS,Mario Alpizar,nio_uio-a0-26ww17a
+parmiopcie6ttcore_uio_0,UIO,[NWP] scan: edten cont proxy,PASS,Mario Alpizar,nio_uio-a0-26ww17a
+parmiopcie6ttcore_uio_0,UIO,[NWP] scan: edten stuckat proxy,PASS,Mario Alpizar,nio_uio-a0-26ww17a
+parmiostaticmux_uio_0,UIO,[NWP] scan: edten atspeed proxy,PASS,Mario Alpizar,nio_uio-a0-26ww17a
+parmiostaticmux_uio_0,UIO,[NWP] TAP: iJTAG R/W,PASS,Mario Alpizar,nio_uio-a0-26ww17a
+parmiostaticmux_uio_0,UIO,[NWP] scan: scandump,PASS,Mario Alpizar,nio_uio-a0-26ww17a
+parmiostaticmux_uio_0,UIO,[NWP] scan: Burnin,PASS,Mario Alpizar,nio_uio-a0-26ww17a
+parmiostaticmux_uio_0,UIO,[NWP] scan: edtbyp cont proxy,PASS,Mario Alpizar,nio_uio-a0-26ww17a
+parmiostaticmux_uio_0,UIO,[NWP] scan: edtbyp stuckat proxy,PASS,Mario Alpizar,nio_uio-a0-26ww17a
+parmiostaticmux_uio_0,UIO,[NWP] scan: edten cont proxy,PASS,Mario Alpizar,nio_uio-a0-26ww17a
+parmiostaticmux_uio_0,UIO,[NWP] scan: edten stuckat proxy,PASS,Mario Alpizar,nio_uio-a0-26ww17a
+parmcmisc,MC,[NWP] scan: edten atspeed proxy,OPEN,Mauricio Segura,nio_mc-a0-26ww17b
+parmcmisc,MC,[NWP] TAP: iJTAG R/W,OPEN,Mauricio Segura,nio_mc-a0-26ww17b
+parmcmisc,MC,[NWP] scan: scandump,OPEN,Mauricio Segura,nio_mc-a0-26ww17b
+parmcmisc,MC,[NWP] scan: Burnin,OPEN,Mauricio Segura,nio_mc-a0-26ww17b
+parmcmisc,MC,[NWP] scan: edtbyp cont proxy,OPEN,Mauricio Segura,nio_mc-a0-26ww17b
+parmcmisc,MC,[NWP] scan: edtbyp stuckat proxy,OPEN,Mauricio Segura,nio_mc-a0-26ww17b
+parmcmisc,MC,[NWP] scan: edten cont proxy,OPEN,Mauricio Segura,nio_mc-a0-26ww17b
+parmcmisc,MC,[NWP] scan: edten stuckat proxy,OPEN,Mauricio Segura,nio_mc-a0-26ww17b
+parmemdfi0,MC,[NWP] scan: edten atspeed proxy,BLOCKED,Mauricio Segura,nio_mc-a0-26ww17b
+parmemdfi0,MC,[NWP] TAP: iJTAG R/W,BLOCKED,Mauricio Segura,nio_mc-a0-26ww17b
+parmemdfi0,MC,[NWP] scan: scandump,BLOCKED,Mauricio Segura,nio_mc-a0-26ww17b
+parmemdfi0,MC,[NWP] scan: Burnin,BLOCKED,Mauricio Segura,nio_mc-a0-26ww17b
+parmemdfi0,MC,[NWP] scan: edtbyp cont proxy,BLOCKED,Mauricio Segura,nio_mc-a0-26ww17b
+parmemdfi0,MC,[NWP] scan: edtbyp stuckat proxy,BLOCKED,Mauricio Segura,nio_mc-a0-26ww17b
+parmemdfi0,MC,[NWP] scan: edten cont proxy,BLOCKED,Mauricio Segura,nio_mc-a0-26ww17b
+parmemdfi0,MC,[NWP] scan: edten stuckat proxy,BLOCKED,Mauricio Segura,nio_mc-a0-26ww17b
+parmioasf_uio_0,UIO,[NWP] scan: edten atspeed proxy,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmioasf_uio_0,UIO,[NWP] TAP: iJTAG R/W,FAIL,Mauricio Segura,nio_uio-a0-26ww17a
+parmioasf_uio_0,UIO,[NWP] scan: scandump,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmioasf_uio_0,UIO,[NWP] scan: Burnin,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmioasf_uio_0,UIO,[NWP] scan: edtbyp cont proxy,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmioasf_uio_0,UIO,[NWP] scan: edtbyp stuckat proxy,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmioasf_uio_0,UIO,[NWP] scan: edten cont proxy,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmioasf_uio_0,UIO,[NWP] scan: edten stuckat proxy,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmiocpc_uio_0,UIO,[NWP] scan: edten atspeed proxy,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmiocpc_uio_0,UIO,[NWP] TAP: iJTAG R/W,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmiocpc_uio_0,UIO,[NWP] scan: scandump,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmiocpc_uio_0,UIO,[NWP] scan: Burnin,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmiocpc_uio_0,UIO,[NWP] scan: edtbyp cont proxy,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmiocpc_uio_0,UIO,[NWP] scan: edtbyp stuckat proxy,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmiocpc_uio_0,UIO,[NWP] scan: edten cont proxy,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmiocpc_uio_0,UIO,[NWP] scan: edten stuckat proxy,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmiocxlrx_uio_0,UIO,[NWP] scan: edten atspeed proxy,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmiocxlrx_uio_0,UIO,[NWP] TAP: iJTAG R/W,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmiocxlrx_uio_0,UIO,[NWP] scan: scandump,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmiocxlrx_uio_0,UIO,[NWP] scan: Burnin,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmiocxlrx_uio_0,UIO,[NWP] scan: edtbyp cont proxy,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmiocxlrx_uio_0,UIO,[NWP] scan: edtbyp stuckat proxy,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmiocxlrx_uio_0,UIO,[NWP] scan: edten cont proxy,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmiocxlrx_uio_0,UIO,[NWP] scan: edten stuckat proxy,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmiootc_uio_0,UIO,[NWP] scan: edten atspeed proxy,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmiootc_uio_0,UIO,[NWP] TAP: iJTAG R/W,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmiootc_uio_0,UIO,[NWP] scan: scandump,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmiootc_uio_0,UIO,[NWP] scan: Burnin,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmiootc_uio_0,UIO,[NWP] scan: edtbyp cont proxy,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmiootc_uio_0,UIO,[NWP] scan: edtbyp stuckat proxy,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmiootc_uio_0,UIO,[NWP] scan: edten cont proxy,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmiootc_uio_0,UIO,[NWP] scan: edten stuckat proxy,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmiopcie6trcore_uio_0,UIO,[NWP] scan: edten atspeed proxy,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmiopcie6trcore_uio_0,UIO,[NWP] TAP: iJTAG R/W,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmiopcie6trcore_uio_0,UIO,[NWP] scan: scandump,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmiopcie6trcore_uio_0,UIO,[NWP] scan: Burnin,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmiopcie6trcore_uio_0,UIO,[NWP] scan: edtbyp cont proxy,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmiopcie6trcore_uio_0,UIO,[NWP] scan: edtbyp stuckat proxy,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmiopcie6trcore_uio_0,UIO,[NWP] scan: edten cont proxy,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmiopcie6trcore_uio_0,UIO,[NWP] scan: edten stuckat proxy,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmioula_uio_0,UIO,[NWP] scan: edten atspeed proxy,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmioula_uio_0,UIO,[NWP] TAP: iJTAG R/W,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmioula_uio_0,UIO,[NWP] scan: scandump,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmioula_uio_0,UIO,[NWP] scan: Burnin,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmioula_uio_0,UIO,[NWP] scan: edtbyp cont proxy,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmioula_uio_0,UIO,[NWP] scan: edtbyp stuckat proxy,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmioula_uio_0,UIO,[NWP] scan: edten cont proxy,PASS,Mauricio Segura,nio_uio-a0-26ww17a
+parmioula_uio_0,UIO,[NWP] scan: edten stuckat proxy,PASS,Mauricio Segura,nio_uio-a0-26ww17a

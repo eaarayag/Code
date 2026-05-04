@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"></head>
+<body style="font-family:Segoe UI,Arial,sans-serif;color:#212529;max-width:820px;margin:0 auto;padding:20px;">
+  <h2 style="color:#0d6efd;border-bottom:3px solid #0d6efd;padding-bottom:8px;margin-bottom:8px;">
+    NIO DFT L2 Regression — Executive Summary
+  </h2>
+  <p style="color:#6c757d;margin:0 0 18px 0;font-size:13px;">Generated 2026-04-29 11:42</p>
+
+  <h3 style="color:#212529;margin-bottom:8px;">Status Distribution by Model</h3>
+  <table style="border-collapse:collapse;width:100%;font-size:13px;border:2px solid #495057;margin-bottom:18px;">
+    <thead style="background:#0d6efd;color:#fff;">
+      <tr>
+        <th style="border:1px solid #495057;padding:8px 10px;text-align:left;">Model</th>
+        <th style="border:1px solid #495057;padding:8px 10px;">Partitions</th>
+        <th style="border:1px solid #495057;padding:8px 10px;">PASS</th>
+        <th style="border:1px solid #495057;padding:8px 10px;">FAIL</th>
+        <th style="border:1px solid #495057;padding:8px 10px;">BLOCKED</th>
+        <th style="border:1px solid #495057;padding:8px 10px;">OPEN</th>
+        <th style="border:1px solid #495057;padding:8px 10px;">MISSING</th>
+        <th style="border:1px solid #495057;padding:8px 10px;">Total</th>
+      </tr>
+    </thead>
+    <tbody><tr><td style="border:1px solid #495057;padding:6px 10px;font-weight:600;">SOC</td><td style="border:1px solid #495057;padding:6px 10px;text-align:center;">21</td><td style="border:1px solid #495057;padding:6px 10px;text-align:center;color:#28a745;font-weight:600;">0</td><td style="border:1px solid #495057;padding:6px 10px;text-align:center;color:#dc3545;font-weight:600;">0</td><td style="border:1px solid #495057;padding:6px 10px;text-align:center;color:#dc3545;font-weight:600;">112</td><td style="border:1px solid #495057;padding:6px 10px;text-align:center;color:#ffc107;font-weight:600;">55</td><td style="border:1px solid #495057;padding:6px 10px;text-align:center;color:#ffc107;font-weight:600;">0</td><td style="border:1px solid #495057;padding:6px 10px;text-align:center;font-weight:600;">167</td></tr><tr><td style="border:1px solid #495057;padding:6px 10px;font-weight:600;">D2D</td><td style="border:1px solid #495057;padding:6px 10px;text-align:center;">2</td><td style="border:1px solid #495057;padding:6px 10px;text-align:center;color:#28a745;font-weight:600;">14</td><td style="border:1px solid #495057;padding:6px 10px;text-align:center;color:#dc3545;font-weight:600;">2</td><td style="border:1px solid #495057;padding:6px 10px;text-align:center;color:#dc3545;font-weight:600;">0</td><td style="border:1px solid #495057;padding:6px 10px;text-align:center;color:#ffc107;font-weight:600;">0</td><td style="border:1px solid #495057;padding:6px 10px;text-align:center;color:#ffc107;font-weight:600;">0</td><td style="border:1px solid #495057;padding:6px 10px;text-align:center;font-weight:600;">16</td></tr><tr><td style="border:1px solid #495057;padding:6px 10px;font-weight:600;">MC</td><td style="border:1px solid #495057;padding:6px 10px;text-align:center;">5</td><td style="border:1px solid #495057;padding:6px 10px;text-align:center;color:#28a745;font-weight:600;">24</td><td style="border:1px solid #495057;padding:6px 10px;text-align:center;color:#dc3545;font-weight:600;">0</td><td style="border:1px solid #495057;padding:6px 10px;text-align:center;color:#dc3545;font-weight:600;">8</td><td style="border:1px solid #495057;padding:6px 10px;text-align:center;color:#ffc107;font-weight:600;">8</td><td style="border:1px solid #495057;padding:6px 10px;text-align:center;color:#ffc107;font-weight:600;">0</td><td style="border:1px solid #495057;padding:6px 10px;text-align:center;font-weight:600;">40</td></tr><tr><td style="border:1px solid #495057;padding:6px 10px;font-weight:600;">UIO</td><td style="border:1px solid #495057;padding:6px 10px;text-align:center;">17</td><td style="border:1px solid #495057;padding:6px 10px;text-align:center;color:#28a745;font-weight:600;">112</td><td style="border:1px solid #495057;padding:6px 10px;text-align:center;color:#dc3545;font-weight:600;">1</td><td style="border:1px solid #495057;padding:6px 10px;text-align:center;color:#dc3545;font-weight:600;">23</td><td style="border:1px solid #495057;padding:6px 10px;text-align:center;color:#ffc107;font-weight:600;">0</td><td style="border:1px solid #495057;padding:6px 10px;text-align:center;color:#ffc107;font-weight:600;">0</td><td style="border:1px solid #495057;padding:6px 10px;text-align:center;font-weight:600;">136</td></tr></tbody>
+  </table>
+
+  <h3 style="color:#212529;margin-bottom:8px;">High-Level Status</h3>
+  <ul style="font-size:14px;line-height:1.6;color:#212529;">
+    <li><b>150</b> test cases <span style="color:#28a745;font-weight:600;">passing</span> out of <b>359</b> total.</li>
+    <li><b>143</b> <span style="color:#dc3545;font-weight:600;">BLOCKED</span> — most are NWP tests waiting on a model fix tracked by HSDES 14027646772 and a few partition-specific HSDES.</li>
+    <li><b>63</b> <span style="color:#ffc107;font-weight:600;">OPEN (WIP)</span> — passing on the local model but not yet enabled in the regression flow.</li>
+    <li><b>3</b> <span style="color:#dc3545;font-weight:600;">FAIL</span> — under active debug.</li>
+    <li><b>0</b> <span style="color:#ffc107;font-weight:600;">MISSING</span> — tests not yet generated in the latest model.</li>
+  </ul>
+
+  <h3 style="color:#212529;margin-bottom:8px;">Notes</h3>
+  <ul style="font-size:14px;line-height:1.6;color:#212529;">
+    <li>Full per-test detail is attached as <code>test_status_tracker.html</code> (interactive) and <code>test_status_tracker.csv</code> (raw data).</li>
+    <li>Owners: Emmanuel Araya (D2D + selected SOC), Mario Alpizar (UIO + northcap NWP), Mauricio Segura (southcap NWP + memstack).</li>
+  </ul>
+
+  <p style="font-size:12px;color:#6c757d;margin-top:24px;border-top:1px solid #dee2e6;padding-top:10px;">
+    This is an automated message from the L2 Regression Agent.
+  </p>
+</body>
+</html>
