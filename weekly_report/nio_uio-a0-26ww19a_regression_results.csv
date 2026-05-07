@@ -154,3 +154,12 @@ parmiohap_uio_0_ijtag_basic_tap_tests_rw_access,PASS,PASS
 parmioiommu_uio_0_ijtag_basic_tap_tests_rw_access,PASS,PASS
 parmiopcie6trcore_uio_0_ijtag_basic_tap_tests_rw_access,PASS,PASS
 parmioitc_uio_0_ijtag_basic_tap_tests_rw_access,PASS,PASS
+parmiofblptx_uio_1_ijtag_basic_tap_tests_rw_access,FAIL,Command './buildsimv.sh' returned exit status 2 !
+parmiofblptx_ijtag_basic_tap_tests_rw_access,PASS,PASS
+parmiofblprxfcrarbmux_uio_1_ijtag_basic_tap_tests_rw_access,FAIL,Command './buildsimv.sh' returned exit status 2 !
+parmiofblprxfcrarbmux_ijtag_basic_tap_tests_rw_access,PASS,PASS
+parmiocxlrx_uio_0_ijtag_basic_tap_tests_rw_access,PASS,PASS
+parmioasf_uio_1_ijtag_basic_tap_tests_rw_access,FAIL,Command './buildsimv.sh' returned exit status 2 !
+parmiocpc_uio_0_ijtag_basic_tap_tests_rw_access,PASS,PASS
+parmiocxltx_uio_0_ijtag_basic_tap_tests_rw_access,PASS,PASS
+parmioasf_uio_0_ijtag_basic_tap_tests_rw_access,FAIL,Error between simulated and expected patterns
