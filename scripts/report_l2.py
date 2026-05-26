@@ -5,6 +5,7 @@
 
 import csv
 import glob
+import json
 import os
 import subprocess
 import sys
@@ -25,19 +26,33 @@ GITHUB_PAGES_BASE = "https://eaarayag.github.io/Code/reports/"               # B
 
 
 def load_ownership(filepath):
-    """Load ownership.txt and return a list of (owner, prefix) tuples, sorted longest prefix first."""
+    """Load ownership.txt and return a list of (owner, prefix) tuples, sorted longest prefix first.
+    Also parses test-type-level overrides (lines with '@' prefix) into a separate structure."""
     ownership = []
+    test_type_overrides = []  # List of (owner, test_type, excluded_owners)
     with open(filepath, 'r', encoding='utf-8') as f:
         for line in f:
             line = line.strip()
-            if not line:
+            if not line or line.startswith('#'):
                 continue
-            # Parse each line as "owner,prefix" format
-            owner, prefix = line.split(',', 1)
-            ownership.append((owner.strip(), prefix.strip()))
+            parts = line.split(',')
+            owner = parts[0].strip()
+            target = parts[1].strip() if len(parts) > 1 else ''
+            if target.startswith('@'):
+                # Test-type-level override: Owner,@test_type[,exclude:OwnerName]
+                test_type = target[1:]  # Strip '@'
+                excluded_owners = set()
+                for extra in parts[2:]:
+                    extra = extra.strip()
+                    if extra.startswith('exclude:'):
+                        excluded_owners.add(extra[len('exclude:'):].strip())
+                test_type_overrides.append((owner, test_type, excluded_owners))
+            else:
+                # Partition-level ownership
+                ownership.append((owner, target))
     # Sort by prefix length descending so longer prefixes match first
     ownership.sort(key=lambda x: len(x[1]), reverse=True)
-    return ownership
+    return ownership, test_type_overrides
 
 
 def find_owner(test_name, ownership):
@@ -77,6 +92,18 @@ def list_available_models(category):
     return [extract_model_from_filename(f) for f in files]
 
 
+def load_report_timestamps():
+    """Load report_timestamps.json from weekly_report/ if available."""
+    timestamps_file = os.path.join(WEEKLY_REPORT_DIR, "report_timestamps.json")
+    if os.path.isfile(timestamps_file):
+        try:
+            with open(timestamps_file, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except (json.JSONDecodeError, OSError):
+            pass
+    return {}
+
+
 def fetch_remote_models():
     """Call parse_l2_regression.py --list-models and return all available model names.
     Falls back to None (local CSVs will be used) if the remote call fails."""
@@ -103,7 +130,7 @@ def parse_selected_models(selected_models):
     )
 
 
-def prompt_model_selection(category, remote_models=None):
+def prompt_model_selection(category, remote_models=None, timestamps=None):
     """Show available models for a category and let the user pick one (or skip)."""
     if remote_models is not None:
         models = sorted([m for m in remote_models if m.startswith(category)])
@@ -113,9 +140,16 @@ def prompt_model_selection(category, remote_models=None):
         print(f"  No models found for '{category}'. Skipping.")
         return None
 
+    if timestamps is None:
+        timestamps = {}
+
     print(f"\n  Available {category.upper()} models:")
     for i, model in enumerate(models, 1):
-        print(f"    {i}. {model}")
+        ts = timestamps.get(model, "")
+        if ts:
+            print(f"    {i}. {model}  (last modified: {ts})")
+        else:
+            print(f"    {i}. {model}")
     print(f"    0. Skip {category.upper()}")
 
     while True:
@@ -127,18 +161,50 @@ def prompt_model_selection(category, remote_models=None):
         print(f"  Invalid choice. Enter 0-{len(models)}.")
 
 
+# Test types to exclude from reporting entirely (exact match against test_type after partition split).
+EXCLUDED_TEST_TYPES = {
+    'atspeed_edt_bypass_low_internal_serial_scan',
+}
+
+# Prefixes used to exclude any test_type that starts with one of these tokens
+# (also matches when the token appears after a partition-like prefix, e.g. "uio_1_ijtag_...").
+EXCLUDED_TEST_PREFIXES = (
+    'ijtag',
+)
+
+
+def is_excluded_test_type(test_type):
+    """Return True if a test_type should be excluded from the report."""
+    if test_type in EXCLUDED_TEST_TYPES:
+        return True
+    for token in EXCLUDED_TEST_PREFIXES:
+        if test_type.startswith(token) or ('_' + token) in test_type:
+            return True
+    return False
+
+
 # Expected test cases for every partition. '*' prefix means suffix match.
 EXPECTED_TESTS = [
-    'atspeed_edt_bypass_low_internal_serial_scan',
     'atspeed_edt_edt_low_internal_serial_scan',
-    'ijtag_basic_tap_tests_rw_access',
     '*scan_ctlr_stuckat_edt_bypass_low_internal_scandump',
+    'ssn_continuity',
     'stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off',
     'stuckat_edt_bypass_low_internal_serial_chain',
     'stuckat_edt_bypass_low_internal_serial_scan',
+    'stuckat_edt_edt_low_internal_loopback',
     'stuckat_edt_edt_low_internal_serial_chain',
     'stuckat_edt_edt_low_internal_serial_scan',
 ]
+
+def get_effective_owner(test_type, owner, test_type_overrides):
+    """Return effective owner based on test-type-level overrides from ownership.txt.
+    If the test_type matches an override and the current owner is not excluded, return the override owner."""
+    for override_owner, override_test_type, excluded_owners in test_type_overrides:
+        if test_type == override_test_type or test_type.endswith(override_test_type):
+            if owner in excluded_owners:
+                return owner
+            return override_owner
+    return owner
 
 
 def get_partition_type(partition):
@@ -163,7 +229,7 @@ def get_model_type(model_name):
     return None
 
 
-def check_test_completeness(all_rows, ownership, selected_models):
+def check_test_completeness(all_rows, ownership, test_type_overrides, selected_models):
     """For each (partition, model), add MISSING rows for any expected test not found.
     Checks ALL partitions from ownership.txt, but only against their matching model type."""
     # Group existing test_types by (partition, model)
@@ -192,8 +258,9 @@ def check_test_completeness(all_rows, ownership, selected_models):
                 # Suffix match: check if any existing test_type ends with the pattern
                 suffix = expected[1:]
                 if not any(tt.endswith(suffix) for tt in test_types):
+                    effective_owner = get_effective_owner(suffix, owner, test_type_overrides)
                     missing_rows.append({
-                        'owner': owner,
+                        'owner': effective_owner,
                         'partition': partition,
                         'test_type': suffix,
                         'status': 'MISSING',
@@ -202,8 +269,9 @@ def check_test_completeness(all_rows, ownership, selected_models):
             else:
                 # Exact match
                 if expected not in test_types:
+                    effective_owner = get_effective_owner(expected, owner, test_type_overrides)
                     missing_rows.append({
-                        'owner': owner,
+                        'owner': effective_owner,
                         'partition': partition,
                         'test_type': expected,
                         'status': 'MISSING',
@@ -215,7 +283,7 @@ def check_test_completeness(all_rows, ownership, selected_models):
 
 def generate_general_report_for_models(selected_models):
     """Read CSV files for the selected models and produce a consolidated general_report.csv."""
-    ownership = load_ownership(OWNERSHIP_FILE)
+    ownership, test_type_overrides = load_ownership(OWNERSHIP_FILE)
 
     all_rows = []
     for model in selected_models:
@@ -231,8 +299,12 @@ def generate_general_report_for_models(selected_models):
                 if owner == "UNKNOWN":
                     continue
                 partition, test_type = split_test_name(test_name, ownership)
+                if is_excluded_test_type(test_type):
+                    continue
+                # Override owner if test_type is owned at the test-type level
+                effective_owner = get_effective_owner(test_type, owner, test_type_overrides)
                 all_rows.append({
-                    'owner': owner,
+                    'owner': effective_owner,
                     'partition': partition,
                     'test_type': test_type,
                     'status': row['test_status'],
@@ -244,12 +316,12 @@ def generate_general_report_for_models(selected_models):
         return
 
     # Check for missing expected tests and add MISSING rows (checks ALL ownership partitions)
-    missing_rows = check_test_completeness(all_rows, ownership, selected_models)
+    missing_rows = check_test_completeness(all_rows, ownership, test_type_overrides, selected_models)
     if missing_rows:
         print(f"\nFound {len(missing_rows)} missing test(s) across partitions.")
         all_rows.extend(missing_rows)
 
-    all_rows.sort(key=lambda r: (r['owner'], r['model'], r['partition'], r['test_type']))
+    all_rows.sort(key=lambda r: (r['model'], r['partition'], r['test_type'], r['owner']))
 
     with open(OUTPUT_REPORT, 'w', newline='', encoding='utf-8') as f:
         writer = csv.DictWriter(f, fieldnames=['partition', 'test_type', 'status', 'owner', 'model'])
@@ -314,7 +386,7 @@ def generate_general_report_html(all_rows):
     h.append(f'<body style="margin:0;padding:0;background-color:#f4f4f4;{FONT}">')
     h.append('<table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#f4f4f4">')
     h.append('<tr><td align="center" style="padding:20px 0;">')
-    h.append('<table width="780" cellpadding="0" cellspacing="0" border="0" bgcolor="#ffffff" '
+    h.append('<table width="1000" cellpadding="0" cellspacing="0" border="0" bgcolor="#ffffff" '
              'style="border:1px solid #dddddd;">')
 
     # ── Header banner ──
@@ -404,10 +476,10 @@ def generate_general_report_html(all_rows):
             bg = '#ffffff' if i % 2 == 0 else '#fafafa'
             st = r['status']
             h.append(f'<tr bgcolor="{bg}">')
-            h.append(f'<td style="padding:6px 10px;font-size:12px;color:#333;{MONO}border-bottom:1px solid #eee;">{html_mod.escape(r["partition"])}</td>')
-            h.append(f'<td style="padding:6px 10px;font-size:12px;color:#333;{MONO}border-bottom:1px solid #eee;">{html_mod.escape(r["test_type"])}</td>')
-            h.append(f'<td align="center" bgcolor="{status_bg(st)}" style="padding:6px 10px;font-size:12px;font-weight:bold;color:{status_fg(st)};{FONT}border-bottom:1px solid #eee;">{st}</td>')
-            h.append(f'<td style="padding:6px 10px;font-size:12px;color:#555;{FONT}border-bottom:1px solid #eee;">{html_mod.escape(r["owner"])}</td>')
+            h.append(f'<td style="padding:6px 10px;font-size:12px;color:#333;white-space:nowrap;{MONO}border-bottom:1px solid #eee;">{html_mod.escape(r["partition"])}</td>')
+            h.append(f'<td style="padding:6px 10px;font-size:12px;color:#333;white-space:nowrap;{MONO}border-bottom:1px solid #eee;">{html_mod.escape(r["test_type"])}</td>')
+            h.append(f'<td align="center" bgcolor="{status_bg(st)}" style="padding:6px 10px;font-size:12px;font-weight:bold;white-space:nowrap;color:{status_fg(st)};{FONT}border-bottom:1px solid #eee;">{st}</td>')
+            h.append(f'<td style="padding:6px 10px;font-size:12px;color:#555;white-space:nowrap;{FONT}border-bottom:1px solid #eee;">{html_mod.escape(r["owner"])}</td>')
             h.append('</tr>')
         h.append('</table>')
         h.append('</td></tr>')
@@ -632,12 +704,24 @@ def generate_executive_summary(report_path):
 
     # ── Status Changes ──
     h.append('<tr><td style="padding:8px 32px 24px;">')
+    h.append(f'<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:12px;"><tr>'
+             f'<td bgcolor="#e3f2fd" style="padding:8px 12px;border-left:4px solid #0071c5;{FONT}">')
+    h.append(f'<span style="font-size:16px;font-weight:bold;color:#0071c5;text-transform:uppercase;{FONT}">STATUS CHANGES</span>')
     if owner_changes:
-        h.append(f'<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:12px;"><tr><td style="{FONT}">')
-        h.append(f'<span style="font-size:16px;font-weight:bold;color:#333;text-transform:uppercase;{FONT}">STATUS CHANGES</span> ')
-        h.append(f'<span style="font-size:13px;color:#888;{FONT}">({total_changes} vs previous report)</span>')
-        h.append('</td></tr></table>')
+        h.append(f' <span style="font-size:13px;color:#888;{FONT}">({total_changes} vs previous report)</span>')
+    h.append('</td></tr></table>')
 
+    if not owner_changes:
+        if prev_data:
+            h.append(f'<table cellpadding="0" cellspacing="0" border="0"><tr>'
+                     f'<td style="font-size:14px;color:#555;{FONT}padding:4px 0;">No changes vs previous report.</td>'
+                     f'</tr></table>')
+        else:
+            h.append(f'<table cellpadding="0" cellspacing="0" border="0"><tr>'
+                     f'<td style="font-size:14px;color:#555;{FONT}padding:4px 0;">No previous report available for comparison.</td>'
+                     f'</tr></table>')
+
+    if owner_changes:
         for owner in sorted(owner_changes.keys()):
             changes = owner_changes[owner]
             changes.sort(key=lambda x: (x[0]['model'], x[0]['partition'], x[0]['test_type']))
@@ -667,15 +751,72 @@ def generate_executive_summary(report_path):
                 h.append('<tr><td style="font-size:0;line-height:0;height:4px;">&nbsp;</td></tr>')
             h.append('</table>')
 
-    elif prev_data:
-        h.append(f'<table cellpadding="0" cellspacing="0" border="0"><tr>'
-                 f'<td style="font-size:14px;color:#555;{FONT}">No status changes compared to previous report.</td>'
-                 f'</tr></table>')
-    else:
-        h.append(f'<table cellpadding="0" cellspacing="0" border="0"><tr>'
-                 f'<td style="font-size:14px;color:#555;{FONT}">No previous report available for comparison.</td>'
-                 f'</tr></table>')
     h.append('</td></tr>')
+
+    # ── Current Failing & Missing Tests ──
+    fail_rows = [r for r in rows if r['status'] == 'FAIL']
+    missing_rows = [r for r in rows if r['status'] == 'MISSING']
+    if fail_rows or missing_rows:
+        h.append('<tr><td style="padding:8px 32px 24px;">')
+        h.append(f'<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:12px;"><tr>'
+                 f'<td bgcolor="#fff3e0" style="padding:8px 12px;border-left:4px solid #e65100;{FONT}">')
+        h.append(f'<span style="font-size:16px;font-weight:bold;color:#e65100;text-transform:uppercase;{FONT}">'
+                 f'CURRENT FAILING &amp; MISSING TESTS</span> ')
+        h.append(f'<span style="font-size:13px;color:#888;{FONT}">'
+                 f'({len(fail_rows)} FAIL, {len(missing_rows)} MISSING)</span>')
+        h.append('</td></tr></table>')
+
+        # FAIL tests grouped by owner
+        if fail_rows:
+            fail_by_owner = {}
+            for r in fail_rows:
+                owner = r.get('owner', 'UNKNOWN')
+                fail_by_owner.setdefault(owner, []).append(r)
+            h.append(f'<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:8px;"><tr><td style="{FONT}">')
+            h.append(f'<span style="font-size:14px;font-weight:bold;color:#c62828;{FONT}">FAIL ({len(fail_rows)})</span>')
+            h.append('</td></tr></table>')
+            h.append('<table width="100%" cellpadding="0" cellspacing="0" border="0">')
+            for owner in sorted(fail_by_owner.keys()):
+                tests = sorted(fail_by_owner[owner], key=lambda x: (x['model'], x['partition'], x['test_type']))
+                h.append(f'<tr><td style="padding:6px 0 2px;font-size:13px;font-weight:bold;color:#333;{FONT}">'
+                         f'{html_mod.escape(owner)} ({len(tests)})</td></tr>')
+                for r in tests:
+                    partition = html_mod.escape(r['partition'])
+                    test_type = html_mod.escape(r['test_type'])
+                    model = html_mod.escape(r['model'])
+                    h.append(f'<tr><td bgcolor="#ffebee" style="padding:6px 12px;border-left:4px solid #c62828;'
+                             f'font-size:12px;color:#333;{MONO}mso-line-height-rule:exactly;line-height:18px;">')
+                    h.append(f'[{model}] {partition} / {test_type}')
+                    h.append('</td></tr>')
+                    h.append('<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>')
+            h.append('</table>')
+
+        # MISSING tests grouped by owner
+        if missing_rows:
+            missing_by_owner = {}
+            for r in missing_rows:
+                owner = r.get('owner', 'UNKNOWN')
+                missing_by_owner.setdefault(owner, []).append(r)
+            h.append(f'<table cellpadding="0" cellspacing="0" border="0" style="margin-top:16px;margin-bottom:8px;"><tr><td style="{FONT}">')
+            h.append(f'<span style="font-size:14px;font-weight:bold;color:#e65100;{FONT}">MISSING ({len(missing_rows)})</span>')
+            h.append('</td></tr></table>')
+            h.append('<table width="100%" cellpadding="0" cellspacing="0" border="0">')
+            for owner in sorted(missing_by_owner.keys()):
+                tests = sorted(missing_by_owner[owner], key=lambda x: (x['model'], x['partition'], x['test_type']))
+                h.append(f'<tr><td style="padding:6px 0 2px;font-size:13px;font-weight:bold;color:#333;{FONT}">'
+                         f'{html_mod.escape(owner)} ({len(tests)})</td></tr>')
+                for r in tests:
+                    partition = html_mod.escape(r['partition'])
+                    test_type = html_mod.escape(r['test_type'])
+                    model = html_mod.escape(r['model'])
+                    h.append(f'<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;'
+                             f'font-size:12px;color:#333;{MONO}mso-line-height-rule:exactly;line-height:18px;">')
+                    h.append(f'[{model}] {partition} / {test_type}')
+                    h.append('</td></tr>')
+                    h.append('<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>')
+            h.append('</table>')
+
+        h.append('</td></tr>')
 
     # ── Footer ──
     h.append('<tr><td bgcolor="#f8f8f8" style="padding:16px 32px;border-top:1px solid #e0e0e0;">')
@@ -727,6 +868,23 @@ def generate_executive_summary(report_path):
         lines.append(f"  No previous report available for comparison.")
     lines.append("")
     lines.append("=" * 60)
+
+    # Failing & Missing tests in console output
+    if fail_rows or missing_rows:
+        lines.append("")
+        lines.append("  CURRENT FAILING & MISSING TESTS")
+        lines.append("=" * 60)
+        if fail_rows:
+            lines.append(f"  FAIL ({len(fail_rows)}):")
+            for r in sorted(fail_rows, key=lambda x: (x['owner'], x['model'], x['partition'], x['test_type'])):
+                lines.append(f"    [{r['model']}] {r['partition']} / {r['test_type']} ({r.get('owner','UNKNOWN')})")
+        if missing_rows:
+            lines.append(f"  MISSING ({len(missing_rows)}):")
+            for r in sorted(missing_rows, key=lambda x: (x['owner'], x['model'], x['partition'], x['test_type'])):
+                lines.append(f"    [{r['model']}] {r['partition']} / {r['test_type']} ({r.get('owner','UNKNOWN')})")
+        lines.append("")
+        lines.append("=" * 60)
+
     print("\n" + "\n".join(lines))
 
     # Save HTML file
@@ -919,12 +1077,15 @@ def git_commit_and_push():
 
 
 def main():
+    # Load report file timestamps (populated by parse_l2_regression.py)
+    timestamps = load_report_timestamps()
+
     # Step 1: Let user select one model per category from local CSVs
     categories = ['nio_mc', 'nio_uio', 'nio_d2d']
     print("\n--- Model Selection ---")
     selected = []
     for cat in categories:
-        model = prompt_model_selection(cat)
+        model = prompt_model_selection(cat, timestamps=timestamps)
         if model:
             selected.append(model)
 

@@ -72,6 +72,11 @@ def send(msg, config, dry_run=False):
         print("\n[DRY RUN] Email not sent.")
         return
 
+    confirm = input("\nSend email? [y/N]: ").strip().lower()
+    if confirm != "y":
+        print("Aborted. Email not sent.")
+        return
+
     server = config["smtp"]["server"]
     port = int(config["smtp"]["port"])
     print(f"\nConnecting to {server}:{port} ...")

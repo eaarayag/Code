@@ -1,24 +1,34 @@
-Mario,parmiostaticmux_uio_0
-Mario,pard2d1chnl
-Mario,parmccore
-Mario,parmiocxltx_uio_0
-Mario,parmiofblptx
-Mario,parmiohap_uio_0
-Mario,parmioitc_uio_0
-Mario,parmiopcie6ttcore_uio_0
-Mauricio,parmemdfi0
-Mauricio,parmcmisc
-Mauricio,parmiootc_uio_0
-Mauricio,parmiopcie6trcore_uio_0
-Mauricio,parmioula_uio_0
-Mauricio,parmiocxlrx_uio_0
-Mauricio,parmioasf_uio_0
-Mauricio,parmiocpc_uio_0
-Emmanuel,parmemsram
-Emmanuel,parmiopcie6ttidecee_uio_0
-Emmanuel,pard2d1misc
-Emmanuel,parmcmse
-Emmanuel,parmioiommu_uio_0
-Emmanuel,parmiofblprxfcrarbmux
-Emmanuel,parmiopcie6tridelldp_uio_0
-Emmanuel,parmiofblpvnpipeac_uio_0
+# Partition-level ownership (format: Owner,partition_prefix)
+Mario Alpizar,parmiostaticmux_uio_0
+Mario Alpizar,pard2d1chnl
+Mario Alpizar,parmccore
+Mario Alpizar,parmiocxltx_uio_0
+Mario Alpizar,parmiofblptx
+Mario Alpizar,parmiohap_uio_0
+Mario Alpizar,parmioitc_uio_0
+Mario Alpizar,parmiopcie6ttcore_uio_0
+Mauricio Segura,parmemdfi0
+Mauricio Segura,parmcmisc
+Mauricio Segura,parmiootc_uio_0
+Mauricio Segura,parmiopcie6trcore_uio_0
+Mauricio Segura,parmioula_uio_0
+Mauricio Segura,parmiocxlrx_uio_0
+Mauricio Segura,parmioasf_uio_0
+Mauricio Segura,parmiocpc_uio_0
+Emmanuel Araya,parmemsram
+Emmanuel Araya,parmiopcie6ttidecee_uio_0
+Emmanuel Araya,pard2d1misc
+Emmanuel Araya,parmcmse
+Emmanuel Araya,parmioiommu_uio_0
+Emmanuel Araya,parmiofblprxfcrarbmux
+Emmanuel Araya,parmiopcie6tridelldp_uio_0
+Emmanuel Araya,parmiofblpvnpipeac_uio_0
+KalthireddyX Gunasekhar,pard2d1uladda0
+KalthireddyX Gunasekhar,pard2d1uladda1
+KalthireddyX Gunasekhar,parmiomisc_uio_0
+
+# Test-type-level ownership (format: Owner,@test_type,exclude:PartitionOwner)
+# These override the partition owner for specific test types.
+# Use 'exclude:OwnerName' to keep original ownership for that owner's partitions.
+Sebastian Porras,@ssn_continuity,exclude:KalthireddyX Gunasekhar
+Sebastian Porras,@stuckat_edt_edt_low_internal_loopback,exclude:KalthireddyX Gunasekhar

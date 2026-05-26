@@ -1,9 +1,11 @@
 # Standard library imports for CSV writing, regex parsing, CLI args, and path handling
 import csv
+import json
 import os
 import re
 import subprocess
 import sys
+from datetime import datetime
 from pathlib import Path
 
 # --- Remote SSH Configuration ---
@@ -76,9 +78,7 @@ def parse_l2_regression_report(file_path, output_csv='regression_results.csv'):
                 'icl_verify_dft',
                 'ijtag_basic_tap_tests_continuity',
                 'ijtag_basic_tap_tests_reset',
-                'ssn_continuity',
                 'stuckat_edt_bypass_low_internal_loopback',
-                'stuckat_edt_edt_low_internal_loopback',
                 'on_chip_compare',
             )
             if any(test_name.endswith(s) for s in excluded_suffixes):
@@ -261,6 +261,22 @@ def run_remote_parsing(model_filter=None):
         print("No models with valid report files found. Nothing to process.")
         return
 
+    # Collect last-modified timestamps for each report file
+    timestamps = {}
+    for model_name, input_file in validated.items():
+        try:
+            stat = os.stat(input_file)
+            mtime = datetime.fromtimestamp(stat.st_mtime).strftime("%Y-%m-%d %H:%M:%S")
+            timestamps[model_name] = mtime
+        except OSError:
+            timestamps[model_name] = "UNKNOWN"
+
+    # Save timestamps to JSON for use by report_l2.py
+    timestamps_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "report_timestamps.json")
+    with open(timestamps_file, 'w', encoding='utf-8') as f:
+        json.dump(timestamps, f, indent=2)
+    print(f"Saved report timestamps to {timestamps_file}")
+
     for model_name, input_file in validated.items():
         print(f"\n{'='*80}")
         print(f"Processing model: {model_name}")
@@ -269,6 +285,7 @@ def run_remote_parsing(model_filter=None):
         output_file = f"{model_name}_regression_results.csv"
 
         print(f"Report path: {input_file}")
+        print(f"Last modified: {timestamps.get(model_name, 'UNKNOWN')}")
 
         parse_l2_regression_report(input_file, output_file)
 
@@ -344,6 +361,15 @@ def run_from_windows(models=None):
         if scp_down.returncode != 0:
             print(f"Error: SCP download failed (exit code {scp_down.returncode}).")
             sys.exit(scp_down.returncode)
+
+    # Download report_timestamps.json
+    timestamps_dest = os.path.join(WEEKLY_REPORT_DIR, "report_timestamps.json")
+    scp_ts = subprocess.run([
+        "scp", f"{remote}:{REMOTE_WORK_DIR}/report_timestamps.json",
+        timestamps_dest,
+    ])
+    if scp_ts.returncode != 0:
+        print(f"Warning: Could not download report_timestamps.json (exit code {scp_ts.returncode}).")
 
     # Count downloaded files
     csvs = [f for f in os.listdir(WEEKLY_REPORT_DIR) if f.endswith('.csv')]

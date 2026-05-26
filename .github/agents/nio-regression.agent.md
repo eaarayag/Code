@@ -7,13 +7,13 @@ You are the **NIO L2 Regression Agent** — an orchestrator for the DFT L2 regre
 
 ```
 scripts/
-  parse_l2_regression.py   — Parse L2 reports via SSH to zsc24, downloads all model CSVs to weekly_report/
+  parse_l2_regression.py   — Parse L2 reports via SSH to zsc24, downloads all model CSVs and report_timestamps.json to weekly_report/
   report_l2.py             — Interactive report generator: reads local CSVs, prompts model selection, generates reports
   send_email.py            — Send email with reports
   ownership.txt            — Maps test partition prefixes to owners (Mario, Mauricio, Emmanuel)
 config/
   email_config.ini         — SMTP/sender/recipient settings
-weekly_report/             — Per-model regression CSVs (populated by parse_l2_regression.py)
+weekly_report/             — Per-model regression CSVs and report_timestamps.json (populated by parse_l2_regression.py)
 reports/                   — Generated general_report and executive_summary files (HTML + CSV)
 ```
 
@@ -26,17 +26,19 @@ The full weekly pipeline runs in this order:
 cd scripts
 python parse_l2_regression.py
 ```
-Connects to zsc24 via SSH, parses all available models, and downloads all CSVs into `weekly_report/`.
+Connects to zsc24 via SSH, parses all available models, collects last-modified timestamps of each `L2_regression.rpt` file, and downloads all CSVs plus `report_timestamps.json` into `weekly_report/`.
 
 ### Step 2 — Generate reports (local, interactive)
 ```powershell
 cd scripts
 python report_l2.py
 ```
-Reads local CSVs from `weekly_report/`, prompts the user to select one model per category (nio_mc, nio_uio, nio_d2d), then generates:
+Reads local CSVs from `weekly_report/`, prompts the user to select one model per category (nio_mc, nio_uio, nio_d2d). The model selection menu displays the last-modified timestamp of each model's `L2_regression.rpt` file (from `report_timestamps.json`) so the user can identify files that may still be in progress. Then generates:
 - `reports/general_report_TIMESTAMP.csv` — consolidated test results with ownership
 - `reports/general_report_TIMESTAMP.html` — styled HTML version of the general report
-- `reports/executive_summary_TIMESTAMP.html` — styled HTML executive summary with status changes
+- `reports/executive_summary_TIMESTAMP.html` — styled HTML executive summary containing:
+  - **STATUS CHANGES** section (always shown with highlighted header; lists changes vs previous report, or states "No changes" in the body below the header)
+  - **CURRENT FAILING & MISSING TESTS** section (lists all FAIL and MISSING tests from the current report, grouped by owner)
 - `reports/index.html` — report history index page (auto-regenerated)
 
 Then commits and pushes `reports/` and `weekly_report/` to GitHub.
@@ -51,8 +53,8 @@ Sends the executive summary as HTML email body with the HTML general report atta
 ## Important Details
 
 - **Models** follow the naming pattern: `nio_mc-a0-26wwNNx`, `nio_uio-a0-26wwNNx`, `nio_d2d-a0-26wwNNx`
-- **parse_l2_regression.py must be run first** — it populates `weekly_report/` with fresh CSVs before `report_l2.py` can run.
-- **report_l2.py is interactive** — it requires user input to select models. Always run it in a foreground terminal so the user can respond to prompts.
+- **parse_l2_regression.py must be run first** — it populates `weekly_report/` with fresh CSVs and `report_timestamps.json` before `report_l2.py` can run.
+- **report_l2.py is interactive** — it requires user input to select models. Always run it in a foreground terminal so the user can respond to prompts. The model list shows last-modified timestamps to help identify incomplete report files.
 - **send_email.py** reads recipients from `config/email_config.ini`. Use `--dry-run` first when testing.
 - All scripts must be run from the `scripts/` directory.
 
