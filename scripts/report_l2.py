@@ -21,6 +21,7 @@ PARSE_SCRIPT = os.path.join(SCRIPT_DIR, "parse_l2_regression.py")  # Parser scri
 os.makedirs(REPORTS_DIR, exist_ok=True)
 TIMESTAMP = datetime.now().strftime("%Y%m%d_%H%M%S")          # Timestamp for output filename
 OUTPUT_REPORT = os.path.join(REPORTS_DIR, f"general_report_{TIMESTAMP}.csv")  # Final consolidated report
+STACK_HISTORY_FILE = os.path.join(REPORTS_DIR, "stack_status_history.csv")      # Historical stack-level percentages
 GITHUB_PAGES_INDEX = "https://eaarayag.github.io/Code/reports/index.html"     # Report history on GitHub Pages
 GITHUB_PAGES_BASE = "https://eaarayag.github.io/Code/reports/"               # Base URL for individual reports
 
@@ -229,6 +230,150 @@ def get_model_type(model_name):
     return None
 
 
+def _extract_timestamp_from_report_name(report_name):
+    """Extract report timestamp string from a general_report filename."""
+    import re
+    m = re.search(r'(\d{8}_\d{6})', report_name)
+    return m.group(1) if m else ''
+
+
+def _format_report_timestamp_for_history(ts):
+    """Convert 'YYYYMMDD_HHMMSS' to 'YYYY-MM-DD HH:MM:SS'."""
+    if len(ts) == 15 and '_' in ts:
+        date_part, time_part = ts.split('_', 1)
+        return (
+            f"{date_part[0:4]}-{date_part[4:6]}-{date_part[6:8]} "
+            f"{time_part[0:2]}:{time_part[2:4]}:{time_part[4:6]}"
+        )
+    return ''
+
+
+def _compute_stack_metrics(rows):
+    """Compute PASS/FAIL/MISSING counts and percentages per stack (mc/uio/d2d)."""
+    metrics = {}
+    for r in rows:
+        stack = get_model_type(r['model'])
+        if stack not in ('mc', 'uio', 'd2d'):
+            continue
+        if stack not in metrics:
+            metrics[stack] = {'total': 0, 'pass': 0, 'fail': 0, 'missing': 0}
+        metrics[stack]['total'] += 1
+        st = r['status']
+        if st == 'PASS':
+            metrics[stack]['pass'] += 1
+        elif st == 'FAIL':
+            metrics[stack]['fail'] += 1
+        else:
+            metrics[stack]['missing'] += 1
+
+    out = {}
+    for stack, s in metrics.items():
+        total = s['total']
+        out[stack] = {
+            'total': total,
+            'pass': s['pass'],
+            'fail': s['fail'],
+            'missing': s['missing'],
+            'pass_pct': (s['pass'] / total * 100) if total else 0.0,
+            'fail_pct': (s['fail'] / total * 100) if total else 0.0,
+            'missing_pct': (s['missing'] / total * 100) if total else 0.0,
+        }
+    return out
+
+
+def _load_general_report_rows(report_path):
+    """Load rows from a general_report CSV file."""
+    rows = []
+    try:
+        with open(report_path, 'r', encoding='utf-8') as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                rows.append(row)
+    except OSError:
+        return []
+    return rows
+
+
+def rebuild_stack_history_csv():
+    """Rebuild stack_status_history.csv from all historical general_report CSV files."""
+    pattern = os.path.join(REPORTS_DIR, 'general_report_*.csv')
+    report_paths = sorted(glob.glob(pattern))
+
+    entries = []
+    for report_path in report_paths:
+        report_name = os.path.basename(report_path)
+        ts_compact = _extract_timestamp_from_report_name(report_name)
+        ts_human = _format_report_timestamp_for_history(ts_compact)
+        rows = _load_general_report_rows(report_path)
+        if not rows:
+            continue
+        metrics = _compute_stack_metrics(rows)
+        for stack in ('mc', 'uio', 'd2d'):
+            m = metrics.get(stack)
+            if not m:
+                continue
+            entries.append({
+                'report_name': report_name,
+                'report_timestamp': ts_human,
+                'timestamp_key': ts_compact,
+                'stack': stack,
+                'total': m['total'],
+                'pass': m['pass'],
+                'fail': m['fail'],
+                'missing': m['missing'],
+                'pass_pct': f"{m['pass_pct']:.2f}",
+                'fail_pct': f"{m['fail_pct']:.2f}",
+                'missing_pct': f"{m['missing_pct']:.2f}",
+            })
+
+    entries.sort(key=lambda e: (e['timestamp_key'], e['stack']))
+
+    with open(STACK_HISTORY_FILE, 'w', newline='', encoding='utf-8') as f:
+        writer = csv.DictWriter(
+            f,
+            fieldnames=[
+                'report_name', 'report_timestamp', 'stack',
+                'total', 'pass', 'fail', 'missing',
+                'pass_pct', 'fail_pct', 'missing_pct',
+            ]
+        )
+        writer.writeheader()
+        for e in entries:
+            writer.writerow({
+                'report_name': e['report_name'],
+                'report_timestamp': e['report_timestamp'],
+                'stack': e['stack'],
+                'total': e['total'],
+                'pass': e['pass'],
+                'fail': e['fail'],
+                'missing': e['missing'],
+                'pass_pct': e['pass_pct'],
+                'fail_pct': e['fail_pct'],
+                'missing_pct': e['missing_pct'],
+            })
+
+    print(f"Stack history file updated: {STACK_HISTORY_FILE}")
+
+
+def load_stack_history():
+    """Load stack history rows keyed by stack from stack_status_history.csv."""
+    data = {'mc': [], 'uio': [], 'd2d': []}
+    if not os.path.isfile(STACK_HISTORY_FILE):
+        return data
+
+    with open(STACK_HISTORY_FILE, 'r', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            stack = row.get('stack', '').strip()
+            if stack not in data:
+                continue
+            data[stack].append(row)
+
+    for stack in data:
+        data[stack].sort(key=lambda r: _extract_timestamp_from_report_name(r.get('report_name', '')))
+    return data
+
+
 def check_test_completeness(all_rows, ownership, test_type_overrides, selected_models):
     """For each (partition, model), add MISSING rows for any expected test not found.
     Checks ALL partitions from ownership.txt, but only against their matching model type."""
@@ -330,6 +475,9 @@ def generate_general_report_for_models(selected_models):
 
     print(f"\nGeneral report generated: {OUTPUT_REPORT}")
     print(f"Total test entries: {len(all_rows)} ({len(missing_rows)} MISSING)")
+
+    # Rebuild stack-level historical percentages from all general reports.
+    rebuild_stack_history_csv()
 
     # Also generate HTML version
     generate_general_report_html(all_rows)
@@ -444,6 +592,113 @@ def generate_general_report_html(all_rows):
         h.append(f'<td align="center" style="padding:8px 12px;font-size:13px;color:#0071c5;font-weight:bold;{FONT}">{rate:.1f}%</td>')
         h.append('</tr>')
     h.append('</table>')
+    h.append('</td></tr>')
+
+    # ── Historical stack trends (horizontal, 3-across) ──
+    stack_history = load_stack_history()
+
+    def render_stack_trend_svg(stack_key, title):
+        rows = stack_history.get(stack_key, [])
+        if not rows:
+            return (
+                '<table width="100%" cellpadding="0" cellspacing="0" border="0">'
+                '<tr><td align="center" style="padding:18px 6px;font-size:12px;color:#999;">'
+                'No historical data available'
+                '</td></tr></table>'
+            )
+
+        points = []
+        for r in rows:
+            try:
+                p = float(r.get('pass_pct', 0) or 0)
+                f_ = float(r.get('fail_pct', 0) or 0)
+                m = float(r.get('missing_pct', 0) or 0)
+            except ValueError:
+                p, f_, m = 0.0, 0.0, 0.0
+            label = r.get('report_timestamp', '')[:10]  # YYYY-MM-DD
+            points.append((label, p, f_, m))
+
+        width, height = 300, 200
+        left, right, top, bottom = 36, 10, 14, 52
+        plot_w = width - left - right
+        plot_h = height - top - bottom
+        n = len(points)
+
+        def x_at(i):
+            if n <= 1:
+                return left + plot_w / 2
+            return left + (plot_w * i / (n - 1))
+
+        def y_at(v):
+            return top + (100 - max(0.0, min(100.0, v))) * plot_h / 100
+
+        pass_pts = ' '.join(f"{x_at(i):.1f},{y_at(pt[1]):.1f}" for i, pt in enumerate(points))
+        fail_pts = ' '.join(f"{x_at(i):.1f},{y_at(pt[2]):.1f}" for i, pt in enumerate(points))
+        miss_pts = ' '.join(f"{x_at(i):.1f},{y_at(pt[3]):.1f}" for i, pt in enumerate(points))
+
+        latest = points[-1] if points else ('', 0.0, 0.0, 0.0)
+
+        svg = []
+        svg.append(f'<table width="100%" cellpadding="0" cellspacing="0" border="0">')
+        svg.append(f'<tr><td align="center" style="padding:0 0 4px;font-size:12px;font-weight:bold;color:#333;{FONT}">{title}</td></tr>')
+        svg.append(f'<tr><td align="center">')
+        svg.append(f'<svg width="{width}" height="{height}" viewBox="0 0 {width} {height}" xmlns="http://www.w3.org/2000/svg">')
+
+        # Grid and y-axis labels
+        for yv in (0, 25, 50, 75, 100):
+            y = y_at(yv)
+            color = '#dddddd' if yv in (0, 50, 100) else '#eeeeee'
+            svg.append(f'<line x1="{left}" y1="{y:.1f}" x2="{left + plot_w}" y2="{y:.1f}" stroke="{color}" stroke-width="1"/>')
+            svg.append(f'<text x="{left - 5}" y="{y + 4:.1f}" text-anchor="end" font-size="9" fill="#777" font-family="Arial,sans-serif">{yv}%</text>')
+
+        # Axes
+        svg.append(f'<line x1="{left}" y1="{top}" x2="{left}" y2="{top + plot_h}" stroke="#999" stroke-width="1"/>')
+        svg.append(f'<line x1="{left}" y1="{top + plot_h}" x2="{left + plot_w}" y2="{top + plot_h}" stroke="#999" stroke-width="1"/>')
+
+        # Lines
+        svg.append(f'<polyline fill="none" stroke="#2e7d32" stroke-width="2" stroke-linejoin="round" points="{pass_pts}"/>')
+        svg.append(f'<polyline fill="none" stroke="#c62828" stroke-width="2" stroke-linejoin="round" points="{fail_pts}"/>')
+        svg.append(f'<polyline fill="none" stroke="#e65100" stroke-width="1.5" stroke-dasharray="4,2" stroke-linejoin="round" points="{miss_pts}"/>')
+
+        # Data point circles
+        for i, pt in enumerate(points):
+            cx = x_at(i)
+            svg.append(f'<circle cx="{cx:.1f}" cy="{y_at(pt[1]):.1f}" r="2.5" fill="#2e7d32"/>')
+            svg.append(f'<circle cx="{cx:.1f}" cy="{y_at(pt[2]):.1f}" r="2.5" fill="#c62828"/>')
+            svg.append(f'<circle cx="{cx:.1f}" cy="{y_at(pt[3]):.1f}" r="2" fill="#e65100"/>')
+
+        # X-axis labels — all points, rotated 45 degrees, YY-MM-DD format
+        label_y = top + plot_h + 10
+        for i, pt in enumerate(points):
+            cx = x_at(i)
+            short_label = pt[0][2:] if len(pt[0]) >= 10 else pt[0]  # YY-MM-DD
+            svg.append(f'<text x="{cx:.1f}" y="{label_y}" text-anchor="end" font-size="8" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 {cx:.1f} {label_y})">{short_label}</text>')
+
+        svg.append('</svg>')
+        svg.append('</td></tr>')
+        # Legend
+        svg.append(f'<tr><td align="center" style="padding:2px 0 4px;font-size:10px;color:#555;{FONT}">')
+        svg.append(f'<span style="color:#2e7d32;font-weight:bold;">&#9679; PASS {latest[1]:.1f}%</span> &nbsp;')
+        svg.append(f'<span style="color:#c62828;font-weight:bold;">&#9679; FAIL {latest[2]:.1f}%</span> &nbsp;')
+        svg.append(f'<span style="color:#e65100;font-weight:bold;">&#9679; MISS {latest[3]:.1f}%</span>')
+        svg.append('</td></tr></table>')
+        return ''.join(svg)
+
+    h.append('<tr><td style="padding:8px 20px 16px;">')
+    h.append(f'<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:10px;"><tr><td style="{FONT}">')
+    h.append(f'<span style="font-size:16px;font-weight:bold;color:#333;{FONT}">HISTORICAL STACK TRENDS</span>')
+    h.append('</td></tr></table>')
+    h.append('<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr>')
+
+    stacks = [('mc', 'MC Stack'), ('uio', 'UIO Stack'), ('d2d', 'D2D Stack')]
+    for i, (stack_key, stack_title) in enumerate(stacks):
+        if i > 0:
+            h.append('<td width="10"></td>')
+        h.append('<td width="33%" valign="top" bgcolor="#fbfbfb" style="border:1px solid #e6e6e6;padding:8px 6px;">')
+        h.append(render_stack_trend_svg(stack_key, stack_title))
+        h.append('</td>')
+
+    h.append('</tr></table>')
     h.append('</td></tr>')
 
     # ── Detailed test results per model ──
