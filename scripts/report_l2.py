@@ -21,10 +21,8 @@ PARSE_SCRIPT = os.path.join(SCRIPT_DIR, "parse_l2_regression.py")  # Parser scri
 os.makedirs(REPORTS_DIR, exist_ok=True)
 TIMESTAMP = datetime.now().strftime("%Y%m%d_%H%M%S")          # Timestamp for output filename
 OUTPUT_REPORT = os.path.join(REPORTS_DIR, f"general_report_{TIMESTAMP}.csv")  # Final consolidated report
-STACK_HISTORY_FILE = os.path.join(REPORTS_DIR, "stack_status_history.csv")      # Historical stack-level percentages
 GITHUB_PAGES_INDEX = "https://eaarayag.github.io/Code/reports/index.html"     # Report history on GitHub Pages
 GITHUB_PAGES_BASE = "https://eaarayag.github.io/Code/reports/"               # Base URL for individual reports
-REGRESSION_BASE_PATH = "/nfs/site/disks/nwp_vmgr_testresults_006/NWP_DFT_Regressions"  # Remote collateral base
 
 
 def load_ownership(filepath):
@@ -231,150 +229,6 @@ def get_model_type(model_name):
     return None
 
 
-def _extract_timestamp_from_report_name(report_name):
-    """Extract report timestamp string from a general_report filename."""
-    import re
-    m = re.search(r'(\d{8}_\d{6})', report_name)
-    return m.group(1) if m else ''
-
-
-def _format_report_timestamp_for_history(ts):
-    """Convert 'YYYYMMDD_HHMMSS' to 'YYYY-MM-DD HH:MM:SS'."""
-    if len(ts) == 15 and '_' in ts:
-        date_part, time_part = ts.split('_', 1)
-        return (
-            f"{date_part[0:4]}-{date_part[4:6]}-{date_part[6:8]} "
-            f"{time_part[0:2]}:{time_part[2:4]}:{time_part[4:6]}"
-        )
-    return ''
-
-
-def _compute_stack_metrics(rows):
-    """Compute PASS/FAIL/MISSING counts and percentages per stack (mc/uio/d2d)."""
-    metrics = {}
-    for r in rows:
-        stack = get_model_type(r['model'])
-        if stack not in ('mc', 'uio', 'd2d'):
-            continue
-        if stack not in metrics:
-            metrics[stack] = {'total': 0, 'pass': 0, 'fail': 0, 'missing': 0}
-        metrics[stack]['total'] += 1
-        st = r['status']
-        if st == 'PASS':
-            metrics[stack]['pass'] += 1
-        elif st == 'FAIL':
-            metrics[stack]['fail'] += 1
-        else:
-            metrics[stack]['missing'] += 1
-
-    out = {}
-    for stack, s in metrics.items():
-        total = s['total']
-        out[stack] = {
-            'total': total,
-            'pass': s['pass'],
-            'fail': s['fail'],
-            'missing': s['missing'],
-            'pass_pct': (s['pass'] / total * 100) if total else 0.0,
-            'fail_pct': (s['fail'] / total * 100) if total else 0.0,
-            'missing_pct': (s['missing'] / total * 100) if total else 0.0,
-        }
-    return out
-
-
-def _load_general_report_rows(report_path):
-    """Load rows from a general_report CSV file."""
-    rows = []
-    try:
-        with open(report_path, 'r', encoding='utf-8') as f:
-            reader = csv.DictReader(f)
-            for row in reader:
-                rows.append(row)
-    except OSError:
-        return []
-    return rows
-
-
-def rebuild_stack_history_csv():
-    """Rebuild stack_status_history.csv from all historical general_report CSV files."""
-    pattern = os.path.join(REPORTS_DIR, 'general_report_*.csv')
-    report_paths = sorted(glob.glob(pattern))
-
-    entries = []
-    for report_path in report_paths:
-        report_name = os.path.basename(report_path)
-        ts_compact = _extract_timestamp_from_report_name(report_name)
-        ts_human = _format_report_timestamp_for_history(ts_compact)
-        rows = _load_general_report_rows(report_path)
-        if not rows:
-            continue
-        metrics = _compute_stack_metrics(rows)
-        for stack in ('mc', 'uio', 'd2d'):
-            m = metrics.get(stack)
-            if not m:
-                continue
-            entries.append({
-                'report_name': report_name,
-                'report_timestamp': ts_human,
-                'timestamp_key': ts_compact,
-                'stack': stack,
-                'total': m['total'],
-                'pass': m['pass'],
-                'fail': m['fail'],
-                'missing': m['missing'],
-                'pass_pct': f"{m['pass_pct']:.2f}",
-                'fail_pct': f"{m['fail_pct']:.2f}",
-                'missing_pct': f"{m['missing_pct']:.2f}",
-            })
-
-    entries.sort(key=lambda e: (e['timestamp_key'], e['stack']))
-
-    with open(STACK_HISTORY_FILE, 'w', newline='', encoding='utf-8') as f:
-        writer = csv.DictWriter(
-            f,
-            fieldnames=[
-                'report_name', 'report_timestamp', 'stack',
-                'total', 'pass', 'fail', 'missing',
-                'pass_pct', 'fail_pct', 'missing_pct',
-            ]
-        )
-        writer.writeheader()
-        for e in entries:
-            writer.writerow({
-                'report_name': e['report_name'],
-                'report_timestamp': e['report_timestamp'],
-                'stack': e['stack'],
-                'total': e['total'],
-                'pass': e['pass'],
-                'fail': e['fail'],
-                'missing': e['missing'],
-                'pass_pct': e['pass_pct'],
-                'fail_pct': e['fail_pct'],
-                'missing_pct': e['missing_pct'],
-            })
-
-    print(f"Stack history file updated: {STACK_HISTORY_FILE}")
-
-
-def load_stack_history():
-    """Load stack history rows keyed by stack from stack_status_history.csv."""
-    data = {'mc': [], 'uio': [], 'd2d': []}
-    if not os.path.isfile(STACK_HISTORY_FILE):
-        return data
-
-    with open(STACK_HISTORY_FILE, 'r', encoding='utf-8') as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            stack = row.get('stack', '').strip()
-            if stack not in data:
-                continue
-            data[stack].append(row)
-
-    for stack in data:
-        data[stack].sort(key=lambda r: _extract_timestamp_from_report_name(r.get('report_name', '')))
-    return data
-
-
 def check_test_completeness(all_rows, ownership, test_type_overrides, selected_models):
     """For each (partition, model), add MISSING rows for any expected test not found.
     Checks ALL partitions from ownership.txt, but only against their matching model type."""
@@ -477,36 +331,8 @@ def generate_general_report_for_models(selected_models):
     print(f"\nGeneral report generated: {OUTPUT_REPORT}")
     print(f"Total test entries: {len(all_rows)} ({len(missing_rows)} MISSING)")
 
-    # Generate collateral paths for failing/missing tests
-    generate_collateral_paths(all_rows)
-
-    # Rebuild stack-level historical percentages from all general reports.
-    rebuild_stack_history_csv()
-
     # Also generate HTML version
     generate_general_report_html(all_rows)
-
-
-def generate_collateral_paths(all_rows):
-    """Generate a file listing regression collateral paths for FAIL tests only."""
-    fail_rows = [r for r in all_rows if r['status'] == 'FAIL']
-    if not fail_rows:
-        return
-
-    # Map model type to collateral directory name
-    COLLATERAL_DIR_NAME = {'mc': 'memstack', 'uio': 'uio', 'd2d': 'd2d'}
-
-    output_path = os.path.join(REPORTS_DIR, f"collateral_paths_{TIMESTAMP}.txt")
-    with open(output_path, 'w', encoding='utf-8') as f:
-        for r in sorted(fail_rows, key=lambda x: (x['model'], x['partition'], x['test_type'])):
-            model = r['model']
-            model_type = get_model_type(model)  # mc, uio, or d2d
-            dir_name = COLLATERAL_DIR_NAME.get(model_type, model_type)
-            test_name = f"{r['partition']}_{r['test_type']}" if r['test_type'] else r['partition']
-            path = f"{REGRESSION_BASE_PATH}/{model}/{dir_name}/L2_regression.list/{test_name}/"
-            f.write(f"{r['status']}\t{r['owner']}\t{path}\n")
-
-    print(f"Collateral paths file: {output_path}")
 
 
 def generate_general_report_html(all_rows):
@@ -552,116 +378,6 @@ def generate_general_report_html(all_rows):
 
     def status_fg(s):
         return {'PASS': '#2e7d32', 'FAIL': '#c62828', 'MISSING': '#e65100'}.get(s, '#333333')
-
-    stack_history = load_stack_history()
-
-    def render_stack_trend_svg(stack_key, title):
-        rows = stack_history.get(stack_key, [])
-        if not rows:
-            return (
-                '<table width="100%" cellpadding="0" cellspacing="0" border="0">'
-                '<tr><td align="center" style="padding:18px 6px;font-size:12px;color:#999;">'
-                'No historical data available'
-                '</td></tr></table>'
-            )
-
-        points = []
-        for r in rows:
-            try:
-                p = float(r.get('pass_pct', 0) or 0)
-                f_ = float(r.get('fail_pct', 0) or 0)
-                m = float(r.get('missing_pct', 0) or 0)
-            except ValueError:
-                p, f_, m = 0.0, 0.0, 0.0
-            label = r.get('report_timestamp', '')[:10]  # YYYY-MM-DD
-            points.append((label, p, f_, m))
-
-        # Larger plot with room for rotated x-axis labels
-        width, height = 860, 260
-        left, right, top, bottom = 46, 20, 20, 80
-        plot_w = width - left - right
-        plot_h = height - top - bottom
-        n = len(points)
-
-        def x_at(i):
-            if n <= 1:
-                return left + plot_w / 2
-            return left + (plot_w * i / (n - 1))
-
-        def y_at(v):
-            return top + (100 - max(0.0, min(100.0, v))) * plot_h / 100
-
-        pass_pts = ' '.join(f"{x_at(i):.1f},{y_at(pt[1]):.1f}" for i, pt in enumerate(points))
-        fail_pts = ' '.join(f"{x_at(i):.1f},{y_at(pt[2]):.1f}" for i, pt in enumerate(points))
-        miss_pts = ' '.join(f"{x_at(i):.1f},{y_at(pt[3]):.1f}" for i, pt in enumerate(points))
-
-        latest = points[-1] if points else ('', 0.0, 0.0, 0.0)
-
-        svg = []
-        svg.append(f'<table width="100%" cellpadding="0" cellspacing="0" border="0">')
-        svg.append(f'<tr><td align="center" style="padding:0 0 6px;font-size:14px;font-weight:bold;color:#333;{FONT}">{title}</td></tr>')
-        svg.append(f'<tr><td align="center">')
-        svg.append(f'<svg width="{width}" height="{height}" viewBox="0 0 {width} {height}" xmlns="http://www.w3.org/2000/svg">')
-
-        # Background
-        svg.append(f'<rect x="{left}" y="{top}" width="{plot_w}" height="{plot_h}" fill="#fafafa"/>')
-
-        # Grid and y-axis labels
-        for yv in (0, 25, 50, 75, 100):
-            y = y_at(yv)
-            color = '#d0d0d0' if yv in (0, 50, 100) else '#e8e8e8'
-            sw = '1' if yv in (0, 50, 100) else '0.5'
-            svg.append(f'<line x1="{left}" y1="{y:.1f}" x2="{left + plot_w}" y2="{y:.1f}" stroke="{color}" stroke-width="{sw}"/>')
-            svg.append(f'<text x="{left - 8}" y="{y + 4:.1f}" text-anchor="end" font-size="11" fill="#555" font-family="Arial,sans-serif">{yv}%</text>')
-
-        # Axes
-        svg.append(f'<line x1="{left}" y1="{top}" x2="{left}" y2="{top + plot_h}" stroke="#888" stroke-width="1"/>')
-        svg.append(f'<line x1="{left}" y1="{top + plot_h}" x2="{left + plot_w}" y2="{top + plot_h}" stroke="#888" stroke-width="1"/>')
-
-        # Filled areas under lines (subtle)
-        pass_area = f'M {x_at(0):.1f},{y_at(0):.1f} ' + ' '.join(f'L {x_at(i):.1f},{y_at(pt[1]):.1f}' for i, pt in enumerate(points)) + f' L {x_at(n-1):.1f},{y_at(0):.1f} Z'
-        svg.append(f'<path d="{pass_area}" fill="#2e7d32" fill-opacity="0.06"/>')
-
-        # Lines (thicker)
-        svg.append(f'<polyline fill="none" stroke="#2e7d32" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" points="{pass_pts}"/>')
-        svg.append(f'<polyline fill="none" stroke="#c62828" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" points="{fail_pts}"/>')
-        svg.append(f'<polyline fill="none" stroke="#e65100" stroke-width="2" stroke-dasharray="6,3" stroke-linejoin="round" stroke-linecap="round" points="{miss_pts}"/>')
-
-        # Data point circles at every point
-        for i, pt in enumerate(points):
-            cx = x_at(i)
-            svg.append(f'<circle cx="{cx:.1f}" cy="{y_at(pt[1]):.1f}" r="3" fill="#2e7d32" stroke="#fff" stroke-width="1"/>')
-            svg.append(f'<circle cx="{cx:.1f}" cy="{y_at(pt[2]):.1f}" r="3" fill="#c62828" stroke="#fff" stroke-width="1"/>')
-            svg.append(f'<circle cx="{cx:.1f}" cy="{y_at(pt[3]):.1f}" r="2.5" fill="#e65100" stroke="#fff" stroke-width="1"/>')
-
-        # X-axis labels — show all points, rotated 45 degrees
-        label_y = top + plot_h + 12
-        for i, pt in enumerate(points):
-            cx = x_at(i)
-            # Use MM-DD format for compactness
-            short_label = pt[0][5:] if len(pt[0]) >= 10 else pt[0]
-            svg.append(f'<text x="{cx:.1f}" y="{label_y}" text-anchor="end" font-size="10" fill="#555" font-family="Arial,sans-serif" transform="rotate(-45 {cx:.1f} {label_y})">{short_label}</text>')
-
-        # Vertical tick marks at each x point
-        for i in range(n):
-            cx = x_at(i)
-            svg.append(f'<line x1="{cx:.1f}" y1="{top + plot_h}" x2="{cx:.1f}" y2="{top + plot_h + 4}" stroke="#888" stroke-width="0.5"/>')
-
-        svg.append('</svg>')
-        svg.append('</td></tr>')
-        # Legend row
-        svg.append(f'<tr><td align="center" style="padding:6px 0 8px;font-size:12px;color:#444;{FONT}">')
-        svg.append(f'<span style="display:inline-block;width:14px;height:3px;background:#2e7d32;vertical-align:middle;margin-right:4px;"></span>')
-        svg.append(f'<span style="color:#2e7d32;font-weight:bold;{FONT}">PASS {latest[1]:.1f}%</span>')
-        svg.append(f'&nbsp;&nbsp;&nbsp;')
-        svg.append(f'<span style="display:inline-block;width:14px;height:3px;background:#c62828;vertical-align:middle;margin-right:4px;"></span>')
-        svg.append(f'<span style="color:#c62828;font-weight:bold;{FONT}">FAIL {latest[2]:.1f}%</span>')
-        svg.append(f'&nbsp;&nbsp;&nbsp;')
-        svg.append(f'<span style="display:inline-block;width:14px;height:3px;background:#e65100;vertical-align:middle;margin-right:4px;border-top:2px dashed #e65100;height:0;"></span>')
-        svg.append(f'<span style="color:#e65100;font-weight:bold;{FONT}">MISSING {latest[3]:.1f}%</span>')
-        svg.append('</td></tr>')
-        svg.append('</table>')
-        return ''.join(svg)
 
     h = []
     h.append('<!DOCTYPE html>')
@@ -728,21 +444,6 @@ def generate_general_report_html(all_rows):
         h.append(f'<td align="center" style="padding:8px 12px;font-size:13px;color:#0071c5;font-weight:bold;{FONT}">{rate:.1f}%</td>')
         h.append('</tr>')
     h.append('</table>')
-    h.append('</td></tr>')
-
-    # ── Historical stack trends ──
-    h.append('<tr><td style="padding:16px 32px 8px;">')
-    h.append(f'<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:12px;"><tr><td style="{FONT}">')
-    h.append(f'<span style="font-size:16px;font-weight:bold;color:#333;{FONT}">HISTORICAL STACK TRENDS</span>')
-    h.append('</td></tr></table>')
-
-    stacks = [('mc', 'MC Stack (Memstack)'), ('uio', 'UIO Stack'), ('d2d', 'D2D Stack')]
-    for stack_key, stack_title in stacks:
-        h.append('<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:16px;">')
-        h.append('<tr><td valign="top" bgcolor="#fbfbfb" style="border:1px solid #e0e0e0;padding:12px 16px;">')
-        h.append(render_stack_trend_svg(stack_key, stack_title))
-        h.append('</td></tr></table>')
-
     h.append('</td></tr>')
 
     # ── Detailed test results per model ──
