@@ -615,8 +615,17 @@ def generate_general_report_html(all_rows):
                 m = float(r.get('missing_pct', 0) or 0)
             except ValueError:
                 p, f_, m = 0.0, 0.0, 0.0
-            label = r.get('report_timestamp', '')[:10]  # YYYY-MM-DD
-            points.append((label, p, f_, m))
+            date_str = r.get('report_timestamp', '')[:10]  # YYYY-MM-DD
+            # Convert date to work-week label (WW##)
+            try:
+                from datetime import date as _date
+                parts = date_str.split('-')
+                d = _date(int(parts[0]), int(parts[1]), int(parts[2]))
+                ww = d.isocalendar()[1]
+                ww_label = f"WW{ww:02d}"
+            except (ValueError, IndexError):
+                ww_label = date_str
+            points.append((date_str, p, f_, m, ww_label))
 
         width, height = 300, 200
         left, right, top, bottom = 36, 10, 14, 52
@@ -663,17 +672,16 @@ def generate_general_report_html(all_rows):
         # Data point circles with hover tooltips
         for i, pt in enumerate(points):
             cx = x_at(i)
-            date_label = pt[0]
+            date_label = f"{pt[4]} ({pt[0]})"
             svg.append(f'<circle cx="{cx:.1f}" cy="{y_at(pt[1]):.1f}" r="2.5" fill="#2e7d32"><title>{date_label} — PASS: {pt[1]:.1f}%</title></circle>')
             svg.append(f'<circle cx="{cx:.1f}" cy="{y_at(pt[2]):.1f}" r="2.5" fill="#c62828"><title>{date_label} — FAIL: {pt[2]:.1f}%</title></circle>')
             svg.append(f'<circle cx="{cx:.1f}" cy="{y_at(pt[3]):.1f}" r="2" fill="#e65100"><title>{date_label} — MISSING: {pt[3]:.1f}%</title></circle>')
 
-        # X-axis labels — all points, rotated 45 degrees, YY-MM-DD format
+        # X-axis labels — all points, rotated 45 degrees, work-week format
         label_y = top + plot_h + 10
         for i, pt in enumerate(points):
             cx = x_at(i)
-            short_label = pt[0][2:] if len(pt[0]) >= 10 else pt[0]  # YY-MM-DD
-            svg.append(f'<text x="{cx:.1f}" y="{label_y}" text-anchor="end" font-size="8" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 {cx:.1f} {label_y})">{short_label}</text>')
+            svg.append(f'<text x="{cx:.1f}" y="{label_y}" text-anchor="end" font-size="8" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 {cx:.1f} {label_y})">{pt[4]}</text>')
 
         svg.append('</svg>')
         svg.append('</td></tr>')
