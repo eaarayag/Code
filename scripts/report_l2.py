@@ -660,12 +660,13 @@ def generate_general_report_html(all_rows):
         svg.append(f'<polyline fill="none" stroke="#c62828" stroke-width="2" stroke-linejoin="round" points="{fail_pts}"/>')
         svg.append(f'<polyline fill="none" stroke="#e65100" stroke-width="1.5" stroke-dasharray="4,2" stroke-linejoin="round" points="{miss_pts}"/>')
 
-        # Data point circles
+        # Data point circles with hover tooltips
         for i, pt in enumerate(points):
             cx = x_at(i)
-            svg.append(f'<circle cx="{cx:.1f}" cy="{y_at(pt[1]):.1f}" r="2.5" fill="#2e7d32"/>')
-            svg.append(f'<circle cx="{cx:.1f}" cy="{y_at(pt[2]):.1f}" r="2.5" fill="#c62828"/>')
-            svg.append(f'<circle cx="{cx:.1f}" cy="{y_at(pt[3]):.1f}" r="2" fill="#e65100"/>')
+            date_label = pt[0]
+            svg.append(f'<circle cx="{cx:.1f}" cy="{y_at(pt[1]):.1f}" r="2.5" fill="#2e7d32"><title>{date_label} — PASS: {pt[1]:.1f}%</title></circle>')
+            svg.append(f'<circle cx="{cx:.1f}" cy="{y_at(pt[2]):.1f}" r="2.5" fill="#c62828"><title>{date_label} — FAIL: {pt[2]:.1f}%</title></circle>')
+            svg.append(f'<circle cx="{cx:.1f}" cy="{y_at(pt[3]):.1f}" r="2" fill="#e65100"><title>{date_label} — MISSING: {pt[3]:.1f}%</title></circle>')
 
         # X-axis labels — all points, rotated 45 degrees, YY-MM-DD format
         label_y = top + plot_h + 10
