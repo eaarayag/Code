@@ -618,8 +618,8 @@ def generate_general_report_html(all_rows):
             label = r.get('report_timestamp', '')[:10]  # YYYY-MM-DD
             points.append((label, p, f_, m))
 
-        width, height = 300, 200
-        left, right, top, bottom = 36, 10, 14, 52
+        width, height = 300, 180
+        left, right, top, bottom = 36, 10, 14, 30
         plot_w = width - left - right
         plot_h = height - top - bottom
         n = len(points)
@@ -668,12 +668,24 @@ def generate_general_report_html(all_rows):
             svg.append(f'<circle cx="{cx:.1f}" cy="{y_at(pt[2]):.1f}" r="2.5" fill="#c62828"><title>{date_label} — FAIL: {pt[2]:.1f}%</title></circle>')
             svg.append(f'<circle cx="{cx:.1f}" cy="{y_at(pt[3]):.1f}" r="2" fill="#e65100"><title>{date_label} — MISSING: {pt[3]:.1f}%</title></circle>')
 
-        # X-axis labels — all points, rotated 45 degrees, YY-MM-DD format
-        label_y = top + plot_h + 10
-        for i, pt in enumerate(points):
+        # X-axis labels — evenly spaced (like Y-axis grid), showing ~5 dates max
+        label_y = top + plot_h + 14
+        if n <= 5:
+            label_indices = list(range(n))
+        else:
+            # Pick evenly spaced indices including first and last
+            label_indices = [0]
+            step = (n - 1) / 4
+            for k in range(1, 4):
+                label_indices.append(round(step * k))
+            label_indices.append(n - 1)
+            label_indices = sorted(set(label_indices))
+
+        for i in label_indices:
             cx = x_at(i)
-            short_label = pt[0][2:] if len(pt[0]) >= 10 else pt[0]  # YY-MM-DD
-            svg.append(f'<text x="{cx:.1f}" y="{label_y}" text-anchor="end" font-size="8" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 {cx:.1f} {label_y})">{short_label}</text>')
+            short_label = points[i][0][2:] if len(points[i][0]) >= 10 else points[i][0]  # YY-MM-DD
+            svg.append(f'<line x1="{cx:.1f}" y1="{top + plot_h}" x2="{cx:.1f}" y2="{top + plot_h + 4}" stroke="#999" stroke-width="0.5"/>')
+            svg.append(f'<text x="{cx:.1f}" y="{label_y}" text-anchor="middle" font-size="9" fill="#555" font-family="Arial,sans-serif">{short_label}</text>')
 
         svg.append('</svg>')
         svg.append('</td></tr>')
