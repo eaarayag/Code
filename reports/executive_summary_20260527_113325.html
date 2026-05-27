@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+<body style="margin:0;padding:0;background-color:#f4f4f4;font-family:Arial,Helvetica,sans-serif;">
+<table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#f4f4f4">
+<tr><td align="center" style="padding:20px 0;">
+<table width="640" cellpadding="0" cellspacing="0" border="0" bgcolor="#ffffff" style="border:1px solid #dddddd;">
+<tr><td bgcolor="#0071c5" style="padding:24px 32px;">
+<table cellpadding="0" cellspacing="0" border="0"><tr><td style="font-family:Arial,Helvetica,sans-serif;">
+<span style="color:#ffffff;font-size:22px;font-weight:bold;font-family:Arial,Helvetica,sans-serif;">EXECUTIVE SUMMARY</span><br>
+<span style="color:#b3d9f2;font-size:14px;font-family:Arial,Helvetica,sans-serif;">SCAN L2 Regression Report</span>
+</td></tr></table>
+</td></tr>
+<tr><td style="padding:20px 32px 16px;border-bottom:1px solid #e0e0e0;">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr><td style="font-size:14px;color:#444;font-family:Arial,Helvetica,sans-serif;padding:3px 0;"><b>Report:</b> <a href="https://eaarayag.github.io/Code/reports/general_report_20260527_113325.html" style="color:#0071c5;text-decoration:none;">general_report_20260527_113325.html</a></td>
+<td align="right" style="font-size:13px;color:#888;font-family:Arial,Helvetica,sans-serif;padding:3px 0;">2026-05-27 11:33:25</td></tr>
+<tr><td style="font-size:14px;color:#444;font-family:Arial,Helvetica,sans-serif;padding:3px 0;"><b>Compared to:</b> <a href="https://eaarayag.github.io/Code/reports/general_report_20260527_113301.html" style="color:#0071c5;text-decoration:none;">general_report_20260527_113301.html</a></td>
+<td align="right" style="font-size:13px;color:#888;font-family:Arial,Helvetica,sans-serif;padding:3px 0;">2026-05-27 11:33:01</td></tr>
+<tr><td colspan="2" style="font-size:12px;color:#999;font-family:Arial,Helvetica,sans-serif;padding:8px 0 0;">Generated: 2026-05-27 11:33:30</td></tr>
+</table></td></tr>
+<tr><td style="padding:16px 32px 8px;">
+<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:8px;"><tr><td style="font-family:Arial,Helvetica,sans-serif;">
+<span style="font-size:14px;font-weight:bold;color:#333;font-family:Arial,Helvetica,sans-serif;">SELECTED MODELS</span>
+</td></tr></table>
+<table cellpadding="0" cellspacing="0" border="0">
+<tr><td style="padding:4px 0;font-family:Arial,Helvetica,sans-serif;">
+<span style="display:inline-block;background-color:#00695c;color:#ffffff;font-size:11px;font-weight:bold;padding:2px 8px;font-family:Arial,Helvetica,sans-serif;">D2D</span> 
+<span style="font-size:13px;color:#333;font-family:Consolas,'Courier New',monospace;">nio_d2d-a0-26ww21a</span>
+</td></tr>
+<tr><td style="padding:4px 0;font-family:Arial,Helvetica,sans-serif;">
+<span style="display:inline-block;background-color:#0071c5;color:#ffffff;font-size:11px;font-weight:bold;padding:2px 8px;font-family:Arial,Helvetica,sans-serif;">MC</span> 
+<span style="font-size:13px;color:#333;font-family:Consolas,'Courier New',monospace;">nio_mc-a0-26ww20c</span>
+</td></tr>
+<tr><td style="padding:4px 0;font-family:Arial,Helvetica,sans-serif;">
+<span style="display:inline-block;background-color:#6a1b9a;color:#ffffff;font-size:11px;font-weight:bold;padding:2px 8px;font-family:Arial,Helvetica,sans-serif;">UIO</span> 
+<span style="font-size:13px;color:#333;font-family:Consolas,'Courier New',monospace;">nio_uio-a0-26ww21c</span>
+</td></tr>
+</table>
+</td></tr>
+<tr><td style="padding:24px 32px 16px;">
+<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:8px;"><tr><td style="font-family:Arial,Helvetica,sans-serif;">
+<span style="font-size:16px;font-weight:bold;color:#333;text-transform:uppercase;font-family:Arial,Helvetica,sans-serif;">OVERALL PARTITION LEVEL STATUS</span>
+</td></tr></table>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:10px;"><tr>
+<td width="25%" align="center" bgcolor="#f0f7ff" style="padding:14px 8px;">
+<span style="font-size:26px;font-weight:bold;color:#0071c5;font-family:Arial,Helvetica,sans-serif;">243</span><br>
+<span style="font-size:11px;color:#666;text-transform:uppercase;font-family:Arial,Helvetica,sans-serif;">TOTAL</span>
+</td>
+<td width="8"></td>
+<td width="25%" align="center" bgcolor="#e8f5e9" style="padding:14px 8px;">
+<span style="font-size:26px;font-weight:bold;color:#2e7d32;font-family:Arial,Helvetica,sans-serif;">207</span><br>
+<span style="font-size:11px;color:#666;text-transform:uppercase;font-family:Arial,Helvetica,sans-serif;">PASS</span>
+</td>
+<td width="8"></td>
+<td width="25%" align="center" bgcolor="#ffebee" style="padding:14px 8px;">
+<span style="font-size:26px;font-weight:bold;color:#c62828;font-family:Arial,Helvetica,sans-serif;">0</span><br>
+<span style="font-size:11px;color:#666;text-transform:uppercase;font-family:Arial,Helvetica,sans-serif;">FAIL</span>
+</td>
+<td width="8"></td>
+<td width="25%" align="center" bgcolor="#fff3e0" style="padding:14px 8px;">
+<span style="font-size:26px;font-weight:bold;color:#e65100;font-family:Arial,Helvetica,sans-serif;">36</span><br>
+<span style="font-size:11px;color:#666;text-transform:uppercase;font-family:Arial,Helvetica,sans-serif;">MISSING</span>
+</td>
+</tr></table>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:10px;margin-bottom:14px;">
+<tr><td align="center" style="font-size:14px;color:#555;font-family:Arial,Helvetica,sans-serif;">
+Pass rate: <b style="color:#0071c5;font-size:20px;">85.2%</b>
+</td></tr></table>
+<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:8px;"><tr><td style="font-family:Arial,Helvetica,sans-serif;">
+<span style="font-size:16px;font-weight:bold;color:#333;text-transform:uppercase;font-family:Arial,Helvetica,sans-serif;">OVERALL STACK LEVEL STATUS</span>
+</td></tr></table>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:10px;"><tr>
+<td width="25%" align="center" bgcolor="#f0f7ff" style="padding:14px 8px;">
+<span style="font-size:26px;font-weight:bold;color:#0071c5;font-family:Arial,Helvetica,sans-serif;">27</span><br>
+<span style="font-size:11px;color:#666;text-transform:uppercase;font-family:Arial,Helvetica,sans-serif;">TOTAL</span>
+</td>
+<td width="8"></td>
+<td width="25%" align="center" bgcolor="#e8f5e9" style="padding:14px 8px;">
+<span style="font-size:26px;font-weight:bold;color:#2e7d32;font-family:Arial,Helvetica,sans-serif;">0</span><br>
+<span style="font-size:11px;color:#666;text-transform:uppercase;font-family:Arial,Helvetica,sans-serif;">PASS</span>
+</td>
+<td width="8"></td>
+<td width="25%" align="center" bgcolor="#ffebee" style="padding:14px 8px;">
+<span style="font-size:26px;font-weight:bold;color:#c62828;font-family:Arial,Helvetica,sans-serif;">0</span><br>
+<span style="font-size:11px;color:#666;text-transform:uppercase;font-family:Arial,Helvetica,sans-serif;">FAIL</span>
+</td>
+<td width="8"></td>
+<td width="25%" align="center" bgcolor="#fff3e0" style="padding:14px 8px;">
+<span style="font-size:26px;font-weight:bold;color:#e65100;font-family:Arial,Helvetica,sans-serif;">27</span><br>
+<span style="font-size:11px;color:#666;text-transform:uppercase;font-family:Arial,Helvetica,sans-serif;">MISSING</span>
+</td>
+</tr></table>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:10px;margin-bottom:14px;">
+<tr><td align="center" style="font-size:14px;color:#555;font-family:Arial,Helvetica,sans-serif;">
+Pass rate: <b style="color:#0071c5;font-size:20px;">0.0%</b>
+</td></tr></table>
+</td></tr>
+<tr><td style="padding:8px 20px 16px;">
+<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:10px;"><tr><td style="font-family:Arial,Helvetica,sans-serif;">
+<span style="font-size:16px;font-weight:bold;color:#333;font-family:Arial,Helvetica,sans-serif;">PARTITION LEVEL HISTORICAL TRENDS</span>
+</td></tr></table>
+<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
+<td width="33%" valign="top" bgcolor="#fbfbfb" style="border:1px solid #e6e6e6;padding:6px 4px;">
+<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="padding:0 0 3px;font-size:11px;font-weight:bold;color:#333;font-family:Arial,Helvetica,sans-serif;">MC Stack</td></tr><tr><td align="center"><svg width="185" height="160" viewBox="0 0 185 160" xmlns="http://www.w3.org/2000/svg"><style>polyline { transition: stroke-width 0.15s; } polyline:hover { stroke-width: 3.5; }</style><line x1="28" y1="112.0" x2="179" y2="112.0" stroke="#e6e6e6" stroke-width="1"/><text x="24" y="115.0" text-anchor="end" font-size="8" fill="#777" font-family="Arial,sans-serif">0%</text><line x1="28" y1="62.0" x2="179" y2="62.0" stroke="#e6e6e6" stroke-width="1"/><text x="24" y="65.0" text-anchor="end" font-size="8" fill="#777" font-family="Arial,sans-serif">50%</text><line x1="28" y1="12.0" x2="179" y2="12.0" stroke="#e6e6e6" stroke-width="1"/><text x="24" y="15.0" text-anchor="end" font-size="8" fill="#777" font-family="Arial,sans-serif">100%</text><line x1="28" y1="12" x2="28" y2="112" stroke="#999" stroke-width="1"/><line x1="28" y1="112" x2="179" y2="112" stroke="#999" stroke-width="1"/><polyline fill="none" stroke="#2e7d32" stroke-width="1.8" stroke-linejoin="round" points="28.0,47.6 40.6,47.6 53.2,47.6 65.8,52.0 78.3,52.0 90.9,52.0 103.5,50.3 116.1,50.3 128.7,40.6 141.2,40.6 153.8,40.9 166.4,40.9 179.0,40.9"/><polyline fill="none" stroke="#c62828" stroke-width="1.8" stroke-linejoin="round" points="28.0,96.4 40.6,96.4 53.2,96.4 65.8,109.8 78.3,109.8 90.9,109.8 103.5,107.7 116.1,107.7 128.7,112.0 141.2,112.0 153.8,112.0 166.4,112.0 179.0,112.0"/><polyline fill="none" stroke="#e65100" stroke-width="1.4" stroke-dasharray="4,2" stroke-linejoin="round" points="28.0,92.0 40.6,92.0 53.2,92.0 65.8,74.2 78.3,74.2 90.9,74.2 103.5,78.0 116.1,78.0 128.7,83.4 141.2,83.4 153.8,83.1 166.4,83.1 179.0,83.1"/><circle cx="28.0" cy="47.6" r="2" fill="#2e7d32"/><circle cx="28.0" cy="47.6" r="8" fill="transparent" stroke="none"><title>ww15p4 (2026-04-09) — PASS: 64.4%</title></circle><circle cx="28.0" cy="96.4" r="2" fill="#c62828"/><circle cx="28.0" cy="96.4" r="8" fill="transparent" stroke="none"><title>ww15p4 (2026-04-09) — FAIL: 15.6%</title></circle><circle cx="28.0" cy="92.0" r="1.8" fill="#e65100"/><circle cx="28.0" cy="92.0" r="8" fill="transparent" stroke="none"><title>ww15p4 (2026-04-09) — MISSING: 20.0%</title></circle><text x="28.0" y="122" text-anchor="end" font-size="7" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 28.0 122)">ww15p4</text><circle cx="40.6" cy="47.6" r="2" fill="#2e7d32"/><circle cx="40.6" cy="47.6" r="8" fill="transparent" stroke="none"><title>ww16p1 (2026-04-13) — PASS: 64.4%</title></circle><circle cx="40.6" cy="96.4" r="2" fill="#c62828"/><circle cx="40.6" cy="96.4" r="8" fill="transparent" stroke="none"><title>ww16p1 (2026-04-13) — FAIL: 15.6%</title></circle><circle cx="40.6" cy="92.0" r="1.8" fill="#e65100"/><circle cx="40.6" cy="92.0" r="8" fill="transparent" stroke="none"><title>ww16p1 (2026-04-13) — MISSING: 20.0%</title></circle><text x="40.6" y="122" text-anchor="end" font-size="7" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 40.6 122)">ww16p1</text><circle cx="53.2" cy="47.6" r="2" fill="#2e7d32"/><circle cx="53.2" cy="47.6" r="8" fill="transparent" stroke="none"><title>ww16p2 (2026-04-14) — PASS: 64.4%</title></circle><circle cx="53.2" cy="96.4" r="2" fill="#c62828"/><circle cx="53.2" cy="96.4" r="8" fill="transparent" stroke="none"><title>ww16p2 (2026-04-14) — FAIL: 15.6%</title></circle><circle cx="53.2" cy="92.0" r="1.8" fill="#e65100"/><circle cx="53.2" cy="92.0" r="8" fill="transparent" stroke="none"><title>ww16p2 (2026-04-14) — MISSING: 20.0%</title></circle><text x="53.2" y="122" text-anchor="end" font-size="7" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 53.2 122)">ww16p2</text><circle cx="65.8" cy="52.0" r="2" fill="#2e7d32"/><circle cx="65.8" cy="52.0" r="8" fill="transparent" stroke="none"><title>ww17p5 (2026-04-24) — PASS: 60.0%</title></circle><circle cx="65.8" cy="109.8" r="2" fill="#c62828"/><circle cx="65.8" cy="109.8" r="8" fill="transparent" stroke="none"><title>ww17p5 (2026-04-24) — FAIL: 2.2%</title></circle><circle cx="65.8" cy="74.2" r="1.8" fill="#e65100"/><circle cx="65.8" cy="74.2" r="8" fill="transparent" stroke="none"><title>ww17p5 (2026-04-24) — MISSING: 37.8%</title></circle><text x="65.8" y="122" text-anchor="end" font-size="7" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 65.8 122)">ww17p5</text><circle cx="78.3" cy="52.0" r="2" fill="#2e7d32"/><circle cx="78.3" cy="52.0" r="8" fill="transparent" stroke="none"><title>ww18p1 (2026-04-27) — PASS: 60.0%</title></circle><circle cx="78.3" cy="109.8" r="2" fill="#c62828"/><circle cx="78.3" cy="109.8" r="8" fill="transparent" stroke="none"><title>ww18p1 (2026-04-27) — FAIL: 2.2%</title></circle><circle cx="78.3" cy="74.2" r="1.8" fill="#e65100"/><circle cx="78.3" cy="74.2" r="8" fill="transparent" stroke="none"><title>ww18p1 (2026-04-27) — MISSING: 37.8%</title></circle><text x="78.3" y="122" text-anchor="end" font-size="7" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 78.3 122)">ww18p1</text><circle cx="90.9" cy="52.0" r="2" fill="#2e7d32"/><circle cx="90.9" cy="52.0" r="8" fill="transparent" stroke="none"><title>ww19p1 (2026-05-04) — PASS: 60.0%</title></circle><circle cx="90.9" cy="109.8" r="2" fill="#c62828"/><circle cx="90.9" cy="109.8" r="8" fill="transparent" stroke="none"><title>ww19p1 (2026-05-04) — FAIL: 2.2%</title></circle><circle cx="90.9" cy="74.2" r="1.8" fill="#e65100"/><circle cx="90.9" cy="74.2" r="8" fill="transparent" stroke="none"><title>ww19p1 (2026-05-04) — MISSING: 37.8%</title></circle><text x="90.9" y="122" text-anchor="end" font-size="7" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 90.9 122)">ww19p1</text><circle cx="103.5" cy="50.3" r="2" fill="#2e7d32"/><circle cx="103.5" cy="50.3" r="8" fill="transparent" stroke="none"><title>ww19p4 (2026-05-07) — PASS: 61.7%</title></circle><circle cx="103.5" cy="107.7" r="2" fill="#c62828"/><circle cx="103.5" cy="107.7" r="8" fill="transparent" stroke="none"><title>ww19p4 (2026-05-07) — FAIL: 4.3%</title></circle><circle cx="103.5" cy="78.0" r="1.8" fill="#e65100"/><circle cx="103.5" cy="78.0" r="8" fill="transparent" stroke="none"><title>ww19p4 (2026-05-07) — MISSING: 34.0%</title></circle><text x="103.5" y="122" text-anchor="end" font-size="7" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 103.5 122)">ww19p4</text><circle cx="116.1" cy="50.3" r="2" fill="#2e7d32"/><circle cx="116.1" cy="50.3" r="8" fill="transparent" stroke="none"><title>ww20p1 (2026-05-11) — PASS: 61.7%</title></circle><circle cx="116.1" cy="107.7" r="2" fill="#c62828"/><circle cx="116.1" cy="107.7" r="8" fill="transparent" stroke="none"><title>ww20p1 (2026-05-11) — FAIL: 4.3%</title></circle><circle cx="116.1" cy="78.0" r="1.8" fill="#e65100"/><circle cx="116.1" cy="78.0" r="8" fill="transparent" stroke="none"><title>ww20p1 (2026-05-11) — MISSING: 34.0%</title></circle><text x="116.1" y="122" text-anchor="end" font-size="7" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 116.1 122)">ww20p1</text><circle cx="128.7" cy="40.6" r="2" fill="#2e7d32"/><circle cx="128.7" cy="40.6" r="8" fill="transparent" stroke="none"><title>ww20p5 (2026-05-15) — PASS: 71.4%</title></circle><circle cx="128.7" cy="112.0" r="2" fill="#c62828"/><circle cx="128.7" cy="112.0" r="8" fill="transparent" stroke="none"><title>ww20p5 (2026-05-15) — FAIL: 0.0%</title></circle><circle cx="128.7" cy="83.4" r="1.8" fill="#e65100"/><circle cx="128.7" cy="83.4" r="8" fill="transparent" stroke="none"><title>ww20p5 (2026-05-15) — MISSING: 28.6%</title></circle><text x="128.7" y="122" text-anchor="end" font-size="7" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 128.7 122)">ww20p5</text><circle cx="141.2" cy="40.6" r="2" fill="#2e7d32"/><circle cx="141.2" cy="40.6" r="8" fill="transparent" stroke="none"><title>ww21p1 (2026-05-18) — PASS: 71.4%</title></circle><circle cx="141.2" cy="112.0" r="2" fill="#c62828"/><circle cx="141.2" cy="112.0" r="8" fill="transparent" stroke="none"><title>ww21p1 (2026-05-18) — FAIL: 0.0%</title></circle><circle cx="141.2" cy="83.4" r="1.8" fill="#e65100"/><circle cx="141.2" cy="83.4" r="8" fill="transparent" stroke="none"><title>ww21p1 (2026-05-18) — MISSING: 28.6%</title></circle><text x="141.2" y="122" text-anchor="end" font-size="7" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 141.2 122)">ww21p1</text><circle cx="153.8" cy="40.9" r="2" fill="#2e7d32"/><circle cx="153.8" cy="40.9" r="8" fill="transparent" stroke="none"><title>ww21p5 (2026-05-22) — PASS: 71.1%</title></circle><circle cx="153.8" cy="112.0" r="2" fill="#c62828"/><circle cx="153.8" cy="112.0" r="8" fill="transparent" stroke="none"><title>ww21p5 (2026-05-22) — FAIL: 0.0%</title></circle><circle cx="153.8" cy="83.1" r="1.8" fill="#e65100"/><circle cx="153.8" cy="83.1" r="8" fill="transparent" stroke="none"><title>ww21p5 (2026-05-22) — MISSING: 28.9%</title></circle><text x="153.8" y="122" text-anchor="end" font-size="7" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 153.8 122)">ww21p5</text><circle cx="166.4" cy="40.9" r="2" fill="#2e7d32"/><circle cx="166.4" cy="40.9" r="8" fill="transparent" stroke="none"><title>ww22p1 (2026-05-25) — PASS: 71.1%</title></circle><circle cx="166.4" cy="112.0" r="2" fill="#c62828"/><circle cx="166.4" cy="112.0" r="8" fill="transparent" stroke="none"><title>ww22p1 (2026-05-25) — FAIL: 0.0%</title></circle><circle cx="166.4" cy="83.1" r="1.8" fill="#e65100"/><circle cx="166.4" cy="83.1" r="8" fill="transparent" stroke="none"><title>ww22p1 (2026-05-25) — MISSING: 28.9%</title></circle><text x="166.4" y="122" text-anchor="end" font-size="7" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 166.4 122)">ww22p1</text><circle cx="179.0" cy="40.9" r="2" fill="#2e7d32"/><circle cx="179.0" cy="40.9" r="8" fill="transparent" stroke="none"><title>ww22p3 (2026-05-27) — PASS: 71.1%</title></circle><circle cx="179.0" cy="112.0" r="2" fill="#c62828"/><circle cx="179.0" cy="112.0" r="8" fill="transparent" stroke="none"><title>ww22p3 (2026-05-27) — FAIL: 0.0%</title></circle><circle cx="179.0" cy="83.1" r="1.8" fill="#e65100"/><circle cx="179.0" cy="83.1" r="8" fill="transparent" stroke="none"><title>ww22p3 (2026-05-27) — MISSING: 28.9%</title></circle><text x="179.0" y="122" text-anchor="end" font-size="7" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 179.0 122)">ww22p3</text></svg></td></tr><tr><td align="center" style="padding:2px 0 2px;font-size:9px;color:#555;font-family:Arial,Helvetica,sans-serif;"><span style="color:#2e7d32;font-weight:bold;">&#9679; 71.1%</span> &nbsp;<span style="color:#c62828;font-weight:bold;">&#9679; 0.0%</span> &nbsp;<span style="color:#e65100;font-weight:bold;">&#9679; 28.9%</span></td></tr></table>
+</td>
+<td width="8"></td>
+<td width="33%" valign="top" bgcolor="#fbfbfb" style="border:1px solid #e6e6e6;padding:6px 4px;">
+<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="padding:0 0 3px;font-size:11px;font-weight:bold;color:#333;font-family:Arial,Helvetica,sans-serif;">UIO Stack</td></tr><tr><td align="center"><svg width="185" height="160" viewBox="0 0 185 160" xmlns="http://www.w3.org/2000/svg"><style>polyline { transition: stroke-width 0.15s; } polyline:hover { stroke-width: 3.5; }</style><line x1="28" y1="112.0" x2="179" y2="112.0" stroke="#e6e6e6" stroke-width="1"/><text x="24" y="115.0" text-anchor="end" font-size="8" fill="#777" font-family="Arial,sans-serif">0%</text><line x1="28" y1="62.0" x2="179" y2="62.0" stroke="#e6e6e6" stroke-width="1"/><text x="24" y="65.0" text-anchor="end" font-size="8" fill="#777" font-family="Arial,sans-serif">50%</text><line x1="28" y1="12.0" x2="179" y2="12.0" stroke="#e6e6e6" stroke-width="1"/><text x="24" y="15.0" text-anchor="end" font-size="8" fill="#777" font-family="Arial,sans-serif">100%</text><line x1="28" y1="12" x2="28" y2="112" stroke="#999" stroke-width="1"/><line x1="28" y1="112" x2="179" y2="112" stroke="#999" stroke-width="1"/><polyline fill="none" stroke="#2e7d32" stroke-width="1.8" stroke-linejoin="round" points="28.0,60.4 40.6,44.7 53.2,44.7 65.8,30.6 78.3,29.7 90.9,27.7 103.5,27.7 116.1,27.7 128.7,23.8 141.2,23.8 153.8,25.0 166.4,25.0 179.0,25.0"/><polyline fill="none" stroke="#c62828" stroke-width="1.8" stroke-linejoin="round" points="28.0,99.6 40.6,99.6 53.2,99.6 65.8,108.5 78.3,111.3 90.9,111.3 103.5,111.3 116.1,111.3 128.7,112.0 141.2,112.0 153.8,112.0 166.4,112.0 179.0,112.0"/><polyline fill="none" stroke="#e65100" stroke-width="1.4" stroke-dasharray="4,2" stroke-linejoin="round" points="28.0,76.0 40.6,91.7 53.2,91.7 65.8,96.9 78.3,95.0 90.9,97.0 103.5,97.0 116.1,97.0 128.7,100.2 141.2,100.2 153.8,99.0 166.4,99.0 179.0,99.0"/><circle cx="28.0" cy="60.4" r="2" fill="#2e7d32"/><circle cx="28.0" cy="60.4" r="8" fill="transparent" stroke="none"><title>ww15p4 (2026-04-09) — PASS: 51.6%</title></circle><circle cx="28.0" cy="99.6" r="2" fill="#c62828"/><circle cx="28.0" cy="99.6" r="8" fill="transparent" stroke="none"><title>ww15p4 (2026-04-09) — FAIL: 12.4%</title></circle><circle cx="28.0" cy="76.0" r="1.8" fill="#e65100"/><circle cx="28.0" cy="76.0" r="8" fill="transparent" stroke="none"><title>ww15p4 (2026-04-09) — MISSING: 36.0%</title></circle><text x="28.0" y="122" text-anchor="end" font-size="7" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 28.0 122)">ww15p4</text><circle cx="40.6" cy="44.7" r="2" fill="#2e7d32"/><circle cx="40.6" cy="44.7" r="8" fill="transparent" stroke="none"><title>ww16p1 (2026-04-13) — PASS: 67.3%</title></circle><circle cx="40.6" cy="99.6" r="2" fill="#c62828"/><circle cx="40.6" cy="99.6" r="8" fill="transparent" stroke="none"><title>ww16p1 (2026-04-13) — FAIL: 12.4%</title></circle><circle cx="40.6" cy="91.7" r="1.8" fill="#e65100"/><circle cx="40.6" cy="91.7" r="8" fill="transparent" stroke="none"><title>ww16p1 (2026-04-13) — MISSING: 20.3%</title></circle><text x="40.6" y="122" text-anchor="end" font-size="7" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 40.6 122)">ww16p1</text><circle cx="53.2" cy="44.7" r="2" fill="#2e7d32"/><circle cx="53.2" cy="44.7" r="8" fill="transparent" stroke="none"><title>ww16p2 (2026-04-14) — PASS: 67.3%</title></circle><circle cx="53.2" cy="99.6" r="2" fill="#c62828"/><circle cx="53.2" cy="99.6" r="8" fill="transparent" stroke="none"><title>ww16p2 (2026-04-14) — FAIL: 12.4%</title></circle><circle cx="53.2" cy="91.7" r="1.8" fill="#e65100"/><circle cx="53.2" cy="91.7" r="8" fill="transparent" stroke="none"><title>ww16p2 (2026-04-14) — MISSING: 20.3%</title></circle><text x="53.2" y="122" text-anchor="end" font-size="7" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 53.2 122)">ww16p2</text><circle cx="65.8" cy="30.6" r="2" fill="#2e7d32"/><circle cx="65.8" cy="30.6" r="8" fill="transparent" stroke="none"><title>ww17p5 (2026-04-24) — PASS: 81.4%</title></circle><circle cx="65.8" cy="108.5" r="2" fill="#c62828"/><circle cx="65.8" cy="108.5" r="8" fill="transparent" stroke="none"><title>ww17p5 (2026-04-24) — FAIL: 3.5%</title></circle><circle cx="65.8" cy="96.9" r="1.8" fill="#e65100"/><circle cx="65.8" cy="96.9" r="8" fill="transparent" stroke="none"><title>ww17p5 (2026-04-24) — MISSING: 15.1%</title></circle><text x="65.8" y="122" text-anchor="end" font-size="7" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 65.8 122)">ww17p5</text><circle cx="78.3" cy="29.7" r="2" fill="#2e7d32"/><circle cx="78.3" cy="29.7" r="8" fill="transparent" stroke="none"><title>ww18p1 (2026-04-27) — PASS: 82.3%</title></circle><circle cx="78.3" cy="111.3" r="2" fill="#c62828"/><circle cx="78.3" cy="111.3" r="8" fill="transparent" stroke="none"><title>ww18p1 (2026-04-27) — FAIL: 0.7%</title></circle><circle cx="78.3" cy="95.0" r="1.8" fill="#e65100"/><circle cx="78.3" cy="95.0" r="8" fill="transparent" stroke="none"><title>ww18p1 (2026-04-27) — MISSING: 17.0%</title></circle><text x="78.3" y="122" text-anchor="end" font-size="7" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 78.3 122)">ww18p1</text><circle cx="90.9" cy="27.7" r="2" fill="#2e7d32"/><circle cx="90.9" cy="27.7" r="8" fill="transparent" stroke="none"><title>ww19p1 (2026-05-04) — PASS: 84.3%</title></circle><circle cx="90.9" cy="111.3" r="2" fill="#c62828"/><circle cx="90.9" cy="111.3" r="8" fill="transparent" stroke="none"><title>ww19p1 (2026-05-04) — FAIL: 0.7%</title></circle><circle cx="90.9" cy="97.0" r="1.8" fill="#e65100"/><circle cx="90.9" cy="97.0" r="8" fill="transparent" stroke="none"><title>ww19p1 (2026-05-04) — MISSING: 15.0%</title></circle><text x="90.9" y="122" text-anchor="end" font-size="7" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 90.9 122)">ww19p1</text><circle cx="103.5" cy="27.7" r="2" fill="#2e7d32"/><circle cx="103.5" cy="27.7" r="8" fill="transparent" stroke="none"><title>ww19p4 (2026-05-07) — PASS: 84.3%</title></circle><circle cx="103.5" cy="111.3" r="2" fill="#c62828"/><circle cx="103.5" cy="111.3" r="8" fill="transparent" stroke="none"><title>ww19p4 (2026-05-07) — FAIL: 0.7%</title></circle><circle cx="103.5" cy="97.0" r="1.8" fill="#e65100"/><circle cx="103.5" cy="97.0" r="8" fill="transparent" stroke="none"><title>ww19p4 (2026-05-07) — MISSING: 15.0%</title></circle><text x="103.5" y="122" text-anchor="end" font-size="7" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 103.5 122)">ww19p4</text><circle cx="116.1" cy="27.7" r="2" fill="#2e7d32"/><circle cx="116.1" cy="27.7" r="8" fill="transparent" stroke="none"><title>ww20p1 (2026-05-11) — PASS: 84.3%</title></circle><circle cx="116.1" cy="111.3" r="2" fill="#c62828"/><circle cx="116.1" cy="111.3" r="8" fill="transparent" stroke="none"><title>ww20p1 (2026-05-11) — FAIL: 0.7%</title></circle><circle cx="116.1" cy="97.0" r="1.8" fill="#e65100"/><circle cx="116.1" cy="97.0" r="8" fill="transparent" stroke="none"><title>ww20p1 (2026-05-11) — MISSING: 15.0%</title></circle><text x="116.1" y="122" text-anchor="end" font-size="7" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 116.1 122)">ww20p1</text><circle cx="128.7" cy="23.8" r="2" fill="#2e7d32"/><circle cx="128.7" cy="23.8" r="8" fill="transparent" stroke="none"><title>ww20p5 (2026-05-15) — PASS: 88.2%</title></circle><circle cx="128.7" cy="112.0" r="2" fill="#c62828"/><circle cx="128.7" cy="112.0" r="8" fill="transparent" stroke="none"><title>ww20p5 (2026-05-15) — FAIL: 0.0%</title></circle><circle cx="128.7" cy="100.2" r="1.8" fill="#e65100"/><circle cx="128.7" cy="100.2" r="8" fill="transparent" stroke="none"><title>ww20p5 (2026-05-15) — MISSING: 11.8%</title></circle><text x="128.7" y="122" text-anchor="end" font-size="7" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 128.7 122)">ww20p5</text><circle cx="141.2" cy="23.8" r="2" fill="#2e7d32"/><circle cx="141.2" cy="23.8" r="8" fill="transparent" stroke="none"><title>ww21p1 (2026-05-18) — PASS: 88.2%</title></circle><circle cx="141.2" cy="112.0" r="2" fill="#c62828"/><circle cx="141.2" cy="112.0" r="8" fill="transparent" stroke="none"><title>ww21p1 (2026-05-18) — FAIL: 0.0%</title></circle><circle cx="141.2" cy="100.2" r="1.8" fill="#e65100"/><circle cx="141.2" cy="100.2" r="8" fill="transparent" stroke="none"><title>ww21p1 (2026-05-18) — MISSING: 11.8%</title></circle><text x="141.2" y="122" text-anchor="end" font-size="7" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 141.2 122)">ww21p1</text><circle cx="153.8" cy="25.0" r="2" fill="#2e7d32"/><circle cx="153.8" cy="25.0" r="8" fill="transparent" stroke="none"><title>ww21p5 (2026-05-22) — PASS: 87.0%</title></circle><circle cx="153.8" cy="112.0" r="2" fill="#c62828"/><circle cx="153.8" cy="112.0" r="8" fill="transparent" stroke="none"><title>ww21p5 (2026-05-22) — FAIL: 0.0%</title></circle><circle cx="153.8" cy="99.0" r="1.8" fill="#e65100"/><circle cx="153.8" cy="99.0" r="8" fill="transparent" stroke="none"><title>ww21p5 (2026-05-22) — MISSING: 13.0%</title></circle><text x="153.8" y="122" text-anchor="end" font-size="7" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 153.8 122)">ww21p5</text><circle cx="166.4" cy="25.0" r="2" fill="#2e7d32"/><circle cx="166.4" cy="25.0" r="8" fill="transparent" stroke="none"><title>ww22p1 (2026-05-25) — PASS: 87.0%</title></circle><circle cx="166.4" cy="112.0" r="2" fill="#c62828"/><circle cx="166.4" cy="112.0" r="8" fill="transparent" stroke="none"><title>ww22p1 (2026-05-25) — FAIL: 0.0%</title></circle><circle cx="166.4" cy="99.0" r="1.8" fill="#e65100"/><circle cx="166.4" cy="99.0" r="8" fill="transparent" stroke="none"><title>ww22p1 (2026-05-25) — MISSING: 13.0%</title></circle><text x="166.4" y="122" text-anchor="end" font-size="7" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 166.4 122)">ww22p1</text><circle cx="179.0" cy="25.0" r="2" fill="#2e7d32"/><circle cx="179.0" cy="25.0" r="8" fill="transparent" stroke="none"><title>ww22p3 (2026-05-27) — PASS: 87.0%</title></circle><circle cx="179.0" cy="112.0" r="2" fill="#c62828"/><circle cx="179.0" cy="112.0" r="8" fill="transparent" stroke="none"><title>ww22p3 (2026-05-27) — FAIL: 0.0%</title></circle><circle cx="179.0" cy="99.0" r="1.8" fill="#e65100"/><circle cx="179.0" cy="99.0" r="8" fill="transparent" stroke="none"><title>ww22p3 (2026-05-27) — MISSING: 13.0%</title></circle><text x="179.0" y="122" text-anchor="end" font-size="7" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 179.0 122)">ww22p3</text></svg></td></tr><tr><td align="center" style="padding:2px 0 2px;font-size:9px;color:#555;font-family:Arial,Helvetica,sans-serif;"><span style="color:#2e7d32;font-weight:bold;">&#9679; 87.0%</span> &nbsp;<span style="color:#c62828;font-weight:bold;">&#9679; 0.0%</span> &nbsp;<span style="color:#e65100;font-weight:bold;">&#9679; 13.0%</span></td></tr></table>
+</td>
+<td width="8"></td>
+<td width="33%" valign="top" bgcolor="#fbfbfb" style="border:1px solid #e6e6e6;padding:6px 4px;">
+<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="padding:0 0 3px;font-size:11px;font-weight:bold;color:#333;font-family:Arial,Helvetica,sans-serif;">D2D Stack</td></tr><tr><td align="center"><svg width="185" height="160" viewBox="0 0 185 160" xmlns="http://www.w3.org/2000/svg"><style>polyline { transition: stroke-width 0.15s; } polyline:hover { stroke-width: 3.5; }</style><line x1="28" y1="112.0" x2="179" y2="112.0" stroke="#e6e6e6" stroke-width="1"/><text x="24" y="115.0" text-anchor="end" font-size="8" fill="#777" font-family="Arial,sans-serif">0%</text><line x1="28" y1="62.0" x2="179" y2="62.0" stroke="#e6e6e6" stroke-width="1"/><text x="24" y="65.0" text-anchor="end" font-size="8" fill="#777" font-family="Arial,sans-serif">50%</text><line x1="28" y1="12.0" x2="179" y2="12.0" stroke="#e6e6e6" stroke-width="1"/><text x="24" y="15.0" text-anchor="end" font-size="8" fill="#777" font-family="Arial,sans-serif">100%</text><line x1="28" y1="12" x2="28" y2="112" stroke="#999" stroke-width="1"/><line x1="28" y1="112" x2="179" y2="112" stroke="#999" stroke-width="1"/><polyline fill="none" stroke="#2e7d32" stroke-width="1.8" stroke-linejoin="round" points="28.0,56.4 40.6,56.4 53.2,56.4 65.8,23.1 78.3,23.1 90.9,23.1 103.5,23.1 116.1,23.1 128.7,12.0 141.2,12.0 153.8,17.6 166.4,17.6 179.0,17.6"/><polyline fill="none" stroke="#c62828" stroke-width="1.8" stroke-linejoin="round" points="28.0,89.8 40.6,89.8 53.2,89.8 65.8,100.9 78.3,100.9 90.9,100.9 103.5,100.9 116.1,100.9 128.7,112.0 141.2,112.0 153.8,112.0 166.4,112.0 179.0,112.0"/><polyline fill="none" stroke="#e65100" stroke-width="1.4" stroke-dasharray="4,2" stroke-linejoin="round" points="28.0,89.8 40.6,89.8 53.2,89.8 65.8,112.0 78.3,112.0 90.9,112.0 103.5,112.0 116.1,112.0 128.7,112.0 141.2,112.0 153.8,106.4 166.4,106.4 179.0,106.4"/><circle cx="28.0" cy="56.4" r="2" fill="#2e7d32"/><circle cx="28.0" cy="56.4" r="8" fill="transparent" stroke="none"><title>ww15p4 (2026-04-09) — PASS: 55.6%</title></circle><circle cx="28.0" cy="89.8" r="2" fill="#c62828"/><circle cx="28.0" cy="89.8" r="8" fill="transparent" stroke="none"><title>ww15p4 (2026-04-09) — FAIL: 22.2%</title></circle><circle cx="28.0" cy="89.8" r="1.8" fill="#e65100"/><circle cx="28.0" cy="89.8" r="8" fill="transparent" stroke="none"><title>ww15p4 (2026-04-09) — MISSING: 22.2%</title></circle><text x="28.0" y="122" text-anchor="end" font-size="7" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 28.0 122)">ww15p4</text><circle cx="40.6" cy="56.4" r="2" fill="#2e7d32"/><circle cx="40.6" cy="56.4" r="8" fill="transparent" stroke="none"><title>ww16p1 (2026-04-13) — PASS: 55.6%</title></circle><circle cx="40.6" cy="89.8" r="2" fill="#c62828"/><circle cx="40.6" cy="89.8" r="8" fill="transparent" stroke="none"><title>ww16p1 (2026-04-13) — FAIL: 22.2%</title></circle><circle cx="40.6" cy="89.8" r="1.8" fill="#e65100"/><circle cx="40.6" cy="89.8" r="8" fill="transparent" stroke="none"><title>ww16p1 (2026-04-13) — MISSING: 22.2%</title></circle><text x="40.6" y="122" text-anchor="end" font-size="7" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 40.6 122)">ww16p1</text><circle cx="53.2" cy="56.4" r="2" fill="#2e7d32"/><circle cx="53.2" cy="56.4" r="8" fill="transparent" stroke="none"><title>ww16p2 (2026-04-14) — PASS: 55.6%</title></circle><circle cx="53.2" cy="89.8" r="2" fill="#c62828"/><circle cx="53.2" cy="89.8" r="8" fill="transparent" stroke="none"><title>ww16p2 (2026-04-14) — FAIL: 22.2%</title></circle><circle cx="53.2" cy="89.8" r="1.8" fill="#e65100"/><circle cx="53.2" cy="89.8" r="8" fill="transparent" stroke="none"><title>ww16p2 (2026-04-14) — MISSING: 22.2%</title></circle><text x="53.2" y="122" text-anchor="end" font-size="7" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 53.2 122)">ww16p2</text><circle cx="65.8" cy="23.1" r="2" fill="#2e7d32"/><circle cx="65.8" cy="23.1" r="8" fill="transparent" stroke="none"><title>ww17p5 (2026-04-24) — PASS: 88.9%</title></circle><circle cx="65.8" cy="100.9" r="2" fill="#c62828"/><circle cx="65.8" cy="100.9" r="8" fill="transparent" stroke="none"><title>ww17p5 (2026-04-24) — FAIL: 11.1%</title></circle><circle cx="65.8" cy="112.0" r="1.8" fill="#e65100"/><circle cx="65.8" cy="112.0" r="8" fill="transparent" stroke="none"><title>ww17p5 (2026-04-24) — MISSING: 0.0%</title></circle><text x="65.8" y="122" text-anchor="end" font-size="7" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 65.8 122)">ww17p5</text><circle cx="78.3" cy="23.1" r="2" fill="#2e7d32"/><circle cx="78.3" cy="23.1" r="8" fill="transparent" stroke="none"><title>ww18p1 (2026-04-27) — PASS: 88.9%</title></circle><circle cx="78.3" cy="100.9" r="2" fill="#c62828"/><circle cx="78.3" cy="100.9" r="8" fill="transparent" stroke="none"><title>ww18p1 (2026-04-27) — FAIL: 11.1%</title></circle><circle cx="78.3" cy="112.0" r="1.8" fill="#e65100"/><circle cx="78.3" cy="112.0" r="8" fill="transparent" stroke="none"><title>ww18p1 (2026-04-27) — MISSING: 0.0%</title></circle><text x="78.3" y="122" text-anchor="end" font-size="7" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 78.3 122)">ww18p1</text><circle cx="90.9" cy="23.1" r="2" fill="#2e7d32"/><circle cx="90.9" cy="23.1" r="8" fill="transparent" stroke="none"><title>ww19p1 (2026-05-04) — PASS: 88.9%</title></circle><circle cx="90.9" cy="100.9" r="2" fill="#c62828"/><circle cx="90.9" cy="100.9" r="8" fill="transparent" stroke="none"><title>ww19p1 (2026-05-04) — FAIL: 11.1%</title></circle><circle cx="90.9" cy="112.0" r="1.8" fill="#e65100"/><circle cx="90.9" cy="112.0" r="8" fill="transparent" stroke="none"><title>ww19p1 (2026-05-04) — MISSING: 0.0%</title></circle><text x="90.9" y="122" text-anchor="end" font-size="7" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 90.9 122)">ww19p1</text><circle cx="103.5" cy="23.1" r="2" fill="#2e7d32"/><circle cx="103.5" cy="23.1" r="8" fill="transparent" stroke="none"><title>ww19p4 (2026-05-07) — PASS: 88.9%</title></circle><circle cx="103.5" cy="100.9" r="2" fill="#c62828"/><circle cx="103.5" cy="100.9" r="8" fill="transparent" stroke="none"><title>ww19p4 (2026-05-07) — FAIL: 11.1%</title></circle><circle cx="103.5" cy="112.0" r="1.8" fill="#e65100"/><circle cx="103.5" cy="112.0" r="8" fill="transparent" stroke="none"><title>ww19p4 (2026-05-07) — MISSING: 0.0%</title></circle><text x="103.5" y="122" text-anchor="end" font-size="7" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 103.5 122)">ww19p4</text><circle cx="116.1" cy="23.1" r="2" fill="#2e7d32"/><circle cx="116.1" cy="23.1" r="8" fill="transparent" stroke="none"><title>ww20p1 (2026-05-11) — PASS: 88.9%</title></circle><circle cx="116.1" cy="100.9" r="2" fill="#c62828"/><circle cx="116.1" cy="100.9" r="8" fill="transparent" stroke="none"><title>ww20p1 (2026-05-11) — FAIL: 11.1%</title></circle><circle cx="116.1" cy="112.0" r="1.8" fill="#e65100"/><circle cx="116.1" cy="112.0" r="8" fill="transparent" stroke="none"><title>ww20p1 (2026-05-11) — MISSING: 0.0%</title></circle><text x="116.1" y="122" text-anchor="end" font-size="7" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 116.1 122)">ww20p1</text><circle cx="128.7" cy="12.0" r="2" fill="#2e7d32"/><circle cx="128.7" cy="12.0" r="8" fill="transparent" stroke="none"><title>ww20p5 (2026-05-15) — PASS: 100.0%</title></circle><circle cx="128.7" cy="112.0" r="2" fill="#c62828"/><circle cx="128.7" cy="112.0" r="8" fill="transparent" stroke="none"><title>ww20p5 (2026-05-15) — FAIL: 0.0%</title></circle><circle cx="128.7" cy="112.0" r="1.8" fill="#e65100"/><circle cx="128.7" cy="112.0" r="8" fill="transparent" stroke="none"><title>ww20p5 (2026-05-15) — MISSING: 0.0%</title></circle><text x="128.7" y="122" text-anchor="end" font-size="7" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 128.7 122)">ww20p5</text><circle cx="141.2" cy="12.0" r="2" fill="#2e7d32"/><circle cx="141.2" cy="12.0" r="8" fill="transparent" stroke="none"><title>ww21p1 (2026-05-18) — PASS: 100.0%</title></circle><circle cx="141.2" cy="112.0" r="2" fill="#c62828"/><circle cx="141.2" cy="112.0" r="8" fill="transparent" stroke="none"><title>ww21p1 (2026-05-18) — FAIL: 0.0%</title></circle><circle cx="141.2" cy="112.0" r="1.8" fill="#e65100"/><circle cx="141.2" cy="112.0" r="8" fill="transparent" stroke="none"><title>ww21p1 (2026-05-18) — MISSING: 0.0%</title></circle><text x="141.2" y="122" text-anchor="end" font-size="7" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 141.2 122)">ww21p1</text><circle cx="153.8" cy="17.6" r="2" fill="#2e7d32"/><circle cx="153.8" cy="17.6" r="8" fill="transparent" stroke="none"><title>ww21p5 (2026-05-22) — PASS: 94.4%</title></circle><circle cx="153.8" cy="112.0" r="2" fill="#c62828"/><circle cx="153.8" cy="112.0" r="8" fill="transparent" stroke="none"><title>ww21p5 (2026-05-22) — FAIL: 0.0%</title></circle><circle cx="153.8" cy="106.4" r="1.8" fill="#e65100"/><circle cx="153.8" cy="106.4" r="8" fill="transparent" stroke="none"><title>ww21p5 (2026-05-22) — MISSING: 5.6%</title></circle><text x="153.8" y="122" text-anchor="end" font-size="7" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 153.8 122)">ww21p5</text><circle cx="166.4" cy="17.6" r="2" fill="#2e7d32"/><circle cx="166.4" cy="17.6" r="8" fill="transparent" stroke="none"><title>ww22p1 (2026-05-25) — PASS: 94.4%</title></circle><circle cx="166.4" cy="112.0" r="2" fill="#c62828"/><circle cx="166.4" cy="112.0" r="8" fill="transparent" stroke="none"><title>ww22p1 (2026-05-25) — FAIL: 0.0%</title></circle><circle cx="166.4" cy="106.4" r="1.8" fill="#e65100"/><circle cx="166.4" cy="106.4" r="8" fill="transparent" stroke="none"><title>ww22p1 (2026-05-25) — MISSING: 5.6%</title></circle><text x="166.4" y="122" text-anchor="end" font-size="7" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 166.4 122)">ww22p1</text><circle cx="179.0" cy="17.6" r="2" fill="#2e7d32"/><circle cx="179.0" cy="17.6" r="8" fill="transparent" stroke="none"><title>ww22p3 (2026-05-27) — PASS: 94.4%</title></circle><circle cx="179.0" cy="112.0" r="2" fill="#c62828"/><circle cx="179.0" cy="112.0" r="8" fill="transparent" stroke="none"><title>ww22p3 (2026-05-27) — FAIL: 0.0%</title></circle><circle cx="179.0" cy="106.4" r="1.8" fill="#e65100"/><circle cx="179.0" cy="106.4" r="8" fill="transparent" stroke="none"><title>ww22p3 (2026-05-27) — MISSING: 5.6%</title></circle><text x="179.0" y="122" text-anchor="end" font-size="7" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 179.0 122)">ww22p3</text></svg></td></tr><tr><td align="center" style="padding:2px 0 2px;font-size:9px;color:#555;font-family:Arial,Helvetica,sans-serif;"><span style="color:#2e7d32;font-weight:bold;">&#9679; 94.4%</span> &nbsp;<span style="color:#c62828;font-weight:bold;">&#9679; 0.0%</span> &nbsp;<span style="color:#e65100;font-weight:bold;">&#9679; 5.6%</span></td></tr></table>
+</td>
+</tr></table>
+</td></tr>
+<tr><td style="padding:0 20px 16px;">
+<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:10px;"><tr><td style="font-family:Arial,Helvetica,sans-serif;">
+<span style="font-size:16px;font-weight:bold;color:#333;font-family:Arial,Helvetica,sans-serif;">STACK LEVEL HISTORICAL TRENDS</span>
+</td></tr></table>
+<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
+<td width="33%" valign="top" bgcolor="#fbfbfb" style="border:1px solid #e6e6e6;padding:6px 4px;">
+<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="padding:0 0 3px;font-size:11px;font-weight:bold;color:#333;font-family:Arial,Helvetica,sans-serif;">MC Stack</td></tr><tr><td align="center"><svg width="185" height="160" viewBox="0 0 185 160" xmlns="http://www.w3.org/2000/svg"><style>polyline { transition: stroke-width 0.15s; } polyline:hover { stroke-width: 3.5; }</style><line x1="28" y1="112.0" x2="179" y2="112.0" stroke="#e6e6e6" stroke-width="1"/><text x="24" y="115.0" text-anchor="end" font-size="8" fill="#777" font-family="Arial,sans-serif">0%</text><line x1="28" y1="62.0" x2="179" y2="62.0" stroke="#e6e6e6" stroke-width="1"/><text x="24" y="65.0" text-anchor="end" font-size="8" fill="#777" font-family="Arial,sans-serif">50%</text><line x1="28" y1="12.0" x2="179" y2="12.0" stroke="#e6e6e6" stroke-width="1"/><text x="24" y="15.0" text-anchor="end" font-size="8" fill="#777" font-family="Arial,sans-serif">100%</text><line x1="28" y1="12" x2="28" y2="112" stroke="#999" stroke-width="1"/><line x1="28" y1="112" x2="179" y2="112" stroke="#999" stroke-width="1"/><polyline fill="none" stroke="#2e7d32" stroke-width="1.8" stroke-linejoin="round" points="103.5,112.0"/><polyline fill="none" stroke="#c62828" stroke-width="1.8" stroke-linejoin="round" points="103.5,112.0"/><polyline fill="none" stroke="#e65100" stroke-width="1.4" stroke-dasharray="4,2" stroke-linejoin="round" points="103.5,12.0"/><circle cx="103.5" cy="112.0" r="2" fill="#2e7d32"/><circle cx="103.5" cy="112.0" r="8" fill="transparent" stroke="none"><title>ww22p3 (2026-05-27) — PASS: 0.0%</title></circle><circle cx="103.5" cy="112.0" r="2" fill="#c62828"/><circle cx="103.5" cy="112.0" r="8" fill="transparent" stroke="none"><title>ww22p3 (2026-05-27) — FAIL: 0.0%</title></circle><circle cx="103.5" cy="12.0" r="1.8" fill="#e65100"/><circle cx="103.5" cy="12.0" r="8" fill="transparent" stroke="none"><title>ww22p3 (2026-05-27) — MISSING: 100.0%</title></circle><text x="103.5" y="122" text-anchor="end" font-size="7" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 103.5 122)">ww22p3</text></svg></td></tr><tr><td align="center" style="padding:2px 0 2px;font-size:9px;color:#555;font-family:Arial,Helvetica,sans-serif;"><span style="color:#2e7d32;font-weight:bold;">&#9679; 0.0%</span> &nbsp;<span style="color:#c62828;font-weight:bold;">&#9679; 0.0%</span> &nbsp;<span style="color:#e65100;font-weight:bold;">&#9679; 100.0%</span></td></tr></table>
+</td>
+<td width="8"></td>
+<td width="33%" valign="top" bgcolor="#fbfbfb" style="border:1px solid #e6e6e6;padding:6px 4px;">
+<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="padding:0 0 3px;font-size:11px;font-weight:bold;color:#333;font-family:Arial,Helvetica,sans-serif;">UIO Stack</td></tr><tr><td align="center"><svg width="185" height="160" viewBox="0 0 185 160" xmlns="http://www.w3.org/2000/svg"><style>polyline { transition: stroke-width 0.15s; } polyline:hover { stroke-width: 3.5; }</style><line x1="28" y1="112.0" x2="179" y2="112.0" stroke="#e6e6e6" stroke-width="1"/><text x="24" y="115.0" text-anchor="end" font-size="8" fill="#777" font-family="Arial,sans-serif">0%</text><line x1="28" y1="62.0" x2="179" y2="62.0" stroke="#e6e6e6" stroke-width="1"/><text x="24" y="65.0" text-anchor="end" font-size="8" fill="#777" font-family="Arial,sans-serif">50%</text><line x1="28" y1="12.0" x2="179" y2="12.0" stroke="#e6e6e6" stroke-width="1"/><text x="24" y="15.0" text-anchor="end" font-size="8" fill="#777" font-family="Arial,sans-serif">100%</text><line x1="28" y1="12" x2="28" y2="112" stroke="#999" stroke-width="1"/><line x1="28" y1="112" x2="179" y2="112" stroke="#999" stroke-width="1"/><polyline fill="none" stroke="#2e7d32" stroke-width="1.8" stroke-linejoin="round" points="103.5,112.0"/><polyline fill="none" stroke="#c62828" stroke-width="1.8" stroke-linejoin="round" points="103.5,112.0"/><polyline fill="none" stroke="#e65100" stroke-width="1.4" stroke-dasharray="4,2" stroke-linejoin="round" points="103.5,12.0"/><circle cx="103.5" cy="112.0" r="2" fill="#2e7d32"/><circle cx="103.5" cy="112.0" r="8" fill="transparent" stroke="none"><title>ww22p3 (2026-05-27) — PASS: 0.0%</title></circle><circle cx="103.5" cy="112.0" r="2" fill="#c62828"/><circle cx="103.5" cy="112.0" r="8" fill="transparent" stroke="none"><title>ww22p3 (2026-05-27) — FAIL: 0.0%</title></circle><circle cx="103.5" cy="12.0" r="1.8" fill="#e65100"/><circle cx="103.5" cy="12.0" r="8" fill="transparent" stroke="none"><title>ww22p3 (2026-05-27) — MISSING: 100.0%</title></circle><text x="103.5" y="122" text-anchor="end" font-size="7" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 103.5 122)">ww22p3</text></svg></td></tr><tr><td align="center" style="padding:2px 0 2px;font-size:9px;color:#555;font-family:Arial,Helvetica,sans-serif;"><span style="color:#2e7d32;font-weight:bold;">&#9679; 0.0%</span> &nbsp;<span style="color:#c62828;font-weight:bold;">&#9679; 0.0%</span> &nbsp;<span style="color:#e65100;font-weight:bold;">&#9679; 100.0%</span></td></tr></table>
+</td>
+<td width="8"></td>
+<td width="33%" valign="top" bgcolor="#fbfbfb" style="border:1px solid #e6e6e6;padding:6px 4px;">
+<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="padding:0 0 3px;font-size:11px;font-weight:bold;color:#333;font-family:Arial,Helvetica,sans-serif;">D2D Stack</td></tr><tr><td align="center"><svg width="185" height="160" viewBox="0 0 185 160" xmlns="http://www.w3.org/2000/svg"><style>polyline { transition: stroke-width 0.15s; } polyline:hover { stroke-width: 3.5; }</style><line x1="28" y1="112.0" x2="179" y2="112.0" stroke="#e6e6e6" stroke-width="1"/><text x="24" y="115.0" text-anchor="end" font-size="8" fill="#777" font-family="Arial,sans-serif">0%</text><line x1="28" y1="62.0" x2="179" y2="62.0" stroke="#e6e6e6" stroke-width="1"/><text x="24" y="65.0" text-anchor="end" font-size="8" fill="#777" font-family="Arial,sans-serif">50%</text><line x1="28" y1="12.0" x2="179" y2="12.0" stroke="#e6e6e6" stroke-width="1"/><text x="24" y="15.0" text-anchor="end" font-size="8" fill="#777" font-family="Arial,sans-serif">100%</text><line x1="28" y1="12" x2="28" y2="112" stroke="#999" stroke-width="1"/><line x1="28" y1="112" x2="179" y2="112" stroke="#999" stroke-width="1"/><polyline fill="none" stroke="#2e7d32" stroke-width="1.8" stroke-linejoin="round" points="103.5,112.0"/><polyline fill="none" stroke="#c62828" stroke-width="1.8" stroke-linejoin="round" points="103.5,112.0"/><polyline fill="none" stroke="#e65100" stroke-width="1.4" stroke-dasharray="4,2" stroke-linejoin="round" points="103.5,12.0"/><circle cx="103.5" cy="112.0" r="2" fill="#2e7d32"/><circle cx="103.5" cy="112.0" r="8" fill="transparent" stroke="none"><title>ww22p3 (2026-05-27) — PASS: 0.0%</title></circle><circle cx="103.5" cy="112.0" r="2" fill="#c62828"/><circle cx="103.5" cy="112.0" r="8" fill="transparent" stroke="none"><title>ww22p3 (2026-05-27) — FAIL: 0.0%</title></circle><circle cx="103.5" cy="12.0" r="1.8" fill="#e65100"/><circle cx="103.5" cy="12.0" r="8" fill="transparent" stroke="none"><title>ww22p3 (2026-05-27) — MISSING: 100.0%</title></circle><text x="103.5" y="122" text-anchor="end" font-size="7" fill="#666" font-family="Arial,sans-serif" transform="rotate(-50 103.5 122)">ww22p3</text></svg></td></tr><tr><td align="center" style="padding:2px 0 2px;font-size:9px;color:#555;font-family:Arial,Helvetica,sans-serif;"><span style="color:#2e7d32;font-weight:bold;">&#9679; 0.0%</span> &nbsp;<span style="color:#c62828;font-weight:bold;">&#9679; 0.0%</span> &nbsp;<span style="color:#e65100;font-weight:bold;">&#9679; 100.0%</span></td></tr></table>
+</td>
+</tr></table>
+</td></tr>
+<tr><td style="padding:8px 32px 24px;">
+<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:12px;"><tr><td bgcolor="#e3f2fd" style="padding:8px 12px;border-left:4px solid #0071c5;font-family:Arial,Helvetica,sans-serif;">
+<span style="font-size:16px;font-weight:bold;color:#0071c5;text-transform:uppercase;font-family:Arial,Helvetica,sans-serif;">STATUS CHANGES</span>
+</td></tr></table>
+<table cellpadding="0" cellspacing="0" border="0"><tr><td style="font-size:14px;color:#555;font-family:Arial,Helvetica,sans-serif;padding:4px 0;">No changes vs previous report.</td></tr></table>
+</td></tr>
+<tr><td style="padding:8px 32px 24px;">
+<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:12px;"><tr><td bgcolor="#fff3e0" style="padding:8px 12px;border-left:4px solid #e65100;font-family:Arial,Helvetica,sans-serif;">
+<span style="font-size:16px;font-weight:bold;color:#e65100;text-transform:uppercase;font-family:Arial,Helvetica,sans-serif;">CURRENT FAILING &amp; MISSING TESTS</span> 
+<span style="font-size:13px;color:#888;font-family:Arial,Helvetica,sans-serif;">(0 FAIL, 63 MISSING)</span>
+</td></tr></table>
+<table cellpadding="0" cellspacing="0" border="0" style="margin-top:16px;margin-bottom:8px;"><tr><td style="font-family:Arial,Helvetica,sans-serif;">
+<span style="font-size:14px;font-weight:bold;color:#e65100;font-family:Arial,Helvetica,sans-serif;">MISSING (63)</span>
+</td></tr></table>
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr><td style="padding:6px 0 2px;font-size:13px;font-weight:bold;color:#333;font-family:Arial,Helvetica,sans-serif;">Emmanuel Araya (21)</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_d2d-a0-26ww21a] d2d1 / atspeed_edt_edt_low_internal_serial_scan
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_d2d-a0-26ww21a] d2d1 / scan_ctlr_stuckat_edt_bypass_low_internal_scandump
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_d2d-a0-26ww21a] d2d1 / stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_d2d-a0-26ww21a] d2d1 / stuckat_edt_bypass_low_internal_serial_chain
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_d2d-a0-26ww21a] d2d1 / stuckat_edt_bypass_low_internal_serial_scan
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_d2d-a0-26ww21a] d2d1 / stuckat_edt_edt_low_internal_serial_chain
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_d2d-a0-26ww21a] d2d1 / stuckat_edt_edt_low_internal_serial_scan
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_uio-a0-26ww21c] parmiofblpvnpipeac_uio_0 / atspeed_edt_edt_low_internal_serial_scan
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_uio-a0-26ww21c] parmiofblpvnpipeac_uio_0 / scan_ctlr_stuckat_edt_bypass_low_internal_scandump
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_uio-a0-26ww21c] parmiofblpvnpipeac_uio_0 / stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_uio-a0-26ww21c] parmiofblpvnpipeac_uio_0 / stuckat_edt_bypass_low_internal_serial_chain
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_uio-a0-26ww21c] parmiofblpvnpipeac_uio_0 / stuckat_edt_bypass_low_internal_serial_scan
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_uio-a0-26ww21c] parmiofblpvnpipeac_uio_0 / stuckat_edt_edt_low_internal_serial_chain
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_uio-a0-26ww21c] parmiofblpvnpipeac_uio_0 / stuckat_edt_edt_low_internal_serial_scan
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_uio-a0-26ww21c] parmioiommu_uio_0 / atspeed_edt_edt_low_internal_serial_scan
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_uio-a0-26ww21c] parmioiommu_uio_0 / scan_ctlr_stuckat_edt_bypass_low_internal_scandump
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_uio-a0-26ww21c] parmioiommu_uio_0 / stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_uio-a0-26ww21c] parmioiommu_uio_0 / stuckat_edt_bypass_low_internal_serial_chain
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_uio-a0-26ww21c] parmioiommu_uio_0 / stuckat_edt_bypass_low_internal_serial_scan
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_uio-a0-26ww21c] parmioiommu_uio_0 / stuckat_edt_edt_low_internal_serial_chain
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_uio-a0-26ww21c] parmioiommu_uio_0 / stuckat_edt_edt_low_internal_serial_scan
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td style="padding:6px 0 2px;font-size:13px;font-weight:bold;color:#333;font-family:Arial,Helvetica,sans-serif;">KalthireddyX Gunasekhar (3)</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_uio-a0-26ww21c] parmiomisc_uio_0 / scan_ctlr_stuckat_edt_bypass_low_internal_scandump
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_uio-a0-26ww21c] parmiomisc_uio_0 / ssn_continuity
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_uio-a0-26ww21c] parmiomisc_uio_0 / stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td style="padding:6px 0 2px;font-size:13px;font-weight:bold;color:#333;font-family:Arial,Helvetica,sans-serif;">Mario Alpizar (10)</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_d2d-a0-26ww21a] pard2d1chnl / stuckat_edt_bypass_low_internal_serial_chain
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_d2d-a0-26ww21a] pard2d1chnl / stuckat_edt_bypass_low_internal_serial_scan
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_mc-a0-26ww20c] memstack / atspeed_edt_edt_low_internal_serial_scan
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_mc-a0-26ww20c] memstack / scan_ctlr_stuckat_edt_bypass_low_internal_scandump
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_mc-a0-26ww20c] memstack / stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_mc-a0-26ww20c] memstack / stuckat_edt_bypass_low_internal_serial_chain
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_mc-a0-26ww20c] memstack / stuckat_edt_bypass_low_internal_serial_scan
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_mc-a0-26ww20c] memstack / stuckat_edt_edt_low_internal_serial_chain
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_mc-a0-26ww20c] memstack / stuckat_edt_edt_low_internal_serial_scan
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_mc-a0-26ww20c] parmccore / atspeed_edt_edt_low_internal_serial_scan
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td style="padding:6px 0 2px;font-size:13px;font-weight:bold;color:#333;font-family:Arial,Helvetica,sans-serif;">Mauricio Segura (16)</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_mc-a0-26ww20c] parmcmisc / scan_ctlr_stuckat_edt_bypass_low_internal_scandump
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_mc-a0-26ww20c] parmcmisc / stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_mc-a0-26ww20c] parmemdfi0 / atspeed_edt_edt_low_internal_serial_scan
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_mc-a0-26ww20c] parmemdfi0 / scan_ctlr_stuckat_edt_bypass_low_internal_scandump
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_mc-a0-26ww20c] parmemdfi0 / stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_mc-a0-26ww20c] parmemdfi0 / stuckat_edt_bypass_low_internal_serial_chain
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_mc-a0-26ww20c] parmemdfi0 / stuckat_edt_bypass_low_internal_serial_scan
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_mc-a0-26ww20c] parmemdfi0 / stuckat_edt_edt_low_internal_serial_chain
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_mc-a0-26ww20c] parmemdfi0 / stuckat_edt_edt_low_internal_serial_scan
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_uio-a0-26ww21c] uio_a_0 / atspeed_edt_edt_low_internal_serial_scan
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_uio-a0-26ww21c] uio_a_0 / scan_ctlr_stuckat_edt_bypass_low_internal_scandump
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_uio-a0-26ww21c] uio_a_0 / stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_uio-a0-26ww21c] uio_a_0 / stuckat_edt_bypass_low_internal_serial_chain
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_uio-a0-26ww21c] uio_a_0 / stuckat_edt_bypass_low_internal_serial_scan
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_uio-a0-26ww21c] uio_a_0 / stuckat_edt_edt_low_internal_serial_chain
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_uio-a0-26ww21c] uio_a_0 / stuckat_edt_edt_low_internal_serial_scan
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td style="padding:6px 0 2px;font-size:13px;font-weight:bold;color:#333;font-family:Arial,Helvetica,sans-serif;">Sebastian Porras (13)</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_d2d-a0-26ww21a] d2d1 / ssn_continuity
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_d2d-a0-26ww21a] d2d1 / stuckat_edt_edt_low_internal_loopback
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_mc-a0-26ww20c] memstack / ssn_continuity
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_mc-a0-26ww20c] memstack / stuckat_edt_edt_low_internal_loopback
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_mc-a0-26ww20c] parmcmisc / ssn_continuity
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_mc-a0-26ww20c] parmemdfi0 / ssn_continuity
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_mc-a0-26ww20c] parmemdfi0 / stuckat_edt_edt_low_internal_loopback
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_uio-a0-26ww21c] parmiofblpvnpipeac_uio_0 / ssn_continuity
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_uio-a0-26ww21c] parmiofblpvnpipeac_uio_0 / stuckat_edt_edt_low_internal_loopback
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_uio-a0-26ww21c] parmioiommu_uio_0 / ssn_continuity
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_uio-a0-26ww21c] parmioiommu_uio_0 / stuckat_edt_edt_low_internal_loopback
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_uio-a0-26ww21c] uio_a_0 / ssn_continuity
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;font-size:12px;color:#333;font-family:Consolas,'Courier New',monospace;mso-line-height-rule:exactly;line-height:18px;">
+[nio_uio-a0-26ww21c] uio_a_0 / stuckat_edt_edt_low_internal_loopback
+</td></tr>
+<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>
+</table>
+</td></tr>
+<tr><td bgcolor="#f8f8f8" style="padding:16px 32px;border-top:1px solid #e0e0e0;">
+<table cellpadding="0" cellspacing="0" border="0"><tr><td style="font-family:Arial,Helvetica,sans-serif;">
+<span style="font-size:11px;color:#999;font-family:Arial,Helvetica,sans-serif;mso-line-height-rule:exactly;line-height:18px;">
+This is an automated report generated by AI.<br>
+Thanks for reading.<br>
+<a href="https://eaarayag.github.io/Code/reports/index.html" style="color:#0071c5;text-decoration:none;">&#128202; View all report history</a><br><br>
+For changes contact: <a href="mailto:emmanuel.a.araya.gamboa@intel.com" style="color:#0071c5;text-decoration:none;">Emmanuel Araya</a>
+</span>
+</td></tr></table>
+</td></tr>
+</table></td></tr></table></body></html>
