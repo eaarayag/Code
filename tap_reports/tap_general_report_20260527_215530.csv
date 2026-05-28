@@ -1,0 +1,541 @@
+partition,test_type,pvim_item,status,owner,model
+d2d1,n/a,[NWP] IOV: Chain continuity check,MISSING,Emmanuel Araya,nio_d2d-a0-26ww21a
+d2d1,n/a,[NWP] LCP: partition level validation - controller and chain continuity,MISSING,Emmanuel Araya,nio_d2d-a0-26ww21a
+d2d1,n/a,[NWP] TAP: Boundary Scan,MISSING,Emmanuel Araya,nio_d2d-a0-26ww21a
+d2d1,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: iJTAG reset / network collapse,MISSING,Emmanuel Araya,nio_d2d-a0-26ww21a
+d2d1,n/a,[NWP] TAP: security - taps & rtdrs,MISSING,Emmanuel Araya,nio_d2d-a0-26ww21a
+d2d1,n/a,[NWP] IOV: Chain reset test,MISSING,Emmanuel Araya,nio_d2d-a0-26ww21a
+d2d1,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,FAIL,Emmanuel Araya,nio_d2d-a0-26ww21a
+d2d1,ijtag_basic_tap_tests_user_defined,[NWP] TAP: IDCODE all taps in the partition,MISSING,Emmanuel Araya,nio_d2d-a0-26ww21a
+d2d1,n/a,[NWP] IOV: IDV counter readout,MISSING,Emmanuel Araya,nio_d2d-a0-26ww21a
+d2d1,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,FAIL,Emmanuel Araya,nio_d2d-a0-26ww21a
+d2d1,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: ijtag reset does not perturb TDRs,MISSING,Emmanuel Araya,nio_d2d-a0-26ww21a
+d2d1,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: treset - verify no TDRs perturbed by TRESET,MISSING,Emmanuel Araya,nio_d2d-a0-26ww21a
+d2d1,ijtag_basic_tap_tests_rw_access,[NWP] TAP: iJTAG R/W,FAIL,Emmanuel Araya,nio_d2d-a0-26ww21a
+d2d1,ijtag_basic_tap_tests_continuity,[NWP] TAP: IJTAG icl continuity tests of entire network,FAIL,Emmanuel Araya,nio_d2d-a0-26ww21a
+d2d1,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",FAIL,Emmanuel Araya,nio_d2d-a0-26ww21a
+d2d1,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,FAIL,Emmanuel Araya,nio_d2d-a0-26ww21a
+d2d1,n/a,[NWP] TAP: security - sib,MISSING,Emmanuel Araya,nio_d2d-a0-26ww21a
+d2d1,icl_verify_dft,[NWP] TAP: icl_verify,MISSING,Emmanuel Araya,nio_d2d-a0-26ww21a
+pard2d1chnl,n/a,[NWP] IOV: Chain continuity check,MISSING,Mario Alpizar,nio_d2d-a0-26ww21a
+pard2d1chnl,n/a,[NWP] LCP: partition level validation - controller and chain continuity,MISSING,Mario Alpizar,nio_d2d-a0-26ww21a
+pard2d1chnl,n/a,[NWP] TAP: Boundary Scan,MISSING,Mario Alpizar,nio_d2d-a0-26ww21a
+pard2d1chnl,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: iJTAG reset / network collapse,MISSING,Mario Alpizar,nio_d2d-a0-26ww21a
+pard2d1chnl,n/a,[NWP] TAP: security - taps & rtdrs,MISSING,Mario Alpizar,nio_d2d-a0-26ww21a
+pard2d1chnl,n/a,[NWP] IOV: Chain reset test,MISSING,Mario Alpizar,nio_d2d-a0-26ww21a
+pard2d1chnl,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,FAIL,Mario Alpizar,nio_d2d-a0-26ww21a
+pard2d1chnl,ijtag_basic_tap_tests_user_defined,[NWP] TAP: IDCODE all taps in the partition,MISSING,Mario Alpizar,nio_d2d-a0-26ww21a
+pard2d1chnl,n/a,[NWP] IOV: IDV counter readout,MISSING,Mario Alpizar,nio_d2d-a0-26ww21a
+pard2d1chnl,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,FAIL,Mario Alpizar,nio_d2d-a0-26ww21a
+pard2d1chnl,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: ijtag reset does not perturb TDRs,MISSING,Mario Alpizar,nio_d2d-a0-26ww21a
+pard2d1chnl,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: treset - verify no TDRs perturbed by TRESET,MISSING,Mario Alpizar,nio_d2d-a0-26ww21a
+pard2d1chnl,ijtag_basic_tap_tests_rw_access,[NWP] TAP: iJTAG R/W,FAIL,Mario Alpizar,nio_d2d-a0-26ww21a
+pard2d1chnl,ijtag_basic_tap_tests_continuity,[NWP] TAP: IJTAG icl continuity tests of entire network,PASS,Mario Alpizar,nio_d2d-a0-26ww21a
+pard2d1chnl,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",PASS,Mario Alpizar,nio_d2d-a0-26ww21a
+pard2d1chnl,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,PASS,Mario Alpizar,nio_d2d-a0-26ww21a
+pard2d1chnl,n/a,[NWP] TAP: security - sib,MISSING,Mario Alpizar,nio_d2d-a0-26ww21a
+pard2d1chnl,icl_verify_dft,[NWP] TAP: icl_verify,PASS,Mario Alpizar,nio_d2d-a0-26ww21a
+pard2d1misc,n/a,[NWP] IOV: Chain continuity check,MISSING,Emmanuel Araya,nio_d2d-a0-26ww21a
+pard2d1misc,n/a,[NWP] LCP: partition level validation - controller and chain continuity,MISSING,Emmanuel Araya,nio_d2d-a0-26ww21a
+pard2d1misc,n/a,[NWP] TAP: Boundary Scan,MISSING,Emmanuel Araya,nio_d2d-a0-26ww21a
+pard2d1misc,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: iJTAG reset / network collapse,MISSING,Emmanuel Araya,nio_d2d-a0-26ww21a
+pard2d1misc,n/a,[NWP] TAP: security - taps & rtdrs,MISSING,Emmanuel Araya,nio_d2d-a0-26ww21a
+pard2d1misc,n/a,[NWP] IOV: Chain reset test,MISSING,Emmanuel Araya,nio_d2d-a0-26ww21a
+pard2d1misc,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,FAIL,Emmanuel Araya,nio_d2d-a0-26ww21a
+pard2d1misc,ijtag_basic_tap_tests_user_defined,[NWP] TAP: IDCODE all taps in the partition,MISSING,Emmanuel Araya,nio_d2d-a0-26ww21a
+pard2d1misc,n/a,[NWP] IOV: IDV counter readout,MISSING,Emmanuel Araya,nio_d2d-a0-26ww21a
+pard2d1misc,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,FAIL,Emmanuel Araya,nio_d2d-a0-26ww21a
+pard2d1misc,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: ijtag reset does not perturb TDRs,MISSING,Emmanuel Araya,nio_d2d-a0-26ww21a
+pard2d1misc,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: treset - verify no TDRs perturbed by TRESET,MISSING,Emmanuel Araya,nio_d2d-a0-26ww21a
+pard2d1misc,ijtag_basic_tap_tests_rw_access,[NWP] TAP: iJTAG R/W,FAIL,Emmanuel Araya,nio_d2d-a0-26ww21a
+pard2d1misc,ijtag_basic_tap_tests_continuity,[NWP] TAP: IJTAG icl continuity tests of entire network,FAIL,Emmanuel Araya,nio_d2d-a0-26ww21a
+pard2d1misc,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",FAIL,Emmanuel Araya,nio_d2d-a0-26ww21a
+pard2d1misc,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,FAIL,Emmanuel Araya,nio_d2d-a0-26ww21a
+pard2d1misc,n/a,[NWP] TAP: security - sib,MISSING,Emmanuel Araya,nio_d2d-a0-26ww21a
+pard2d1misc,icl_verify_dft,[NWP] TAP: icl_verify,FAIL,Emmanuel Araya,nio_d2d-a0-26ww21a
+pard2d1uladda0,n/a,[NWP] IOV: Chain continuity check,MISSING,KalthireddyX Gunasekhar,nio_d2d-a0-26ww21a
+pard2d1uladda0,n/a,[NWP] LCP: partition level validation - controller and chain continuity,MISSING,KalthireddyX Gunasekhar,nio_d2d-a0-26ww21a
+pard2d1uladda0,n/a,[NWP] TAP: Boundary Scan,MISSING,KalthireddyX Gunasekhar,nio_d2d-a0-26ww21a
+pard2d1uladda0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: iJTAG reset / network collapse,MISSING,KalthireddyX Gunasekhar,nio_d2d-a0-26ww21a
+pard2d1uladda0,n/a,[NWP] TAP: security - taps & rtdrs,MISSING,KalthireddyX Gunasekhar,nio_d2d-a0-26ww21a
+pard2d1uladda0,n/a,[NWP] IOV: Chain reset test,MISSING,KalthireddyX Gunasekhar,nio_d2d-a0-26ww21a
+pard2d1uladda0,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,PASS,KalthireddyX Gunasekhar,nio_d2d-a0-26ww21a
+pard2d1uladda0,ijtag_basic_tap_tests_user_defined,[NWP] TAP: IDCODE all taps in the partition,MISSING,KalthireddyX Gunasekhar,nio_d2d-a0-26ww21a
+pard2d1uladda0,n/a,[NWP] IOV: IDV counter readout,MISSING,KalthireddyX Gunasekhar,nio_d2d-a0-26ww21a
+pard2d1uladda0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,PASS,KalthireddyX Gunasekhar,nio_d2d-a0-26ww21a
+pard2d1uladda0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: ijtag reset does not perturb TDRs,MISSING,KalthireddyX Gunasekhar,nio_d2d-a0-26ww21a
+pard2d1uladda0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: treset - verify no TDRs perturbed by TRESET,MISSING,KalthireddyX Gunasekhar,nio_d2d-a0-26ww21a
+pard2d1uladda0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: iJTAG R/W,PASS,KalthireddyX Gunasekhar,nio_d2d-a0-26ww21a
+pard2d1uladda0,ijtag_basic_tap_tests_continuity,[NWP] TAP: IJTAG icl continuity tests of entire network,PASS,KalthireddyX Gunasekhar,nio_d2d-a0-26ww21a
+pard2d1uladda0,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",PASS,KalthireddyX Gunasekhar,nio_d2d-a0-26ww21a
+pard2d1uladda0,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,PASS,KalthireddyX Gunasekhar,nio_d2d-a0-26ww21a
+pard2d1uladda0,n/a,[NWP] TAP: security - sib,MISSING,KalthireddyX Gunasekhar,nio_d2d-a0-26ww21a
+pard2d1uladda0,icl_verify_dft,[NWP] TAP: icl_verify,PASS,KalthireddyX Gunasekhar,nio_d2d-a0-26ww21a
+pard2d1uladda1,n/a,[NWP] IOV: Chain continuity check,MISSING,KalthireddyX Gunasekhar,nio_d2d-a0-26ww21a
+pard2d1uladda1,n/a,[NWP] LCP: partition level validation - controller and chain continuity,MISSING,KalthireddyX Gunasekhar,nio_d2d-a0-26ww21a
+pard2d1uladda1,n/a,[NWP] TAP: Boundary Scan,MISSING,KalthireddyX Gunasekhar,nio_d2d-a0-26ww21a
+pard2d1uladda1,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: iJTAG reset / network collapse,MISSING,KalthireddyX Gunasekhar,nio_d2d-a0-26ww21a
+pard2d1uladda1,n/a,[NWP] TAP: security - taps & rtdrs,MISSING,KalthireddyX Gunasekhar,nio_d2d-a0-26ww21a
+pard2d1uladda1,n/a,[NWP] IOV: Chain reset test,MISSING,KalthireddyX Gunasekhar,nio_d2d-a0-26ww21a
+pard2d1uladda1,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,PASS,KalthireddyX Gunasekhar,nio_d2d-a0-26ww21a
+pard2d1uladda1,ijtag_basic_tap_tests_user_defined,[NWP] TAP: IDCODE all taps in the partition,MISSING,KalthireddyX Gunasekhar,nio_d2d-a0-26ww21a
+pard2d1uladda1,n/a,[NWP] IOV: IDV counter readout,MISSING,KalthireddyX Gunasekhar,nio_d2d-a0-26ww21a
+pard2d1uladda1,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,PASS,KalthireddyX Gunasekhar,nio_d2d-a0-26ww21a
+pard2d1uladda1,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: ijtag reset does not perturb TDRs,MISSING,KalthireddyX Gunasekhar,nio_d2d-a0-26ww21a
+pard2d1uladda1,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: treset - verify no TDRs perturbed by TRESET,MISSING,KalthireddyX Gunasekhar,nio_d2d-a0-26ww21a
+pard2d1uladda1,ijtag_basic_tap_tests_rw_access,[NWP] TAP: iJTAG R/W,PASS,KalthireddyX Gunasekhar,nio_d2d-a0-26ww21a
+pard2d1uladda1,ijtag_basic_tap_tests_continuity,[NWP] TAP: IJTAG icl continuity tests of entire network,PASS,KalthireddyX Gunasekhar,nio_d2d-a0-26ww21a
+pard2d1uladda1,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",PASS,KalthireddyX Gunasekhar,nio_d2d-a0-26ww21a
+pard2d1uladda1,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,PASS,KalthireddyX Gunasekhar,nio_d2d-a0-26ww21a
+pard2d1uladda1,n/a,[NWP] TAP: security - sib,MISSING,KalthireddyX Gunasekhar,nio_d2d-a0-26ww21a
+pard2d1uladda1,icl_verify_dft,[NWP] TAP: icl_verify,PASS,KalthireddyX Gunasekhar,nio_d2d-a0-26ww21a
+memstack,n/a,[NWP] IOV: Chain continuity check,MISSING,Mario Alpizar,nio_mc-a0-26ww20c
+memstack,n/a,[NWP] LCP: partition level validation - controller and chain continuity,MISSING,Mario Alpizar,nio_mc-a0-26ww20c
+memstack,n/a,[NWP] TAP: Boundary Scan,MISSING,Mario Alpizar,nio_mc-a0-26ww20c
+memstack,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: iJTAG reset / network collapse,MISSING,Mario Alpizar,nio_mc-a0-26ww20c
+memstack,n/a,[NWP] TAP: security - taps & rtdrs,MISSING,Mario Alpizar,nio_mc-a0-26ww20c
+memstack,n/a,[NWP] IOV: Chain reset test,MISSING,Mario Alpizar,nio_mc-a0-26ww20c
+memstack,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,PASS,Mario Alpizar,nio_mc-a0-26ww20c
+memstack,ijtag_basic_tap_tests_user_defined,[NWP] TAP: IDCODE all taps in the partition,FAIL,Mario Alpizar,nio_mc-a0-26ww20c
+memstack,n/a,[NWP] IOV: IDV counter readout,MISSING,Mario Alpizar,nio_mc-a0-26ww20c
+memstack,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,PASS,Mario Alpizar,nio_mc-a0-26ww20c
+memstack,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: ijtag reset does not perturb TDRs,MISSING,Mario Alpizar,nio_mc-a0-26ww20c
+memstack,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: treset - verify no TDRs perturbed by TRESET,MISSING,Mario Alpizar,nio_mc-a0-26ww20c
+memstack,ijtag_basic_tap_tests_rw_access,[NWP] TAP: iJTAG R/W,PASS,Mario Alpizar,nio_mc-a0-26ww20c
+memstack,ijtag_basic_tap_tests_continuity,[NWP] TAP: IJTAG icl continuity tests of entire network,PASS,Mario Alpizar,nio_mc-a0-26ww20c
+memstack,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",PASS,Mario Alpizar,nio_mc-a0-26ww20c
+memstack,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,PASS,Mario Alpizar,nio_mc-a0-26ww20c
+memstack,n/a,[NWP] TAP: security - sib,MISSING,Mario Alpizar,nio_mc-a0-26ww20c
+memstack,icl_verify_dft,[NWP] TAP: icl_verify,MISSING,Mario Alpizar,nio_mc-a0-26ww20c
+parmccore,n/a,[NWP] IOV: Chain continuity check,MISSING,Mario Alpizar,nio_mc-a0-26ww20c
+parmccore,n/a,[NWP] LCP: partition level validation - controller and chain continuity,MISSING,Mario Alpizar,nio_mc-a0-26ww20c
+parmccore,n/a,[NWP] TAP: Boundary Scan,MISSING,Mario Alpizar,nio_mc-a0-26ww20c
+parmccore,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: iJTAG reset / network collapse,MISSING,Mario Alpizar,nio_mc-a0-26ww20c
+parmccore,n/a,[NWP] TAP: security - taps & rtdrs,MISSING,Mario Alpizar,nio_mc-a0-26ww20c
+parmccore,n/a,[NWP] IOV: Chain reset test,MISSING,Mario Alpizar,nio_mc-a0-26ww20c
+parmccore,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,PASS,Mario Alpizar,nio_mc-a0-26ww20c
+parmccore,ijtag_basic_tap_tests_user_defined,[NWP] TAP: IDCODE all taps in the partition,MISSING,Mario Alpizar,nio_mc-a0-26ww20c
+parmccore,n/a,[NWP] IOV: IDV counter readout,MISSING,Mario Alpizar,nio_mc-a0-26ww20c
+parmccore,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,PASS,Mario Alpizar,nio_mc-a0-26ww20c
+parmccore,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: ijtag reset does not perturb TDRs,MISSING,Mario Alpizar,nio_mc-a0-26ww20c
+parmccore,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: treset - verify no TDRs perturbed by TRESET,MISSING,Mario Alpizar,nio_mc-a0-26ww20c
+parmccore,ijtag_basic_tap_tests_rw_access,[NWP] TAP: iJTAG R/W,PASS,Mario Alpizar,nio_mc-a0-26ww20c
+parmccore,ijtag_basic_tap_tests_continuity,[NWP] TAP: IJTAG icl continuity tests of entire network,PASS,Mario Alpizar,nio_mc-a0-26ww20c
+parmccore,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",PASS,Mario Alpizar,nio_mc-a0-26ww20c
+parmccore,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,PASS,Mario Alpizar,nio_mc-a0-26ww20c
+parmccore,n/a,[NWP] TAP: security - sib,MISSING,Mario Alpizar,nio_mc-a0-26ww20c
+parmccore,icl_verify_dft,[NWP] TAP: icl_verify,PASS,Mario Alpizar,nio_mc-a0-26ww20c
+parmcmisc,n/a,[NWP] IOV: Chain continuity check,MISSING,Mauricio Segura,nio_mc-a0-26ww20c
+parmcmisc,n/a,[NWP] LCP: partition level validation - controller and chain continuity,MISSING,Mauricio Segura,nio_mc-a0-26ww20c
+parmcmisc,n/a,[NWP] TAP: Boundary Scan,MISSING,Mauricio Segura,nio_mc-a0-26ww20c
+parmcmisc,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: iJTAG reset / network collapse,MISSING,Mauricio Segura,nio_mc-a0-26ww20c
+parmcmisc,n/a,[NWP] TAP: security - taps & rtdrs,MISSING,Mauricio Segura,nio_mc-a0-26ww20c
+parmcmisc,n/a,[NWP] IOV: Chain reset test,MISSING,Mauricio Segura,nio_mc-a0-26ww20c
+parmcmisc,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,FAIL,Mauricio Segura,nio_mc-a0-26ww20c
+parmcmisc,ijtag_basic_tap_tests_user_defined,[NWP] TAP: IDCODE all taps in the partition,PASS,Mauricio Segura,nio_mc-a0-26ww20c
+parmcmisc,n/a,[NWP] IOV: IDV counter readout,MISSING,Mauricio Segura,nio_mc-a0-26ww20c
+parmcmisc,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,FAIL,Mauricio Segura,nio_mc-a0-26ww20c
+parmcmisc,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: ijtag reset does not perturb TDRs,MISSING,Mauricio Segura,nio_mc-a0-26ww20c
+parmcmisc,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: treset - verify no TDRs perturbed by TRESET,MISSING,Mauricio Segura,nio_mc-a0-26ww20c
+parmcmisc,ijtag_basic_tap_tests_rw_access,[NWP] TAP: iJTAG R/W,FAIL,Mauricio Segura,nio_mc-a0-26ww20c
+parmcmisc,ijtag_basic_tap_tests_continuity,[NWP] TAP: IJTAG icl continuity tests of entire network,PASS,Mauricio Segura,nio_mc-a0-26ww20c
+parmcmisc,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",PASS,Mauricio Segura,nio_mc-a0-26ww20c
+parmcmisc,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,PASS,Mauricio Segura,nio_mc-a0-26ww20c
+parmcmisc,n/a,[NWP] TAP: security - sib,MISSING,Mauricio Segura,nio_mc-a0-26ww20c
+parmcmisc,icl_verify_dft,[NWP] TAP: icl_verify,MISSING,Mauricio Segura,nio_mc-a0-26ww20c
+parmcmse,n/a,[NWP] IOV: Chain continuity check,MISSING,Emmanuel Araya,nio_mc-a0-26ww20c
+parmcmse,n/a,[NWP] LCP: partition level validation - controller and chain continuity,MISSING,Emmanuel Araya,nio_mc-a0-26ww20c
+parmcmse,n/a,[NWP] TAP: Boundary Scan,MISSING,Emmanuel Araya,nio_mc-a0-26ww20c
+parmcmse,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: iJTAG reset / network collapse,MISSING,Emmanuel Araya,nio_mc-a0-26ww20c
+parmcmse,n/a,[NWP] TAP: security - taps & rtdrs,MISSING,Emmanuel Araya,nio_mc-a0-26ww20c
+parmcmse,n/a,[NWP] IOV: Chain reset test,MISSING,Emmanuel Araya,nio_mc-a0-26ww20c
+parmcmse,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,PASS,Emmanuel Araya,nio_mc-a0-26ww20c
+parmcmse,ijtag_basic_tap_tests_user_defined,[NWP] TAP: IDCODE all taps in the partition,FAIL,Emmanuel Araya,nio_mc-a0-26ww20c
+parmcmse,n/a,[NWP] IOV: IDV counter readout,MISSING,Emmanuel Araya,nio_mc-a0-26ww20c
+parmcmse,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,PASS,Emmanuel Araya,nio_mc-a0-26ww20c
+parmcmse,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: ijtag reset does not perturb TDRs,MISSING,Emmanuel Araya,nio_mc-a0-26ww20c
+parmcmse,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: treset - verify no TDRs perturbed by TRESET,MISSING,Emmanuel Araya,nio_mc-a0-26ww20c
+parmcmse,ijtag_basic_tap_tests_rw_access,[NWP] TAP: iJTAG R/W,PASS,Emmanuel Araya,nio_mc-a0-26ww20c
+parmcmse,ijtag_basic_tap_tests_continuity,[NWP] TAP: IJTAG icl continuity tests of entire network,PASS,Emmanuel Araya,nio_mc-a0-26ww20c
+parmcmse,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",PASS,Emmanuel Araya,nio_mc-a0-26ww20c
+parmcmse,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,PASS,Emmanuel Araya,nio_mc-a0-26ww20c
+parmcmse,n/a,[NWP] TAP: security - sib,MISSING,Emmanuel Araya,nio_mc-a0-26ww20c
+parmcmse,icl_verify_dft,[NWP] TAP: icl_verify,PASS,Emmanuel Araya,nio_mc-a0-26ww20c
+parmemdfi0,n/a,[NWP] IOV: Chain continuity check,MISSING,Mauricio Segura,nio_mc-a0-26ww20c
+parmemdfi0,n/a,[NWP] LCP: partition level validation - controller and chain continuity,MISSING,Mauricio Segura,nio_mc-a0-26ww20c
+parmemdfi0,n/a,[NWP] TAP: Boundary Scan,MISSING,Mauricio Segura,nio_mc-a0-26ww20c
+parmemdfi0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: iJTAG reset / network collapse,MISSING,Mauricio Segura,nio_mc-a0-26ww20c
+parmemdfi0,n/a,[NWP] TAP: security - taps & rtdrs,MISSING,Mauricio Segura,nio_mc-a0-26ww20c
+parmemdfi0,n/a,[NWP] IOV: Chain reset test,MISSING,Mauricio Segura,nio_mc-a0-26ww20c
+parmemdfi0,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,MISSING,Mauricio Segura,nio_mc-a0-26ww20c
+parmemdfi0,ijtag_basic_tap_tests_user_defined,[NWP] TAP: IDCODE all taps in the partition,MISSING,Mauricio Segura,nio_mc-a0-26ww20c
+parmemdfi0,n/a,[NWP] IOV: IDV counter readout,MISSING,Mauricio Segura,nio_mc-a0-26ww20c
+parmemdfi0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,MISSING,Mauricio Segura,nio_mc-a0-26ww20c
+parmemdfi0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: ijtag reset does not perturb TDRs,MISSING,Mauricio Segura,nio_mc-a0-26ww20c
+parmemdfi0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: treset - verify no TDRs perturbed by TRESET,MISSING,Mauricio Segura,nio_mc-a0-26ww20c
+parmemdfi0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: iJTAG R/W,MISSING,Mauricio Segura,nio_mc-a0-26ww20c
+parmemdfi0,ijtag_basic_tap_tests_continuity,[NWP] TAP: IJTAG icl continuity tests of entire network,MISSING,Mauricio Segura,nio_mc-a0-26ww20c
+parmemdfi0,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",MISSING,Mauricio Segura,nio_mc-a0-26ww20c
+parmemdfi0,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,MISSING,Mauricio Segura,nio_mc-a0-26ww20c
+parmemdfi0,n/a,[NWP] TAP: security - sib,MISSING,Mauricio Segura,nio_mc-a0-26ww20c
+parmemdfi0,icl_verify_dft,[NWP] TAP: icl_verify,MISSING,Mauricio Segura,nio_mc-a0-26ww20c
+parmemsram,n/a,[NWP] IOV: Chain continuity check,MISSING,Emmanuel Araya,nio_mc-a0-26ww20c
+parmemsram,n/a,[NWP] LCP: partition level validation - controller and chain continuity,MISSING,Emmanuel Araya,nio_mc-a0-26ww20c
+parmemsram,n/a,[NWP] TAP: Boundary Scan,MISSING,Emmanuel Araya,nio_mc-a0-26ww20c
+parmemsram,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: iJTAG reset / network collapse,MISSING,Emmanuel Araya,nio_mc-a0-26ww20c
+parmemsram,n/a,[NWP] TAP: security - taps & rtdrs,MISSING,Emmanuel Araya,nio_mc-a0-26ww20c
+parmemsram,n/a,[NWP] IOV: Chain reset test,MISSING,Emmanuel Araya,nio_mc-a0-26ww20c
+parmemsram,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,PASS,Emmanuel Araya,nio_mc-a0-26ww20c
+parmemsram,ijtag_basic_tap_tests_user_defined,[NWP] TAP: IDCODE all taps in the partition,MISSING,Emmanuel Araya,nio_mc-a0-26ww20c
+parmemsram,n/a,[NWP] IOV: IDV counter readout,MISSING,Emmanuel Araya,nio_mc-a0-26ww20c
+parmemsram,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,PASS,Emmanuel Araya,nio_mc-a0-26ww20c
+parmemsram,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: ijtag reset does not perturb TDRs,MISSING,Emmanuel Araya,nio_mc-a0-26ww20c
+parmemsram,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: treset - verify no TDRs perturbed by TRESET,MISSING,Emmanuel Araya,nio_mc-a0-26ww20c
+parmemsram,ijtag_basic_tap_tests_rw_access,[NWP] TAP: iJTAG R/W,PASS,Emmanuel Araya,nio_mc-a0-26ww20c
+parmemsram,ijtag_basic_tap_tests_continuity,[NWP] TAP: IJTAG icl continuity tests of entire network,PASS,Emmanuel Araya,nio_mc-a0-26ww20c
+parmemsram,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",PASS,Emmanuel Araya,nio_mc-a0-26ww20c
+parmemsram,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,PASS,Emmanuel Araya,nio_mc-a0-26ww20c
+parmemsram,n/a,[NWP] TAP: security - sib,MISSING,Emmanuel Araya,nio_mc-a0-26ww20c
+parmemsram,icl_verify_dft,[NWP] TAP: icl_verify,PASS,Emmanuel Araya,nio_mc-a0-26ww20c
+parmioasf_uio_0,n/a,[NWP] IOV: Chain continuity check,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmioasf_uio_0,n/a,[NWP] LCP: partition level validation - controller and chain continuity,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmioasf_uio_0,n/a,[NWP] TAP: Boundary Scan,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmioasf_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: iJTAG reset / network collapse,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmioasf_uio_0,n/a,[NWP] TAP: security - taps & rtdrs,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmioasf_uio_0,n/a,[NWP] IOV: Chain reset test,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmioasf_uio_0,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,FAIL,Mauricio Segura,nio_uio-a0-26ww21c
+parmioasf_uio_0,ijtag_basic_tap_tests_user_defined,[NWP] TAP: IDCODE all taps in the partition,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmioasf_uio_0,n/a,[NWP] IOV: IDV counter readout,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmioasf_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,FAIL,Mauricio Segura,nio_uio-a0-26ww21c
+parmioasf_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: ijtag reset does not perturb TDRs,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmioasf_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: treset - verify no TDRs perturbed by TRESET,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmioasf_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: iJTAG R/W,FAIL,Mauricio Segura,nio_uio-a0-26ww21c
+parmioasf_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: IJTAG icl continuity tests of entire network,FAIL,Mauricio Segura,nio_uio-a0-26ww21c
+parmioasf_uio_0,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",FAIL,Mauricio Segura,nio_uio-a0-26ww21c
+parmioasf_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,FAIL,Mauricio Segura,nio_uio-a0-26ww21c
+parmioasf_uio_0,n/a,[NWP] TAP: security - sib,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmioasf_uio_0,icl_verify_dft,[NWP] TAP: icl_verify,PASS,Mauricio Segura,nio_uio-a0-26ww21c
+parmiocpc_uio_0,n/a,[NWP] IOV: Chain continuity check,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiocpc_uio_0,n/a,[NWP] LCP: partition level validation - controller and chain continuity,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiocpc_uio_0,n/a,[NWP] TAP: Boundary Scan,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiocpc_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: iJTAG reset / network collapse,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiocpc_uio_0,n/a,[NWP] TAP: security - taps & rtdrs,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiocpc_uio_0,n/a,[NWP] IOV: Chain reset test,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiocpc_uio_0,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,PASS,Mauricio Segura,nio_uio-a0-26ww21c
+parmiocpc_uio_0,ijtag_basic_tap_tests_user_defined,[NWP] TAP: IDCODE all taps in the partition,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiocpc_uio_0,n/a,[NWP] IOV: IDV counter readout,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiocpc_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,PASS,Mauricio Segura,nio_uio-a0-26ww21c
+parmiocpc_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: ijtag reset does not perturb TDRs,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiocpc_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: treset - verify no TDRs perturbed by TRESET,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiocpc_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: iJTAG R/W,PASS,Mauricio Segura,nio_uio-a0-26ww21c
+parmiocpc_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: IJTAG icl continuity tests of entire network,PASS,Mauricio Segura,nio_uio-a0-26ww21c
+parmiocpc_uio_0,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",PASS,Mauricio Segura,nio_uio-a0-26ww21c
+parmiocpc_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,PASS,Mauricio Segura,nio_uio-a0-26ww21c
+parmiocpc_uio_0,n/a,[NWP] TAP: security - sib,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiocpc_uio_0,icl_verify_dft,[NWP] TAP: icl_verify,PASS,Mauricio Segura,nio_uio-a0-26ww21c
+parmiocxlrx_uio_0,n/a,[NWP] IOV: Chain continuity check,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiocxlrx_uio_0,n/a,[NWP] LCP: partition level validation - controller and chain continuity,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiocxlrx_uio_0,n/a,[NWP] TAP: Boundary Scan,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiocxlrx_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: iJTAG reset / network collapse,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiocxlrx_uio_0,n/a,[NWP] TAP: security - taps & rtdrs,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiocxlrx_uio_0,n/a,[NWP] IOV: Chain reset test,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiocxlrx_uio_0,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,PASS,Mauricio Segura,nio_uio-a0-26ww21c
+parmiocxlrx_uio_0,ijtag_basic_tap_tests_user_defined,[NWP] TAP: IDCODE all taps in the partition,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiocxlrx_uio_0,n/a,[NWP] IOV: IDV counter readout,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiocxlrx_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,PASS,Mauricio Segura,nio_uio-a0-26ww21c
+parmiocxlrx_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: ijtag reset does not perturb TDRs,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiocxlrx_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: treset - verify no TDRs perturbed by TRESET,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiocxlrx_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: iJTAG R/W,PASS,Mauricio Segura,nio_uio-a0-26ww21c
+parmiocxlrx_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: IJTAG icl continuity tests of entire network,PASS,Mauricio Segura,nio_uio-a0-26ww21c
+parmiocxlrx_uio_0,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",PASS,Mauricio Segura,nio_uio-a0-26ww21c
+parmiocxlrx_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,PASS,Mauricio Segura,nio_uio-a0-26ww21c
+parmiocxlrx_uio_0,n/a,[NWP] TAP: security - sib,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiocxlrx_uio_0,icl_verify_dft,[NWP] TAP: icl_verify,PASS,Mauricio Segura,nio_uio-a0-26ww21c
+parmiocxltx_uio_0,n/a,[NWP] IOV: Chain continuity check,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiocxltx_uio_0,n/a,[NWP] LCP: partition level validation - controller and chain continuity,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiocxltx_uio_0,n/a,[NWP] TAP: Boundary Scan,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiocxltx_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: iJTAG reset / network collapse,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiocxltx_uio_0,n/a,[NWP] TAP: security - taps & rtdrs,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiocxltx_uio_0,n/a,[NWP] IOV: Chain reset test,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiocxltx_uio_0,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,PASS,Mario Alpizar,nio_uio-a0-26ww21c
+parmiocxltx_uio_0,ijtag_basic_tap_tests_user_defined,[NWP] TAP: IDCODE all taps in the partition,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiocxltx_uio_0,n/a,[NWP] IOV: IDV counter readout,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiocxltx_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,PASS,Mario Alpizar,nio_uio-a0-26ww21c
+parmiocxltx_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: ijtag reset does not perturb TDRs,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiocxltx_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: treset - verify no TDRs perturbed by TRESET,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiocxltx_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: iJTAG R/W,PASS,Mario Alpizar,nio_uio-a0-26ww21c
+parmiocxltx_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: IJTAG icl continuity tests of entire network,PASS,Mario Alpizar,nio_uio-a0-26ww21c
+parmiocxltx_uio_0,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",PASS,Mario Alpizar,nio_uio-a0-26ww21c
+parmiocxltx_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,PASS,Mario Alpizar,nio_uio-a0-26ww21c
+parmiocxltx_uio_0,n/a,[NWP] TAP: security - sib,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiocxltx_uio_0,icl_verify_dft,[NWP] TAP: icl_verify,PASS,Mario Alpizar,nio_uio-a0-26ww21c
+parmiofblprxfcrarbmux,n/a,[NWP] IOV: Chain continuity check,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiofblprxfcrarbmux,n/a,[NWP] LCP: partition level validation - controller and chain continuity,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiofblprxfcrarbmux,n/a,[NWP] TAP: Boundary Scan,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiofblprxfcrarbmux,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: iJTAG reset / network collapse,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiofblprxfcrarbmux,n/a,[NWP] TAP: security - taps & rtdrs,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiofblprxfcrarbmux,n/a,[NWP] IOV: Chain reset test,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiofblprxfcrarbmux,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,PASS,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiofblprxfcrarbmux,ijtag_basic_tap_tests_user_defined,[NWP] TAP: IDCODE all taps in the partition,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiofblprxfcrarbmux,n/a,[NWP] IOV: IDV counter readout,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiofblprxfcrarbmux,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,PASS,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiofblprxfcrarbmux,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: ijtag reset does not perturb TDRs,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiofblprxfcrarbmux,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: treset - verify no TDRs perturbed by TRESET,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiofblprxfcrarbmux,ijtag_basic_tap_tests_rw_access,[NWP] TAP: iJTAG R/W,PASS,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiofblprxfcrarbmux,ijtag_basic_tap_tests_continuity,[NWP] TAP: IJTAG icl continuity tests of entire network,PASS,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiofblprxfcrarbmux,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",PASS,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiofblprxfcrarbmux,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,PASS,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiofblprxfcrarbmux,n/a,[NWP] TAP: security - sib,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiofblprxfcrarbmux,icl_verify_dft,[NWP] TAP: icl_verify,PASS,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiofblptx,n/a,[NWP] IOV: Chain continuity check,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiofblptx,n/a,[NWP] LCP: partition level validation - controller and chain continuity,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiofblptx,n/a,[NWP] TAP: Boundary Scan,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiofblptx,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: iJTAG reset / network collapse,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiofblptx,n/a,[NWP] TAP: security - taps & rtdrs,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiofblptx,n/a,[NWP] IOV: Chain reset test,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiofblptx,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,PASS,Mario Alpizar,nio_uio-a0-26ww21c
+parmiofblptx,ijtag_basic_tap_tests_user_defined,[NWP] TAP: IDCODE all taps in the partition,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiofblptx,n/a,[NWP] IOV: IDV counter readout,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiofblptx,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,PASS,Mario Alpizar,nio_uio-a0-26ww21c
+parmiofblptx,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: ijtag reset does not perturb TDRs,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiofblptx,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: treset - verify no TDRs perturbed by TRESET,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiofblptx,ijtag_basic_tap_tests_rw_access,[NWP] TAP: iJTAG R/W,PASS,Mario Alpizar,nio_uio-a0-26ww21c
+parmiofblptx,ijtag_basic_tap_tests_continuity,[NWP] TAP: IJTAG icl continuity tests of entire network,PASS,Mario Alpizar,nio_uio-a0-26ww21c
+parmiofblptx,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",PASS,Mario Alpizar,nio_uio-a0-26ww21c
+parmiofblptx,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,PASS,Mario Alpizar,nio_uio-a0-26ww21c
+parmiofblptx,n/a,[NWP] TAP: security - sib,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiofblptx,icl_verify_dft,[NWP] TAP: icl_verify,PASS,Mario Alpizar,nio_uio-a0-26ww21c
+parmiofblpvnpipeac_uio_0,n/a,[NWP] IOV: Chain continuity check,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiofblpvnpipeac_uio_0,n/a,[NWP] LCP: partition level validation - controller and chain continuity,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiofblpvnpipeac_uio_0,n/a,[NWP] TAP: Boundary Scan,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiofblpvnpipeac_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: iJTAG reset / network collapse,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiofblpvnpipeac_uio_0,n/a,[NWP] TAP: security - taps & rtdrs,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiofblpvnpipeac_uio_0,n/a,[NWP] IOV: Chain reset test,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiofblpvnpipeac_uio_0,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiofblpvnpipeac_uio_0,ijtag_basic_tap_tests_user_defined,[NWP] TAP: IDCODE all taps in the partition,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiofblpvnpipeac_uio_0,n/a,[NWP] IOV: IDV counter readout,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiofblpvnpipeac_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiofblpvnpipeac_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: ijtag reset does not perturb TDRs,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiofblpvnpipeac_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: treset - verify no TDRs perturbed by TRESET,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiofblpvnpipeac_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: iJTAG R/W,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiofblpvnpipeac_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: IJTAG icl continuity tests of entire network,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiofblpvnpipeac_uio_0,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiofblpvnpipeac_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiofblpvnpipeac_uio_0,n/a,[NWP] TAP: security - sib,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiofblpvnpipeac_uio_0,icl_verify_dft,[NWP] TAP: icl_verify,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiohap_uio_0,n/a,[NWP] IOV: Chain continuity check,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiohap_uio_0,n/a,[NWP] LCP: partition level validation - controller and chain continuity,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiohap_uio_0,n/a,[NWP] TAP: Boundary Scan,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiohap_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: iJTAG reset / network collapse,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiohap_uio_0,n/a,[NWP] TAP: security - taps & rtdrs,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiohap_uio_0,n/a,[NWP] IOV: Chain reset test,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiohap_uio_0,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,PASS,Mario Alpizar,nio_uio-a0-26ww21c
+parmiohap_uio_0,ijtag_basic_tap_tests_user_defined,[NWP] TAP: IDCODE all taps in the partition,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiohap_uio_0,n/a,[NWP] IOV: IDV counter readout,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiohap_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,PASS,Mario Alpizar,nio_uio-a0-26ww21c
+parmiohap_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: ijtag reset does not perturb TDRs,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiohap_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: treset - verify no TDRs perturbed by TRESET,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiohap_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: iJTAG R/W,PASS,Mario Alpizar,nio_uio-a0-26ww21c
+parmiohap_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: IJTAG icl continuity tests of entire network,PASS,Mario Alpizar,nio_uio-a0-26ww21c
+parmiohap_uio_0,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",PASS,Mario Alpizar,nio_uio-a0-26ww21c
+parmiohap_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,PASS,Mario Alpizar,nio_uio-a0-26ww21c
+parmiohap_uio_0,n/a,[NWP] TAP: security - sib,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiohap_uio_0,icl_verify_dft,[NWP] TAP: icl_verify,PASS,Mario Alpizar,nio_uio-a0-26ww21c
+parmioiommu_uio_0,n/a,[NWP] IOV: Chain continuity check,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmioiommu_uio_0,n/a,[NWP] LCP: partition level validation - controller and chain continuity,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmioiommu_uio_0,n/a,[NWP] TAP: Boundary Scan,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmioiommu_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: iJTAG reset / network collapse,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmioiommu_uio_0,n/a,[NWP] TAP: security - taps & rtdrs,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmioiommu_uio_0,n/a,[NWP] IOV: Chain reset test,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmioiommu_uio_0,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,PASS,Emmanuel Araya,nio_uio-a0-26ww21c
+parmioiommu_uio_0,ijtag_basic_tap_tests_user_defined,[NWP] TAP: IDCODE all taps in the partition,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmioiommu_uio_0,n/a,[NWP] IOV: IDV counter readout,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmioiommu_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,PASS,Emmanuel Araya,nio_uio-a0-26ww21c
+parmioiommu_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: ijtag reset does not perturb TDRs,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmioiommu_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: treset - verify no TDRs perturbed by TRESET,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmioiommu_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: iJTAG R/W,PASS,Emmanuel Araya,nio_uio-a0-26ww21c
+parmioiommu_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: IJTAG icl continuity tests of entire network,PASS,Emmanuel Araya,nio_uio-a0-26ww21c
+parmioiommu_uio_0,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",PASS,Emmanuel Araya,nio_uio-a0-26ww21c
+parmioiommu_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,PASS,Emmanuel Araya,nio_uio-a0-26ww21c
+parmioiommu_uio_0,n/a,[NWP] TAP: security - sib,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmioiommu_uio_0,icl_verify_dft,[NWP] TAP: icl_verify,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmioitc_uio_0,n/a,[NWP] IOV: Chain continuity check,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmioitc_uio_0,n/a,[NWP] LCP: partition level validation - controller and chain continuity,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmioitc_uio_0,n/a,[NWP] TAP: Boundary Scan,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmioitc_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: iJTAG reset / network collapse,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmioitc_uio_0,n/a,[NWP] TAP: security - taps & rtdrs,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmioitc_uio_0,n/a,[NWP] IOV: Chain reset test,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmioitc_uio_0,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,PASS,Mario Alpizar,nio_uio-a0-26ww21c
+parmioitc_uio_0,ijtag_basic_tap_tests_user_defined,[NWP] TAP: IDCODE all taps in the partition,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmioitc_uio_0,n/a,[NWP] IOV: IDV counter readout,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmioitc_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,PASS,Mario Alpizar,nio_uio-a0-26ww21c
+parmioitc_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: ijtag reset does not perturb TDRs,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmioitc_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: treset - verify no TDRs perturbed by TRESET,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmioitc_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: iJTAG R/W,PASS,Mario Alpizar,nio_uio-a0-26ww21c
+parmioitc_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: IJTAG icl continuity tests of entire network,PASS,Mario Alpizar,nio_uio-a0-26ww21c
+parmioitc_uio_0,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",PASS,Mario Alpizar,nio_uio-a0-26ww21c
+parmioitc_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,PASS,Mario Alpizar,nio_uio-a0-26ww21c
+parmioitc_uio_0,n/a,[NWP] TAP: security - sib,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmioitc_uio_0,icl_verify_dft,[NWP] TAP: icl_verify,PASS,Mario Alpizar,nio_uio-a0-26ww21c
+parmiomisc_uio_0,n/a,[NWP] IOV: Chain continuity check,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww21c
+parmiomisc_uio_0,n/a,[NWP] LCP: partition level validation - controller and chain continuity,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww21c
+parmiomisc_uio_0,n/a,[NWP] TAP: Boundary Scan,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww21c
+parmiomisc_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: iJTAG reset / network collapse,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww21c
+parmiomisc_uio_0,n/a,[NWP] TAP: security - taps & rtdrs,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww21c
+parmiomisc_uio_0,n/a,[NWP] IOV: Chain reset test,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww21c
+parmiomisc_uio_0,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,FAIL,KalthireddyX Gunasekhar,nio_uio-a0-26ww21c
+parmiomisc_uio_0,ijtag_basic_tap_tests_user_defined,[NWP] TAP: IDCODE all taps in the partition,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww21c
+parmiomisc_uio_0,n/a,[NWP] IOV: IDV counter readout,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww21c
+parmiomisc_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,FAIL,KalthireddyX Gunasekhar,nio_uio-a0-26ww21c
+parmiomisc_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: ijtag reset does not perturb TDRs,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww21c
+parmiomisc_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: treset - verify no TDRs perturbed by TRESET,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww21c
+parmiomisc_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: iJTAG R/W,FAIL,KalthireddyX Gunasekhar,nio_uio-a0-26ww21c
+parmiomisc_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: IJTAG icl continuity tests of entire network,PASS,KalthireddyX Gunasekhar,nio_uio-a0-26ww21c
+parmiomisc_uio_0,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",PASS,KalthireddyX Gunasekhar,nio_uio-a0-26ww21c
+parmiomisc_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,PASS,KalthireddyX Gunasekhar,nio_uio-a0-26ww21c
+parmiomisc_uio_0,n/a,[NWP] TAP: security - sib,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww21c
+parmiomisc_uio_0,icl_verify_dft,[NWP] TAP: icl_verify,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww21c
+parmiootc_uio_0,n/a,[NWP] IOV: Chain continuity check,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiootc_uio_0,n/a,[NWP] LCP: partition level validation - controller and chain continuity,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiootc_uio_0,n/a,[NWP] TAP: Boundary Scan,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiootc_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: iJTAG reset / network collapse,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiootc_uio_0,n/a,[NWP] TAP: security - taps & rtdrs,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiootc_uio_0,n/a,[NWP] IOV: Chain reset test,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiootc_uio_0,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,PASS,Mauricio Segura,nio_uio-a0-26ww21c
+parmiootc_uio_0,ijtag_basic_tap_tests_user_defined,[NWP] TAP: IDCODE all taps in the partition,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiootc_uio_0,n/a,[NWP] IOV: IDV counter readout,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiootc_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,PASS,Mauricio Segura,nio_uio-a0-26ww21c
+parmiootc_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: ijtag reset does not perturb TDRs,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiootc_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: treset - verify no TDRs perturbed by TRESET,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiootc_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: iJTAG R/W,PASS,Mauricio Segura,nio_uio-a0-26ww21c
+parmiootc_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: IJTAG icl continuity tests of entire network,PASS,Mauricio Segura,nio_uio-a0-26ww21c
+parmiootc_uio_0,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",PASS,Mauricio Segura,nio_uio-a0-26ww21c
+parmiootc_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,PASS,Mauricio Segura,nio_uio-a0-26ww21c
+parmiootc_uio_0,n/a,[NWP] TAP: security - sib,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiootc_uio_0,icl_verify_dft,[NWP] TAP: icl_verify,PASS,Mauricio Segura,nio_uio-a0-26ww21c
+parmiopcie6trcore_uio_0,n/a,[NWP] IOV: Chain continuity check,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiopcie6trcore_uio_0,n/a,[NWP] LCP: partition level validation - controller and chain continuity,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiopcie6trcore_uio_0,n/a,[NWP] TAP: Boundary Scan,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiopcie6trcore_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: iJTAG reset / network collapse,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiopcie6trcore_uio_0,n/a,[NWP] TAP: security - taps & rtdrs,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiopcie6trcore_uio_0,n/a,[NWP] IOV: Chain reset test,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiopcie6trcore_uio_0,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,PASS,Mauricio Segura,nio_uio-a0-26ww21c
+parmiopcie6trcore_uio_0,ijtag_basic_tap_tests_user_defined,[NWP] TAP: IDCODE all taps in the partition,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiopcie6trcore_uio_0,n/a,[NWP] IOV: IDV counter readout,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiopcie6trcore_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,PASS,Mauricio Segura,nio_uio-a0-26ww21c
+parmiopcie6trcore_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: ijtag reset does not perturb TDRs,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiopcie6trcore_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: treset - verify no TDRs perturbed by TRESET,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiopcie6trcore_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: iJTAG R/W,PASS,Mauricio Segura,nio_uio-a0-26ww21c
+parmiopcie6trcore_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: IJTAG icl continuity tests of entire network,PASS,Mauricio Segura,nio_uio-a0-26ww21c
+parmiopcie6trcore_uio_0,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",PASS,Mauricio Segura,nio_uio-a0-26ww21c
+parmiopcie6trcore_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,PASS,Mauricio Segura,nio_uio-a0-26ww21c
+parmiopcie6trcore_uio_0,n/a,[NWP] TAP: security - sib,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmiopcie6trcore_uio_0,icl_verify_dft,[NWP] TAP: icl_verify,PASS,Mauricio Segura,nio_uio-a0-26ww21c
+parmiopcie6tridelldp_uio_0,n/a,[NWP] IOV: Chain continuity check,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiopcie6tridelldp_uio_0,n/a,[NWP] LCP: partition level validation - controller and chain continuity,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiopcie6tridelldp_uio_0,n/a,[NWP] TAP: Boundary Scan,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiopcie6tridelldp_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: iJTAG reset / network collapse,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiopcie6tridelldp_uio_0,n/a,[NWP] TAP: security - taps & rtdrs,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiopcie6tridelldp_uio_0,n/a,[NWP] IOV: Chain reset test,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiopcie6tridelldp_uio_0,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,PASS,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiopcie6tridelldp_uio_0,ijtag_basic_tap_tests_user_defined,[NWP] TAP: IDCODE all taps in the partition,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiopcie6tridelldp_uio_0,n/a,[NWP] IOV: IDV counter readout,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiopcie6tridelldp_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,PASS,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiopcie6tridelldp_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: ijtag reset does not perturb TDRs,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiopcie6tridelldp_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: treset - verify no TDRs perturbed by TRESET,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiopcie6tridelldp_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: iJTAG R/W,PASS,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiopcie6tridelldp_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: IJTAG icl continuity tests of entire network,PASS,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiopcie6tridelldp_uio_0,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",PASS,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiopcie6tridelldp_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,PASS,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiopcie6tridelldp_uio_0,n/a,[NWP] TAP: security - sib,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiopcie6tridelldp_uio_0,icl_verify_dft,[NWP] TAP: icl_verify,PASS,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiopcie6ttcore_uio_0,n/a,[NWP] IOV: Chain continuity check,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiopcie6ttcore_uio_0,n/a,[NWP] LCP: partition level validation - controller and chain continuity,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiopcie6ttcore_uio_0,n/a,[NWP] TAP: Boundary Scan,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiopcie6ttcore_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: iJTAG reset / network collapse,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiopcie6ttcore_uio_0,n/a,[NWP] TAP: security - taps & rtdrs,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiopcie6ttcore_uio_0,n/a,[NWP] IOV: Chain reset test,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiopcie6ttcore_uio_0,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,PASS,Mario Alpizar,nio_uio-a0-26ww21c
+parmiopcie6ttcore_uio_0,ijtag_basic_tap_tests_user_defined,[NWP] TAP: IDCODE all taps in the partition,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiopcie6ttcore_uio_0,n/a,[NWP] IOV: IDV counter readout,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiopcie6ttcore_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,PASS,Mario Alpizar,nio_uio-a0-26ww21c
+parmiopcie6ttcore_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: ijtag reset does not perturb TDRs,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiopcie6ttcore_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: treset - verify no TDRs perturbed by TRESET,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiopcie6ttcore_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: iJTAG R/W,PASS,Mario Alpizar,nio_uio-a0-26ww21c
+parmiopcie6ttcore_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: IJTAG icl continuity tests of entire network,PASS,Mario Alpizar,nio_uio-a0-26ww21c
+parmiopcie6ttcore_uio_0,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",PASS,Mario Alpizar,nio_uio-a0-26ww21c
+parmiopcie6ttcore_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,PASS,Mario Alpizar,nio_uio-a0-26ww21c
+parmiopcie6ttcore_uio_0,n/a,[NWP] TAP: security - sib,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiopcie6ttcore_uio_0,icl_verify_dft,[NWP] TAP: icl_verify,PASS,Mario Alpizar,nio_uio-a0-26ww21c
+parmiopcie6ttidecee_uio_0,n/a,[NWP] IOV: Chain continuity check,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiopcie6ttidecee_uio_0,n/a,[NWP] LCP: partition level validation - controller and chain continuity,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiopcie6ttidecee_uio_0,n/a,[NWP] TAP: Boundary Scan,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiopcie6ttidecee_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: iJTAG reset / network collapse,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiopcie6ttidecee_uio_0,n/a,[NWP] TAP: security - taps & rtdrs,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiopcie6ttidecee_uio_0,n/a,[NWP] IOV: Chain reset test,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiopcie6ttidecee_uio_0,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,PASS,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiopcie6ttidecee_uio_0,ijtag_basic_tap_tests_user_defined,[NWP] TAP: IDCODE all taps in the partition,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiopcie6ttidecee_uio_0,n/a,[NWP] IOV: IDV counter readout,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiopcie6ttidecee_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,PASS,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiopcie6ttidecee_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: ijtag reset does not perturb TDRs,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiopcie6ttidecee_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: treset - verify no TDRs perturbed by TRESET,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiopcie6ttidecee_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: iJTAG R/W,PASS,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiopcie6ttidecee_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: IJTAG icl continuity tests of entire network,PASS,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiopcie6ttidecee_uio_0,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",PASS,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiopcie6ttidecee_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,PASS,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiopcie6ttidecee_uio_0,n/a,[NWP] TAP: security - sib,MISSING,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiopcie6ttidecee_uio_0,icl_verify_dft,[NWP] TAP: icl_verify,PASS,Emmanuel Araya,nio_uio-a0-26ww21c
+parmiostaticmux_uio_0,n/a,[NWP] IOV: Chain continuity check,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiostaticmux_uio_0,n/a,[NWP] LCP: partition level validation - controller and chain continuity,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiostaticmux_uio_0,n/a,[NWP] TAP: Boundary Scan,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiostaticmux_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: iJTAG reset / network collapse,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiostaticmux_uio_0,n/a,[NWP] TAP: security - taps & rtdrs,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiostaticmux_uio_0,n/a,[NWP] IOV: Chain reset test,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiostaticmux_uio_0,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,PASS,Mario Alpizar,nio_uio-a0-26ww21c
+parmiostaticmux_uio_0,ijtag_basic_tap_tests_user_defined,[NWP] TAP: IDCODE all taps in the partition,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiostaticmux_uio_0,n/a,[NWP] IOV: IDV counter readout,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiostaticmux_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,PASS,Mario Alpizar,nio_uio-a0-26ww21c
+parmiostaticmux_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: ijtag reset does not perturb TDRs,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiostaticmux_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: treset - verify no TDRs perturbed by TRESET,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiostaticmux_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: iJTAG R/W,PASS,Mario Alpizar,nio_uio-a0-26ww21c
+parmiostaticmux_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: IJTAG icl continuity tests of entire network,PASS,Mario Alpizar,nio_uio-a0-26ww21c
+parmiostaticmux_uio_0,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",PASS,Mario Alpizar,nio_uio-a0-26ww21c
+parmiostaticmux_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,PASS,Mario Alpizar,nio_uio-a0-26ww21c
+parmiostaticmux_uio_0,n/a,[NWP] TAP: security - sib,MISSING,Mario Alpizar,nio_uio-a0-26ww21c
+parmiostaticmux_uio_0,icl_verify_dft,[NWP] TAP: icl_verify,PASS,Mario Alpizar,nio_uio-a0-26ww21c
+parmioula_uio_0,n/a,[NWP] IOV: Chain continuity check,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmioula_uio_0,n/a,[NWP] LCP: partition level validation - controller and chain continuity,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmioula_uio_0,n/a,[NWP] TAP: Boundary Scan,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmioula_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: iJTAG reset / network collapse,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmioula_uio_0,n/a,[NWP] TAP: security - taps & rtdrs,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmioula_uio_0,n/a,[NWP] IOV: Chain reset test,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmioula_uio_0,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,PASS,Mauricio Segura,nio_uio-a0-26ww21c
+parmioula_uio_0,ijtag_basic_tap_tests_user_defined,[NWP] TAP: IDCODE all taps in the partition,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmioula_uio_0,n/a,[NWP] IOV: IDV counter readout,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmioula_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,PASS,Mauricio Segura,nio_uio-a0-26ww21c
+parmioula_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: ijtag reset does not perturb TDRs,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmioula_uio_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: treset - verify no TDRs perturbed by TRESET,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmioula_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: iJTAG R/W,PASS,Mauricio Segura,nio_uio-a0-26ww21c
+parmioula_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: IJTAG icl continuity tests of entire network,PASS,Mauricio Segura,nio_uio-a0-26ww21c
+parmioula_uio_0,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",PASS,Mauricio Segura,nio_uio-a0-26ww21c
+parmioula_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,PASS,Mauricio Segura,nio_uio-a0-26ww21c
+parmioula_uio_0,n/a,[NWP] TAP: security - sib,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+parmioula_uio_0,icl_verify_dft,[NWP] TAP: icl_verify,PASS,Mauricio Segura,nio_uio-a0-26ww21c
+uio_a_0,n/a,[NWP] IOV: Chain continuity check,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+uio_a_0,n/a,[NWP] LCP: partition level validation - controller and chain continuity,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+uio_a_0,n/a,[NWP] TAP: Boundary Scan,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+uio_a_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: iJTAG reset / network collapse,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+uio_a_0,n/a,[NWP] TAP: security - taps & rtdrs,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+uio_a_0,n/a,[NWP] IOV: Chain reset test,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+uio_a_0,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+uio_a_0,ijtag_basic_tap_tests_user_defined,[NWP] TAP: IDCODE all taps in the partition,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+uio_a_0,n/a,[NWP] IOV: IDV counter readout,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+uio_a_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+uio_a_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: ijtag reset does not perturb TDRs,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+uio_a_0,ijtag_basic_tap_tests_reset_tlr,[NWP] TAP: treset - verify no TDRs perturbed by TRESET,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+uio_a_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: iJTAG R/W,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+uio_a_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: IJTAG icl continuity tests of entire network,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+uio_a_0,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+uio_a_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+uio_a_0,n/a,[NWP] TAP: security - sib,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
+uio_a_0,icl_verify_dft,[NWP] TAP: icl_verify,MISSING,Mauricio Segura,nio_uio-a0-26ww21c
