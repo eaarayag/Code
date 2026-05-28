@@ -28,6 +28,10 @@ pard2d1uladda1_atspeed_edt_bypass_low_internal_serial_scan,FAIL,Error between si
 pard2d1chnl_stuckat_edt_bypass_low_internal_serial_scan,PASS,PASS
 pard2d1misc_ssn_continuity,PASS,PASS
 pard2d1misc_stuckat_edt_edt_low_internal_loopback,PASS,PASS
+pard2d4uladda1_ijtag_basic_tap_tests_reset,FAIL,Command './buildsimv.sh' returned exit status 2 !
+pard2d4uladda0_ijtag_basic_tap_tests_reset,FAIL,Command './buildsimv.sh' returned exit status 2 !
+pard2d4misc_ijtag_basic_tap_tests_reset,FAIL,Command './buildsimv.sh' returned exit status 2 !
+pard2d4chnl_ijtag_basic_tap_tests_reset,FAIL,Command './buildsimv.sh' returned exit status 2 !
 pard2d4chnl_ijtag_basic_tap_tests_rw_access,FAIL,Command './buildsimv.sh' returned exit status 2 !
 pard2d1chnl_ssn_continuity,PASS,PASS
 pard2d4misc_ijtag_basic_tap_tests_rw_access,FAIL,Command './buildsimv.sh' returned exit status 2 !
@@ -35,7 +39,23 @@ pard2d4uladda0_ijtag_basic_tap_tests_rw_access,FAIL,Command './buildsimv.sh' ret
 pard2d4uladda1_ijtag_basic_tap_tests_rw_access,FAIL,Command './buildsimv.sh' returned exit status 2 !
 pard2d1chnl_stuckat_edt_edt_low_internal_loopback,PASS,PASS
 pard2d1chnl_stuckat_edt_edt_low_internal_serial_chain,PASS,PASS
+pard2d1misc_ijtag_basic_tap_tests_reset,FAIL,Error between simulated and expected patterns
+pard2d1uladda1_ijtag_basic_tap_tests_reset,PASS,PASS
+pard2d1uladda0_ijtag_basic_tap_tests_reset,PASS,PASS
 pard2d1uladda1_ijtag_basic_tap_tests_rw_access,PASS,PASS
 pard2d1uladda0_ijtag_basic_tap_tests_rw_access,PASS,PASS
+pard2d1uladda1_icl_verify_dft,PASS,PASS
+pard2d4chnl_ijtag_basic_tap_tests_continuity,FAIL,Command './buildsimv.sh' returned exit status 2 !
+pard2d4misc_ijtag_basic_tap_tests_continuity,FAIL,Command './buildsimv.sh' returned exit status 2 !
+pard2d4uladda1_ijtag_basic_tap_tests_continuity,FAIL,Command './buildsimv.sh' returned exit status 2 !
+pard2d4uladda0_ijtag_basic_tap_tests_continuity,FAIL,Command './buildsimv.sh' returned exit status 2 !
 pard2d1misc_ijtag_basic_tap_tests_rw_access,FAIL,Error between simulated and expected patterns
+pard2d1uladda0_icl_verify_dft,PASS,PASS
+pard2d1misc_ijtag_basic_tap_tests_continuity,FAIL,Error between simulated and expected patterns
+pard2d1uladda1_ijtag_basic_tap_tests_continuity,PASS,PASS
+pard2d1misc_icl_verify_dft,FAIL,Error between simulated and expected patterns
+pard2d1uladda0_ijtag_basic_tap_tests_continuity,PASS,PASS
+pard2d1chnl_icl_verify_dft,PASS,PASS
 pard2d1chnl_ijtag_basic_tap_tests_rw_access,FAIL,Error between simulated and expected patterns
+pard2d1chnl_ijtag_basic_tap_tests_continuity,PASS,PASS
+pard2d1chnl_ijtag_basic_tap_tests_reset,FAIL,Error between simulated and expected patterns

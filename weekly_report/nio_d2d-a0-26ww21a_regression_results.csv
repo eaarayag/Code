@@ -1,28 +1,47 @@
 test_name,test_status,test_result
+pard2d4uladda0_ijtag_basic_tap_tests_reset,FAIL,Command './buildsimv.sh' returned exit status 2 !
 pard2d1uladda1_stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,PASS,PASS
+pard2d4misc_ijtag_basic_tap_tests_reset,FAIL,Command './buildsimv.sh' returned exit status 2 !
+pard2d4chnl_ijtag_basic_tap_tests_reset,FAIL,Command './buildsimv.sh' returned exit status 2 !
 pard2d4uladda0_ijtag_basic_tap_tests_rw_access,FAIL,Command './buildsimv.sh' returned exit status 2 !
 pard2d4uladda1_ijtag_basic_tap_tests_rw_access,FAIL,Command './buildsimv.sh' returned exit status 2 !
+pard2d1uladda1_ijtag_basic_tap_tests_reset,PASS,PASS
 pard2d4misc_ijtag_basic_tap_tests_rw_access,FAIL,Command './buildsimv.sh' returned exit status 2 !
+pard2d1misc_ijtag_basic_tap_tests_reset,FAIL,Error between simulated and expected patterns
+pard2d1uladda0_ijtag_basic_tap_tests_reset,PASS,PASS
 pard2d4chnl_ijtag_basic_tap_tests_rw_access,FAIL,Command './buildsimv.sh' returned exit status 2 !
 pard2d1uladda1_ijtag_basic_tap_tests_rw_access,PASS,PASS
 pard2d1uladda0_ijtag_basic_tap_tests_rw_access,PASS,PASS
 pard2d1misc_ijtag_basic_tap_tests_rw_access,FAIL,Error between simulated and expected patterns
+pard2d1uladda1_icl_verify_dft,PASS,PASS
+pard2d4uladda1_ijtag_basic_tap_tests_continuity,FAIL,Command './buildsimv.sh' returned exit status 2 !
+pard2d4uladda0_ijtag_basic_tap_tests_continuity,FAIL,Command './buildsimv.sh' returned exit status 2 !
+pard2d4misc_ijtag_basic_tap_tests_continuity,FAIL,Command './buildsimv.sh' returned exit status 2 !
+pard2d1misc_icl_verify_dft,FAIL,Error between simulated and expected patterns
+pard2d1uladda0_icl_verify_dft,PASS,PASS
+pard2d1chnl_icl_verify_dft,PASS,PASS
+pard2d4chnl_ijtag_basic_tap_tests_continuity,FAIL,Command './buildsimv.sh' returned exit status 2 !
+pard2d1misc_ijtag_basic_tap_tests_continuity,FAIL,Error between simulated and expected patterns
 pard2d1uladda0_stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,PASS,PASS
+pard2d1uladda1_ijtag_basic_tap_tests_continuity,PASS,PASS
 pard2d1chnl_ijtag_basic_tap_tests_rw_access,FAIL,Error between simulated and expected patterns
 pard2d1uladda0_pard2d1uladda0_ub_i_ult_scan_ctlr_stuckat_edt_bypass_low_internal_scandump,PASS,PASS
 pard2d1misc_pard2d1misc_ub_i_ult_scan_ctlr_stuckat_edt_bypass_low_internal_scandump,PASS,PASS
 pard2d1uladda1_pard2d1uladda1_ub_i_ult_scan_ctlr_stuckat_edt_bypass_low_internal_scandump,PASS,PASS
+pard2d1uladda0_ijtag_basic_tap_tests_continuity,PASS,PASS
 pard2d4uladda1_stuckat_edt_edt_low_internal_serial_scan,FAIL,Command './buildsimv.sh' returned exit status 2 !
 pard2d4uladda1_stuckat_edt_edt_low_internal_serial_chain,FAIL,Command './buildsimv.sh' returned exit status 2 !
 pard2d1chnl_stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,PASS,PASS
 pard2d4uladda1_atspeed_edt_edt_low_internal_serial_scan,FAIL,Command './buildsimv.sh' returned exit status 2 !
 pard2d1misc_stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,PASS,PASS
+pard2d1chnl_ijtag_basic_tap_tests_reset,FAIL,Error between simulated and expected patterns
 pard2d4uladda0_stuckat_edt_edt_low_internal_serial_scan,FAIL,Command './buildsimv.sh' returned exit status 2 !
 pard2d4uladda0_atspeed_edt_edt_low_internal_serial_scan,FAIL,Command './buildsimv.sh' returned exit status 2 !
 pard2d4uladda0_stuckat_edt_edt_low_internal_serial_chain,FAIL,Command './buildsimv.sh' returned exit status 2 !
 pard2d4misc_stuckat_edt_edt_low_internal_serial_scan,FAIL,Command './buildsimv.sh' returned exit status 2 !
 pard2d4misc_stuckat_edt_edt_low_internal_serial_chain,FAIL,Command './buildsimv.sh' returned exit status 2 !
 pard2d4misc_atspeed_edt_edt_low_internal_serial_scan,FAIL,Command './buildsimv.sh' returned exit status 2 !
+pard2d1chnl_ijtag_basic_tap_tests_continuity,PASS,PASS
 pard2d1chnl_pard2d1chnl_ub_i_ult_scan_ctlr_stuckat_edt_bypass_low_internal_scandump,PASS,PASS
 pard2d4chnl_stuckat_edt_edt_low_internal_serial_scan,FAIL,Command './buildsimv.sh' returned exit status 2 !
 pard2d4chnl_stuckat_edt_edt_low_internal_serial_chain,FAIL,Command './buildsimv.sh' returned exit status 2 !
@@ -52,6 +71,8 @@ pard2d4misc_stuckat_edt_edt_low_internal_loopback,FAIL,Command './buildsimv.sh' 
 pard2d4uladda0_stuckat_edt_edt_low_internal_loopback,FAIL,Command './buildsimv.sh' returned exit status 2 !
 pard2d4chnl_stuckat_edt_edt_low_internal_loopback,FAIL,Command './buildsimv.sh' returned exit status 2 !
 pard2d1uladda1_stuckat_edt_edt_low_internal_loopback,PASS,PASS
+d2d1_ijtag_basic_tap_tests_reset,FAIL,Error between simulated and expected patterns
+d2d1_ijtag_basic_tap_tests_continuity,FAIL,Error between simulated and expected patterns
 pard2d1uladda1_ssn_continuity,PASS,PASS
 pard2d1uladda0_ssn_continuity,PASS,PASS
 d2d1_ijtag_basic_tap_tests_rw_access,FAIL,Error between simulated and expected patterns
@@ -59,5 +80,6 @@ pard2d1misc_ssn_continuity,PASS,PASS
 pard2d1chnl_stuckat_edt_edt_low_internal_serial_chain,PASS,PASS
 pard2d1uladda0_stuckat_edt_edt_low_internal_loopback,PASS,PASS
 pard2d1misc_stuckat_edt_edt_low_internal_loopback,PASS,PASS
+pard2d4uladda1_ijtag_basic_tap_tests_reset,FAIL,Command './buildsimv.sh' returned exit status 2 !
 pard2d1chnl_stuckat_edt_edt_low_internal_loopback,PASS,PASS
 pard2d1chnl_ssn_continuity,PASS,PASS

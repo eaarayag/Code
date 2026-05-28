@@ -1,0 +1,3 @@
+FAIL	Emmanuel Araya	/nfs/site/disks/nwp_vmgr_testresults_006/NWP_DFT_Regressions/nio_d2d-a0-26ww13b/d2d/L2_regression.list/pard2d1misc_atspeed_edt_edt_low_internal_serial_scan/
+FAIL	KalthireddyX Gunasekhar	/nfs/site/disks/nwp_vmgr_testresults_006/NWP_DFT_Regressions/nio_d2d-a0-26ww13b/d2d/L2_regression.list/pard2d1uladda0_atspeed_edt_edt_low_internal_serial_scan/
+FAIL	KalthireddyX Gunasekhar	/nfs/site/disks/nwp_vmgr_testresults_006/NWP_DFT_Regressions/nio_d2d-a0-26ww13b/d2d/L2_regression.list/pard2d1uladda1_atspeed_edt_edt_low_internal_serial_scan/
