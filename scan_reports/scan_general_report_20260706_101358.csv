@@ -54,9 +54,9 @@ Partition Level,pard2d1uladda1,stuckat_edt_edt_low_internal_serial_chain,[NWP] s
 Partition Level,pard2d1uladda1,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,PASS,KalthireddyX Gunasekhar,nio_d2d-a0-26ww26a
 Stack Level,memstack,ssn_continuity,[NWP] SSN: continuity,MISSING,Sebastian Porras,nio_mc-a0-26ww27c
 Partition Level,pardfi,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,PASS,Mauricio Segura,nio_mc-a0-26ww27c
-Partition Level,pardfi,atspeed_edt_edt_low_internal_sih_loopback,,PASS,Mauricio Segura,nio_mc-a0-26ww27c
-Partition Level,pardfi,atspeed_edt_edt_low_internal_sih_serial_chain,,PASS,Mauricio Segura,nio_mc-a0-26ww27c
-Partition Level,pardfi,atspeed_edt_edt_low_internal_sih_serial_scan,,PASS,Mauricio Segura,nio_mc-a0-26ww27c
+Partition Level,pardfi,atspeed_edt_edt_low_internal_sih_loopback,[NWP] SIH case val,PASS,Diego Matamoros,nio_mc-a0-26ww27c
+Partition Level,pardfi,atspeed_edt_edt_low_internal_sih_serial_chain,[NWP] SIH case val,PASS,Diego Matamoros,nio_mc-a0-26ww27c
+Partition Level,pardfi,atspeed_edt_edt_low_internal_sih_serial_scan,[NWP] SIH case val,PASS,Diego Matamoros,nio_mc-a0-26ww27c
 Stack Level,pardfi,memstack_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,FAIL,Mauricio Segura,nio_mc-a0-26ww27c
 Stack Level,pardfi,memstack_retarget_stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,FAIL,Mauricio Segura,nio_mc-a0-26ww27c
 Stack Level,pardfi,memstack_retarget_stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,FAIL,Mauricio Segura,nio_mc-a0-26ww27c
@@ -71,9 +71,9 @@ Partition Level,pardfi,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: e
 Partition Level,pardfi,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,PASS,Sebastian Porras,nio_mc-a0-26ww27c
 Partition Level,pardfi,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,PASS,Mauricio Segura,nio_mc-a0-26ww27c
 Partition Level,pardfi,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,FAIL,Mauricio Segura,nio_mc-a0-26ww27c
-Partition Level,pardfi,stuckat_edt_edt_low_internal_sih_loopback,,PASS,Mauricio Segura,nio_mc-a0-26ww27c
-Partition Level,pardfi,stuckat_edt_edt_low_internal_sih_serial_chain,,PASS,Mauricio Segura,nio_mc-a0-26ww27c
-Partition Level,pardfi,stuckat_edt_edt_low_internal_sih_serial_scan,,FAIL,Mauricio Segura,nio_mc-a0-26ww27c
+Partition Level,pardfi,stuckat_edt_edt_low_internal_sih_loopback,[NWP] SIH case val,PASS,Diego Matamoros,nio_mc-a0-26ww27c
+Partition Level,pardfi,stuckat_edt_edt_low_internal_sih_serial_chain,[NWP] SIH case val,PASS,Diego Matamoros,nio_mc-a0-26ww27c
+Partition Level,pardfi,stuckat_edt_edt_low_internal_sih_serial_scan,[NWP] SIH case val,FAIL,Diego Matamoros,nio_mc-a0-26ww27c
 Partition Level,parmccore,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,PASS,Mario Alpizar,nio_mc-a0-26ww27c
 Stack Level,parmccore,memstack_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,FAIL,Mario Alpizar,nio_mc-a0-26ww27c
 Stack Level,parmccore,memstack_retarget_stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,FAIL,Mario Alpizar,nio_mc-a0-26ww27c
@@ -90,9 +90,9 @@ Partition Level,parmccore,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpo
 Partition Level,parmccore,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,PASS,Mario Alpizar,nio_mc-a0-26ww27c
 Partition Level,parmccore,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,PASS,Mario Alpizar,nio_mc-a0-26ww27c
 Partition Level,parmcmisc,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,PASS,Mauricio Segura,nio_mc-a0-26ww27c
-Partition Level,parmcmisc,atspeed_edt_edt_low_internal_sih_loopback,,PASS,Mauricio Segura,nio_mc-a0-26ww27c
-Partition Level,parmcmisc,atspeed_edt_edt_low_internal_sih_serial_chain,,PASS,Mauricio Segura,nio_mc-a0-26ww27c
-Partition Level,parmcmisc,atspeed_edt_edt_low_internal_sih_serial_scan,,PASS,Mauricio Segura,nio_mc-a0-26ww27c
+Partition Level,parmcmisc,atspeed_edt_edt_low_internal_sih_loopback,[NWP] SIH case val,PASS,Diego Matamoros,nio_mc-a0-26ww27c
+Partition Level,parmcmisc,atspeed_edt_edt_low_internal_sih_serial_chain,[NWP] SIH case val,PASS,Diego Matamoros,nio_mc-a0-26ww27c
+Partition Level,parmcmisc,atspeed_edt_edt_low_internal_sih_serial_scan,[NWP] SIH case val,PASS,Diego Matamoros,nio_mc-a0-26ww27c
 Stack Level,parmcmisc,memstack_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,FAIL,Mauricio Segura,nio_mc-a0-26ww27c
 Stack Level,parmcmisc,memstack_retarget_stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,FAIL,Mauricio Segura,nio_mc-a0-26ww27c
 Stack Level,parmcmisc,memstack_retarget_stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,FAIL,Mauricio Segura,nio_mc-a0-26ww27c
@@ -107,9 +107,9 @@ Partition Level,parmcmisc,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan
 Partition Level,parmcmisc,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,PASS,Sebastian Porras,nio_mc-a0-26ww27c
 Partition Level,parmcmisc,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,PASS,Mauricio Segura,nio_mc-a0-26ww27c
 Partition Level,parmcmisc,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,PASS,Mauricio Segura,nio_mc-a0-26ww27c
-Partition Level,parmcmisc,stuckat_edt_edt_low_internal_sih_loopback,,PASS,Mauricio Segura,nio_mc-a0-26ww27c
-Partition Level,parmcmisc,stuckat_edt_edt_low_internal_sih_serial_chain,,PASS,Mauricio Segura,nio_mc-a0-26ww27c
-Partition Level,parmcmisc,stuckat_edt_edt_low_internal_sih_serial_scan,,PASS,Mauricio Segura,nio_mc-a0-26ww27c
+Partition Level,parmcmisc,stuckat_edt_edt_low_internal_sih_loopback,[NWP] SIH case val,PASS,Diego Matamoros,nio_mc-a0-26ww27c
+Partition Level,parmcmisc,stuckat_edt_edt_low_internal_sih_serial_chain,[NWP] SIH case val,PASS,Diego Matamoros,nio_mc-a0-26ww27c
+Partition Level,parmcmisc,stuckat_edt_edt_low_internal_sih_serial_scan,[NWP] SIH case val,PASS,Diego Matamoros,nio_mc-a0-26ww27c
 Partition Level,parmcmse,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,PASS,Emmanuel Araya,nio_mc-a0-26ww27c
 Stack Level,parmcmse,memstack_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,PASS,Emmanuel Araya,nio_mc-a0-26ww27c
 Stack Level,parmcmse,memstack_retarget_stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,PASS,Emmanuel Araya,nio_mc-a0-26ww27c
