@@ -5,9 +5,10 @@ This workspace manages the NIO DFT L2 regression pipeline.
 ## Project Structure
 
 - `scripts/` — Python scripts (parse, report, email)
-- `config/` — Configuration files (email settings)
+- `config/` — Configuration files (email settings per pipeline)
 - `weekly_report/` — Downloaded per-model regression CSVs
-- `reports/` — Generated reports and executive summaries
+- `scan_reports/` — Generated SCAN reports and executive summaries
+- `tap_reports/` — Generated TAP reports and executive summaries
 
 ## Conventions
 

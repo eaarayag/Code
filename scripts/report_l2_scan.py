@@ -1,7 +1,7 @@
-# report_l2.py
+# report_l2_scan.py
 # Reads CSV files from the local weekly_report folder and generates a
 # consolidated report CSV with owner, test_case, status, and model.
-# Usage: python report_l2.py
+# Usage: python report_l2_scan.py
 
 import csv
 import glob
@@ -16,17 +16,20 @@ from datetime import datetime
 # --- Configuration ---
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))       # Directory where this script lives
 ROOT_DIR = os.path.dirname(SCRIPT_DIR)                        # Project root (parent of scripts/)
-OWNERSHIP_FILE = os.path.join(SCRIPT_DIR, "ownership.txt")    # Maps test prefixes to owners
+OWNERSHIP_FILE = os.path.join(SCRIPT_DIR, "scan_ownership.txt")  # Maps test prefixes to owners (SCAN pipeline)
 WEEKLY_REPORT_DIR = os.path.join(ROOT_DIR, "weekly_report")   # Folder with per-model regression CSVs
-REPORTS_DIR = os.path.join(ROOT_DIR, "reports")                # Folder for generated reports
+REPORTS_DIR = os.path.join(ROOT_DIR, "scan_reports")            # Folder for generated SCAN reports
 PARSE_SCRIPT = os.path.join(SCRIPT_DIR, "parse_l2_regression.py")  # Parser script path
 os.makedirs(REPORTS_DIR, exist_ok=True)
 TIMESTAMP = datetime.now().strftime("%Y%m%d_%H%M%S")          # Timestamp for output filename
-OUTPUT_REPORT = os.path.join(REPORTS_DIR, f"general_report_{TIMESTAMP}.csv")  # Final consolidated report
-STACK_HISTORY_FILE = os.path.join(REPORTS_DIR, "stack_status_history.csv")      # Historical percentages for partition-level plots (par*)
-STACK_LEVEL_HISTORY_FILE = os.path.join(REPORTS_DIR, "stack_level_status_history.csv")  # Historical percentages for stack-level plots
-GITHUB_PAGES_INDEX = "https://eaarayag.github.io/Code/reports/index.html"     # Report history on GitHub Pages
-GITHUB_PAGES_BASE = "https://eaarayag.github.io/Code/reports/"               # Base URL for individual reports
+OUTPUT_REPORT = os.path.join(REPORTS_DIR, f"scan_general_report_{TIMESTAMP}.csv")  # Final consolidated report
+STACK_HISTORY_FILE = os.path.join(REPORTS_DIR, "scan_stack_status_history.csv")      # Historical percentages for partition-level plots (par*)
+STACK_LEVEL_HISTORY_FILE = os.path.join(REPORTS_DIR, "scan_stack_level_status_history.csv")  # Historical percentages for stack-level plots
+GITHUB_PAGES_INDEX = "https://eaarayag.github.io/Code/scan_reports/scan_index.html"     # Report history on GitHub Pages
+GITHUB_PAGES_BASE = "https://eaarayag.github.io/Code/scan_reports/"               # Base URL for individual reports
+SIH_TEST_TOKEN = "_sih_"
+SIH_PVIM_ITEM = "[NWP] SIH case val"
+SIH_OWNER = "Diego Matamoros"
 
 
 def load_ownership(filepath):
@@ -174,6 +177,7 @@ EXCLUDED_TEST_TYPES = {
 # (also matches when the token appears after a partition-like prefix, e.g. "uio_1_ijtag_...").
 EXCLUDED_TEST_PREFIXES = (
     'ijtag',
+    'icl',
 )
 
 
@@ -185,6 +189,53 @@ def is_excluded_test_type(test_type):
         if test_type.startswith(token) or ('_' + token) in test_type:
             return True
     return False
+
+
+# PVIM mapping: maps test_type to PVIM item description for SCAN pipeline.
+SCAN_PVIM_MAPPING = {
+    'stuckat_edt_bypass_low_internal_serial_scan': '[NWP] scan: edtbyp stuckat proxy',
+    'stuckat_edt_edt_low_internal_serial_scan': '[NWP] scan: edten stuckat proxy',
+    'atspeed_edt_edt_low_internal_serial_scan': '[NWP] scan: edten atspeed proxy',
+    'stuckat_edt_bypass_low_internal_serial_chain': '[NWP] scan: edtbyp cont proxy',
+    'stuckat_edt_edt_low_internal_serial_chain': '[NWP] scan: edten cont proxy',
+    'stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off': '[NWP] scan: Burnin',
+    'ssn_continuity': '[NWP] SSN: continuity',
+    'stuckat_edt_edt_low_internal_loopback': '[NWP] SSN: endpoint loopback',
+}
+
+# Suffix-based PVIM mappings (for test types matched with '*' in EXPECTED_TESTS)
+SCAN_PVIM_SUFFIX_MAPPING = {
+    'scan_ctlr_stuckat_edt_bypass_low_internal_scandump': '[NWP] scan: scandump',
+}
+
+
+def get_scan_pvim_item(test_type):
+    """Look up PVIM item description for a given test_type.
+
+    Stack-level retarget tests (e.g. `d2d1_retarget_atspeed_edt_edt_low_internal_serial_scan`)
+    share the same Item value as their partition-level base test
+    (`atspeed_edt_edt_low_internal_serial_scan`). To support this, after an
+    exact-match miss we fall back to suffix matching against `SCAN_PVIM_MAPPING`
+    so the trailing base test name resolves to the same Item description.
+    """
+    if test_type in SCAN_PVIM_MAPPING:
+        return SCAN_PVIM_MAPPING[test_type]
+    for suffix, pvim_item in SCAN_PVIM_SUFFIX_MAPPING.items():
+        if test_type.endswith(suffix):
+            return pvim_item
+    # Fallback: stack-level retarget variants reuse the base test's Item value.
+    for base_name, pvim_item in SCAN_PVIM_MAPPING.items():
+        if test_type.endswith('_' + base_name):
+            return pvim_item
+    return ''
+
+
+def apply_sih_override(row):
+    """Force SIH rows to the required item/owner mapping."""
+    test_type = (row.get('test_type') or '').lower()
+    if SIH_TEST_TOKEN in test_type:
+        row['pvim_item'] = SIH_PVIM_ITEM
+        row['owner'] = SIH_OWNER
 
 
 # Expected test cases for every partition. '*' prefix means suffix match.
@@ -200,6 +251,40 @@ EXPECTED_TESTS = [
     'stuckat_edt_edt_low_internal_serial_scan',
 ]
 
+# Test types that are NOT expected to run at Stack Level scope.
+# Stack-root regions (d2d1, memstack, uio_a_0) should not be flagged as MISSING
+# for these test types because they will never exist as stack-level tests.
+STACK_LEVEL_EXCLUDED_EXPECTED_TESTS = {
+    'atspeed_edt_edt_low_internal_serial_scan',
+    'scan_ctlr_stuckat_edt_bypass_low_internal_scandump',
+    'stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off',
+    'stuckat_edt_bypass_low_internal_serial_chain',
+    'stuckat_edt_bypass_low_internal_serial_scan',
+    'stuckat_edt_edt_low_internal_loopback',
+    'stuckat_edt_edt_low_internal_serial_chain',
+    'stuckat_edt_edt_low_internal_serial_scan',
+}
+
+# Base test types that must exist at Stack Level scope for every non-root
+# partition, in the form `<stack>_retarget_<base>`. They map to these Items:
+#   stuckat_edt_edt_low_internal_serial_scan   -> [NWP] scan: edten stuckat proxy
+#   stuckat_edt_edt_low_internal_serial_chain  -> [NWP] scan: edten cont proxy
+#   stuckat_edt_edt_low_internal_loopback      -> [NWP] SSN: endpoint loopback
+#   atspeed_edt_edt_low_internal_serial_scan   -> [NWP] scan: edten atspeed proxy
+STACK_LEVEL_EXPECTED_BASE_TESTS = [
+    'stuckat_edt_edt_low_internal_serial_scan',
+    'stuckat_edt_edt_low_internal_serial_chain',
+    'stuckat_edt_edt_low_internal_loopback',
+    'atspeed_edt_edt_low_internal_serial_scan',
+]
+
+# Map partition model-type to the stack root used in `<stack>_retarget_*` tests.
+STACK_ROOT_BY_TYPE = {
+    'd2d': 'd2d1',
+    'mc': 'memstack',
+    'uio': 'uio_a_0',
+}
+
 def get_effective_owner(test_type, owner, test_type_overrides):
     """Return effective owner based on test-type-level overrides from ownership.txt.
     If the test_type matches an override and the current owner is not excluded, return the override owner."""
@@ -209,6 +294,27 @@ def get_effective_owner(test_type, owner, test_type_overrides):
                 return owner
             return override_owner
     return owner
+
+
+def get_scope(partition, test_type=''):
+    """Return validation scope label based on the stack identifier.
+
+    A row is classified as Stack Level when either:
+      1. The region/partition itself is a stack root (e.g. `d2d1`, `memstack`,
+         `uio_a_0`), or
+      2. The test name carries the cross-stack retarget identifier
+         `<stack>_retarget` (e.g. `d2d1_retarget_*`, `memstack_retarget_*`).
+    Everything else is classified as Partition Level.
+    """
+    stack_names = ('d2d1', 'memstack', 'uio_a_0')
+    region = (partition or '').strip().lower()
+    if region in stack_names:
+        return 'Stack Level'
+    name = (test_type or '').lower()
+    for stack in stack_names:
+        if f'{stack}_retarget' in name:
+            return 'Stack Level'
+    return 'Partition Level'
 
 
 def get_partition_type(partition):
@@ -225,6 +331,12 @@ def get_partition_type(partition):
         return 'mc'
     elif partition.startswith('parmio'):
         return 'uio'
+    # Explicit overrides for partitions whose prefix does not fit the rules
+    # above. Keep this list in sync with scan_ownership.txt entries so every
+    # partition is classified for completeness checks.
+    explicit_mc_partitions = {'pardfi', 'phy_cluster'}
+    if partition in explicit_mc_partitions:
+        return 'mc'
     return None
 
 
@@ -237,6 +349,52 @@ def get_model_type(model_name):
     elif model_name.startswith('nio_d2d'):
         return 'd2d'
     return None
+
+
+def _status_priority(status):
+    """Priority for collapsing duplicate rows of the same test.
+    FAIL is highest priority, then PASS, then MISSING/other."""
+    order = {
+        'FAIL': 3,
+        'PASS': 2,
+        'MISSING': 1,
+    }
+    return order.get((status or '').strip().upper(), 0)
+
+
+def dedupe_and_normalize_rows(rows):
+    """Collapse duplicate rows by (model, partition, test_type).
+
+    If multiple statuses are present for the same key, keep the one with the
+    highest priority so regressions are not hidden.
+    """
+    deduped = {}
+    for row in rows:
+        key = (row.get('model', ''), row.get('partition', ''), row.get('test_type', ''))
+        prev = deduped.get(key)
+        if prev is None:
+            deduped[key] = dict(row)
+            continue
+
+        prev_pri = _status_priority(prev.get('status'))
+        curr_pri = _status_priority(row.get('status'))
+        if curr_pri > prev_pri:
+            chosen = dict(row)
+            # Preserve fields that may be missing in the promoted row.
+            if not chosen.get('owner'):
+                chosen['owner'] = prev.get('owner', '')
+            if not chosen.get('pvim_item'):
+                chosen['pvim_item'] = prev.get('pvim_item', '')
+            deduped[key] = chosen
+            continue
+
+        # Keep previous status, but backfill missing non-key fields if needed.
+        if not prev.get('owner') and row.get('owner'):
+            prev['owner'] = row['owner']
+        if not prev.get('pvim_item') and row.get('pvim_item'):
+            prev['pvim_item'] = row['pvim_item']
+
+    return list(deduped.values())
 
 
 def _extract_timestamp_from_report_name(report_name):
@@ -257,14 +415,13 @@ def _format_report_timestamp_for_history(ts):
     return ''
 
 
-def _compute_stack_metrics(rows, include_partition=None):
+def _compute_stack_metrics(rows, include_row=None):
     """Compute PASS/FAIL/MISSING counts and percentages per stack (mc/uio/d2d).
-    A partition filter can be passed through include_partition(partition) -> bool.
+    A predicate `include_row(row)` can filter which rows are counted.
     """
     metrics = {}
     for r in rows:
-        partition = (r.get('partition') or '').strip()
-        if include_partition and not include_partition(partition):
+        if include_row and not include_row(r):
             continue
         stack = get_model_type(r['model'])
         if stack not in ('mc', 'uio', 'd2d'):
@@ -337,12 +494,11 @@ def _write_stack_history_csv(file_path, entries):
 
 def rebuild_stack_history_csv():
     """Rebuild partition-level and stack-level history CSV files from all general reports."""
-    pattern = os.path.join(REPORTS_DIR, 'general_report_*.csv')
+    pattern = os.path.join(REPORTS_DIR, 'scan_general_report_*.csv')
     report_paths = sorted(glob.glob(pattern))
 
     partition_entries = []
     stack_entries = []
-    stack_level_partitions = {'memstack', 'd2d1', 'uio_a_0'}
 
     def make_entry(report_name, ts_human, ts_compact, stack, m):
         return {
@@ -367,8 +523,11 @@ def rebuild_stack_history_csv():
         if not rows:
             continue
 
-        # Partition-level trends: only partitions starting with "par".
-        metrics = _compute_stack_metrics(rows, include_partition=lambda p: p.startswith('par'))
+        # Partition-level trends: rows whose scope is Partition Level.
+        metrics = _compute_stack_metrics(
+            rows,
+            include_row=lambda r: get_scope(r.get('partition', ''), r.get('test_type', '')) == 'Partition Level',
+        )
         for stack in ('mc', 'uio', 'd2d'):
             m = metrics.get(stack)
             if not m:
@@ -376,7 +535,10 @@ def rebuild_stack_history_csv():
             partition_entries.append(make_entry(report_name, ts_human, ts_compact, stack, m))
 
         # Stack-level trends: only memstack/d2d1/uio_a_0 partitions.
-        stack_metrics = _compute_stack_metrics(rows, include_partition=lambda p: p in stack_level_partitions)
+        stack_metrics = _compute_stack_metrics(
+            rows,
+            include_row=lambda r: get_scope(r.get('partition', ''), r.get('test_type', '')) == 'Stack Level',
+        )
         for stack in ('mc', 'uio', 'd2d'):
             m = stack_metrics.get(stack)
             if not m:
@@ -525,21 +687,32 @@ def check_test_completeness(all_rows, ownership, test_type_overrides, selected_m
 
     # Build combos only for matching partition/model types
     all_partition_combos = []
+    unmapped_prefixes = []
     for owner, prefix in ownership:
         p_type = get_partition_type(prefix)
+        if p_type is None:
+            unmapped_prefixes.append(prefix)
+            continue
         for model in selected_models:
             m_type = get_model_type(model)
             # Only pair partition with its matching model type
             if p_type and m_type and p_type == m_type:
                 all_partition_combos.append((prefix, model, owner))
+    if unmapped_prefixes:
+        print(f"Warning: {len(unmapped_prefixes)} ownership prefix(es) not classified "
+              f"by get_partition_type and will be skipped from MISSING checks: "
+              f"{', '.join(sorted(set(unmapped_prefixes)))}")
 
     missing_rows = []
     for (partition, model, owner) in all_partition_combos:
         test_types = existing.get((partition, model), set())
+        is_stack_level = get_scope(partition) == 'Stack Level'
         for expected in EXPECTED_TESTS:
             if expected.startswith('*'):
                 # Suffix match: check if any existing test_type ends with the pattern
                 suffix = expected[1:]
+                if is_stack_level and suffix in STACK_LEVEL_EXCLUDED_EXPECTED_TESTS:
+                    continue
                 if not any(tt.endswith(suffix) for tt in test_types):
                     effective_owner = get_effective_owner(suffix, owner, test_type_overrides)
                     missing_rows.append({
@@ -551,6 +724,8 @@ def check_test_completeness(all_rows, ownership, test_type_overrides, selected_m
                     })
             else:
                 # Exact match
+                if is_stack_level and expected in STACK_LEVEL_EXCLUDED_EXPECTED_TESTS:
+                    continue
                 if expected not in test_types:
                     effective_owner = get_effective_owner(expected, owner, test_type_overrides)
                     missing_rows.append({
@@ -560,6 +735,31 @@ def check_test_completeness(all_rows, ownership, test_type_overrides, selected_m
                         'status': 'MISSING',
                         'model': model,
                     })
+
+    # Stack Level expected retarget tests: every non-root partition should
+    # carry `<stack>_retarget_<base>` for each base test in
+    # STACK_LEVEL_EXPECTED_BASE_TESTS. Missing ones surface as Stack Level
+    # MISSING rows (scope is derived from the test name by get_scope).
+    stack_root_partitions = set(STACK_ROOT_BY_TYPE.values())
+    for (partition, model, owner) in all_partition_combos:
+        if partition in stack_root_partitions:
+            continue  # stack roots themselves are not expected to retarget
+        stack_root = STACK_ROOT_BY_TYPE.get(get_partition_type(partition))
+        if not stack_root:
+            continue
+        test_types = existing.get((partition, model), set())
+        for base in STACK_LEVEL_EXPECTED_BASE_TESTS:
+            expected_tt = f'{stack_root}_retarget_{base}'
+            if expected_tt in test_types:
+                continue
+            effective_owner = get_effective_owner(expected_tt, owner, test_type_overrides)
+            missing_rows.append({
+                'owner': effective_owner,
+                'partition': partition,
+                'test_type': expected_tt,
+                'status': 'MISSING',
+                'model': model,
+            })
 
     return missing_rows
 
@@ -590,6 +790,7 @@ def generate_general_report_for_models(selected_models):
                     'owner': effective_owner,
                     'partition': partition,
                     'test_type': test_type,
+                    'pvim_item': get_scan_pvim_item(test_type),
                     'status': row['test_status'],
                     'model': model,
                 })
@@ -604,10 +805,25 @@ def generate_general_report_for_models(selected_models):
         print(f"\nFound {len(missing_rows)} missing test(s) across partitions.")
         all_rows.extend(missing_rows)
 
+    # Consolidate repeated rows from source CSVs to keep one canonical entry per test.
+    before_dedupe = len(all_rows)
+    all_rows = dedupe_and_normalize_rows(all_rows)
+    deduped_count = before_dedupe - len(all_rows)
+    if deduped_count > 0:
+        print(f"Collapsed {deduped_count} duplicate test row(s) in consolidated report.")
+
+    # Populate pvim_item for missing rows that were added by check_test_completeness
+    for r in all_rows:
+        if 'pvim_item' not in r:
+            r['pvim_item'] = get_scan_pvim_item(r['test_type'])
+        # Populate validation scope so downstream consumers can group rows.
+        r['scope'] = get_scope(r.get('partition', ''), r.get('test_type', ''))
+        apply_sih_override(r)
+
     all_rows.sort(key=lambda r: (r['model'], r['partition'], r['test_type'], r['owner']))
 
     with open(OUTPUT_REPORT, 'w', newline='', encoding='utf-8') as f:
-        writer = csv.DictWriter(f, fieldnames=['partition', 'test_type', 'status', 'owner', 'model'])
+        writer = csv.DictWriter(f, fieldnames=['scope', 'partition', 'test_type', 'pvim_item', 'status', 'owner', 'model'])
         writer.writeheader()
         writer.writerows(all_rows)
 
@@ -627,7 +843,7 @@ def generate_general_report_html(all_rows):
 
     FONT = "font-family:Arial,Helvetica,sans-serif;"
     MONO = "font-family:Consolas,'Courier New',monospace;"
-    html_path = os.path.join(REPORTS_DIR, f"general_report_{TIMESTAMP}.html")
+    html_path = os.path.join(REPORTS_DIR, f"scan_general_report_{TIMESTAMP}.html")
 
     # Compute summary stats per owner
     owner_stats = {}
@@ -653,8 +869,6 @@ def generate_general_report_html(all_rows):
             models_seen.append(m)
         rows_by_model[m].append(r)
 
-    stack_level_partitions = {'memstack', 'd2d1', 'uio_a_0'}
-
     def compute_summary(rows):
         total = len(rows)
         total_pass = sum(1 for r in rows if r['status'] == 'PASS')
@@ -669,8 +883,8 @@ def generate_general_report_html(all_rows):
             'pass_rate': pass_rate,
         }
 
-    partition_rows = [r for r in all_rows if (r.get('partition') or '').startswith('par')]
-    stack_rows = [r for r in all_rows if (r.get('partition') or '') in stack_level_partitions]
+    partition_rows = [r for r in all_rows if get_scope(r.get('partition', ''), r.get('test_type', '')) == 'Partition Level']
+    stack_rows = [r for r in all_rows if get_scope(r.get('partition', ''), r.get('test_type', '')) == 'Stack Level']
     partition_summary = compute_summary(partition_rows)
     stack_summary = compute_summary(stack_rows)
 
@@ -692,9 +906,11 @@ def generate_general_report_html(all_rows):
 
     # ── Header banner ──
     h.append('<tr><td bgcolor="#0071c5" style="padding:24px 32px;">')
-    h.append(f'<table cellpadding="0" cellspacing="0" border="0"><tr><td style="{FONT}">')
-    h.append(f'<span style="color:#ffffff;font-size:22px;font-weight:bold;{FONT}">GENERAL REPORT</span><br>')
+    h.append(f'<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="{FONT}">')
+    h.append(f'<span style="color:#ffffff;font-size:22px;font-weight:bold;{FONT}">SCAN GENERAL REPORT</span><br>')
     h.append(f'<span style="color:#b3d9f2;font-size:14px;{FONT}">SCAN L2 Regression &mdash; {datetime.now().strftime("%Y-%m-%d %H:%M")}</span>')
+    h.append(f'</td><td align="right" valign="top" style="{FONT}">')
+    h.append(f'<a href="{GITHUB_PAGES_INDEX}" style="color:#ffffff;font-size:13px;text-decoration:underline;{FONT}">Report History</a>')
     h.append('</td></tr></table>')
     h.append('</td></tr>')
 
@@ -902,6 +1118,13 @@ def generate_general_report_html(all_rows):
     # ── Detailed test results per model ──
     for model in models_seen:
         model_rows = rows_by_model[model]
+        # Sort rows so Stack Level appears before Partition Level, then by
+        # region/test for stable, predictable ordering within each group.
+        def _scope_sort_key(row):
+            scope_val = row.get('scope') or get_scope(row.get('partition', ''), row.get('test_type', ''))
+            scope_rank = 0 if scope_val == 'Stack Level' else 1
+            return (scope_rank, row.get('partition', ''), row.get('test_type', ''))
+        model_rows = sorted(model_rows, key=_scope_sort_key)
         m_pass = sum(1 for r in model_rows if r['status'] == 'PASS')
         m_fail = sum(1 for r in model_rows if r['status'] == 'FAIL')
         m_miss = sum(1 for r in model_rows if r['status'] == 'MISSING')
@@ -921,15 +1144,19 @@ def generate_general_report_html(all_rows):
         h.append('<table width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #e0e0e0;">')
         # Table header
         h.append(f'<tr bgcolor="#f0f0f0">')
-        for col in ['Partition', 'Test Type', 'Status', 'Owner']:
+        for col in ['Scope', 'Region name', 'Item', 'Test', 'Status', 'Owner']:
             h.append(f'<td style="padding:7px 10px;font-size:12px;font-weight:bold;color:#555;border-bottom:2px solid #d0d0d0;{FONT}">{col}</td>')
         h.append('</tr>')
         # Table rows
         for i, r in enumerate(model_rows):
             bg = '#ffffff' if i % 2 == 0 else '#fafafa'
             st = r['status']
+            pvim = html_mod.escape(r.get('pvim_item', ''))
+            scope_val = html_mod.escape(r.get('scope') or get_scope(r.get('partition', ''), r.get('test_type', '')))
             h.append(f'<tr bgcolor="{bg}">')
+            h.append(f'<td style="padding:6px 10px;font-size:12px;color:#333;white-space:nowrap;{FONT}border-bottom:1px solid #eee;">{scope_val}</td>')
             h.append(f'<td style="padding:6px 10px;font-size:12px;color:#333;white-space:nowrap;{MONO}border-bottom:1px solid #eee;">{html_mod.escape(r["partition"])}</td>')
+            h.append(f'<td style="padding:6px 10px;font-size:12px;color:#333;white-space:nowrap;{MONO}border-bottom:1px solid #eee;">{pvim}</td>')
             h.append(f'<td style="padding:6px 10px;font-size:12px;color:#333;white-space:nowrap;{MONO}border-bottom:1px solid #eee;">{html_mod.escape(r["test_type"])}</td>')
             h.append(f'<td align="center" bgcolor="{status_bg(st)}" style="padding:6px 10px;font-size:12px;font-weight:bold;white-space:nowrap;color:{status_fg(st)};{FONT}border-bottom:1px solid #eee;">{st}</td>')
             h.append(f'<td style="padding:6px 10px;font-size:12px;color:#555;white-space:nowrap;{FONT}border-bottom:1px solid #eee;">{html_mod.escape(r["owner"])}</td>')
@@ -957,7 +1184,7 @@ def generate_general_report_html(all_rows):
 def find_previous_report(current_report_path):
     """Find the most recent general_report CSV before the current one."""
     current_name = os.path.basename(current_report_path)
-    pattern = os.path.join(REPORTS_DIR, "general_report_*.csv")
+    pattern = os.path.join(REPORTS_DIR, "scan_general_report_*.csv")
     reports = sorted(glob.glob(pattern))
     # Filter out the current report and pick the latest remaining
     previous = [r for r in reports if os.path.basename(r) != current_name]
@@ -965,7 +1192,7 @@ def find_previous_report(current_report_path):
 
 
 def _report_date_str(report_path):
-    """Extract date from report filename like general_report_20260407_151132.csv -> '2026-04-07 15:11:32'."""
+    """Extract date from report filename like scan_general_report_20260407_151132.csv -> '2026-04-07 15:11:32'."""
     basename = os.path.basename(report_path)
     import re
     m = re.search(r'(\d{4})(\d{2})(\d{2})_(\d{2})(\d{2})(\d{2})', basename)
@@ -975,12 +1202,16 @@ def _report_date_str(report_path):
 
 
 def load_report_as_dict(report_path):
-    """Load a general report CSV and return a dict keyed by (partition, test_type) -> row."""
+    """Load a general report CSV and return a dict keyed by (model_type, partition, test_type) -> row.
+
+    Uses model *category* (mc/uio/d2d) instead of the full model name so that
+    week-over-week model rotations (e.g. ww26 -> ww27) still align entries for
+    status-change detection."""
     result = {}
     with open(report_path, 'r', encoding='utf-8') as f:
         reader = csv.DictReader(f)
         for row in reader:
-            key = (row['partition'], row['test_type'])
+            key = (get_model_type(row.get('model', '')), row['partition'], row['test_type'])
             result[key] = row
     return result
 
@@ -998,6 +1229,24 @@ def _change_border_color(new_status):
 def _change_bg_color(new_status):
     """Return background color for a status change row."""
     return '#e8f5e9' if new_status == 'PASS' else '#ffebee'
+
+
+def _new_border_color(status):
+    """Left-border color for a newly-appeared test row (no prior baseline)."""
+    return {
+        'PASS': '#4caf50',
+        'FAIL': '#e53935',
+        'MISSING': '#fb8c00',
+    }.get(status, '#9e9e9e')
+
+
+def _new_bg_color(status):
+    """Background color for a newly-appeared test row."""
+    return {
+        'PASS': '#e8f5e9',
+        'FAIL': '#ffebee',
+        'MISSING': '#fff3e0',
+    }.get(status, '#f5f5f5')
 
 
 def generate_executive_summary(report_path):
@@ -1021,7 +1270,6 @@ def generate_executive_summary(report_path):
     prev_data = load_report_as_dict(prev_report_path) if prev_report_path else {}
 
     # Compute summary stats
-    stack_level_partitions = {'memstack', 'd2d1', 'uio_a_0'}
 
     def compute_summary(all_rows):
         total = len(all_rows)
@@ -1037,8 +1285,8 @@ def generate_executive_summary(report_path):
             'pass_rate': pass_rate,
         }
 
-    partition_rows = [r for r in rows if (r.get('partition') or '').startswith('par')]
-    stack_rows = [r for r in rows if (r.get('partition') or '') in stack_level_partitions]
+    partition_rows = [r for r in rows if get_scope(r.get('partition', ''), r.get('test_type', '')) == 'Partition Level']
+    stack_rows = [r for r in rows if get_scope(r.get('partition', ''), r.get('test_type', '')) == 'Stack Level']
     partition_summary = compute_summary(partition_rows)
     stack_summary = compute_summary(stack_rows)
 
@@ -1048,20 +1296,27 @@ def generate_executive_summary(report_path):
 
     # Collect status changes
     owner_changes = {}
+    owner_new_rows = {}
     if prev_data:
         current_data = {}
         for row in rows:
-            key = (row['partition'], row['test_type'])
+            key = (get_model_type(row.get('model', '')), row['partition'], row['test_type'])
             current_data[key] = row
         for key, cur_row in current_data.items():
             prev_row = prev_data.get(key)
-            if prev_row and prev_row['status'] != cur_row['status']:
+            if prev_row is None:
+                # No baseline entry — this is a newly-tracked test.
+                owner = cur_row.get('owner', 'UNKNOWN')
+                owner_new_rows.setdefault(owner, []).append(cur_row)
+                continue
+            if prev_row['status'] != cur_row['status']:
                 owner = cur_row.get('owner', 'UNKNOWN')
                 if owner not in owner_changes:
                     owner_changes[owner] = []
                 owner_changes[owner].append((cur_row, prev_row['status']))
 
     total_changes = sum(len(v) for v in owner_changes.values())
+    total_new = sum(len(v) for v in owner_new_rows.values())
 
     # ── Build HTML (Outlook-compatible Corporate Clean) ──
     # Outlook uses Word's rendering engine, so we must:
@@ -1085,9 +1340,11 @@ def generate_executive_summary(report_path):
 
     # ── Header banner ──
     h.append('<tr><td bgcolor="#0071c5" style="padding:24px 32px;">')
-    h.append(f'<table cellpadding="0" cellspacing="0" border="0"><tr><td style="{FONT}">')
-    h.append(f'<span style="color:#ffffff;font-size:22px;font-weight:bold;{FONT}">EXECUTIVE SUMMARY</span><br>')
+    h.append(f'<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="{FONT}">')
+    h.append(f'<span style="color:#ffffff;font-size:22px;font-weight:bold;{FONT}">SCAN EXECUTIVE SUMMARY</span><br>')
     h.append(f'<span style="color:#b3d9f2;font-size:14px;{FONT}">SCAN L2 Regression Report</span>')
+    h.append(f'</td><td align="right" valign="top" style="{FONT}">')
+    h.append(f'<a href="{GITHUB_PAGES_INDEX}" style="color:#ffffff;font-size:13px;text-decoration:underline;{FONT}">Report History</a>')
     h.append('</td></tr></table>')
     h.append('</td></tr>')
 
@@ -1170,25 +1427,14 @@ def generate_executive_summary(report_path):
     append_overall_summary_cards('OVERALL STACK LEVEL STATUS', stack_summary)
     h.append('</td></tr>')
 
-    # ── Historical trends links (partition-level and stack-level) ──
+    # ── Historical trends link ──
     h.append('<tr><td style="padding:8px 20px 16px;">')
     h.append(f'<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:10px;"><tr><td style="{FONT}">')
-    h.append(f'<span style="font-size:16px;font-weight:bold;color:#333;{FONT}">PARTITION LEVEL HISTORICAL TRENDS</span>')
+    h.append(f'<span style="font-size:16px;font-weight:bold;color:#333;{FONT}">HISTORICAL TRENDS</span>')
     h.append('</td></tr></table>')
     h.append('<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr>')
     h.append('<td bgcolor="#fbfbfb" style="border:1px solid #e6e6e6;padding:12px;">')
-    h.append(f'<span style="font-size:13px;color:#555;{FONT}">View partition trend charts on GitHub Pages: </span>')
-    h.append(f'<a href="{report_html_url}" style="color:#0071c5;text-decoration:none;font-size:13px;{FONT}">Open latest general report trends</a>')
-    h.append('</td></tr></table>')
-    h.append('</td></tr>')
-
-    h.append('<tr><td style="padding:0 20px 16px;">')
-    h.append(f'<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:10px;"><tr><td style="{FONT}">')
-    h.append(f'<span style="font-size:16px;font-weight:bold;color:#333;{FONT}">STACK LEVEL HISTORICAL TRENDS</span>')
-    h.append('</td></tr></table>')
-    h.append('<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr>')
-    h.append('<td bgcolor="#fbfbfb" style="border:1px solid #e6e6e6;padding:12px;">')
-    h.append(f'<span style="font-size:13px;color:#555;{FONT}">View stack trend charts on GitHub Pages: </span>')
+    h.append(f'<span style="font-size:13px;color:#555;{FONT}">View partition and stack trend charts on GitHub Pages: </span>')
     h.append(f'<a href="{report_html_url}" style="color:#0071c5;text-decoration:none;font-size:13px;{FONT}">Open latest general report trends</a>')
     h.append('</td></tr></table>')
     h.append('</td></tr>')
@@ -1370,6 +1616,7 @@ def generate_executive_summary(report_path):
     else:
         lines.append(f"")
         lines.append(f"  No previous report available for comparison.")
+
     lines.append("")
     lines.append("=" * 60)
 
@@ -1392,21 +1639,21 @@ def generate_executive_summary(report_path):
     print("\n" + "\n".join(lines))
 
     # Save HTML file
-    summary_file = os.path.join(REPORTS_DIR, f"executive_summary_{TIMESTAMP}.html")
+    summary_file = os.path.join(REPORTS_DIR, f"scan_executive_summary_{TIMESTAMP}.html")
     with open(summary_file, 'w', encoding='utf-8') as f:
         f.write(html_text)
     print(f"\nExecutive summary saved to: {summary_file}")
 
 
 def generate_index_html():
-    """Generate an index.html in reports/ that links to all general report HTML files."""
+    """Generate scan_index.html in scan_reports/ that links to all SCAN report HTML files."""
     import html as html_mod
     import re
 
     FONT = "font-family:Arial,Helvetica,sans-serif;"
 
     # Discover all general report HTML files
-    html_reports = sorted(glob.glob(os.path.join(REPORTS_DIR, "general_report_*.html")), reverse=True)
+    html_reports = sorted(glob.glob(os.path.join(REPORTS_DIR, "scan_general_report_*.html")), reverse=True)
 
     if not html_reports:
         print("No HTML general reports found. Skipping index generation.")
@@ -1423,7 +1670,7 @@ def generate_index_html():
         if m:
             date_str = f"{m.group(1)}-{m.group(2)}-{m.group(3)}"
             time_str = f"{m.group(4)}:{m.group(5)}:{m.group(6)}"
-            ww_raw = basename  # e.g. general_report_20260409_144523.html
+            ww_raw = basename  # e.g. scan_general_report_20260409_144523.html
         else:
             date_str = "Unknown"
             time_str = ""
@@ -1450,7 +1697,7 @@ def generate_index_html():
         rate = (p / total * 100) if total else 0
 
         # Find matching executive summary
-        summary_name = basename.replace('general_report_', 'executive_summary_')
+        summary_name = basename.replace('scan_general_report_', 'scan_executive_summary_')
         summary_path = os.path.join(REPORTS_DIR, summary_name)
         has_summary = os.path.isfile(summary_path)
 
@@ -1550,7 +1797,7 @@ def generate_index_html():
 
     h.append('</table></td></tr></table></body></html>')
 
-    index_path = os.path.join(REPORTS_DIR, "index.html")
+    index_path = os.path.join(REPORTS_DIR, "scan_index.html")
     with open(index_path, 'w', encoding='utf-8') as f:
         f.write("\n".join(h))
     print(f"Index page saved to: {index_path}")
@@ -1562,7 +1809,7 @@ def git_commit_and_push():
 
     print("\n--- Git Commit & Push ---")
     try:
-        subprocess.run(["git", "add", "reports/", "weekly_report/"], cwd=ROOT_DIR, check=True)
+        subprocess.run(["git", "add", "scan_reports/", "weekly_report/"], cwd=ROOT_DIR, check=True)
         # Check if there are staged changes
         result = subprocess.run(["git", "diff", "--cached", "--quiet"], cwd=ROOT_DIR)
         if result.returncode == 0:

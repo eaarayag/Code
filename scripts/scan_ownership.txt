@@ -7,7 +7,7 @@ Mario Alpizar,parmiofblptx
 Mario Alpizar,parmiohap_uio_0
 Mario Alpizar,parmioitc_uio_0
 Mario Alpizar,parmiopcie6ttcore_uio_0
-Mauricio Segura,parmemdfi0
+Mauricio Segura,pardfi
 Mauricio Segura,parmcmisc
 Mauricio Segura,parmiootc_uio_0
 Mauricio Segura,parmiopcie6trcore_uio_0
@@ -15,7 +15,7 @@ Mauricio Segura,parmioula_uio_0
 Mauricio Segura,parmiocxlrx_uio_0
 Mauricio Segura,parmioasf_uio_0
 Mauricio Segura,parmiocpc_uio_0
-Emmanuel Araya,parmemsram
+Emmanuel Araya,phy_cluster
 Emmanuel Araya,parmiopcie6ttidecee_uio_0
 Emmanuel Araya,pard2d1misc
 Emmanuel Araya,parmcmse

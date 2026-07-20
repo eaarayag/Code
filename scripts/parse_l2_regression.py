@@ -13,6 +13,12 @@ REMOTE_HOST = "sccc06381314.zsc24.intel.com"
 REMOTE_USER = "eaarayag"
 REMOTE_WORK_DIR = "/nfs/site/disks/nwp_dft_fe_002/eaarayag/scripts"
 
+# --- Regression Storage Paths (searched in order) ---
+BASE_PATHS = [
+    "/nfs/site/disks/nwp_vmgr_testresults_006/NWP_DFT_Regressions",
+    "/nfs/site/disks/nwp_vmgr_testresults_016/NWP_DFT_Regressions",
+]
+
 # --- Local Configuration ---
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = os.path.dirname(SCRIPT_DIR)
@@ -75,9 +81,6 @@ def parse_l2_regression_report(file_path, output_csv='regression_results.csv'):
                 'atspeed_edt_bypass_low_internal_serial_chain',
                 'atspeed_edt_edt_low_internal_loopback',
                 'atspeed_edt_edt_low_internal_serial_chain',
-                'icl_verify_dft',
-                'ijtag_basic_tap_tests_continuity',
-                'ijtag_basic_tap_tests_reset',
                 'stuckat_edt_bypass_low_internal_loopback',
                 'on_chip_compare',
             )
@@ -141,8 +144,6 @@ def build_report_path(model_name):
     Returns:
         str: Full path to the L2_regression.rpt file, or None on error
     """
-    base_path = "/nfs/site/disks/nwp_vmgr_testresults_006/NWP_DFT_Regressions"
-
     # Determine subfolder based on model type in the name
     subfolder_map = {
         'nio_mc':  'memstack',
@@ -159,74 +160,78 @@ def build_report_path(model_name):
     if subfolder is None:
         print(f"Error: Could not determine subfolder for model '{model_name}'.")
         print(f"Expected model name starting with: {', '.join(subfolder_map.keys())}")
-        _print_available_models(base_path)
+        _print_available_models()
         return None
 
-    # Verify the model directory exists in base_path
-    model_dir = f"{base_path}/{model_name}"
-    if not os.path.isdir(model_dir):
-        print(f"Error: Model directory '{model_name}' does not exist.")
-        _print_available_models(base_path)
-        return None
+    # Search across all base paths for the model directory
+    for base_path in BASE_PATHS:
+        model_dir = f"{base_path}/{model_name}"
+        if os.path.isdir(model_dir):
+            return f"{base_path}/{model_name}/{subfolder}/L2_regression.list.latest/L2_regression.rpt"
 
-    return f"{base_path}/{model_name}/{subfolder}/L2_regression.list.latest/L2_regression.rpt"
-
-
-def _print_available_models(base_path):
-    """List available model directories under base_path."""
-    try:
-        entries = sorted(os.listdir(base_path))
-        dirs = [e for e in entries if os.path.isdir(os.path.join(base_path, e))]
-        if dirs:
-            print("\nAvailable models:")
-            for d in dirs:
-                print(f"  {d}")
-        else:
-            print(f"\nNo model directories found in {base_path}")
-    except OSError as e:
-        print(f"\nCould not list available models: {e}")
+    print(f"Error: Model directory '{model_name}' does not exist in any known path.")
+    _print_available_models()
+    return None
 
 
-def discover_models(base_path):
+def _print_available_models():
+    """List available model directories under all base paths."""
+    print("\nAvailable models:")
+    for base_path in BASE_PATHS:
+        try:
+            entries = sorted(os.listdir(base_path))
+            dirs = [e for e in entries if os.path.isdir(os.path.join(base_path, e))]
+            if dirs:
+                print(f"  [{base_path}]")
+                for d in dirs:
+                    print(f"    {d}")
+        except OSError as e:
+            print(f"  [{base_path}] Could not list: {e}")
+
+
+def discover_models(base_paths=None):
     """
-    Auto-discover all valid model directories under base_path.
+    Auto-discover all valid model directories under all base paths.
+
+    Args:
+        base_paths: List of paths to search. Defaults to BASE_PATHS.
 
     Returns:
-        list: Sorted list of model directory names matching known prefixes.
+        list: Sorted list of unique model directory names matching known prefixes.
     """
+    if base_paths is None:
+        base_paths = BASE_PATHS
     subfolder_prefixes = ('nio_mc', 'nio_uio', 'nio_d2d')
-    try:
-        entries = sorted(os.listdir(base_path))
-        models = [
-            e for e in entries
-            if os.path.isdir(os.path.join(base_path, e))
-            and any(e.startswith(p) for p in subfolder_prefixes)
-        ]
-        return models
-    except OSError as e:
-        print(f"Error: Could not list models in {base_path}: {e}")
-        return []
+    all_models = set()
+    for base_path in base_paths:
+        try:
+            entries = os.listdir(base_path)
+            for e in entries:
+                if os.path.isdir(os.path.join(base_path, e)) and any(e.startswith(p) for p in subfolder_prefixes):
+                    all_models.add(e)
+        except OSError as e:
+            print(f"Warning: Could not list models in {base_path}: {e}")
+    return sorted(all_models)
 
 
 def list_remote_models():
     """Print available model names to stdout (one per line). No parsing."""
-    base_path = "/nfs/site/disks/nwp_vmgr_testresults_006/NWP_DFT_Regressions"
-    models = discover_models(base_path)
+    models = discover_models()
     for m in models:
         print(m)
 
 
 def run_remote_parsing(model_filter=None):
     """Run on the remote zsc24 machine: discover models, parse reports, write CSVs."""
-    base_path = "/nfs/site/disks/nwp_vmgr_testresults_006/NWP_DFT_Regressions"
-
-    # Auto-discover all available models
-    print(f"Discovering models in {base_path}...")
-    model_names = discover_models(base_path)
+    # Auto-discover all available models across all base paths
+    print(f"Discovering models in {len(BASE_PATHS)} path(s)...")
+    for bp in BASE_PATHS:
+        print(f"  {bp}")
+    model_names = discover_models()
 
     if not model_names:
         print("No models found matching known prefixes (nio_mc, nio_uio, nio_d2d).")
-        _print_available_models(base_path)
+        _print_available_models()
         return
 
     # Filter to only requested models if specified
@@ -271,7 +276,7 @@ def run_remote_parsing(model_filter=None):
         except OSError:
             timestamps[model_name] = "UNKNOWN"
 
-    # Save timestamps to JSON for use by report_l2.py
+    # Save timestamps to JSON for use by report_l2_scan.py
     timestamps_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "report_timestamps.json")
     with open(timestamps_file, 'w', encoding='utf-8') as f:
         json.dump(timestamps, f, indent=2)

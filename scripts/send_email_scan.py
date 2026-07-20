@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Send L2 regression report email using config/email_config.ini."""
+"""Send L2 regression report email using config/email_config_scan.ini."""
 
 import argparse
 import configparser
@@ -13,7 +13,7 @@ from email import encoders
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = os.path.dirname(SCRIPT_DIR)
-CONFIG_PATH = os.path.join(ROOT_DIR, "config", "email_config.ini")
+CONFIG_PATH = os.path.join(ROOT_DIR, "config", "email_config_scan.ini")
 
 
 def load_config():

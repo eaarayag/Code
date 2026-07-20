@@ -1,0 +1,3 @@
+- Python package installs to pypi work with Intel proxy http://proxy-dmz.intel.com:911.
+- Alternate working proxies observed: http://proxy-chain.intel.com:911 and http://proxy-us.intel.com:911.
+- Example install command used successfully: python -m pip install --user --proxy http://proxy-dmz.intel.com:911 matplotlib
