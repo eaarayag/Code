@@ -153,6 +153,15 @@ Stack Level,parmioasf_uio_0,uio_a_0_retarget_atspeed_edt_edt_low_internal_serial
 Stack Level,parmioasf_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,PASS,Sebastian Porras,nio_uio-a0-26ww31a
 Stack Level,parmioasf_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,PASS,Mauricio Segura,nio_uio-a0-26ww31a
 Stack Level,parmioasf_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,PASS,Mauricio Segura,nio_uio-a0-26ww31a
+Partition Level,parmioasf_uio_1,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmioasf_uio_1,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmioasf_uio_1,ssn_continuity,[NWP] SSN: continuity,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmioasf_uio_1,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmioasf_uio_1,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmioasf_uio_1,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmioasf_uio_1,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmioasf_uio_1,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmioasf_uio_1,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
 Partition Level,parmiocpc_uio_0,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,PASS,Mauricio Segura,nio_uio-a0-26ww31a
 Partition Level,parmiocpc_uio_0,parmiocpc_uio_0_ub_i_ult_scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,PASS,Mauricio Segura,nio_uio-a0-26ww31a
 Partition Level,parmiocpc_uio_0,ssn_continuity,[NWP] SSN: continuity,PASS,Sebastian Porras,nio_uio-a0-26ww31a
@@ -205,6 +214,15 @@ Stack Level,parmiofblprxfcrarbmux,uio_a_0_retarget_atspeed_edt_edt_low_internal_
 Stack Level,parmiofblprxfcrarbmux,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,PASS,Sebastian Porras,nio_uio-a0-26ww31a
 Stack Level,parmiofblprxfcrarbmux,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,PASS,Emmanuel Araya,nio_uio-a0-26ww31a
 Stack Level,parmiofblprxfcrarbmux,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,PASS,Emmanuel Araya,nio_uio-a0-26ww31a
+Partition Level,parmiofblprxfcrarbmux_uio_1,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmiofblprxfcrarbmux_uio_1,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmiofblprxfcrarbmux_uio_1,ssn_continuity,[NWP] SSN: continuity,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmiofblprxfcrarbmux_uio_1,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmiofblprxfcrarbmux_uio_1,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmiofblprxfcrarbmux_uio_1,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmiofblprxfcrarbmux_uio_1,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmiofblprxfcrarbmux_uio_1,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmiofblprxfcrarbmux_uio_1,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
 Partition Level,parmiofblptx,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,PASS,Mario Alpizar,nio_uio-a0-26ww31a
 Partition Level,parmiofblptx,parmiofblptx_ub_i_ult_scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,PASS,Mario Alpizar,nio_uio-a0-26ww31a
 Partition Level,parmiofblptx,ssn_continuity,[NWP] SSN: continuity,PASS,Sebastian Porras,nio_uio-a0-26ww31a
@@ -218,6 +236,15 @@ Stack Level,parmiofblptx,uio_a_0_retarget_atspeed_edt_edt_low_internal_serial_sc
 Stack Level,parmiofblptx,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,PASS,Sebastian Porras,nio_uio-a0-26ww31a
 Stack Level,parmiofblptx,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,PASS,Mario Alpizar,nio_uio-a0-26ww31a
 Stack Level,parmiofblptx,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,PASS,Mario Alpizar,nio_uio-a0-26ww31a
+Partition Level,parmiofblptx_uio_1,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmiofblptx_uio_1,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmiofblptx_uio_1,ssn_continuity,[NWP] SSN: continuity,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmiofblptx_uio_1,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmiofblptx_uio_1,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmiofblptx_uio_1,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmiofblptx_uio_1,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmiofblptx_uio_1,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmiofblptx_uio_1,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
 Partition Level,parmiofblpvnpipeac_uio_0,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,MISSING,Emmanuel Araya,nio_uio-a0-26ww31a
 Partition Level,parmiofblpvnpipeac_uio_0,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,MISSING,Emmanuel Araya,nio_uio-a0-26ww31a
 Partition Level,parmiofblpvnpipeac_uio_0,ssn_continuity,[NWP] SSN: continuity,MISSING,Sebastian Porras,nio_uio-a0-26ww31a
@@ -231,6 +258,15 @@ Stack Level,parmiofblpvnpipeac_uio_0,uio_a_0_retarget_atspeed_edt_edt_low_intern
 Stack Level,parmiofblpvnpipeac_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,MISSING,Sebastian Porras,nio_uio-a0-26ww31a
 Stack Level,parmiofblpvnpipeac_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,MISSING,Emmanuel Araya,nio_uio-a0-26ww31a
 Stack Level,parmiofblpvnpipeac_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,MISSING,Emmanuel Araya,nio_uio-a0-26ww31a
+Partition Level,parmiofblpvnpipeac_uio_1,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmiofblpvnpipeac_uio_1,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmiofblpvnpipeac_uio_1,ssn_continuity,[NWP] SSN: continuity,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmiofblpvnpipeac_uio_1,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmiofblpvnpipeac_uio_1,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmiofblpvnpipeac_uio_1,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmiofblpvnpipeac_uio_1,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmiofblpvnpipeac_uio_1,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmiofblpvnpipeac_uio_1,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
 Partition Level,parmiohap_uio_0,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,PASS,Mario Alpizar,nio_uio-a0-26ww31a
 Partition Level,parmiohap_uio_0,parmiohap_uio_0_ub_i_ult_scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,PASS,Mario Alpizar,nio_uio-a0-26ww31a
 Partition Level,parmiohap_uio_0,ssn_continuity,[NWP] SSN: continuity,PASS,Sebastian Porras,nio_uio-a0-26ww31a
@@ -289,6 +325,15 @@ Stack Level,parmiomisc_uio_0,uio_a_0_retarget_atspeed_edt_edt_low_internal_seria
 Stack Level,parmiomisc_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,PASS,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
 Stack Level,parmiomisc_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,PASS,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
 Stack Level,parmiomisc_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,PASS,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmiomisc_uio_1,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmiomisc_uio_1,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmiomisc_uio_1,ssn_continuity,[NWP] SSN: continuity,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmiomisc_uio_1,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmiomisc_uio_1,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmiomisc_uio_1,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmiomisc_uio_1,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmiomisc_uio_1,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmiomisc_uio_1,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
 Partition Level,parmiootc_uio_0,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,PASS,Mauricio Segura,nio_uio-a0-26ww31a
 Partition Level,parmiootc_uio_0,parmiootc_uio_0_ub_i_ult_scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,PASS,Mauricio Segura,nio_uio-a0-26ww31a
 Partition Level,parmiootc_uio_0,ssn_continuity,[NWP] SSN: continuity,PASS,Sebastian Porras,nio_uio-a0-26ww31a
@@ -354,6 +399,15 @@ Stack Level,parmiopcie6ttidecee_uio_0,uio_a_0_retarget_atspeed_edt_edt_low_inter
 Stack Level,parmiopcie6ttidecee_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,PASS,Sebastian Porras,nio_uio-a0-26ww31a
 Stack Level,parmiopcie6ttidecee_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,PASS,Emmanuel Araya,nio_uio-a0-26ww31a
 Stack Level,parmiopcie6ttidecee_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,PASS,Emmanuel Araya,nio_uio-a0-26ww31a
+Partition Level,parmiopcie6ttidecee_uio_1,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmiopcie6ttidecee_uio_1,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmiopcie6ttidecee_uio_1,ssn_continuity,[NWP] SSN: continuity,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmiopcie6ttidecee_uio_1,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmiopcie6ttidecee_uio_1,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmiopcie6ttidecee_uio_1,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmiopcie6ttidecee_uio_1,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmiopcie6ttidecee_uio_1,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmiopcie6ttidecee_uio_1,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
 Partition Level,parmiostaticmux_uio_0,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,PASS,Mario Alpizar,nio_uio-a0-26ww31a
 Partition Level,parmiostaticmux_uio_0,parmiostaticmux_uio_0_ub_i_ult_scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,PASS,Mario Alpizar,nio_uio-a0-26ww31a
 Partition Level,parmiostaticmux_uio_0,ssn_continuity,[NWP] SSN: continuity,PASS,Sebastian Porras,nio_uio-a0-26ww31a
@@ -380,4 +434,13 @@ Stack Level,parmioula_uio_0,uio_a_0_retarget_atspeed_edt_edt_low_internal_serial
 Stack Level,parmioula_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,PASS,Sebastian Porras,nio_uio-a0-26ww31a
 Stack Level,parmioula_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,PASS,Mauricio Segura,nio_uio-a0-26ww31a
 Stack Level,parmioula_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,PASS,Mauricio Segura,nio_uio-a0-26ww31a
+Partition Level,parmioula_uio_1,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmioula_uio_1,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmioula_uio_1,ssn_continuity,[NWP] SSN: continuity,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmioula_uio_1,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmioula_uio_1,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmioula_uio_1,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmioula_uio_1,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmioula_uio_1,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
+Partition Level,parmioula_uio_1,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,MISSING,KalthireddyX Gunasekhar,nio_uio-a0-26ww31a
 Stack Level,uio_a_0,ssn_continuity,[NWP] SSN: continuity,PASS,Sebastian Porras,nio_uio-a0-26ww31a
