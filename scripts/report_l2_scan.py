@@ -283,6 +283,45 @@ STACK_ROOT_BY_TYPE = {
     'd2d': 'd2d1',
     'mc': 'memstack',
     'uio': 'uio_a_0',
+    'uioe': 'uio_1',
+}
+
+# Partitions classified under the new `uioestack` bucket. These partitions
+# live inside the existing `nio_uio` model CSVs but are tracked in their own
+# table/history bucket.
+EXPLICIT_UIOE_PARTITIONS = {
+    'parmiofblpvnpipeac_uio_1',
+    'parmiofblptx_uio_1',
+    'parmiopcie6ttidecee_uio_1',
+    'parmioasf_uio_1',
+    'parmioula_uio_1',
+    'parmiomisc_uio_1',
+    'parmiofblprxfcrarbmux_uio_1',
+}
+
+# Which partition-types belong to each model category. A single model can host
+# more than one partition-type bucket (e.g. `nio_uio` hosts both `uio` and the
+# new `uioe` partitions).
+PARTITION_TYPES_FOR_MODEL = {
+    'mc': ('mc',),
+    'uio': ('uio', 'uioe'),
+    'd2d': ('d2d',),
+}
+
+# Ordered list of stack buckets and their display labels used for trend
+# charts, history CSVs, and per-model detail tables.
+STACK_BUCKETS = ('mc', 'uio', 'd2d', 'uioe')
+STACK_LABELS = {
+    'mc': 'MC Stack',
+    'uio': 'UIO Stack',
+    'd2d': 'D2D Stack',
+    'uioe': 'UIOe Stack',
+}
+STACK_CHART_LABELS = {
+    'mc': 'MEMSTACK',
+    'uio': 'UIO',
+    'd2d': 'D2D',
+    'uioe': 'UIOe Stack',
 }
 
 def get_effective_owner(test_type, owner, test_type_overrides):
@@ -301,30 +340,42 @@ def get_scope(partition, test_type=''):
 
     A row is classified as Stack Level when either:
       1. The region/partition itself is a stack root (e.g. `d2d1`, `memstack`,
-         `uio_a_0`), or
+         `uio_a_0`, `uio_1`), or
       2. The test name carries the cross-stack retarget identifier
-         `<stack>_retarget` (e.g. `d2d1_retarget_*`, `memstack_retarget_*`).
+         `<stack>_retarget` (e.g. `d2d1_retarget_*`, `memstack_retarget_*`,
+         `uio_a_0_retarget_*`, `uio_1_retarget_*`).
     Everything else is classified as Partition Level.
     """
-    stack_names = ('d2d1', 'memstack', 'uio_a_0')
+    stack_root_names = ('d2d1', 'memstack', 'uio_a_0', 'uio_1')
+    retarget_roots = ('d2d1', 'memstack', 'uio_a_0', 'uio_1')
     region = (partition or '').strip().lower()
-    if region in stack_names:
+    if region in stack_root_names:
         return 'Stack Level'
     name = (test_type or '').lower()
-    for stack in stack_names:
+    for stack in retarget_roots:
         if f'{stack}_retarget' in name:
             return 'Stack Level'
     return 'Partition Level'
 
 
 def get_partition_type(partition):
-    """Determine model type (mc/uio/d2d) for a partition based on its naming prefix."""
+    """Determine model type (mc/uio/d2d/uioe) for a partition based on its naming prefix."""
     if partition.startswith('memstack'):
         return 'mc'
     if partition.startswith('d2d1'):
         return 'd2d'
     if partition.startswith('uio_a_0'):
         return 'uio'
+    # `uio_1` is the stack root for the new UIOe Stack bucket — must be
+    # classified as `uioe` (not plain `uio`) so its Stack Level rows land in
+    # the UIOe Stack column of the trend charts.
+    if partition == 'uio_1':
+        return 'uioe'
+    # The new `uioestack` partitions live in `nio_uio` CSVs but form their own
+    # bucket. Match them explicitly BEFORE the generic `parmio*` rule so they
+    # are not misclassified as plain `uio`.
+    if partition in EXPLICIT_UIOE_PARTITIONS:
+        return 'uioe'
     if partition.startswith('pard2d'):
         return 'd2d'
     elif partition.startswith('parmc') or partition.startswith('parmem'):
@@ -416,15 +467,19 @@ def _format_report_timestamp_for_history(ts):
 
 
 def _compute_stack_metrics(rows, include_row=None):
-    """Compute PASS/FAIL/MISSING counts and percentages per stack (mc/uio/d2d).
+    """Compute PASS/FAIL/MISSING counts and percentages per stack bucket.
+
+    Rows are bucketed by partition-type (mc/uio/d2d/uioe) so that partitions
+    in the new `uioestack` bucket (which physically live inside `nio_uio`
+    model CSVs) are separated from the regular `uio` bucket.
     A predicate `include_row(row)` can filter which rows are counted.
     """
     metrics = {}
     for r in rows:
         if include_row and not include_row(r):
             continue
-        stack = get_model_type(r['model'])
-        if stack not in ('mc', 'uio', 'd2d'):
+        stack = get_partition_type(r.get('partition', ''))
+        if stack not in STACK_BUCKETS:
             continue
         if stack not in metrics:
             metrics[stack] = {'total': 0, 'pass': 0, 'fail': 0, 'missing': 0}
@@ -528,18 +583,18 @@ def rebuild_stack_history_csv():
             rows,
             include_row=lambda r: get_scope(r.get('partition', ''), r.get('test_type', '')) == 'Partition Level',
         )
-        for stack in ('mc', 'uio', 'd2d'):
+        for stack in STACK_BUCKETS:
             m = metrics.get(stack)
             if not m:
                 continue
             partition_entries.append(make_entry(report_name, ts_human, ts_compact, stack, m))
 
-        # Stack-level trends: only memstack/d2d1/uio_a_0 partitions.
+        # Stack-level trends: rows whose scope is Stack Level.
         stack_metrics = _compute_stack_metrics(
             rows,
             include_row=lambda r: get_scope(r.get('partition', ''), r.get('test_type', '')) == 'Stack Level',
         )
-        for stack in ('mc', 'uio', 'd2d'):
+        for stack in STACK_BUCKETS:
             m = stack_metrics.get(stack)
             if not m:
                 continue
@@ -557,7 +612,7 @@ def rebuild_stack_history_csv():
 
 def load_stack_history(history_file=STACK_HISTORY_FILE):
     """Load stack history rows keyed by stack from a history CSV file."""
-    data = {'mc': [], 'uio': [], 'd2d': []}
+    data = {stack: [] for stack in STACK_BUCKETS}
     if not os.path.isfile(history_file):
         return data
 
@@ -602,7 +657,7 @@ def _write_png_rgb(path, width, height, rgb_bytes):
 
 
 def _render_trend_png(history_data, output_path):
-    """Render 3 horizontal line charts (mc/uio/d2d) into a PNG image using matplotlib."""
+    """Render horizontal line charts (one per stack bucket) into a PNG image using matplotlib."""
     import importlib
 
     matplotlib = importlib.import_module('matplotlib')
@@ -632,8 +687,8 @@ def _render_trend_png(history_data, output_path):
         m = [by_date[d][2] for d in dates]
         return dates, p, f, m
 
-    stacks = [('mc', 'MEMSTACK'), ('uio', 'UIO'), ('d2d', 'D2D')]
-    fig, axes = plt.subplots(1, 3, figsize=(15.8, 3.6), dpi=160)
+    stacks = [(k, STACK_CHART_LABELS[k]) for k in STACK_BUCKETS]
+    fig, axes = plt.subplots(1, len(stacks), figsize=(5.2 * len(stacks), 3.6), dpi=160)
     if len(stacks) == 1:
         axes = [axes]
 
@@ -695,8 +750,9 @@ def check_test_completeness(all_rows, ownership, test_type_overrides, selected_m
             continue
         for model in selected_models:
             m_type = get_model_type(model)
-            # Only pair partition with its matching model type
-            if p_type and m_type and p_type == m_type:
+            # Only pair partition with a model whose category hosts this
+            # partition-type bucket (e.g. `nio_uio` hosts both `uio` and `uioe`).
+            if p_type and m_type and p_type in PARTITION_TYPES_FOR_MODEL.get(m_type, ()):
                 all_partition_combos.append((prefix, model, owner))
     if unmapped_prefixes:
         print(f"Warning: {len(unmapped_prefixes)} ownership prefix(es) not classified "
@@ -1061,28 +1117,33 @@ def generate_general_report_html(all_rows):
     h.append('</td></tr></table>')
     h.append('<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr>')
 
-    stacks = [('mc', 'MC Stack'), ('uio', 'UIO Stack'), ('d2d', 'D2D Stack')]
-    for i, (stack_key, stack_title) in enumerate(stacks):
+    # Partition-level trends: one column per bucket in STACK_BUCKETS
+    # (mc/uio/d2d/uioe). Column widths adapt so the row always sums to 100%.
+    partition_stacks = [(k, STACK_LABELS[k]) for k in STACK_BUCKETS]
+    partition_col_width = f"{int(100 / max(1, len(partition_stacks)))}%"
+    for i, (stack_key, stack_title) in enumerate(partition_stacks):
         if i > 0:
             h.append('<td width="10"></td>')
-        h.append('<td width="33%" valign="top" bgcolor="#fbfbfb" style="border:1px solid #e6e6e6;padding:8px 6px;">')
+        h.append(f'<td width="{partition_col_width}" valign="top" bgcolor="#fbfbfb" style="border:1px solid #e6e6e6;padding:8px 6px;">')
         h.append(render_stack_trend_svg(stack_history, stack_key, stack_title))
         h.append('</td>')
 
     h.append('</tr></table>')
     h.append('</td></tr>')
 
-    # ── Stack-level historical trends for memstack/d2d1/uio_a_0 ──
+    # ── Stack-level historical trends for memstack/d2d1/uio_a_0/uio_1 ──
     h.append('<tr><td style="padding:0 20px 16px;">')
     h.append(f'<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:10px;"><tr><td style="{FONT}">')
     h.append(f'<span style="font-size:16px;font-weight:bold;color:#333;{FONT}">STACK LEVEL HISTORICAL TRENDS</span>')
     h.append('</td></tr></table>')
     h.append('<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr>')
 
-    for i, (stack_key, stack_title) in enumerate(stacks):
+    stack_level_stacks = [(k, STACK_LABELS[k]) for k in STACK_BUCKETS]
+    stack_level_col_width = f"{int(100 / max(1, len(stack_level_stacks)))}%"
+    for i, (stack_key, stack_title) in enumerate(stack_level_stacks):
         if i > 0:
             h.append('<td width="10"></td>')
-        h.append('<td width="33%" valign="top" bgcolor="#fbfbfb" style="border:1px solid #e6e6e6;padding:8px 6px;">')
+        h.append(f'<td width="{stack_level_col_width}" valign="top" bgcolor="#fbfbfb" style="border:1px solid #e6e6e6;padding:8px 6px;">')
         h.append(render_stack_trend_svg(stack_level_history, stack_key, stack_title))
         h.append('</td>')
 
@@ -1116,53 +1177,66 @@ def generate_general_report_html(all_rows):
     h.append('</td></tr>')
 
     # ── Detailed test results per model ──
+    # Rows for partitions in the `uioestack` bucket are pulled into their own
+    # sub-table so they are not visually mixed with the main UIO stack rows.
     for model in models_seen:
         model_rows = rows_by_model[model]
+        main_rows = [r for r in model_rows if get_partition_type(r.get('partition', '')) != 'uioe']
+        uioe_rows = [r for r in model_rows if get_partition_type(r.get('partition', '')) == 'uioe']
+
         # Sort rows so Stack Level appears before Partition Level, then by
         # region/test for stable, predictable ordering within each group.
         def _scope_sort_key(row):
             scope_val = row.get('scope') or get_scope(row.get('partition', ''), row.get('test_type', ''))
             scope_rank = 0 if scope_val == 'Stack Level' else 1
             return (scope_rank, row.get('partition', ''), row.get('test_type', ''))
-        model_rows = sorted(model_rows, key=_scope_sort_key)
-        m_pass = sum(1 for r in model_rows if r['status'] == 'PASS')
-        m_fail = sum(1 for r in model_rows if r['status'] == 'FAIL')
-        m_miss = sum(1 for r in model_rows if r['status'] == 'MISSING')
 
-        h.append('<tr><td style="padding:16px 32px 8px;">')
-        h.append(f'<table cellpadding="0" cellspacing="0" border="0"><tr><td style="{FONT}">')
-        h.append(f'<span style="font-size:15px;font-weight:bold;color:#333;{FONT}">{html_mod.escape(model)}</span> ')
-        h.append(f'<span style="font-size:12px;color:#888;{FONT}">')
-        h.append(f'&mdash; {len(model_rows)} tests: ')
-        h.append(f'<span style="color:#2e7d32;">{m_pass} pass</span>, ')
-        h.append(f'<span style="color:#c62828;">{m_fail} fail</span>, ')
-        h.append(f'<span style="color:#e65100;">{m_miss} missing</span>')
-        h.append('</span></td></tr></table>')
-        h.append('</td></tr>')
+        for sub_label, sub_rows in (('', main_rows), (STACK_LABELS['uioe'], uioe_rows)):
+            if not sub_rows:
+                continue
+            sub_rows = sorted(sub_rows, key=_scope_sort_key)
+            m_pass = sum(1 for r in sub_rows if r['status'] == 'PASS')
+            m_fail = sum(1 for r in sub_rows if r['status'] == 'FAIL')
+            m_miss = sum(1 for r in sub_rows if r['status'] == 'MISSING')
 
-        h.append('<tr><td style="padding:0 32px 16px;">')
-        h.append('<table width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #e0e0e0;">')
-        # Table header
-        h.append(f'<tr bgcolor="#f0f0f0">')
-        for col in ['Scope', 'Region name', 'Item', 'Test', 'Status', 'Owner']:
-            h.append(f'<td style="padding:7px 10px;font-size:12px;font-weight:bold;color:#555;border-bottom:2px solid #d0d0d0;{FONT}">{col}</td>')
-        h.append('</tr>')
-        # Table rows
-        for i, r in enumerate(model_rows):
-            bg = '#ffffff' if i % 2 == 0 else '#fafafa'
-            st = r['status']
-            pvim = html_mod.escape(r.get('pvim_item', ''))
-            scope_val = html_mod.escape(r.get('scope') or get_scope(r.get('partition', ''), r.get('test_type', '')))
-            h.append(f'<tr bgcolor="{bg}">')
-            h.append(f'<td style="padding:6px 10px;font-size:12px;color:#333;white-space:nowrap;{FONT}border-bottom:1px solid #eee;">{scope_val}</td>')
-            h.append(f'<td style="padding:6px 10px;font-size:12px;color:#333;white-space:nowrap;{MONO}border-bottom:1px solid #eee;">{html_mod.escape(r["partition"])}</td>')
-            h.append(f'<td style="padding:6px 10px;font-size:12px;color:#333;white-space:nowrap;{MONO}border-bottom:1px solid #eee;">{pvim}</td>')
-            h.append(f'<td style="padding:6px 10px;font-size:12px;color:#333;white-space:nowrap;{MONO}border-bottom:1px solid #eee;">{html_mod.escape(r["test_type"])}</td>')
-            h.append(f'<td align="center" bgcolor="{status_bg(st)}" style="padding:6px 10px;font-size:12px;font-weight:bold;white-space:nowrap;color:{status_fg(st)};{FONT}border-bottom:1px solid #eee;">{st}</td>')
-            h.append(f'<td style="padding:6px 10px;font-size:12px;color:#555;white-space:nowrap;{FONT}border-bottom:1px solid #eee;">{html_mod.escape(r["owner"])}</td>')
+            heading = html_mod.escape(model)
+            if sub_label:
+                heading = f"{heading} &mdash; {html_mod.escape(sub_label)}"
+
+            h.append('<tr><td style="padding:16px 32px 8px;">')
+            h.append(f'<table cellpadding="0" cellspacing="0" border="0"><tr><td style="{FONT}">')
+            h.append(f'<span style="font-size:15px;font-weight:bold;color:#333;{FONT}">{heading}</span> ')
+            h.append(f'<span style="font-size:12px;color:#888;{FONT}">')
+            h.append(f'&mdash; {len(sub_rows)} tests: ')
+            h.append(f'<span style="color:#2e7d32;">{m_pass} pass</span>, ')
+            h.append(f'<span style="color:#c62828;">{m_fail} fail</span>, ')
+            h.append(f'<span style="color:#e65100;">{m_miss} missing</span>')
+            h.append('</span></td></tr></table>')
+            h.append('</td></tr>')
+
+            h.append('<tr><td style="padding:0 32px 16px;">')
+            h.append('<table width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #e0e0e0;">')
+            # Table header
+            h.append(f'<tr bgcolor="#f0f0f0">')
+            for col in ['Scope', 'Region name', 'Item', 'Test', 'Status', 'Owner']:
+                h.append(f'<td style="padding:7px 10px;font-size:12px;font-weight:bold;color:#555;border-bottom:2px solid #d0d0d0;{FONT}">{col}</td>')
             h.append('</tr>')
-        h.append('</table>')
-        h.append('</td></tr>')
+            # Table rows
+            for i, r in enumerate(sub_rows):
+                bg = '#ffffff' if i % 2 == 0 else '#fafafa'
+                st = r['status']
+                pvim = html_mod.escape(r.get('pvim_item', ''))
+                scope_val = html_mod.escape(r.get('scope') or get_scope(r.get('partition', ''), r.get('test_type', '')))
+                h.append(f'<tr bgcolor="{bg}">')
+                h.append(f'<td style="padding:6px 10px;font-size:12px;color:#333;white-space:nowrap;{FONT}border-bottom:1px solid #eee;">{scope_val}</td>')
+                h.append(f'<td style="padding:6px 10px;font-size:12px;color:#333;white-space:nowrap;{MONO}border-bottom:1px solid #eee;">{html_mod.escape(r["partition"])}</td>')
+                h.append(f'<td style="padding:6px 10px;font-size:12px;color:#333;white-space:nowrap;{MONO}border-bottom:1px solid #eee;">{pvim}</td>')
+                h.append(f'<td style="padding:6px 10px;font-size:12px;color:#333;white-space:nowrap;{MONO}border-bottom:1px solid #eee;">{html_mod.escape(r["test_type"])}</td>')
+                h.append(f'<td align="center" bgcolor="{status_bg(st)}" style="padding:6px 10px;font-size:12px;font-weight:bold;white-space:nowrap;color:{status_fg(st)};{FONT}border-bottom:1px solid #eee;">{st}</td>')
+                h.append(f'<td style="padding:6px 10px;font-size:12px;color:#555;white-space:nowrap;{FONT}border-bottom:1px solid #eee;">{html_mod.escape(r["owner"])}</td>')
+                h.append('</tr>')
+            h.append('</table>')
+            h.append('</td></tr>')
 
     # ── Footer ──
     h.append('<tr><td bgcolor="#f8f8f8" style="padding:16px 32px;border-top:1px solid #e0e0e0;">')

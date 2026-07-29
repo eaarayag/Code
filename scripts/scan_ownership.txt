@@ -26,9 +26,17 @@ Emmanuel Araya,parmiofblpvnpipeac_uio_0
 KalthireddyX Gunasekhar,pard2d1uladda0
 KalthireddyX Gunasekhar,pard2d1uladda1
 KalthireddyX Gunasekhar,parmiomisc_uio_0
+KalthireddyX Gunasekhar,parmiofblpvnpipeac_uio_1
+KalthireddyX Gunasekhar,parmiofblptx_uio_1
+KalthireddyX Gunasekhar,parmiopcie6ttidecee_uio_1
+KalthireddyX Gunasekhar,parmioasf_uio_1
+KalthireddyX Gunasekhar,parmioula_uio_1
+KalthireddyX Gunasekhar,parmiomisc_uio_1
+KalthireddyX Gunasekhar,parmiofblprxfcrarbmux_uio_1
 Mario Alpizar,memstack
 Emmanuel Araya,d2d1
 Mauricio Segura,uio_a_0
+KalthireddyX Gunasekhar,uio_1
 
 # Test-type-level ownership (format: Owner,@test_type,exclude:PartitionOwner)
 # These override the partition owner for specific test types.

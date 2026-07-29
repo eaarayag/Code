@@ -1,7 +1,7 @@
 # Partition-level ownership for TAP pipeline (format: Owner,partition_prefix)
-Gaby Gomez,parmiostaticmux_uio_0
+Maria Perez,parmiostaticmux_uio_0
 Natalia Abarca,pard2d1chnl
-Gaby Gomez,parmccore
+Maria Perez,parmccore
 Sebastian Porras,parmiocxltx_uio_0
 Sebastian Porras,parmiofblptx
 Sebastian Porras,parmiohap_uio_0
@@ -26,8 +26,16 @@ Sebastian Porras,parmiofblpvnpipeac_uio_0
 SathyahX Sv,pard2d1uladda0
 SathyahX Sv,pard2d1uladda1
 Bhanu Vattikuti,parmiomisc_uio_0
+SathyahX Sv,parmiofblpvnpipeac_uio_1
+SathyahX Sv,parmiofblptx_uio_1
+SathyahX Sv,parmiopcie6ttidecee_uio_1
+SathyahX Sv,parmioasf_uio_1
+SathyahX Sv,parmioula_uio_1
+SathyahX Sv,parmiomisc_uio_1
+SathyahX Sv,parmiofblprxfcrarbmux_uio_1
 Alex McBride,memstack
 Sebastian Porras,d2d1
 SathyahX Sv,uio_a_0
+SathyahX Sv,uio_1
 Bhanu Vattikuti,@ijtag_basic_tap_tests_continuity,exclude:Sebastian Porras,exclude:SathyahX Sv,exclude:Gaby Gomez,exclude:Natalia Abarca
 Bhanu Vattikuti,@icl_verify_dft,exclude:Sebastian Porras,exclude:SathyahX Sv,exclude:Gaby Gomez,exclude:Natalia Abarca
