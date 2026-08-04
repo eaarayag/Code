@@ -187,18 +187,14 @@ def is_included_test_type(test_type):
 # PVIM mapping: each entry is (pvim_item_description, test_name_or_None).
 # For each partition, one row per PVIM item is generated.
 # If test_name is None, status is "N/A". If test_name is set, status comes from regression.
+# Each test appears at most once so tables stay unique per test.
 PVIM_MAPPING = [
-    ('[NWP] TAP: iJTAG reset / network collapse', 'ijtag_basic_tap_tests_tlr_reset'),
-    ('[NWP] TAP: check reset (default) register values', 'ijtag_basic_tap_tests_reset'),
+    ('[NWP] TAP: tap tests tlr reset', 'ijtag_basic_tap_tests_tlr_reset'),
+    ('[NWP] TAP: tap tests reset', 'ijtag_basic_tap_tests_reset'),
     ('[NWP] TAP: IDCODE all taps in the partition', 'ijtag_basic_tap_tests_user_defined'),
-    ('[NWP] TAP: rw to all RTDR/TDR', 'ijtag_basic_tap_tests_rw_access'),
-    ('[NWP] TAP: ijtag reset does not perturb TDRs', 'ijtag_basic_tap_tests_tlr_reset'),
-    ('[NWP] TAP: treset - verify no TDRs perturbed by TRESET', 'ijtag_basic_tap_tests_tlr_reset'),
-    ('[NWP] TAP: iJTAG R/W', 'ijtag_basic_tap_tests_rw_access'),
-    ('[NWP] TAP: IJTAG icl continuity tests of entire network', 'ijtag_basic_tap_tests_continuity'),
-    ('[NWP] TAP: pause-dr, exit, pause-ir', 'ijtag_basic_tap_tests_continuity'),
-    ('[NWP] TAP: chain connectivity all RTDR and TDRs', 'ijtag_basic_tap_tests_continuity'),
-    ('[NWP] TAP: icl_verify', 'icl_verify_dft'),
+    ('[NWP] TAP: tap tests rw access', 'ijtag_basic_tap_tests_rw_access'),
+    ('[NWP] TAP: tap tests continuity', 'ijtag_basic_tap_tests_continuity'),
+    ('[NWP] TAP: icl verify dft', 'icl_verify_dft'),
 ]
 
 # PVIM items that only apply to a restricted set of partitions. Any partition
