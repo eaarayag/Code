@@ -1,31 +1,31 @@
 # Partition-level ownership for TAP pipeline (format: Owner,partition_prefix)
-Maria Perez,parmiostaticmux_uio_0
-Natalia Abarca,pard2d1chnl
+Sebastian Porras,phy_cluster
 Maria Perez,parmccore
-Sebastian Porras,parmiocxltx_uio_0
-Sebastian Porras,parmiofblptx
-Sebastian Porras,parmiohap_uio_0
-Sebastian Porras,parmioitc_uio_0
-Sebastian Porras,parmiopcie6ttcore_uio_0
+Sebastian Porras,parmcmse
 Natalia Abarca,pardfi
 Sebastian Porras,parmcmisc
+Natalia Abarca,pard2d1chnl
+Sebastian Porras,pard2d1misc
+SathyahX Sv,pard2d1uladda1
+SathyahX Sv,pard2d1uladda0
+Maria Perez,parmiostaticmux_uio_0
+Sebastian Porras,parmiopcie6ttidecee_uio_0
+Sebastian Porras,parmiocxltx_uio_0
+Sebastian Porras,parmiofblptx
+Sebastian Porras,parmioiommu_uio_0
+Sebastian Porras,parmiohap_uio_0
 Sebastian Porras,parmiootc_uio_0
 Sebastian Porras,parmiopcie6trcore_uio_0
+Sebastian Porras,parmiofblprxfcrarbmux
+Sebastian Porras,parmioitc_uio_0
+Sebastian Porras,parmiopcie6tridelldp_uio_0
+Sebastian Porras,parmiopcie6ttcore_uio_0
+Sebastian Porras,parmiofblpvnpipeac_uio_0
 Natalia Abarca,parmioula_uio_0
 Sebastian Porras,parmiocxlrx_uio_0
+Bhanu Vattikuti,parmiomisc_uio_0
 Natalia Abarca,parmioasf_uio_0
 Natalia Abarca,parmiocpc_uio_0
-Sebastian Porras,phy_cluster
-Sebastian Porras,parmiopcie6ttidecee_uio_0
-Sebastian Porras,pard2d1misc
-Sebastian Porras,parmcmse
-Sebastian Porras,parmioiommu_uio_0
-Sebastian Porras,parmiofblprxfcrarbmux
-Sebastian Porras,parmiopcie6tridelldp_uio_0
-Sebastian Porras,parmiofblpvnpipeac_uio_0
-SathyahX Sv,pard2d1uladda0
-SathyahX Sv,pard2d1uladda1
-Bhanu Vattikuti,parmiomisc_uio_0
 SathyahX Sv,parmiofblpvnpipeac_uio_1
 SathyahX Sv,parmiofblptx_uio_1
 SathyahX Sv,parmiopcie6ttidecee_uio_1
@@ -33,9 +33,6 @@ SathyahX Sv,parmioasf_uio_1
 SathyahX Sv,parmioula_uio_1
 SathyahX Sv,parmiomisc_uio_1
 SathyahX Sv,parmiofblprxfcrarbmux_uio_1
-Alex McBride,memstack
-Sebastian Porras,d2d1
-SathyahX Sv,uio_a_0
 SathyahX Sv,uio_1
-Bhanu Vattikuti,@ijtag_basic_tap_tests_continuity,exclude:Sebastian Porras,exclude:SathyahX Sv,exclude:Gaby Gomez,exclude:Natalia Abarca
+
 Bhanu Vattikuti,@icl_verify_dft,exclude:Sebastian Porras,exclude:SathyahX Sv,exclude:Gaby Gomez,exclude:Natalia Abarca
