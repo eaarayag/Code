@@ -22,13 +22,14 @@ def load_config():
     return config
 
 
-def build_message(config, subject, body_html, attachments):
+def build_message(config, subject, body_html, attachments, to_override=None, cc_override=None):
     msg = MIMEMultipart("mixed")
     msg["Subject"] = subject
     msg["From"] = f"{config['sender']['display_name']} <{config['sender']['address']}>"
-    msg["To"] = config["recipients"]["to"]
-    if config["recipients"].get("cc"):
-        msg["Cc"] = config["recipients"]["cc"]
+    msg["To"] = to_override if to_override is not None else config["recipients"]["to"]
+    cc_value = cc_override if cc_override is not None else config["recipients"].get("cc", "")
+    if cc_value:
+        msg["Cc"] = cc_value
 
     msg.attach(MIMEText(body_html, "html"))
 
@@ -44,23 +45,15 @@ def build_message(config, subject, body_html, attachments):
     return msg
 
 
-def get_all_recipients(config):
-    recipients = [
-        addr.strip()
-        for addr in config["recipients"]["to"].split(",")
-        if addr.strip()
-    ]
-    if config["recipients"].get("cc"):
-        recipients += [
-            addr.strip()
-            for addr in config["recipients"]["cc"].split(",")
-            if addr.strip()
-        ]
+def get_all_recipients(msg):
+    recipients = [addr.strip() for addr in (msg["To"] or "").split(",") if addr.strip()]
+    if msg.get("Cc"):
+        recipients += [addr.strip() for addr in msg["Cc"].split(",") if addr.strip()]
     return recipients
 
 
 def send(msg, config, dry_run=False):
-    all_recipients = get_all_recipients(config)
+    all_recipients = get_all_recipients(msg)
     print(f"\nFrom:    {msg['From']}")
     print(f"To:      {msg['To']}")
     if msg.get("Cc"):
@@ -91,6 +84,11 @@ def main():
     parser.add_argument("--body-file", required=True, help="Path to HTML file for email body")
     parser.add_argument("--attach", nargs="*", default=[], help="Files to attach")
     parser.add_argument("--dry-run", action="store_true", help="Preview without sending")
+    parser.add_argument("--to", default=None,
+                        help="Override the recipients 'To' list from the config (comma-separated).")
+    parser.add_argument("--cc", default=None,
+                        help="Override the recipients 'Cc' list from the config (comma-separated). "
+                             "Pass an empty string to clear Cc.")
     args = parser.parse_args()
 
     body_path = os.path.abspath(args.body_file)
@@ -107,7 +105,12 @@ def main():
         body_html = f.read()
 
     config = load_config()
-    msg = build_message(config, args.subject, body_html, [os.path.abspath(a) for a in args.attach])
+    msg = build_message(
+        config, args.subject, body_html,
+        [os.path.abspath(a) for a in args.attach],
+        to_override=args.to,
+        cc_override=args.cc,
+    )
     send(msg, config, dry_run=args.dry_run)
 
 

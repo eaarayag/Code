@@ -218,6 +218,60 @@ PVIM_PARTITION_ALLOWLIST = {
 
 STACK_ROOT_PARTITIONS = {'d2d1', 'memstack', 'uio_a_0', 'uio_1'}
 
+# ── Stack Level: expected combos for MISSING detection ─────────────────────
+# Mirrors the Partition-Level MISSING logic. For each (stack_root, model,
+# partition, test_type) combo derived from these constants, if the parsed
+# `_stacklevel_regression_results.csv` does NOT contain a matching entry, the
+# report emits a MISSING row so gaps in coverage are visible.
+#
+# STACK_PVIM_MAPPING: PVIM items that apply at Stack Level. Only the three
+# test types the parser keeps via TAP_STACKLEVEL_KEYWORDS = (rw, reset,
+# continuity) are valid here. Order controls report ordering.
+STACK_PVIM_MAPPING = [
+    ('[NWP] TAP: tap tests reset',      'ijtag_basic_tap_tests_reset'),
+    ('[NWP] TAP: tap tests rw access',  'ijtag_basic_tap_tests_rw_access'),
+    ('[NWP] TAP: tap tests continuity', 'ijtag_basic_tap_tests_continuity'),
+]
+
+# STACK_EXPECTED_PARTITIONS_BY_ROOT: partitions that MUST appear in the
+# stacklevel CSV for each stack root. Derived from local
+# `_stacklevel_regression_results.csv` files. Update when new partitions come
+# online at Stack Level. Empty sets are allowed (e.g. `uio_1` until UIOe stack
+# CSVs land locally).
+STACK_EXPECTED_PARTITIONS_BY_ROOT = {
+    'memstack': {
+        'pardfi',
+        'parmccore',
+        'parmcmisc',
+        'parmcmse',
+        'phy_cluster',
+    },
+    'uio_a_0': {
+        'parmiocpc_uio_0',
+        'parmiocxlrx_uio_0',
+        'parmiocxltx_uio_0',
+        'parmiofblprxfcrarbmux_uio_0',
+        'parmiofblptx_uio_0',
+        'parmiohap_uio_0',
+        'parmioiommu_uio_0',
+        'parmioitc_uio_0',
+        'parmiomisc_uio_0_group1',
+        'parmiomisc_uio_0_group2',
+        'parmiomisc_uio_0_group3',
+        'parmiootc_uio_0',
+        'parmiopcie6trcore_uio_0',
+        'parmiopcie6tridelldp_uio_0',
+        'parmiopcie6ttcore_uio_0',
+        'parmiopcie6ttidecee_uio_0',
+        'parmiostaticmux_uio_0',
+        'parmioula_uio_0',
+    },
+    # UIOe stack: no CSVs locally yet — fill once nio_uio-a0 stacklevel data is
+    # available. Leaving empty means no MISSING will be reported for uio_1
+    # (matches current behavior — no false positives).
+    'uio_1': set(),
+}
+
 # Mapping from model type -> stack root partition to assign to rows generated
 # from the per-model `<model>_stacklevel_regression_results.csv` produced by
 # parse_l2_regression.py. `d2d` is intentionally excluded (no stacklevel rpt).
@@ -264,6 +318,19 @@ def parse_stack_test_name(test_name, stack_root):
     return partition, canonical_test_type
 
 
+# Sub-partition names that must be collapsed onto their canonical parent when
+# resolving stack-level ownership. Left-side keys are the raw partition names
+# parsed from the stacklevel report; right-side values are the parent
+# partition already listed in `tap_ownership.txt`.
+STACK_PARTITION_ALIASES = {
+    # phy_cluster sub-block: appears in some SVF filenames as
+    # `phy_clusterparmemsram` (no separator) and in others as
+    # `phy_cluster_parmemsram`. Both collapse to `phy_cluster`.
+    'phy_clusterparmemsram': 'phy_cluster',
+    'phy_cluster_parmemsram': 'phy_cluster',
+}
+
+
 def find_stack_owner(partition, ownership):
     """Resolve a stack-level partition to its canonical (partition, owner).
 
@@ -276,6 +343,12 @@ def find_stack_owner(partition, ownership):
     """
     if not partition:
         return partition, "UNKNOWN"
+    # Explicit aliases collapse sub-partition test names onto their canonical
+    # parent (e.g. `phy_cluster_parmemsram` → `phy_cluster` when the sub-block
+    # is exercised by the parent partition's tests).
+    aliased = STACK_PARTITION_ALIASES.get(partition)
+    if aliased:
+        return aliased, find_owner(aliased, ownership)
     owner = find_owner(partition, ownership)
     if owner != "UNKNOWN":
         return partition, owner
@@ -731,6 +804,30 @@ def generate_general_report_for_models(selected_models):
                     # Keep the row whose status has higher failure rank.
                     if _STATUS_RANK.get(status_val, 0) > _STATUS_RANK.get(existing['status'], 0):
                         stack_dedup[key] = new_row
+
+            # ── MISSING detection for Stack Level ──────────────────────────
+            # Mirrors the Partition-Level MISSING logic: for every partition
+            # in STACK_EXPECTED_PARTITIONS_BY_ROOT[stack_root] and every
+            # test_type in STACK_PVIM_MAPPING, if no matching row was parsed
+            # from the CSV, emit a MISSING row so the gap shows in the report.
+            expected_partitions = STACK_EXPECTED_PARTITIONS_BY_ROOT.get(stack_root, set())
+            for exp_partition in expected_partitions:
+                for pvim_label, exp_test_type in STACK_PVIM_MAPPING:
+                    key = (exp_partition, exp_test_type)
+                    if key in stack_dedup:
+                        continue
+                    _canonical, owner = find_stack_owner(exp_partition, ownership)
+                    effective_owner = get_effective_owner(exp_test_type, owner, test_type_overrides)
+                    stack_dedup[key] = {
+                        'scope': 'Stack Level',
+                        'owner': effective_owner,
+                        'partition': exp_partition,
+                        'test_type': exp_test_type,
+                        'pvim_item': pvim_label,
+                        'status': 'MISSING',
+                        'model': model,
+                    }
+
             all_rows.extend(stack_dedup.values())
 
     for r in all_rows:

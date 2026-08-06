@@ -93,9 +93,13 @@ def extract_model_from_filename(filename):
 
 
 def list_available_models(category):
-    """List available CSV files in weekly_report/ matching a category prefix (e.g. 'nio_mc')."""
+    """List available CSV files in weekly_report/ matching a category prefix (e.g. 'nio_mc').
+
+    Excludes stack-level CSVs (`<model>_stacklevel_regression_results.csv`) which are
+    consumed only by the TAP pipeline — SCAN must not present them as selectable models.
+    """
     pattern = os.path.join(WEEKLY_REPORT_DIR, f"{category}*_regression_results.csv")
-    files = sorted(glob.glob(pattern))
+    files = sorted(f for f in glob.glob(pattern) if "_stacklevel_" not in os.path.basename(f))
     return [extract_model_from_filename(f) for f in files]
 
 
