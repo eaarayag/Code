@@ -19,21 +19,34 @@ BASE_PATHS = [
     "/nfs/site/disks/nwp_vmgr_testresults_016/NWP_DFT_Regressions",
 ]
 
+# --- Stack-level TAP report paths (relative to <base>/<model>/) ---
+# nio_d2d intentionally excluded — no stacklevel rpt for d2d.
+STACKLEVEL_SUBPATHS = {
+    'nio_uio': 'uio/uio/uio_a_0_dft_stacklevel_L2.list.latest/uio_a_0_dft_stacklevel_L2.rpt',
+    'nio_mc':  'memstack/memstack/L2_stacklevel_regression.list.latest/L2_stacklevel_regression.rpt',
+}
+
+# --- TAP stacklevel filter: only keep tests whose test_name contains one of these substrings (case-insensitive) ---
+TAP_STACKLEVEL_KEYWORDS = ('rw', 'reset', 'continuity')
+
 # --- Local Configuration ---
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = os.path.dirname(SCRIPT_DIR)
 WEEKLY_REPORT_DIR = os.path.join(ROOT_DIR, "weekly_report")
 
-def parse_l2_regression_report(file_path, output_csv='regression_results.csv'):
+def parse_l2_regression_report(file_path, output_csv='regression_results.csv', filter_keywords=None):
     """
     Parse L2_regression.rpt file and extract test information to CSV
     
     Args:
         file_path (str): Path to the L2_regression.rpt file
         output_csv (str): Output CSV file name
+        filter_keywords (tuple|list|None): Optional case-insensitive substrings; if provided,
+            only tests whose test_name contains at least one keyword are kept.
     """
     
     test_results = []  # List to hold parsed test result dictionaries
+    lowered_keywords = tuple(k.lower() for k in filter_keywords) if filter_keywords else None
     
     try:
         # Read the entire report file into memory
@@ -87,6 +100,12 @@ def parse_l2_regression_report(file_path, output_csv='regression_results.csv'):
             if any(test_name.endswith(s) for s in excluded_suffixes):
                 continue
 
+            # Optional keyword filter (case-insensitive substring match on test_name)
+            if lowered_keywords is not None:
+                lowered_name = test_name.lower()
+                if not any(k in lowered_name for k in lowered_keywords):
+                    continue
+
             # Store the parsed result as a dictionary
             test_results.append({
                 'test_name': test_name,
@@ -134,6 +153,93 @@ def parse_l2_regression_report(file_path, output_csv='regression_results.csv'):
     except Exception as e:
         print(f"Error parsing file: {str(e)}")
 
+
+def parse_stacklevel_report(file_path, output_csv, filter_keywords=None):
+    """
+    Parse a stack-level rpt (e.g. `uio_a_0_dft_stacklevel_L2.rpt`) where every
+    section's `TEST NAME` is the generic `dft_svf_test`. The real test
+    identifier lives inside the `+SVF_FILE=<path>.svf` argument of the CMD-LINE
+    (fallback: `DIR TAG`).
+
+    Args:
+        file_path (str): Path to the stacklevel rpt file.
+        output_csv (str): Output CSV file name.
+        filter_keywords (tuple|list|None): Optional case-insensitive substrings;
+            only tests whose derived name contains at least one keyword are kept.
+    """
+    test_results = []
+    lowered_keywords = tuple(k.lower() for k in filter_keywords) if filter_keywords else None
+
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+    except FileNotFoundError:
+        print(f"Error: File '{file_path}' not found.")
+        return
+    except Exception as e:
+        print(f"Error reading file: {e}")
+        return
+
+    # Split sections using the standard test-report banner as delimiter
+    test_sections = re.split(r'T E S T    R E P O R T   F I L E\s*#+', content)
+
+    svf_re = re.compile(r'\+SVF_FILE=(\S+\.svf)')
+    dir_tag_re = re.compile(r'^\s*DIR TAG:\s*(.+)$', re.MULTILINE)
+    status_re = re.compile(r'^\s*TEST STATUS:\s*(.+)$', re.MULTILINE)
+    pass_fail_re = re.compile(r'PASS/FAIL:\s*(\w+)')
+
+    for section in test_sections:
+        if not section.strip():
+            continue
+
+        # Extract the effective test name: prefer SVF_FILE basename, fall back to DIR TAG.
+        svf_match = svf_re.search(section)
+        if svf_match:
+            effective_name = os.path.basename(svf_match.group(1))
+            if effective_name.endswith('.svf'):
+                effective_name = effective_name[:-4]
+        else:
+            dt_match = dir_tag_re.search(section)
+            if not dt_match:
+                continue
+            effective_name = dt_match.group(1).strip()
+
+        # Optional keyword filter (case-insensitive substring match)
+        if lowered_keywords is not None:
+            lowered_name = effective_name.lower()
+            if not any(k in lowered_name for k in lowered_keywords):
+                continue
+
+        # Test status (PASS/FAIL/etc.)
+        status_match = status_re.search(section)
+        test_status = status_match.group(1).strip() if status_match else 'UNKNOWN'
+
+        # Test result: prefer PASS/FAIL: verdict if present, else mirror test_status
+        pf_match = pass_fail_re.search(section)
+        test_result = pf_match.group(1).strip() if pf_match else test_status
+
+        test_results.append({
+            'test_name': effective_name,
+            'test_status': test_status,
+            'test_result': test_result,
+        })
+
+    if not test_results:
+        print(f"No stack-level test results found in {file_path}.")
+        return
+
+    with open(output_csv, 'w', newline='', encoding='utf-8') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=['test_name', 'test_status', 'test_result'])
+        writer.writeheader()
+        writer.writerows(test_results)
+
+    pass_count = sum(1 for r in test_results if r['test_status'] == 'PASS')
+    fail_count = sum(1 for r in test_results if r['test_status'] == 'FAIL')
+    other_count = len(test_results) - pass_count - fail_count
+    print(f"Stack-level: parsed {len(test_results)} tests "
+          f"({pass_count} PASS, {fail_count} FAIL, {other_count} OTHER) -> {output_csv}")
+
+
 def build_report_path(model_name):
     """
     Build the full path to the L2_regression.rpt file from the model name.
@@ -171,6 +277,33 @@ def build_report_path(model_name):
 
     print(f"Error: Model directory '{model_name}' does not exist in any known path.")
     _print_available_models()
+    return None
+
+
+def build_stacklevel_report_path(model_name):
+    """
+    Build the full path to the stack-level TAP rpt for a model (uio or mc only).
+
+    Returns:
+        str | None: Full path if the model type is supported (uio/mc) and the
+        model directory is found under any BASE_PATHS; otherwise None.
+    """
+    # Determine which stacklevel subpath applies to this model
+    subpath = None
+    for prefix, sub in STACKLEVEL_SUBPATHS.items():
+        if model_name.startswith(prefix):
+            subpath = sub
+            break
+
+    if subpath is None:
+        # nio_d2d (and any unknown prefix) has no stacklevel rpt
+        return None
+
+    for base_path in BASE_PATHS:
+        model_dir = f"{base_path}/{model_name}"
+        if os.path.isdir(model_dir):
+            return f"{base_path}/{model_name}/{subpath}"
+
     return None
 
 
@@ -294,6 +427,30 @@ def run_remote_parsing(model_filter=None):
 
         parse_l2_regression_report(input_file, output_file)
 
+        # --- TAP stack-level rpt (uio/mc only; d2d has none) ---
+        stacklevel_path = build_stacklevel_report_path(model_name)
+        if stacklevel_path is None:
+            continue
+        if not Path(stacklevel_path).exists():
+            print(f"\n[stacklevel] Skipping — file not found: {stacklevel_path}")
+            continue
+
+        try:
+            sl_mtime = datetime.fromtimestamp(os.stat(stacklevel_path).st_mtime).strftime("%Y-%m-%d %H:%M:%S")
+        except OSError:
+            sl_mtime = "UNKNOWN"
+        timestamps[f"{model_name}_stacklevel"] = sl_mtime
+
+        sl_output = f"{model_name}_stacklevel_regression_results.csv"
+        print(f"\n[stacklevel] Report path: {stacklevel_path}")
+        print(f"[stacklevel] Last modified: {sl_mtime}")
+        print(f"[stacklevel] Keyword filter: {', '.join(TAP_STACKLEVEL_KEYWORDS)}")
+        parse_stacklevel_report(stacklevel_path, sl_output, filter_keywords=TAP_STACKLEVEL_KEYWORDS)
+
+    # Re-write timestamps JSON so it includes stacklevel entries
+    with open(timestamps_file, 'w', encoding='utf-8') as f:
+        json.dump(timestamps, f, indent=2)
+
     print(f"\n{'='*80}")
     print(f"Done. Processed {len(validated)} model(s), skipped {len(skipped)}.")
 
@@ -302,6 +459,9 @@ def run_list_models_from_windows():
     """SSH to zsc24 and print available model names to stdout. No parsing."""
     remote = f"{REMOTE_USER}@{REMOTE_HOST}"
     script_path = os.path.abspath(__file__)
+
+    # Ensure remote work dir exists
+    subprocess.run(["ssh", remote, f"mkdir -p {REMOTE_WORK_DIR}"], check=False)
 
     scp_up = subprocess.run([
         "scp", script_path,
@@ -325,6 +485,10 @@ def run_from_windows(models=None):
 
     # Ensure local weekly_report directory exists
     os.makedirs(WEEKLY_REPORT_DIR, exist_ok=True)
+
+    # Step 0: Ensure remote work dir exists (may not exist on first run under this user)
+    print(f"Ensuring remote work dir exists: {REMOTE_WORK_DIR}")
+    subprocess.run(["ssh", remote, f"mkdir -p {REMOTE_WORK_DIR}"], check=False)
 
     # Step 1: Upload this script to the remote working directory
     print(f"Uploading script to {remote}:{REMOTE_WORK_DIR}/")
@@ -358,6 +522,16 @@ def run_from_windows(models=None):
             ])
             if scp_down.returncode != 0:
                 print(f"Warning: Could not download {csv_name} (exit code {scp_down.returncode}).")
+
+            # Also try to download the stacklevel CSV (uio/mc only; d2d won't have one)
+            if any(model.startswith(p) for p in STACKLEVEL_SUBPATHS.keys()):
+                sl_csv_name = f"{model}_stacklevel_regression_results.csv"
+                scp_sl = subprocess.run([
+                    "scp", f"{remote}:{REMOTE_WORK_DIR}/{sl_csv_name}",
+                    WEEKLY_REPORT_DIR,
+                ])
+                if scp_sl.returncode != 0:
+                    print(f"Warning: Could not download {sl_csv_name} (exit code {scp_sl.returncode}).")
     else:
         scp_down = subprocess.run([
             "scp", f"{remote}:{REMOTE_WORK_DIR}/*.csv",

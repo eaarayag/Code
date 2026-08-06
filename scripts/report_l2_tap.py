@@ -7,6 +7,7 @@ import csv
 import glob
 import json
 import os
+import re
 import subprocess
 import sys
 import struct
@@ -93,9 +94,11 @@ def extract_model_from_filename(filename):
 
 
 def list_available_models(category):
-    """List available CSV files in weekly_report/ matching a category prefix (e.g. 'nio_mc')."""
+    """List available CSV files in weekly_report/ matching a category prefix (e.g. 'nio_mc').
+    Excludes stack-level CSVs (`<model>_stacklevel_regression_results.csv`) which are
+    consumed as auxiliary input, not selectable models."""
     pattern = os.path.join(WEEKLY_REPORT_DIR, f"{category}*_regression_results.csv")
-    files = sorted(glob.glob(pattern))
+    files = sorted(f for f in glob.glob(pattern) if "_stacklevel_" not in os.path.basename(f))
     return [extract_model_from_filename(f) for f in files]
 
 
@@ -197,6 +200,10 @@ PVIM_MAPPING = [
     ('[NWP] TAP: icl verify dft', 'icl_verify_dft'),
 ]
 
+# Reverse lookup: canonical test_type -> pvim_item label. Used by Stack Level
+# rows so they render the same `[NWP] TAP: ...` label as Partition Level rows.
+PVIM_ITEM_BY_TEST_TYPE = {test_type: item for (item, test_type) in PVIM_MAPPING}
+
 # PVIM items that only apply to a restricted set of partitions. Any partition
 # not listed here (and not a stack-root region) will have the corresponding
 # PVIM row skipped in the report. Stack roots (d2d1, memstack, uio_a_0) are
@@ -210,6 +217,75 @@ PVIM_PARTITION_ALLOWLIST = {
 }
 
 STACK_ROOT_PARTITIONS = {'d2d1', 'memstack', 'uio_a_0', 'uio_1'}
+
+# Mapping from model type -> stack root partition to assign to rows generated
+# from the per-model `<model>_stacklevel_regression_results.csv` produced by
+# parse_l2_regression.py. `d2d` is intentionally excluded (no stacklevel rpt).
+STACKLEVEL_ROOT_FOR_MODEL_TYPE = {
+    'mc':  'memstack',
+    'uio': 'uio_a_0',
+}
+
+# Prefix to strip when extracting the partition name from a stack-level svf
+# basename (e.g. `memstack_pardfi_ijtag_basic_tap_tests_reset` -> `pardfi`).
+_STACKLEVEL_STRIP_PREFIX = {
+    'memstack': 'memstack_',
+    'uio_a_0':  'uio_a_0_ijtag_',
+}
+
+# Regex to isolate the trailing `<...>_(ijtag_)?basic_tap_tests_<suffix>` segment
+# so we can split a stack-level svf basename into (mid, suffix).
+_STACKLEVEL_SUFFIX_RE = re.compile(
+    r'^(?P<mid>.+?)_(?:ijtag_basic_tap_tests|basic_tap_tests)_(?P<suffix>reset|rw_access|continuity)$',
+    re.IGNORECASE,
+)
+
+
+def parse_stack_test_name(test_name, stack_root):
+    """Extract (partition, canonical_test_type) from a stack-level svf basename.
+
+    Returns (None, None) if the name does not match the expected pattern.
+    Canonical test type mirrors the partition-level format
+    (e.g. `ijtag_basic_tap_tests_reset`), so Stack Level rows align with the
+    same test_type/pvim_item formatting used for Partition Level rows.
+    """
+    if not test_name:
+        return None, None
+    m = _STACKLEVEL_SUFFIX_RE.match(test_name)
+    if not m:
+        return None, None
+    mid = m.group('mid')
+    suffix = m.group('suffix').lower()
+    strip = _STACKLEVEL_STRIP_PREFIX.get(stack_root, f"{stack_root}_")
+    partition = mid[len(strip):] if mid.startswith(strip) else mid
+    if not partition:
+        return None, None
+    canonical_test_type = f"ijtag_basic_tap_tests_{suffix}"
+    return partition, canonical_test_type
+
+
+def find_stack_owner(partition, ownership):
+    """Resolve a stack-level partition to its canonical (partition, owner).
+
+    Stack-level test names sometimes embed a cluster wrapper (e.g.
+    `mc_cluster_parmccore`) that is not itself in the ownership file. When the
+    full partition string does not match, progressively drop leading `_`-
+    delimited segments and retry (`mc_cluster_parmccore` -> `cluster_parmccore`
+    -> `parmccore`). Returns `(canonical_partition, owner)`; if no ownership
+    prefix matches, returns `(partition, "UNKNOWN")`.
+    """
+    if not partition:
+        return partition, "UNKNOWN"
+    owner = find_owner(partition, ownership)
+    if owner != "UNKNOWN":
+        return partition, owner
+    parts = partition.split('_')
+    for i in range(1, len(parts)):
+        candidate = '_'.join(parts[i:])
+        owner = find_owner(candidate, ownership)
+        if owner != "UNKNOWN":
+            return candidate, owner
+    return partition, "UNKNOWN"
 
 # Partitions classified under the new `uioestack` bucket. These partitions
 # live inside the existing `nio_uio` model CSVs but are tracked in their own
@@ -543,6 +619,10 @@ def generate_general_report_for_models(selected_models):
     all_partition_combos = []
     unmapped_prefixes = []
     for owner, prefix in ownership:
+        # Skip current stack-root partitions — stack-level rows now come from
+        # the dedicated `<model>_stacklevel_regression_results.csv` files.
+        if prefix in STACK_ROOT_PARTITIONS:
+            continue
         p_type = get_partition_type(prefix)
         if p_type is None:
             unmapped_prefixes.append(prefix)
@@ -594,6 +674,64 @@ def generate_general_report_for_models(selected_models):
     if not all_rows:
         print("No TAP test entries found for selected models.")
         return
+
+    # ── Stack-level rows from the per-model `_stacklevel_regression_results.csv` ──
+    # These replace the previous stack rows generated from stack-root partitions.
+    for model in selected_models:
+        m_type = get_model_type(model)
+        stack_root = STACKLEVEL_ROOT_FOR_MODEL_TYPE.get(m_type)
+        if not stack_root:
+            continue  # nio_d2d intentionally has no stack-level rpt
+        sl_csv = os.path.join(WEEKLY_REPORT_DIR, f"{model}_stacklevel_regression_results.csv")
+        if not os.path.isfile(sl_csv):
+            print(f"Info: no stack-level CSV for {model} ({sl_csv}) — skipping stack-level rows.")
+            continue
+        with open(sl_csv, 'r', encoding='utf-8') as f:
+            reader = csv.DictReader(f)
+            # Deduplicate collisions: the raw stacklevel CSV may list the same
+            # (partition, test_type) more than once (e.g. multiple .svf files
+            # normalizing to the same canonical test). Collapse by key,
+            # priority: FAIL > MISSING/UNKNOWN > PASS so any failure is kept.
+            stack_dedup = {}  # (partition, test_type) -> row dict
+            _STATUS_RANK = {'FAIL': 3, 'MISSING': 2, 'UNKNOWN': 2, 'PASS': 1}
+            for row in reader:
+                test_name = row.get('test_name', '').strip()
+                if not test_name:
+                    continue
+                parsed_partition, canonical_test_type = parse_stack_test_name(test_name, stack_root)
+                if parsed_partition and canonical_test_type:
+                    canonical_partition, owner = find_stack_owner(parsed_partition, ownership)
+                    partition_val = canonical_partition
+                    test_type_val = canonical_test_type
+                    pvim_item_val = PVIM_ITEM_BY_TEST_TYPE.get(
+                        canonical_test_type, f"[NWP] TAP: {canonical_partition}"
+                    )
+                else:
+                    # Fallback: keep raw name if pattern is unexpected.
+                    partition_val = stack_root
+                    test_type_val = test_name
+                    pvim_item_val = test_name
+                    owner = find_owner(test_name, ownership)
+                effective_owner = get_effective_owner(test_type_val, owner, test_type_overrides)
+                status_val = (row.get('test_status') or 'MISSING').strip() or 'MISSING'
+                key = (partition_val, test_type_val)
+                new_row = {
+                    'scope': 'Stack Level',
+                    'owner': effective_owner,
+                    'partition': partition_val,
+                    'test_type': test_type_val,
+                    'pvim_item': pvim_item_val,
+                    'status': status_val,
+                    'model': model,
+                }
+                existing = stack_dedup.get(key)
+                if existing is None:
+                    stack_dedup[key] = new_row
+                else:
+                    # Keep the row whose status has higher failure rank.
+                    if _STATUS_RANK.get(status_val, 0) > _STATUS_RANK.get(existing['status'], 0):
+                        stack_dedup[key] = new_row
+            all_rows.extend(stack_dedup.values())
 
     for r in all_rows:
         apply_sih_override(r)
@@ -1560,8 +1698,11 @@ def main():
     # Step 4: Regenerate index page with all reports
     generate_index_html()
 
-    # Step 5: Commit and push reports to GitHub
-    git_commit_and_push()
+    # Step 5: Commit and push reports to GitHub (skippable via SKIP_GIT_PUSH env var)
+    if os.environ.get('SKIP_GIT_PUSH', '').strip().lower() in ('1', 'true', 'yes'):
+        print("\n--- Git Commit & Push --- SKIPPED (SKIP_GIT_PUSH env var set)")
+    else:
+        git_commit_and_push()
 
 
 if __name__ == "__main__":
