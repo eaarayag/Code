@@ -901,8 +901,10 @@ def generate_general_report_html(all_rows):
             'pass_rate': pass_rate,
         }
 
-    partition_rows = [r for r in all_rows if get_scope(r.get('partition', ''), r.get('test_type', '')) == 'Partition Level']
-    stack_rows = [r for r in all_rows if get_scope(r.get('partition', ''), r.get('test_type', '')) == 'Stack Level']
+    # Trust the stored `scope` column; get_scope() only recognizes stack-root
+    # partitions and would misclassify canonical sub-partition stack rows.
+    partition_rows = [r for r in all_rows if r.get('scope', '') == 'Partition Level']
+    stack_rows = [r for r in all_rows if r.get('scope', '') == 'Stack Level']
     partition_summary = compute_summary(partition_rows)
     stack_summary = compute_summary(stack_rows)
 
@@ -1318,8 +1320,10 @@ def generate_executive_summary(report_path):
             'pass_rate': pass_rate,
         }
 
-    partition_rows = [r for r in rows if get_scope(r.get('partition', ''), r.get('test_type', '')) == 'Partition Level']
-    stack_rows = [r for r in rows if get_scope(r.get('partition', ''), r.get('test_type', '')) == 'Stack Level']
+    # Trust the stored `scope` column; get_scope() only recognizes stack-root
+    # partitions and would misclassify canonical sub-partition stack rows.
+    partition_rows = [r for r in rows if r.get('scope', '') == 'Partition Level']
+    stack_rows = [r for r in rows if r.get('scope', '') == 'Stack Level']
     partition_summary = compute_summary(partition_rows)
     stack_summary = compute_summary(stack_rows)
 
