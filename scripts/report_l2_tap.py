@@ -71,6 +71,20 @@ def find_owner(test_name, ownership):
     return "UNKNOWN"
 
 
+def match_ownership_prefix(name, ownership):
+    """Return the longest ownership prefix that `name` starts with, else None.
+
+    `ownership` is sorted longest-prefix-first, so the first match is longest.
+    Used to map a stack-level canonical partition (e.g. `parmiofblptx_uio_0`,
+    `parmiomisc_uio_0_group1`) back to its ownership partition so Stack Level
+    coverage can be checked against the ownership file.
+    """
+    for _owner, prefix in ownership:
+        if name.startswith(prefix):
+            return prefix
+    return None
+
+
 def split_test_name(test_name, ownership):
     """Split test_name into (partition, test_type) using ownership prefixes."""
     for _, prefix in ownership:
@@ -233,51 +247,21 @@ STACK_PVIM_MAPPING = [
     ('[NWP] TAP: tap tests continuity', 'ijtag_basic_tap_tests_continuity'),
 ]
 
-# STACK_EXPECTED_PARTITIONS_BY_ROOT: partitions that MUST appear in the
-# stacklevel CSV for each stack root. Derived from local
-# `_stacklevel_regression_results.csv` files. Update when new partitions come
-# online at Stack Level. Empty sets are allowed (e.g. `uio_1` until UIOe stack
-# CSVs land locally).
-STACK_EXPECTED_PARTITIONS_BY_ROOT = {
-    'memstack': {
-        'pardfi',
-        'parmccore',
-        'parmcmisc',
-        'parmcmse',
-        'phy_cluster',
-    },
-    'uio_a_0': {
-        'parmiocpc_uio_0',
-        'parmiocxlrx_uio_0',
-        'parmiocxltx_uio_0',
-        'parmiofblprxfcrarbmux_uio_0',
-        'parmiofblptx_uio_0',
-        'parmiohap_uio_0',
-        'parmioiommu_uio_0',
-        'parmioitc_uio_0',
-        'parmiomisc_uio_0_group1',
-        'parmiomisc_uio_0_group2',
-        'parmiomisc_uio_0_group3',
-        'parmiootc_uio_0',
-        'parmiopcie6trcore_uio_0',
-        'parmiopcie6tridelldp_uio_0',
-        'parmiopcie6ttcore_uio_0',
-        'parmiopcie6ttidecee_uio_0',
-        'parmiostaticmux_uio_0',
-        'parmioula_uio_0',
-    },
-    # UIOe stack: no CSVs locally yet — fill once nio_uio-a0 stacklevel data is
-    # available. Leaving empty means no MISSING will be reported for uio_1
-    # (matches current behavior — no false positives).
-    'uio_1': set(),
-}
-
 # Mapping from model type -> stack root partition to assign to rows generated
 # from the per-model `<model>_stacklevel_regression_results.csv` produced by
 # parse_l2_regression.py. `d2d` is intentionally excluded (no stacklevel rpt).
 STACKLEVEL_ROOT_FOR_MODEL_TYPE = {
     'mc':  'memstack',
     'uio': 'uio_a_0',
+}
+
+# Partition-type -> Stack Level root. Every partition-type that has a Stack
+# Level representation maps here. `d2d` is absent (no stacklevel report). Used
+# to decide which ownership partitions must be represented at Stack Level.
+STACK_ROOT_FOR_PARTITION_TYPE = {
+    'mc':   'memstack',
+    'uio':  'uio_a_0',
+    'uioe': 'uio_1',
 }
 
 # Prefix to strip when extracting the partition name from a stack-level svf
@@ -751,87 +735,100 @@ def generate_general_report_for_models(selected_models):
         print("No TAP test entries found for selected models.")
         return
 
-    # ── Stack-level rows from the per-model `_stacklevel_regression_results.csv` ──
-    # These replace the previous stack rows generated from stack-root partitions.
+    # ── Stack-level rows: data from the per-model stacklevel CSV, MISSING rows
+    # derived from the ownership file so EVERY ownership partition is
+    # represented at Stack Level (mirrors Partition Level). No partition that
+    # appears in tap_ownership.txt is ever silently dropped — if there is no
+    # stack data for it, it is reported as MISSING.
+    _STATUS_RANK = {'FAIL': 3, 'MISSING': 2, 'UNKNOWN': 2, 'PASS': 1}
     for model in selected_models:
         m_type = get_model_type(model)
-        stack_root = STACKLEVEL_ROOT_FOR_MODEL_TYPE.get(m_type)
-        if not stack_root:
-            continue  # nio_d2d intentionally has no stack-level rpt
-        sl_csv = os.path.join(WEEKLY_REPORT_DIR, f"{model}_stacklevel_regression_results.csv")
-        if not os.path.isfile(sl_csv):
-            print(f"Info: no stack-level CSV for {model} ({sl_csv}) — skipping stack-level rows.")
+        model_ptypes = PARTITION_TYPES_FOR_MODEL.get(m_type, ())
+        # Partition-types this model hosts that have a Stack Level root.
+        # `d2d` has no stacklevel report and is intentionally excluded.
+        stack_ptypes = [pt for pt in model_ptypes if pt in STACK_ROOT_FOR_PARTITION_TYPE]
+        if not stack_ptypes:
             continue
-        with open(sl_csv, 'r', encoding='utf-8') as f:
-            reader = csv.DictReader(f)
-            # Deduplicate collisions: the raw stacklevel CSV may list the same
-            # (partition, test_type) more than once (e.g. multiple .svf files
-            # normalizing to the same canonical test). Collapse by key,
-            # priority: FAIL > MISSING/UNKNOWN > PASS so any failure is kept.
-            stack_dedup = {}  # (partition, test_type) -> row dict
-            _STATUS_RANK = {'FAIL': 3, 'MISSING': 2, 'UNKNOWN': 2, 'PASS': 1}
-            for row in reader:
-                test_name = row.get('test_name', '').strip()
-                if not test_name:
-                    continue
-                parsed_partition, canonical_test_type = parse_stack_test_name(test_name, stack_root)
-                if parsed_partition and canonical_test_type:
-                    canonical_partition, owner = find_stack_owner(parsed_partition, ownership)
-                    partition_val = canonical_partition
-                    test_type_val = canonical_test_type
-                    pvim_item_val = PVIM_ITEM_BY_TEST_TYPE.get(
-                        canonical_test_type, f"[NWP] TAP: {canonical_partition}"
-                    )
-                else:
-                    # Fallback: keep raw name if pattern is unexpected.
-                    partition_val = stack_root
-                    test_type_val = test_name
-                    pvim_item_val = test_name
-                    owner = find_owner(test_name, ownership)
-                effective_owner = get_effective_owner(test_type_val, owner, test_type_overrides)
-                status_val = (row.get('test_status') or 'MISSING').strip() or 'MISSING'
-                key = (partition_val, test_type_val)
-                new_row = {
-                    'scope': 'Stack Level',
-                    'owner': effective_owner,
-                    'partition': partition_val,
-                    'test_type': test_type_val,
-                    'pvim_item': pvim_item_val,
-                    'status': status_val,
-                    'model': model,
-                }
-                existing = stack_dedup.get(key)
-                if existing is None:
-                    stack_dedup[key] = new_row
-                else:
-                    # Keep the row whose status has higher failure rank.
-                    if _STATUS_RANK.get(status_val, 0) > _STATUS_RANK.get(existing['status'], 0):
-                        stack_dedup[key] = new_row
 
-            # ── MISSING detection for Stack Level ──────────────────────────
-            # Mirrors the Partition-Level MISSING logic: for every partition
-            # in STACK_EXPECTED_PARTITIONS_BY_ROOT[stack_root] and every
-            # test_type in STACK_PVIM_MAPPING, if no matching row was parsed
-            # from the CSV, emit a MISSING row so the gap shows in the report.
-            expected_partitions = STACK_EXPECTED_PARTITIONS_BY_ROOT.get(stack_root, set())
-            for exp_partition in expected_partitions:
-                for pvim_label, exp_test_type in STACK_PVIM_MAPPING:
-                    key = (exp_partition, exp_test_type)
-                    if key in stack_dedup:
+        stack_dedup = {}  # (partition, test_type) -> row dict
+
+        # ── Data rows parsed from the per-model stacklevel CSV (if present) ──
+        parse_root = STACKLEVEL_ROOT_FOR_MODEL_TYPE.get(m_type)
+        sl_csv = os.path.join(WEEKLY_REPORT_DIR, f"{model}_stacklevel_regression_results.csv")
+        if parse_root and os.path.isfile(sl_csv):
+            with open(sl_csv, 'r', encoding='utf-8') as f:
+                for row in csv.DictReader(f):
+                    test_name = (row.get('test_name', '') or '').strip()
+                    if not test_name:
                         continue
-                    _canonical, owner = find_stack_owner(exp_partition, ownership)
-                    effective_owner = get_effective_owner(exp_test_type, owner, test_type_overrides)
-                    stack_dedup[key] = {
+                    parsed_partition, canonical_test_type = parse_stack_test_name(test_name, parse_root)
+                    if parsed_partition and canonical_test_type:
+                        canonical_partition, owner = find_stack_owner(parsed_partition, ownership)
+                        partition_val = canonical_partition
+                        test_type_val = canonical_test_type
+                        pvim_item_val = PVIM_ITEM_BY_TEST_TYPE.get(
+                            canonical_test_type, f"[NWP] TAP: {canonical_partition}"
+                        )
+                    else:
+                        # Fallback: keep raw name if pattern is unexpected.
+                        partition_val = parse_root
+                        test_type_val = test_name
+                        pvim_item_val = test_name
+                        owner = find_owner(test_name, ownership)
+                    effective_owner = get_effective_owner(test_type_val, owner, test_type_overrides)
+                    status_val = (row.get('test_status') or 'MISSING').strip() or 'MISSING'
+                    key = (partition_val, test_type_val)
+                    new_row = {
                         'scope': 'Stack Level',
                         'owner': effective_owner,
-                        'partition': exp_partition,
-                        'test_type': exp_test_type,
-                        'pvim_item': pvim_label,
-                        'status': 'MISSING',
+                        'partition': partition_val,
+                        'test_type': test_type_val,
+                        'pvim_item': pvim_item_val,
+                        'status': status_val,
                         'model': model,
                     }
+                    existing = stack_dedup.get(key)
+                    if existing is None or _STATUS_RANK.get(status_val, 0) > _STATUS_RANK.get(existing['status'], 0):
+                        stack_dedup[key] = new_row
+        elif parse_root:
+            print(f"Info: no stack-level CSV for {model} ({sl_csv}) — "
+                  f"all its Stack Level partitions will be reported as MISSING.")
 
-            all_rows.extend(stack_dedup.values())
+        # ── MISSING detection derived from the ownership file ──────────────
+        # Every ownership partition whose type this model hosts must appear at
+        # Stack Level. A data row "covers" an ownership partition when its
+        # canonical name maps back to that prefix; anything not covered is
+        # emitted as MISSING for each stack test type.
+        covered = set()
+        for r in stack_dedup.values():
+            mp = match_ownership_prefix(r['partition'], ownership)
+            if mp:
+                covered.add(mp)
+        for _owner_name, prefix in ownership:
+            ptype = get_partition_type(prefix)
+            if ptype not in stack_ptypes:
+                continue
+            if prefix in STACK_ROOT_PARTITIONS:
+                continue  # stack roots are not partition entries at Stack Level
+            if prefix in covered:
+                continue  # already represented by a data row
+            _canonical, p_owner = find_stack_owner(prefix, ownership)
+            for pvim_label, exp_test_type in STACK_PVIM_MAPPING:
+                key = (prefix, exp_test_type)
+                if key in stack_dedup:
+                    continue
+                effective_owner = get_effective_owner(exp_test_type, p_owner, test_type_overrides)
+                stack_dedup[key] = {
+                    'scope': 'Stack Level',
+                    'owner': effective_owner,
+                    'partition': prefix,
+                    'test_type': exp_test_type,
+                    'pvim_item': pvim_label,
+                    'status': 'MISSING',
+                    'model': model,
+                }
+
+        all_rows.extend(stack_dedup.values())
 
     for r in all_rows:
         apply_sih_override(r)
