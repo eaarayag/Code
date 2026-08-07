@@ -17,7 +17,7 @@ scripts/
 config/
   email_config_scan.ini    — SMTP/sender/recipient settings for SCAN emails
   email_config_tap.ini     — SMTP/sender/recipient settings for TAP emails
-weekly_report/             — Per-model regression CSVs and report_timestamps.json (populated by parse_l2_regression.py)
+weekly_report/             — Per-model regression CSVs, per-model `_stacklevel_regression_results.csv` (nio_mc/nio_uio only), and report_timestamps.json (populated by parse_l2_regression.py)
 scan_reports/              — Generated SCAN reports, executive summaries, history CSVs, and scan_index.html
 tap_reports/               — Generated TAP reports, executive summaries, history CSVs, and tap_index.html
 ```
@@ -36,7 +36,7 @@ The pipeline forks after Step 1 (parse). The user must specify which pipeline to
 cd scripts
 python parse_l2_regression.py
 ```
-Connects to zsc24 via SSH, auto-discovers available `nio_mc` / `nio_uio` / `nio_d2d` models, parses each valid report, collects last-modified timestamps of each `L2_regression.rpt`, and downloads model CSVs plus `report_timestamps.json` into `weekly_report/`.
+Connects to zsc24 via SSH, auto-discovers available `nio_mc` / `nio_uio` / `nio_d2d` models, parses each valid report, collects last-modified timestamps of each `L2_regression.rpt`, and downloads model CSVs plus `report_timestamps.json` into `weekly_report/`. For `nio_mc` and `nio_uio` it also parses and downloads a per-model stack-level report as `<model>_stacklevel_regression_results.csv` (filtered to the `rw` / `reset` / `continuity` TAP test types) and records a `<model>_stacklevel` timestamp entry in `report_timestamps.json`. `nio_d2d` has no stack-level report.
 
 Optional parser modes:
 ```powershell
@@ -101,6 +101,23 @@ Sends the TAP executive summary as HTML email body with attachments. Use `--dry-
 - **send_email_scan.py** reads config from `config/email_config_scan.ini`.
 - **send_email_tap.py** reads config from `config/email_config_tap.ini`.
 - All scripts must be run from the `scripts/` directory.
+
+## Report Data Model, Scopes & Completeness
+
+Both pipelines classify every test row into one of two **validation scopes** and one of four **stack buckets**:
+
+- **Scopes**: `Partition Level` and `Stack Level`.
+- **Stack buckets**: `MC` (memstack), `UIO` (uio_a_0), `D2D` (d2d1), and `UIOe` (uio_1 — the `*_uio_1` partitions that live inside `nio_uio` CSVs but form their own bucket).
+
+**Completeness guarantee (both pipelines):** every partition listed in the ownership file is represented at BOTH scopes for the models that host its partition-type. If no regression data exists for a partition/test, it is reported as **MISSING** — a partition present in the ownership file is never silently omitted from either scope.
+
+**Where Stack Level data comes from:**
+- **TAP**: from the per-model `<model>_stacklevel_regression_results.csv` files (nio_mc → `memstack` root, nio_uio → `uio_a_0` root). Stack-level MISSING rows are derived directly from `tap_ownership.txt`, so any ownership partition without stack data (including the `*_uio_1` UIOe partitions) appears as MISSING. `nio_d2d` has no stack-level report.
+- **SCAN**: from `<stack>_retarget_*` tests in the main regression CSV; SCAN's completeness check adds MISSING rows for every ownership partition missing an expected retarget test.
+
+**Auxiliary input:** the `<model>_stacklevel_regression_results.csv` files in `weekly_report/` are TAP-only auxiliary input — they are never offered as selectable models, and SCAN does not consume them.
+
+**History CSVs** (`*_stack_status_history.csv` = partition-level, `*_stack_level_status_history.csv` = stack-level) are rebuilt from all committed general reports on every run and feed the trend charts in the report HTML and index pages.
 
 ## Constraints
 
