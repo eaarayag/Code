@@ -613,10 +613,14 @@ def rebuild_stack_history_csv():
         if not rows:
             continue
 
-        # Partition-level trends: rows whose scope is Partition Level.
+        # Trust the `scope` column stamped by the report writer instead of
+        # re-deriving it here — get_scope() only recognizes stack-root
+        # partitions (uio_a_0/memstack/…) and would misclassify the new
+        # canonical sub-partition rows produced from
+        # `_stacklevel_regression_results.csv` (e.g. `parmiocpc_uio_0`).
         metrics = _compute_stack_metrics(
             rows,
-            include_row=lambda r: get_scope(r.get('partition', ''), r.get('test_type', '')) == 'Partition Level',
+            include_row=lambda r: r.get('scope', '') == 'Partition Level',
         )
         for stack in STACK_BUCKETS:
             m = metrics.get(stack)
@@ -624,10 +628,9 @@ def rebuild_stack_history_csv():
                 continue
             partition_entries.append(make_entry(report_name, ts_human, ts_compact, stack, m))
 
-        # Stack-level trends: rows whose scope is Stack Level.
         stack_metrics = _compute_stack_metrics(
             rows,
-            include_row=lambda r: get_scope(r.get('partition', ''), r.get('test_type', '')) == 'Stack Level',
+            include_row=lambda r: r.get('scope', '') == 'Stack Level',
         )
         for stack in STACK_BUCKETS:
             m = stack_metrics.get(stack)
