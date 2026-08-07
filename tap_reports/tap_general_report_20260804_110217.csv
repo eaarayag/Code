@@ -143,6 +143,9 @@ Partition Level,parmiocpc_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: IJTA
 Partition Level,parmiocpc_uio_0,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",PASS,Natalia Abarca,nio_uio-a0-26ww31b
 Partition Level,parmiocpc_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,PASS,Natalia Abarca,nio_uio-a0-26ww31b
 Partition Level,parmiocpc_uio_0,icl_verify_dft,[NWP] TAP: icl_verify,PASS,Natalia Abarca,nio_uio-a0-26ww31b
+Stack Level,parmiocpc_uio_0,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests reset,FAIL,Natalia Abarca,nio_uio-a0-26ww31b
+Stack Level,parmiocpc_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,PASS,Natalia Abarca,nio_uio-a0-26ww31b
+Stack Level,parmiocpc_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: tap tests continuity,PASS,Natalia Abarca,nio_uio-a0-26ww31b
 Partition Level,parmiocxlrx_uio_0,ijtag_basic_tap_tests_tlr_reset,[NWP] TAP: iJTAG reset / network collapse,PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiocxlrx_uio_0,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiocxlrx_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,PASS,Sebastian Porras,nio_uio-a0-26ww31b
@@ -153,6 +156,9 @@ Partition Level,parmiocxlrx_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: IJ
 Partition Level,parmiocxlrx_uio_0,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiocxlrx_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiocxlrx_uio_0,icl_verify_dft,[NWP] TAP: icl_verify,PASS,Sebastian Porras,nio_uio-a0-26ww31b
+Stack Level,parmiocxlrx_uio_0,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests reset,FAIL,Sebastian Porras,nio_uio-a0-26ww31b
+Stack Level,parmiocxlrx_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,PASS,Sebastian Porras,nio_uio-a0-26ww31b
+Stack Level,parmiocxlrx_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: tap tests continuity,PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiocxltx_uio_0,ijtag_basic_tap_tests_tlr_reset,[NWP] TAP: iJTAG reset / network collapse,FAIL,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiocxltx_uio_0,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiocxltx_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,PASS,Sebastian Porras,nio_uio-a0-26ww31b
@@ -163,6 +169,9 @@ Partition Level,parmiocxltx_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: IJ
 Partition Level,parmiocxltx_uio_0,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiocxltx_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiocxltx_uio_0,icl_verify_dft,[NWP] TAP: icl_verify,PASS,Sebastian Porras,nio_uio-a0-26ww31b
+Stack Level,parmiocxltx_uio_0,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests reset,FAIL,Sebastian Porras,nio_uio-a0-26ww31b
+Stack Level,parmiocxltx_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: tap tests continuity,PASS,Sebastian Porras,nio_uio-a0-26ww31b
+Stack Level,parmiocxltx_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiofblprxfcrarbmux,ijtag_basic_tap_tests_tlr_reset,[NWP] TAP: iJTAG reset / network collapse,FAIL,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiofblprxfcrarbmux,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiofblprxfcrarbmux,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,PASS,Sebastian Porras,nio_uio-a0-26ww31b
@@ -173,6 +182,9 @@ Partition Level,parmiofblprxfcrarbmux,ijtag_basic_tap_tests_continuity,[NWP] TAP
 Partition Level,parmiofblprxfcrarbmux,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiofblprxfcrarbmux,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiofblprxfcrarbmux,icl_verify_dft,[NWP] TAP: icl_verify,PASS,Sebastian Porras,nio_uio-a0-26ww31b
+Stack Level,parmiofblprxfcrarbmux_uio_0,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests reset,FAIL,Sebastian Porras,nio_uio-a0-26ww31b
+Stack Level,parmiofblprxfcrarbmux_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,FAIL,Sebastian Porras,nio_uio-a0-26ww31b
+Stack Level,parmiofblprxfcrarbmux_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: tap tests continuity,FAIL,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiofblprxfcrarbmux_uio_1,ijtag_basic_tap_tests_tlr_reset,[NWP] TAP: iJTAG reset / network collapse,MISSING,SathyahX Sv,nio_uio-a0-26ww31b
 Partition Level,parmiofblprxfcrarbmux_uio_1,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,MISSING,SathyahX Sv,nio_uio-a0-26ww31b
 Partition Level,parmiofblprxfcrarbmux_uio_1,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,MISSING,SathyahX Sv,nio_uio-a0-26ww31b
@@ -193,6 +205,9 @@ Partition Level,parmiofblptx,ijtag_basic_tap_tests_continuity,[NWP] TAP: IJTAG i
 Partition Level,parmiofblptx,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiofblptx,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiofblptx,icl_verify_dft,[NWP] TAP: icl_verify,PASS,Sebastian Porras,nio_uio-a0-26ww31b
+Stack Level,parmiofblptx_uio_0,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests reset,FAIL,Sebastian Porras,nio_uio-a0-26ww31b
+Stack Level,parmiofblptx_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,FAIL,Sebastian Porras,nio_uio-a0-26ww31b
+Stack Level,parmiofblptx_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: tap tests continuity,FAIL,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiofblptx_uio_1,ijtag_basic_tap_tests_tlr_reset,[NWP] TAP: iJTAG reset / network collapse,MISSING,SathyahX Sv,nio_uio-a0-26ww31b
 Partition Level,parmiofblptx_uio_1,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,MISSING,SathyahX Sv,nio_uio-a0-26ww31b
 Partition Level,parmiofblptx_uio_1,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,MISSING,SathyahX Sv,nio_uio-a0-26ww31b
@@ -233,6 +248,9 @@ Partition Level,parmiohap_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: IJTA
 Partition Level,parmiohap_uio_0,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiohap_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiohap_uio_0,icl_verify_dft,[NWP] TAP: icl_verify,PASS,Sebastian Porras,nio_uio-a0-26ww31b
+Stack Level,parmiohap_uio_0,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests reset,FAIL,Sebastian Porras,nio_uio-a0-26ww31b
+Stack Level,parmiohap_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,FAIL,Sebastian Porras,nio_uio-a0-26ww31b
+Stack Level,parmiohap_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: tap tests continuity,PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmioiommu_uio_0,ijtag_basic_tap_tests_tlr_reset,[NWP] TAP: iJTAG reset / network collapse,FAIL,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmioiommu_uio_0,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmioiommu_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,PASS,Sebastian Porras,nio_uio-a0-26ww31b
@@ -243,6 +261,9 @@ Partition Level,parmioiommu_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: IJ
 Partition Level,parmioiommu_uio_0,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmioiommu_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmioiommu_uio_0,icl_verify_dft,[NWP] TAP: icl_verify,PASS,Sebastian Porras,nio_uio-a0-26ww31b
+Stack Level,parmioiommu_uio_0,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests reset,FAIL,Sebastian Porras,nio_uio-a0-26ww31b
+Stack Level,parmioiommu_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,PASS,Sebastian Porras,nio_uio-a0-26ww31b
+Stack Level,parmioiommu_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: tap tests continuity,PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmioitc_uio_0,ijtag_basic_tap_tests_tlr_reset,[NWP] TAP: iJTAG reset / network collapse,PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmioitc_uio_0,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmioitc_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,PASS,Sebastian Porras,nio_uio-a0-26ww31b
@@ -253,6 +274,9 @@ Partition Level,parmioitc_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: IJTA
 Partition Level,parmioitc_uio_0,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmioitc_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmioitc_uio_0,icl_verify_dft,[NWP] TAP: icl_verify,PASS,Sebastian Porras,nio_uio-a0-26ww31b
+Stack Level,parmioitc_uio_0,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests reset,FAIL,Sebastian Porras,nio_uio-a0-26ww31b
+Stack Level,parmioitc_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,PASS,Sebastian Porras,nio_uio-a0-26ww31b
+Stack Level,parmioitc_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: tap tests continuity,PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiomisc_uio_0,ijtag_basic_tap_tests_tlr_reset,[NWP] TAP: iJTAG reset / network collapse,FAIL,Bhanu Vattikuti,nio_uio-a0-26ww31b
 Partition Level,parmiomisc_uio_0,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,PASS,Bhanu Vattikuti,nio_uio-a0-26ww31b
 Partition Level,parmiomisc_uio_0,ijtag_basic_tap_tests_user_defined,[NWP] TAP: IDCODE all taps in the partition,PASS,Bhanu Vattikuti,nio_uio-a0-26ww31b
@@ -264,6 +288,15 @@ Partition Level,parmiomisc_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: IJT
 Partition Level,parmiomisc_uio_0,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",PASS,Bhanu Vattikuti,nio_uio-a0-26ww31b
 Partition Level,parmiomisc_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,PASS,Bhanu Vattikuti,nio_uio-a0-26ww31b
 Partition Level,parmiomisc_uio_0,icl_verify_dft,[NWP] TAP: icl_verify,PASS,Bhanu Vattikuti,nio_uio-a0-26ww31b
+Stack Level,parmiomisc_uio_0_group1,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests reset,FAIL,Bhanu Vattikuti,nio_uio-a0-26ww31b
+Stack Level,parmiomisc_uio_0_group1,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,PASS,Bhanu Vattikuti,nio_uio-a0-26ww31b
+Stack Level,parmiomisc_uio_0_group1,ijtag_basic_tap_tests_continuity,[NWP] TAP: tap tests continuity,PASS,Bhanu Vattikuti,nio_uio-a0-26ww31b
+Stack Level,parmiomisc_uio_0_group2,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests reset,FAIL,Bhanu Vattikuti,nio_uio-a0-26ww31b
+Stack Level,parmiomisc_uio_0_group2,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,FAIL,Bhanu Vattikuti,nio_uio-a0-26ww31b
+Stack Level,parmiomisc_uio_0_group2,ijtag_basic_tap_tests_continuity,[NWP] TAP: tap tests continuity,FAIL,Bhanu Vattikuti,nio_uio-a0-26ww31b
+Stack Level,parmiomisc_uio_0_group3,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests reset,FAIL,Bhanu Vattikuti,nio_uio-a0-26ww31b
+Stack Level,parmiomisc_uio_0_group3,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,PASS,Bhanu Vattikuti,nio_uio-a0-26ww31b
+Stack Level,parmiomisc_uio_0_group3,ijtag_basic_tap_tests_continuity,[NWP] TAP: tap tests continuity,PASS,Bhanu Vattikuti,nio_uio-a0-26ww31b
 Partition Level,parmiomisc_uio_1,ijtag_basic_tap_tests_tlr_reset,[NWP] TAP: iJTAG reset / network collapse,MISSING,SathyahX Sv,nio_uio-a0-26ww31b
 Partition Level,parmiomisc_uio_1,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,MISSING,SathyahX Sv,nio_uio-a0-26ww31b
 Partition Level,parmiomisc_uio_1,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,MISSING,SathyahX Sv,nio_uio-a0-26ww31b
@@ -284,6 +317,9 @@ Partition Level,parmiootc_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: IJTA
 Partition Level,parmiootc_uio_0,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiootc_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiootc_uio_0,icl_verify_dft,[NWP] TAP: icl_verify,PASS,Sebastian Porras,nio_uio-a0-26ww31b
+Stack Level,parmiootc_uio_0,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests reset,FAIL,Sebastian Porras,nio_uio-a0-26ww31b
+Stack Level,parmiootc_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,PASS,Sebastian Porras,nio_uio-a0-26ww31b
+Stack Level,parmiootc_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: tap tests continuity,PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiopcie6trcore_uio_0,ijtag_basic_tap_tests_tlr_reset,[NWP] TAP: iJTAG reset / network collapse,FAIL,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiopcie6trcore_uio_0,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiopcie6trcore_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,PASS,Sebastian Porras,nio_uio-a0-26ww31b
@@ -294,6 +330,9 @@ Partition Level,parmiopcie6trcore_uio_0,ijtag_basic_tap_tests_continuity,[NWP] T
 Partition Level,parmiopcie6trcore_uio_0,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiopcie6trcore_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiopcie6trcore_uio_0,icl_verify_dft,[NWP] TAP: icl_verify,PASS,Sebastian Porras,nio_uio-a0-26ww31b
+Stack Level,parmiopcie6trcore_uio_0,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests reset,FAIL,Sebastian Porras,nio_uio-a0-26ww31b
+Stack Level,parmiopcie6trcore_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,PASS,Sebastian Porras,nio_uio-a0-26ww31b
+Stack Level,parmiopcie6trcore_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: tap tests continuity,PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiopcie6tridelldp_uio_0,ijtag_basic_tap_tests_tlr_reset,[NWP] TAP: iJTAG reset / network collapse,FAIL,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiopcie6tridelldp_uio_0,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiopcie6tridelldp_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,PASS,Sebastian Porras,nio_uio-a0-26ww31b
@@ -304,6 +343,9 @@ Partition Level,parmiopcie6tridelldp_uio_0,ijtag_basic_tap_tests_continuity,[NWP
 Partition Level,parmiopcie6tridelldp_uio_0,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiopcie6tridelldp_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiopcie6tridelldp_uio_0,icl_verify_dft,[NWP] TAP: icl_verify,PASS,Sebastian Porras,nio_uio-a0-26ww31b
+Stack Level,parmiopcie6tridelldp_uio_0,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests reset,FAIL,Sebastian Porras,nio_uio-a0-26ww31b
+Stack Level,parmiopcie6tridelldp_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,PASS,Sebastian Porras,nio_uio-a0-26ww31b
+Stack Level,parmiopcie6tridelldp_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: tap tests continuity,PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiopcie6ttcore_uio_0,ijtag_basic_tap_tests_tlr_reset,[NWP] TAP: iJTAG reset / network collapse,PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiopcie6ttcore_uio_0,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiopcie6ttcore_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,PASS,Sebastian Porras,nio_uio-a0-26ww31b
@@ -314,6 +356,9 @@ Partition Level,parmiopcie6ttcore_uio_0,ijtag_basic_tap_tests_continuity,[NWP] T
 Partition Level,parmiopcie6ttcore_uio_0,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiopcie6ttcore_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiopcie6ttcore_uio_0,icl_verify_dft,[NWP] TAP: icl_verify,PASS,Sebastian Porras,nio_uio-a0-26ww31b
+Stack Level,parmiopcie6ttcore_uio_0,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests reset,FAIL,Sebastian Porras,nio_uio-a0-26ww31b
+Stack Level,parmiopcie6ttcore_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,FAIL,Sebastian Porras,nio_uio-a0-26ww31b
+Stack Level,parmiopcie6ttcore_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: tap tests continuity,PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiopcie6ttidecee_uio_0,ijtag_basic_tap_tests_tlr_reset,[NWP] TAP: iJTAG reset / network collapse,FAIL,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiopcie6ttidecee_uio_0,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiopcie6ttidecee_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,PASS,Sebastian Porras,nio_uio-a0-26ww31b
@@ -324,6 +369,9 @@ Partition Level,parmiopcie6ttidecee_uio_0,ijtag_basic_tap_tests_continuity,[NWP]
 Partition Level,parmiopcie6ttidecee_uio_0,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiopcie6ttidecee_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiopcie6ttidecee_uio_0,icl_verify_dft,[NWP] TAP: icl_verify,PASS,Sebastian Porras,nio_uio-a0-26ww31b
+Stack Level,parmiopcie6ttidecee_uio_0,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests reset,FAIL,Sebastian Porras,nio_uio-a0-26ww31b
+Stack Level,parmiopcie6ttidecee_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,PASS,Sebastian Porras,nio_uio-a0-26ww31b
+Stack Level,parmiopcie6ttidecee_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: tap tests continuity,PASS,Sebastian Porras,nio_uio-a0-26ww31b
 Partition Level,parmiopcie6ttidecee_uio_1,ijtag_basic_tap_tests_tlr_reset,[NWP] TAP: iJTAG reset / network collapse,MISSING,SathyahX Sv,nio_uio-a0-26ww31b
 Partition Level,parmiopcie6ttidecee_uio_1,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,MISSING,SathyahX Sv,nio_uio-a0-26ww31b
 Partition Level,parmiopcie6ttidecee_uio_1,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,MISSING,SathyahX Sv,nio_uio-a0-26ww31b
@@ -344,6 +392,9 @@ Partition Level,parmiostaticmux_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP:
 Partition Level,parmiostaticmux_uio_0,ijtag_basic_tap_tests_tlr_reset,[NWP] TAP: ijtag reset does not perturb TDRs,PASS,Maria Perez,nio_uio-a0-26ww31b
 Partition Level,parmiostaticmux_uio_0,ijtag_basic_tap_tests_tlr_reset,[NWP] TAP: treset - verify no TDRs perturbed by TRESET,PASS,Maria Perez,nio_uio-a0-26ww31b
 Partition Level,parmiostaticmux_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: iJTAG R/W,PASS,Maria Perez,nio_uio-a0-26ww31b
+Stack Level,parmiostaticmux_uio_0,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests reset,FAIL,Maria Perez,nio_uio-a0-26ww31b
+Stack Level,parmiostaticmux_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,PASS,Maria Perez,nio_uio-a0-26ww31b
+Stack Level,parmiostaticmux_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: tap tests continuity,PASS,Maria Perez,nio_uio-a0-26ww31b
 Partition Level,parmioula_uio_0,ijtag_basic_tap_tests_tlr_reset,[NWP] TAP: iJTAG reset / network collapse,PASS,Natalia Abarca,nio_uio-a0-26ww31b
 Partition Level,parmioula_uio_0,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,PASS,Natalia Abarca,nio_uio-a0-26ww31b
 Partition Level,parmioula_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,PASS,Natalia Abarca,nio_uio-a0-26ww31b
@@ -354,6 +405,9 @@ Partition Level,parmioula_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: IJTA
 Partition Level,parmioula_uio_0,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",PASS,Natalia Abarca,nio_uio-a0-26ww31b
 Partition Level,parmioula_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,PASS,Natalia Abarca,nio_uio-a0-26ww31b
 Partition Level,parmioula_uio_0,icl_verify_dft,[NWP] TAP: icl_verify,PASS,Natalia Abarca,nio_uio-a0-26ww31b
+Stack Level,parmioula_uio_0,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests reset,FAIL,Natalia Abarca,nio_uio-a0-26ww31b
+Stack Level,parmioula_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,PASS,Natalia Abarca,nio_uio-a0-26ww31b
+Stack Level,parmioula_uio_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: tap tests continuity,PASS,Natalia Abarca,nio_uio-a0-26ww31b
 Partition Level,parmioula_uio_1,ijtag_basic_tap_tests_tlr_reset,[NWP] TAP: iJTAG reset / network collapse,MISSING,SathyahX Sv,nio_uio-a0-26ww31b
 Partition Level,parmioula_uio_1,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,MISSING,SathyahX Sv,nio_uio-a0-26ww31b
 Partition Level,parmioula_uio_1,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,MISSING,SathyahX Sv,nio_uio-a0-26ww31b
@@ -375,14 +429,3 @@ Stack Level,uio_1,ijtag_basic_tap_tests_continuity,[NWP] TAP: IJTAG icl continui
 Stack Level,uio_1,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",MISSING,SathyahX Sv,nio_uio-a0-26ww31b
 Stack Level,uio_1,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,MISSING,SathyahX Sv,nio_uio-a0-26ww31b
 Stack Level,uio_1,icl_verify_dft,[NWP] TAP: icl_verify,MISSING,SathyahX Sv,nio_uio-a0-26ww31b
-Stack Level,uio_a_0,ijtag_basic_tap_tests_tlr_reset,[NWP] TAP: iJTAG reset / network collapse,MISSING,SathyahX Sv,nio_uio-a0-26ww31b
-Stack Level,uio_a_0,ijtag_basic_tap_tests_reset,[NWP] TAP: check reset (default) register values,MISSING,SathyahX Sv,nio_uio-a0-26ww31b
-Stack Level,uio_a_0,ijtag_basic_tap_tests_user_defined,[NWP] TAP: IDCODE all taps in the partition,MISSING,SathyahX Sv,nio_uio-a0-26ww31b
-Stack Level,uio_a_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: rw to all RTDR/TDR,MISSING,SathyahX Sv,nio_uio-a0-26ww31b
-Stack Level,uio_a_0,ijtag_basic_tap_tests_tlr_reset,[NWP] TAP: ijtag reset does not perturb TDRs,MISSING,SathyahX Sv,nio_uio-a0-26ww31b
-Stack Level,uio_a_0,ijtag_basic_tap_tests_tlr_reset,[NWP] TAP: treset - verify no TDRs perturbed by TRESET,MISSING,SathyahX Sv,nio_uio-a0-26ww31b
-Stack Level,uio_a_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: iJTAG R/W,MISSING,SathyahX Sv,nio_uio-a0-26ww31b
-Stack Level,uio_a_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: IJTAG icl continuity tests of entire network,MISSING,SathyahX Sv,nio_uio-a0-26ww31b
-Stack Level,uio_a_0,ijtag_basic_tap_tests_continuity,"[NWP] TAP: pause-dr, exit, pause-ir",MISSING,SathyahX Sv,nio_uio-a0-26ww31b
-Stack Level,uio_a_0,ijtag_basic_tap_tests_continuity,[NWP] TAP: chain connectivity all RTDR and TDRs,MISSING,SathyahX Sv,nio_uio-a0-26ww31b
-Stack Level,uio_a_0,icl_verify_dft,[NWP] TAP: icl_verify,PASS,SathyahX Sv,nio_uio-a0-26ww31b
