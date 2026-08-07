@@ -18,6 +18,7 @@ from datetime import datetime
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))       # Directory where this script lives
 ROOT_DIR = os.path.dirname(SCRIPT_DIR)                        # Project root (parent of scripts/)
 OWNERSHIP_FILE = os.path.join(SCRIPT_DIR, "tap_ownership.txt")  # Maps test prefixes to owners (TAP pipeline)
+SOC_OWNERSHIP_FILE = os.path.join(SCRIPT_DIR, "soc_ownership.txt")  # Optional SOC partition->owner overrides (merged on top)
 WEEKLY_REPORT_DIR = os.path.join(ROOT_DIR, "weekly_report")   # Folder with per-model regression CSVs
 REPORTS_DIR = os.path.join(ROOT_DIR, "tap_reports")            # Folder for generated TAP reports
 PARSE_SCRIPT = os.path.join(SCRIPT_DIR, "parse_l2_regression.py")  # Parser script path
@@ -364,6 +365,7 @@ PARTITION_TYPES_FOR_MODEL = {
     'mc': ('mc',),
     'uio': ('uio', 'uioe'),
     'd2d': ('d2d',),
+    'soc': ('soc',),
 }
 
 # Ordered list of stack buckets and their display labels used for trend
@@ -375,6 +377,14 @@ STACK_LABELS = {
     'd2d': 'D2D Stack',
     'uioe': 'UIOe Stack',
 }
+
+# SOC is a standalone model bucket (its own model category + trend section),
+# kept apart from the stack buckets. It has a Partition Level and a SOC Level
+# scope (the latter has no data yet). `HISTORY_BUCKETS` is the full set tracked
+# in the history CSVs and metrics.
+SOC_BUCKET = 'soc'
+SOC_LABEL = 'SOC'
+HISTORY_BUCKETS = STACK_BUCKETS + (SOC_BUCKET,)
 
 
 def is_pvim_item_allowed_for_partition(pvim_item, partition):
@@ -457,14 +467,27 @@ def get_partition_type(partition):
 
 
 def get_model_type(model_name):
-    """Extract model type (mc/uio/d2d) from model name like 'nio_mc-a0-26ww14a'."""
+    """Extract model type (mc/uio/d2d/soc) from model name like 'nio_mc-a0-26ww14a'."""
     if model_name.startswith('nio_mc'):
         return 'mc'
     elif model_name.startswith('nio_uio'):
         return 'uio'
     elif model_name.startswith('nio_d2d'):
         return 'd2d'
+    elif model_name.startswith('nio_soc'):
+        return 'soc'
     return None
+
+
+def bucket_for_row(row):
+    """Return the trend/history bucket for a report row.
+
+    SOC partition names are arbitrary and not prefix-classifiable, so SOC rows
+    are bucketed by their model. Everything else buckets by partition prefix.
+    """
+    if get_model_type(row.get('model', '')) == 'soc':
+        return SOC_BUCKET
+    return get_partition_type(row.get('partition', ''))
 
 
 def _extract_timestamp_from_report_name(report_name):
@@ -497,8 +520,8 @@ def _compute_stack_metrics(rows, include_row=None):
     for r in rows:
         if include_row and not include_row(r):
             continue
-        stack = get_partition_type(r.get('partition', ''))
-        if stack not in STACK_BUCKETS:
+        stack = bucket_for_row(r)
+        if stack not in HISTORY_BUCKETS:
             continue
         if stack not in metrics:
             metrics[stack] = {'total': 0, 'pass': 0, 'fail': 0, 'missing': 0}
@@ -606,7 +629,7 @@ def rebuild_stack_history_csv():
             rows,
             include_row=lambda r: r.get('scope', '') == 'Partition Level',
         )
-        for stack in STACK_BUCKETS:
+        for stack in HISTORY_BUCKETS:
             m = metrics.get(stack)
             if not m:
                 continue
@@ -614,9 +637,9 @@ def rebuild_stack_history_csv():
 
         stack_metrics = _compute_stack_metrics(
             rows,
-            include_row=lambda r: r.get('scope', '') == 'Stack Level',
+            include_row=lambda r: r.get('scope', '') in ('Stack Level', 'SOC Level'),
         )
-        for stack in STACK_BUCKETS:
+        for stack in HISTORY_BUCKETS:
             m = stack_metrics.get(stack)
             if not m:
                 continue
@@ -634,7 +657,7 @@ def rebuild_stack_history_csv():
 
 def load_stack_history(history_file=STACK_HISTORY_FILE):
     """Load stack history rows keyed by stack from a history CSV file."""
-    data = {stack: [] for stack in STACK_BUCKETS}
+    data = {stack: [] for stack in HISTORY_BUCKETS}
     if not os.path.isfile(history_file):
         return data
 
@@ -655,6 +678,11 @@ def generate_general_report_for_models(selected_models):
     """Read CSV files for the selected models and produce a consolidated TAP general_report.csv.
     For each (partition, model) combo, generates one row per PVIM item from PVIM_MAPPING."""
     ownership, test_type_overrides = load_ownership(OWNERSHIP_FILE)
+    # Merge optional SOC partition->owner overrides on top (longest prefix first).
+    if os.path.isfile(SOC_OWNERSHIP_FILE):
+        soc_own, soc_overrides = load_ownership(SOC_OWNERSHIP_FILE)
+        ownership = sorted(ownership + soc_own, key=lambda x: len(x[1]), reverse=True)
+        test_type_overrides = test_type_overrides + soc_overrides
 
     # First, collect all regression results for TAP tests keyed by (partition, model, test_type)
     regression_status = {}  # (partition, model, test_type) -> status
@@ -728,6 +756,39 @@ def generate_general_report_for_models(selected_models):
                     'test_type': test_name,
                     'pvim_item': pvim_item,
                     'status': status,
+                    'model': model,
+                })
+
+    # ── SOC model rows (Partition Level, data-driven placeholder) ──────────
+    # SOC has no ownership/PVIM structure yet, so emit one Partition Level row
+    # per parsed SOC TAP (ijtag/icl) test with owner UNKNOWN. partition/test_type
+    # are split by the known PVIM test-type suffixes when possible. SOC rows are
+    # bucketed as `soc` via their model. SOC Level has no data yet.
+    for model in selected_models:
+        if get_model_type(model) != 'soc':
+            continue
+        soc_csv = os.path.join(WEEKLY_REPORT_DIR, f"{model}_regression_results.csv")
+        if not os.path.isfile(soc_csv):
+            print(f"Warning: SOC CSV not found: {soc_csv}. Skipping SOC rows.")
+            continue
+        with open(soc_csv, 'r', encoding='utf-8') as f:
+            for row in csv.DictReader(f):
+                test_name = (row.get('test_name', '') or '').strip()
+                if not test_name or not is_included_test_type(test_name):
+                    continue
+                partition, test_type = test_name, ''
+                for _pvim, tt in PVIM_MAPPING:
+                    if tt and test_name.endswith(tt):
+                        partition = test_name[:-len(tt)].rstrip('_') or test_name
+                        test_type = tt
+                        break
+                all_rows.append({
+                    'scope': 'Partition Level',
+                    'owner': find_owner(test_name, ownership),
+                    'partition': partition,
+                    'test_type': test_type,
+                    'pvim_item': PVIM_ITEM_BY_TEST_TYPE.get(test_type, f'[NWP] TAP: {partition}'),
+                    'status': (row.get('test_status') or 'MISSING').strip() or 'MISSING',
                     'model': model,
                 })
 
@@ -902,8 +963,10 @@ def generate_general_report_html(all_rows):
     # partitions and would misclassify canonical sub-partition stack rows.
     partition_rows = [r for r in all_rows if r.get('scope', '') == 'Partition Level']
     stack_rows = [r for r in all_rows if r.get('scope', '') == 'Stack Level']
+    soc_rows = [r for r in all_rows if get_model_type(r.get('model', '')) == 'soc']
     partition_summary = compute_summary(partition_rows)
     stack_summary = compute_summary(stack_rows)
+    soc_summary = compute_summary(soc_rows)
 
     def status_bg(s):
         return {'PASS': '#e8f5e9', 'FAIL': '#ffebee', 'MISSING': '#fff3e0'}.get(s, '#ffffff')
@@ -959,6 +1022,7 @@ def generate_general_report_html(all_rows):
     h.append('<tr><td style="padding:24px 32px 16px;">')
     append_summary_cards('PARTITION LEVEL STATUS', partition_summary)
     append_summary_cards('STACK LEVEL STATUS', stack_summary)
+    append_summary_cards('SOC PARTITION LEVEL STATUS', soc_summary)
     h.append('</td></tr>')
 
     # ── Historical stack trends (horizontal, 3-across) ──
@@ -970,6 +1034,7 @@ def generate_general_report_html(all_rows):
         if not rows_h:
             return (
                 '<table width="100%" cellpadding="0" cellspacing="0" border="0">'
+                f'<tr><td align="center" style="padding:0 0 4px;font-size:12px;font-weight:bold;color:#333;{FONT}">{title}</td></tr>'
                 '<tr><td align="center" style="padding:18px 6px;font-size:12px;color:#999;">'
                 'No historical data available'
                 '</td></tr></table>'
@@ -1102,7 +1167,22 @@ def generate_general_report_html(all_rows):
     h.append('</tr></table>')
     h.append('</td></tr>')
 
-    # ── Excluded PVIM items reminder ──
+    # ── SOC historical trends (standalone — kept apart from the stack trends) ──
+    # Left: SOC Partition Level (has data). Right: SOC Level (no data yet).
+    h.append('<tr><td style="padding:0 20px 16px;">')
+    h.append(f'<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:10px;"><tr><td style="{FONT}">')
+    h.append(f'<span style="font-size:16px;font-weight:bold;color:#333;{FONT}">SOC HISTORICAL TRENDS</span>')
+    h.append('</td></tr></table>')
+    h.append('<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr>')
+    h.append('<td width="50%" valign="top" bgcolor="#fbfbfb" style="border:1px solid #e6e6e6;padding:8px 6px;">')
+    h.append(render_stack_trend_svg(stack_history, SOC_BUCKET, 'SOC Partition Level'))
+    h.append('</td>')
+    h.append('<td width="10"></td>')
+    h.append('<td width="50%" valign="top" bgcolor="#fbfbfb" style="border:1px solid #e6e6e6;padding:8px 6px;">')
+    h.append(render_stack_trend_svg(stack_level_history, SOC_BUCKET, 'SOC Level'))
+    h.append('</td>')
+    h.append('</tr></table>')
+    h.append('</td></tr>')
     h.append('<tr><td style="padding:12px 32px 8px;">')
     h.append(f'<table width="100%" cellpadding="8" cellspacing="0" border="0" bgcolor="#fff8e1" style="border:1px solid #ffe082;border-radius:4px;">')
     h.append(f'<tr><td style="font-size:12px;color:#6d4c00;{FONT}">')
@@ -1321,8 +1401,10 @@ def generate_executive_summary(report_path):
     # partitions and would misclassify canonical sub-partition stack rows.
     partition_rows = [r for r in rows if r.get('scope', '') == 'Partition Level']
     stack_rows = [r for r in rows if r.get('scope', '') == 'Stack Level']
+    soc_rows = [r for r in rows if get_model_type(r.get('model', '')) == 'soc']
     partition_summary = compute_summary(partition_rows)
     stack_summary = compute_summary(stack_rows)
+    soc_summary = compute_summary(soc_rows)
 
     report_date = _report_date_str(report_path)
     prev_date = _report_date_str(prev_report_path) if prev_report_path else None
@@ -1450,6 +1532,7 @@ def generate_executive_summary(report_path):
     h.append('<tr><td style="padding:24px 32px 16px;">')
     append_overall_summary_cards('OVERALL PARTITION LEVEL STATUS', partition_summary)
     append_overall_summary_cards('OVERALL STACK LEVEL STATUS', stack_summary)
+    append_overall_summary_cards('OVERALL SOC PARTITION LEVEL STATUS', soc_summary)
     h.append('</td></tr>')
 
     # ── Historical trends link ──
@@ -1775,7 +1858,7 @@ def main():
     timestamps = load_report_timestamps()
 
     # Step 1: Let user select one model per category from local CSVs
-    categories = ['nio_mc', 'nio_uio', 'nio_d2d']
+    categories = ['nio_mc', 'nio_uio', 'nio_d2d', 'nio_soc']
     print("\n--- TAP Model Selection ---")
     selected = []
     for cat in categories:

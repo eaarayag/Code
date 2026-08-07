@@ -14,6 +14,7 @@ scripts/
   send_email_tap.py        — Send TAP executive summary email with attachments (supports --dry-run)
   scan_ownership.txt       — Maps test partition prefixes to owners for SCAN pipeline
   tap_ownership.txt        — Maps test partition prefixes to owners for TAP pipeline
+  soc_ownership.txt        — Optional SOC partition->owner overrides (merged on top of scan/tap ownership); placeholder until the SOC partition list is finalized
 config/
   email_config_scan.ini    — SMTP/sender/recipient settings for SCAN emails
   email_config_tap.ini     — SMTP/sender/recipient settings for TAP emails
@@ -38,6 +39,8 @@ python parse_l2_regression.py
 ```
 Connects to zsc24 via SSH, auto-discovers available `nio_mc` / `nio_uio` / `nio_d2d` models, parses each valid report, collects last-modified timestamps of each `L2_regression.rpt`, and downloads model CSVs plus `report_timestamps.json` into `weekly_report/`. For `nio_mc` and `nio_uio` it also parses and downloads a per-model stack-level report as `<model>_stacklevel_regression_results.csv` (filtered to the `rw` / `reset` / `continuity` TAP test types) and records a `<model>_stacklevel` timestamp entry in `report_timestamps.json`. `nio_d2d` has no stack-level report.
 
+The **SOC model** lives under a differently-named directory (`nio-a0-0p5_refresh-<week>`) with an `imh` region subfolder; the parser auto-discovers these and exposes them under the canonical id `nio_soc-a0-<week>` (CSV: `nio_soc-a0-<week>_regression_results.csv`). SOC has no stack-level (SOC Level) report yet.
+
 Optional parser modes:
 ```powershell
 # Parse only selected models
@@ -52,7 +55,7 @@ python parse_l2_regression.py --list-models
 cd scripts
 python report_l2_scan.py
 ```
-Reads local CSVs from `weekly_report/`, prompts the user to select one model per category (`nio_mc`, `nio_uio`, `nio_d2d`). Generates:
+Reads local CSVs from `weekly_report/`, prompts the user to select one model per category (`nio_mc`, `nio_uio`, `nio_d2d`, `nio_soc`). Generates:
 - `scan_reports/scan_general_report_TIMESTAMP.csv` — consolidated test results with ownership
 - `scan_reports/scan_general_report_TIMESTAMP.html` — styled HTML version of the general report
 - `scan_reports/scan_executive_summary_TIMESTAMP.html` — styled HTML executive summary
@@ -67,7 +70,7 @@ Then stages, commits, and pushes `scan_reports/` and `weekly_report/` to GitHub 
 cd scripts
 python report_l2_tap.py
 ```
-Reads local CSVs from `weekly_report/`, prompts the user to select one model per category (`nio_mc`, `nio_uio`, `nio_d2d`). Generates:
+Reads local CSVs from `weekly_report/`, prompts the user to select one model per category (`nio_mc`, `nio_uio`, `nio_d2d`, `nio_soc`). Generates:
 - `tap_reports/tap_general_report_TIMESTAMP.csv` — consolidated TAP test results with ownership
 - `tap_reports/tap_general_report_TIMESTAMP.html` — styled HTML version of the general report
 - `tap_reports/tap_executive_summary_TIMESTAMP.html` — styled HTML executive summary
@@ -93,7 +96,7 @@ Sends the TAP executive summary as HTML email body with attachments. Use `--dry-
 
 ## Important Details
 
-- **Models** follow the naming pattern: `nio_mc-a0-26wwNNx`, `nio_uio-a0-26wwNNx`, `nio_d2d-a0-26wwNNx`
+- **Models** follow the naming pattern: `nio_mc-a0-26wwNNx`, `nio_uio-a0-26wwNNx`, `nio_d2d-a0-26wwNNx`, `nio_soc-a0-26wwNNx` (SOC on-disk dir is `nio-a0-0p5_refresh-26wwNNx`)
 - **parse_l2_regression.py must be run first** — it populates `weekly_report/` with fresh CSVs and `report_timestamps.json` before any report script can run.
 - **report_l2_scan.py** uses `scan_ownership.txt` and outputs to `scan_reports/` with `scan_` prefix.
 - **report_l2_tap.py** uses `tap_ownership.txt` and outputs to `tap_reports/` with `tap_` prefix.
@@ -108,6 +111,7 @@ Both pipelines classify every test row into one of two **validation scopes** and
 
 - **Scopes**: `Partition Level` and `Stack Level`.
 - **Stack buckets**: `MC` (memstack), `UIO` (uio_a_0), `D2D` (d2d1), and `UIOe` (uio_1 — the `*_uio_1` partitions that live inside `nio_uio` CSVs but form their own bucket).
+- **SOC model**: a standalone 4th model category (`nio_soc`) with its own bucket and its own **SOC HISTORICAL TRENDS** section (kept apart from the stack trends). SOC has two scopes — `Partition Level` (data) and `SOC Level` (equivalent to Stack Level; no data yet, rendered as an empty placeholder). SOC rows are bucketed by their model (SOC partition names are arbitrary), included with owner `UNKNOWN` until `soc_ownership.txt` is populated, and are never dropped.
 
 **Completeness guarantee (both pipelines):** every partition listed in the ownership file is represented at BOTH scopes for the models that host its partition-type. If no regression data exists for a partition/test, it is reported as **MISSING** — a partition present in the ownership file is never silently omitted from either scope.
 
@@ -116,7 +120,6 @@ Both pipelines classify every test row into one of two **validation scopes** and
 - **SCAN**: from `<stack>_retarget_*` tests in the main regression CSV; SCAN's completeness check adds MISSING rows for every ownership partition missing an expected retarget test.
 
 **Auxiliary input:** the `<model>_stacklevel_regression_results.csv` files in `weekly_report/` are TAP-only auxiliary input — they are never offered as selectable models, and SCAN does not consume them.
-
 **History CSVs** (`*_stack_status_history.csv` = partition-level, `*_stack_level_status_history.csv` = stack-level) are rebuilt from all committed general reports on every run and feed the trend charts in the report HTML and index pages.
 
 ## Constraints

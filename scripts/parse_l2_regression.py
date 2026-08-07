@@ -21,10 +21,20 @@ BASE_PATHS = [
 
 # --- Stack-level TAP report paths (relative to <base>/<model>/) ---
 # nio_d2d intentionally excluded — no stacklevel rpt for d2d.
+# nio_soc intentionally excluded — no SOC-level rpt yet.
 STACKLEVEL_SUBPATHS = {
     'nio_uio': 'uio/uio/uio_a_0_dft_stacklevel_L2.list.latest/uio_a_0_dft_stacklevel_L2.rpt',
     'nio_mc':  'memstack/memstack/L2_stacklevel_regression.list.latest/L2_stacklevel_regression.rpt',
 }
+
+# --- SOC model mapping ---
+# The SOC regression lives under a differently-named directory
+# (`nio-a0-0p5_refresh-<week>`) with an `imh` region subfolder, unlike the
+# `nio_mc`/`nio_uio`/`nio_d2d` layout. It is exposed to the rest of the flow
+# under the canonical model id `nio_soc-a0-<week>`.
+SOC_DIR_PREFIX = 'nio-a0-0p5_refresh-'   # on-disk directory prefix on zsc24
+SOC_MODEL_PREFIX = 'nio_soc-a0-'         # canonical model id prefix
+SOC_SUBFOLDER = 'imh'                    # SOC region subfolder (only one for now)
 
 # --- TAP stacklevel filter: only keep tests whose test_name contains one of these substrings (case-insensitive) ---
 TAP_STACKLEVEL_KEYWORDS = ('rw', 'reset', 'continuity')
@@ -257,6 +267,18 @@ def build_report_path(model_name):
         'nio_d2d': 'd2d',
     }
 
+    # SOC uses a distinct directory naming + region subfolder. Reconstruct the
+    # on-disk dir (`nio-a0-0p5_refresh-<week>`) from the canonical model id.
+    if model_name.startswith(SOC_MODEL_PREFIX):
+        week = model_name[len(SOC_MODEL_PREFIX):]
+        soc_dir = f"{SOC_DIR_PREFIX}{week}"
+        for base_path in BASE_PATHS:
+            if os.path.isdir(f"{base_path}/{soc_dir}"):
+                return f"{base_path}/{soc_dir}/{SOC_SUBFOLDER}/L2_regression.list.latest/L2_regression.rpt"
+        print(f"Error: SOC model directory '{soc_dir}' does not exist in any known path.")
+        _print_available_models()
+        return None
+
     subfolder = None
     for prefix, folder in subfolder_map.items():
         if model_name.startswith(prefix):
@@ -342,6 +364,12 @@ def discover_models(base_paths=None):
             for e in entries:
                 if os.path.isdir(os.path.join(base_path, e)) and any(e.startswith(p) for p in subfolder_prefixes):
                     all_models.add(e)
+                # SOC dirs use a distinct name; expose them under the canonical
+                # `nio_soc-a0-<week>` id so the rest of the flow treats SOC like
+                # any other model category.
+                elif os.path.isdir(os.path.join(base_path, e)) and e.startswith(SOC_DIR_PREFIX):
+                    week = e[len(SOC_DIR_PREFIX):]
+                    all_models.add(f"{SOC_MODEL_PREFIX}{week}")
         except OSError as e:
             print(f"Warning: Could not list models in {base_path}: {e}")
     return sorted(all_models)
@@ -363,7 +391,7 @@ def run_remote_parsing(model_filter=None):
     model_names = discover_models()
 
     if not model_names:
-        print("No models found matching known prefixes (nio_mc, nio_uio, nio_d2d).")
+        print("No models found matching known prefixes (nio_mc, nio_uio, nio_d2d, nio_soc).")
         _print_available_models()
         return
 

@@ -17,6 +17,7 @@ from datetime import datetime
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))       # Directory where this script lives
 ROOT_DIR = os.path.dirname(SCRIPT_DIR)                        # Project root (parent of scripts/)
 OWNERSHIP_FILE = os.path.join(SCRIPT_DIR, "scan_ownership.txt")  # Maps test prefixes to owners (SCAN pipeline)
+SOC_OWNERSHIP_FILE = os.path.join(SCRIPT_DIR, "soc_ownership.txt")  # Optional SOC partition->owner overrides (merged on top)
 WEEKLY_REPORT_DIR = os.path.join(ROOT_DIR, "weekly_report")   # Folder with per-model regression CSVs
 REPORTS_DIR = os.path.join(ROOT_DIR, "scan_reports")            # Folder for generated SCAN reports
 PARSE_SCRIPT = os.path.join(SCRIPT_DIR, "parse_l2_regression.py")  # Parser script path
@@ -310,6 +311,7 @@ PARTITION_TYPES_FOR_MODEL = {
     'mc': ('mc',),
     'uio': ('uio', 'uioe'),
     'd2d': ('d2d',),
+    'soc': ('soc',),
 }
 
 # Ordered list of stack buckets and their display labels used for trend
@@ -327,6 +329,14 @@ STACK_CHART_LABELS = {
     'd2d': 'D2D',
     'uioe': 'UIOe Stack',
 }
+
+# SOC is a standalone model bucket (its own model category + trend section),
+# kept apart from the stack buckets. It has a Partition Level and a SOC Level
+# scope (the latter has no data yet). `HISTORY_BUCKETS` is the full set tracked
+# in the history CSVs and metrics.
+SOC_BUCKET = 'soc'
+SOC_LABEL = 'SOC'
+HISTORY_BUCKETS = STACK_BUCKETS + (SOC_BUCKET,)
 
 def get_effective_owner(test_type, owner, test_type_overrides):
     """Return effective owner based on test-type-level overrides from ownership.txt.
@@ -396,14 +406,27 @@ def get_partition_type(partition):
 
 
 def get_model_type(model_name):
-    """Extract model type (mc/uio/d2d) from model name like 'nio_mc-a0-26ww14a'."""
+    """Extract model type (mc/uio/d2d/soc) from model name like 'nio_mc-a0-26ww14a'."""
     if model_name.startswith('nio_mc'):
         return 'mc'
     elif model_name.startswith('nio_uio'):
         return 'uio'
     elif model_name.startswith('nio_d2d'):
         return 'd2d'
+    elif model_name.startswith('nio_soc'):
+        return 'soc'
     return None
+
+
+def bucket_for_row(row):
+    """Return the trend/history bucket for a report row.
+
+    SOC partition names are arbitrary and not prefix-classifiable, so SOC rows
+    are bucketed by their model. Everything else buckets by partition prefix.
+    """
+    if get_model_type(row.get('model', '')) == 'soc':
+        return SOC_BUCKET
+    return get_partition_type(row.get('partition', ''))
 
 
 def _status_priority(status):
@@ -482,8 +505,8 @@ def _compute_stack_metrics(rows, include_row=None):
     for r in rows:
         if include_row and not include_row(r):
             continue
-        stack = get_partition_type(r.get('partition', ''))
-        if stack not in STACK_BUCKETS:
+        stack = bucket_for_row(r)
+        if stack not in HISTORY_BUCKETS:
             continue
         if stack not in metrics:
             metrics[stack] = {'total': 0, 'pass': 0, 'fail': 0, 'missing': 0}
@@ -587,7 +610,7 @@ def rebuild_stack_history_csv():
             rows,
             include_row=lambda r: get_scope(r.get('partition', ''), r.get('test_type', '')) == 'Partition Level',
         )
-        for stack in STACK_BUCKETS:
+        for stack in HISTORY_BUCKETS:
             m = metrics.get(stack)
             if not m:
                 continue
@@ -598,7 +621,7 @@ def rebuild_stack_history_csv():
             rows,
             include_row=lambda r: get_scope(r.get('partition', ''), r.get('test_type', '')) == 'Stack Level',
         )
-        for stack in STACK_BUCKETS:
+        for stack in HISTORY_BUCKETS:
             m = stack_metrics.get(stack)
             if not m:
                 continue
@@ -616,7 +639,7 @@ def rebuild_stack_history_csv():
 
 def load_stack_history(history_file=STACK_HISTORY_FILE):
     """Load stack history rows keyed by stack from a history CSV file."""
-    data = {stack: [] for stack in STACK_BUCKETS}
+    data = {stack: [] for stack in HISTORY_BUCKETS}
     if not os.path.isfile(history_file):
         return data
 
@@ -827,6 +850,11 @@ def check_test_completeness(all_rows, ownership, test_type_overrides, selected_m
 def generate_general_report_for_models(selected_models):
     """Read CSV files for the selected models and produce a consolidated general_report.csv."""
     ownership, test_type_overrides = load_ownership(OWNERSHIP_FILE)
+    # Merge optional SOC partition->owner overrides on top (longest prefix first).
+    if os.path.isfile(SOC_OWNERSHIP_FILE):
+        soc_own, soc_overrides = load_ownership(SOC_OWNERSHIP_FILE)
+        ownership = sorted(ownership + soc_own, key=lambda x: len(x[1]), reverse=True)
+        test_type_overrides = test_type_overrides + soc_overrides
 
     all_rows = []
     for model in selected_models:
@@ -836,10 +864,13 @@ def generate_general_report_for_models(selected_models):
             continue
         with open(csv_file, 'r', encoding='utf-8') as f:
             reader = csv.DictReader(f)
+            is_soc = get_model_type(model) == 'soc'
             for row in reader:
                 test_name = row['test_name']
                 owner = find_owner(test_name, ownership)
-                if owner == "UNKNOWN":
+                # SOC partitions have no ownership entries yet — keep them
+                # (owner UNKNOWN) so the new model is never silently dropped.
+                if owner == "UNKNOWN" and not is_soc:
                     continue
                 partition, test_type = split_test_name(test_name, ownership)
                 if is_excluded_test_type(test_type):
@@ -945,8 +976,10 @@ def generate_general_report_html(all_rows):
 
     partition_rows = [r for r in all_rows if get_scope(r.get('partition', ''), r.get('test_type', '')) == 'Partition Level']
     stack_rows = [r for r in all_rows if get_scope(r.get('partition', ''), r.get('test_type', '')) == 'Stack Level']
+    soc_rows = [r for r in all_rows if get_model_type(r.get('model', '')) == 'soc']
     partition_summary = compute_summary(partition_rows)
     stack_summary = compute_summary(stack_rows)
+    soc_summary = compute_summary(soc_rows)
 
     def status_bg(s):
         return {'PASS': '#e8f5e9', 'FAIL': '#ffebee', 'MISSING': '#fff3e0'}.get(s, '#ffffff')
@@ -1002,6 +1035,7 @@ def generate_general_report_html(all_rows):
     h.append('<tr><td style="padding:24px 32px 16px;">')
     append_summary_cards('PARTITION LEVEL STATUS', partition_summary)
     append_summary_cards('STACK LEVEL STATUS', stack_summary)
+    append_summary_cards('SOC PARTITION LEVEL STATUS', soc_summary)
     h.append('</td></tr>')
 
     # ── Historical stack trends (horizontal, 3-across) ──
@@ -1013,6 +1047,7 @@ def generate_general_report_html(all_rows):
         if not rows:
             return (
                 '<table width="100%" cellpadding="0" cellspacing="0" border="0">'
+                f'<tr><td align="center" style="padding:0 0 4px;font-size:12px;font-weight:bold;color:#333;{FONT}">{title}</td></tr>'
                 '<tr><td align="center" style="padding:18px 6px;font-size:12px;color:#999;">'
                 'No historical data available'
                 '</td></tr></table>'
@@ -1151,6 +1186,23 @@ def generate_general_report_html(all_rows):
         h.append(render_stack_trend_svg(stack_level_history, stack_key, stack_title))
         h.append('</td>')
 
+    h.append('</tr></table>')
+    h.append('</td></tr>')
+
+    # ── SOC historical trends (standalone — kept apart from the stack trends) ──
+    # Left: SOC Partition Level (has data). Right: SOC Level (no data yet).
+    h.append('<tr><td style="padding:0 20px 16px;">')
+    h.append(f'<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:10px;"><tr><td style="{FONT}">')
+    h.append(f'<span style="font-size:16px;font-weight:bold;color:#333;{FONT}">SOC HISTORICAL TRENDS</span>')
+    h.append('</td></tr></table>')
+    h.append('<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr>')
+    h.append('<td width="50%" valign="top" bgcolor="#fbfbfb" style="border:1px solid #e6e6e6;padding:8px 6px;">')
+    h.append(render_stack_trend_svg(stack_history, SOC_BUCKET, 'SOC Partition Level'))
+    h.append('</td>')
+    h.append('<td width="10"></td>')
+    h.append('<td width="50%" valign="top" bgcolor="#fbfbfb" style="border:1px solid #e6e6e6;padding:8px 6px;">')
+    h.append(render_stack_trend_svg(stack_level_history, SOC_BUCKET, 'SOC Level'))
+    h.append('</td>')
     h.append('</tr></table>')
     h.append('</td></tr>')
 
@@ -1365,8 +1417,10 @@ def generate_executive_summary(report_path):
 
     partition_rows = [r for r in rows if get_scope(r.get('partition', ''), r.get('test_type', '')) == 'Partition Level']
     stack_rows = [r for r in rows if get_scope(r.get('partition', ''), r.get('test_type', '')) == 'Stack Level']
+    soc_rows = [r for r in rows if get_model_type(r.get('model', '')) == 'soc']
     partition_summary = compute_summary(partition_rows)
     stack_summary = compute_summary(stack_rows)
+    soc_summary = compute_summary(soc_rows)
 
     report_date = _report_date_str(report_path)
     prev_date = _report_date_str(prev_report_path) if prev_report_path else None
@@ -1503,6 +1557,7 @@ def generate_executive_summary(report_path):
     h.append('<tr><td style="padding:24px 32px 16px;">')
     append_overall_summary_cards('OVERALL PARTITION LEVEL STATUS', partition_summary)
     append_overall_summary_cards('OVERALL STACK LEVEL STATUS', stack_summary)
+    append_overall_summary_cards('OVERALL SOC PARTITION LEVEL STATUS', soc_summary)
     h.append('</td></tr>')
 
     # ── Historical trends link ──
@@ -1678,6 +1733,15 @@ def generate_executive_summary(report_path):
         f"  Total: {stack_summary['total']} tests | "
         f"{stack_summary['pass']} PASS | {stack_summary['fail']} FAIL | "
         f"{stack_summary['missing']} MISSING | {stack_summary['pass_rate']:.1f}% pass rate"
+    )
+    lines.append("")
+    lines.append("=" * 60)
+    lines.append("  OVERALL SOC PARTITION LEVEL STATUS")
+    lines.append("=" * 60)
+    lines.append(
+        f"  Total: {soc_summary['total']} tests | "
+        f"{soc_summary['pass']} PASS | {soc_summary['fail']} FAIL | "
+        f"{soc_summary['missing']} MISSING | {soc_summary['pass_rate']:.1f}% pass rate"
     )
     if owner_changes:
         lines.append(f"")
@@ -1910,7 +1974,7 @@ def main():
     timestamps = load_report_timestamps()
 
     # Step 1: Let user select one model per category from local CSVs
-    categories = ['nio_mc', 'nio_uio', 'nio_d2d']
+    categories = ['nio_mc', 'nio_uio', 'nio_d2d', 'nio_soc']
     print("\n--- Model Selection ---")
     selected = []
     for cat in categories:
