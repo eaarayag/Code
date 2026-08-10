@@ -7,6 +7,7 @@ import csv
 import glob
 import json
 import os
+import re
 import subprocess
 import sys
 import struct
@@ -17,7 +18,7 @@ from datetime import datetime
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))       # Directory where this script lives
 ROOT_DIR = os.path.dirname(SCRIPT_DIR)                        # Project root (parent of scripts/)
 OWNERSHIP_FILE = os.path.join(SCRIPT_DIR, "scan_ownership.txt")  # Maps test prefixes to owners (SCAN pipeline)
-SOC_OWNERSHIP_FILE = os.path.join(SCRIPT_DIR, "soc_ownership.txt")  # Optional SOC partition->owner overrides (merged on top)
+SOC_OWNERSHIP_PREFIXES = set()  # Populated from scan_ownership.txt ',soc'-tagged lines; lets get_partition_type classify SOC partitions
 WEEKLY_REPORT_DIR = os.path.join(ROOT_DIR, "weekly_report")   # Folder with per-model regression CSVs
 REPORTS_DIR = os.path.join(ROOT_DIR, "scan_reports")            # Folder for generated SCAN reports
 PARSE_SCRIPT = os.path.join(SCRIPT_DIR, "parse_l2_regression.py")  # Parser script path
@@ -56,8 +57,12 @@ def load_ownership(filepath):
                         excluded_owners.add(extra[len('exclude:'):].strip())
                 test_type_overrides.append((owner, test_type, excluded_owners))
             else:
-                # Partition-level ownership
+                # Partition-level ownership. An optional trailing ',soc' field
+                # marks a SOC-model partition so get_partition_type classifies
+                # it as 'soc' (SOC names overlap stack prefixes like pard2d*).
                 ownership.append((owner, target))
+                if len(parts) > 2 and parts[2].strip().lower() == 'soc':
+                    SOC_OWNERSHIP_PREFIXES.add(target)
     # Sort by prefix length descending so longer prefixes match first
     ownership.sort(key=lambda x: len(x[1]), reverse=True)
     return ownership, test_type_overrides
@@ -81,6 +86,19 @@ def split_test_name(test_name, ownership):
         if test_name == prefix:
             return prefix, ''
     # No matching prefix found; treat entire name as partition
+    return test_name, ''
+
+
+# SOC partitions have no ownership prefixes, so split SOC test names at the
+# first known DFT test-type marker instead of relying on ownership.
+SOC_TEST_TYPE_MARKERS = ('atspeed', 'stuckat', 'ijtag', 'ssn', 'icl', 'scan_ctlr', 'scandump')
+
+
+def split_soc_test_name(test_name):
+    """Split a SOC test_name into (partition, test_type) at the first DFT marker."""
+    m = re.search(r'_(?:' + '|'.join(SOC_TEST_TYPE_MARKERS) + r')_', test_name)
+    if m:
+        return test_name[:m.start()], test_name[m.start() + 1:]
     return test_name, ''
 
 
@@ -373,7 +391,11 @@ def get_scope(partition, test_type=''):
 
 
 def get_partition_type(partition):
-    """Determine model type (mc/uio/d2d/uioe) for a partition based on its naming prefix."""
+    """Determine model type (mc/uio/d2d/uioe/soc) for a partition based on its naming prefix."""
+    # SOC partitions (tagged ',soc' in scan_ownership.txt) are classified first
+    # because their names overlap stack prefixes (pard2d*, parmio*).
+    if partition in SOC_OWNERSHIP_PREFIXES:
+        return 'soc'
     if partition.startswith('memstack'):
         return 'mc'
     if partition.startswith('d2d1'):
@@ -850,11 +872,6 @@ def check_test_completeness(all_rows, ownership, test_type_overrides, selected_m
 def generate_general_report_for_models(selected_models):
     """Read CSV files for the selected models and produce a consolidated general_report.csv."""
     ownership, test_type_overrides = load_ownership(OWNERSHIP_FILE)
-    # Merge optional SOC partition->owner overrides on top (longest prefix first).
-    if os.path.isfile(SOC_OWNERSHIP_FILE):
-        soc_own, soc_overrides = load_ownership(SOC_OWNERSHIP_FILE)
-        ownership = sorted(ownership + soc_own, key=lambda x: len(x[1]), reverse=True)
-        test_type_overrides = test_type_overrides + soc_overrides
 
     all_rows = []
     for model in selected_models:
@@ -872,7 +889,11 @@ def generate_general_report_for_models(selected_models):
                 # (owner UNKNOWN) so the new model is never silently dropped.
                 if owner == "UNKNOWN" and not is_soc:
                     continue
-                partition, test_type = split_test_name(test_name, ownership)
+                if is_soc:
+                    partition, test_type = split_soc_test_name(test_name)
+                else:
+                    partition, test_type = split_test_name(test_name, ownership)
+                # Exclude TAP-only test types (ijtag/icl) from SCAN for all models, SOC included.
                 if is_excluded_test_type(test_type):
                     continue
                 # Override owner if test_type is owned at the test-type level
@@ -977,9 +998,12 @@ def generate_general_report_html(all_rows):
     partition_rows = [r for r in all_rows if get_scope(r.get('partition', ''), r.get('test_type', '')) == 'Partition Level']
     stack_rows = [r for r in all_rows if get_scope(r.get('partition', ''), r.get('test_type', '')) == 'Stack Level']
     soc_rows = [r for r in all_rows if get_model_type(r.get('model', '')) == 'soc']
+    soc_partition_rows = [r for r in soc_rows if get_scope(r.get('partition', ''), r.get('test_type', '')) != 'Stack Level']
+    soc_level_rows = [r for r in soc_rows if get_scope(r.get('partition', ''), r.get('test_type', '')) == 'Stack Level']
     partition_summary = compute_summary(partition_rows)
     stack_summary = compute_summary(stack_rows)
-    soc_summary = compute_summary(soc_rows)
+    soc_partition_summary = compute_summary(soc_partition_rows)
+    soc_level_summary = compute_summary(soc_level_rows)
 
     def status_bg(s):
         return {'PASS': '#e8f5e9', 'FAIL': '#ffebee', 'MISSING': '#fff3e0'}.get(s, '#ffffff')
@@ -1033,9 +1057,10 @@ def generate_general_report_html(all_rows):
 
     # ── Partition and stack-level summary cards ──
     h.append('<tr><td style="padding:24px 32px 16px;">')
+    append_summary_cards('SOC PARTITION LEVEL STATUS', soc_partition_summary)
+    append_summary_cards('SOC LEVEL STATUS', soc_level_summary)
     append_summary_cards('PARTITION LEVEL STATUS', partition_summary)
     append_summary_cards('STACK LEVEL STATUS', stack_summary)
-    append_summary_cards('SOC PARTITION LEVEL STATUS', soc_summary)
     h.append('</td></tr>')
 
     # ── Historical stack trends (horizontal, 3-across) ──
@@ -1150,7 +1175,24 @@ def generate_general_report_html(all_rows):
         svg.append('</td></tr></table>')
         return ''.join(svg)
 
+    # ── SOC historical trends (standalone — shown first) ──
+    # Left: SOC Partition Level (has data). Right: SOC Level (no data yet).
     h.append('<tr><td style="padding:8px 20px 16px;">')
+    h.append(f'<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:10px;"><tr><td style="{FONT}">')
+    h.append(f'<span style="font-size:16px;font-weight:bold;color:#333;{FONT}">SOC HISTORICAL TRENDS</span>')
+    h.append('</td></tr></table>')
+    h.append('<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr>')
+    h.append('<td width="50%" valign="top" bgcolor="#fbfbfb" style="border:1px solid #e6e6e6;padding:8px 6px;">')
+    h.append(render_stack_trend_svg(stack_history, SOC_BUCKET, 'SOC Partition Level'))
+    h.append('</td>')
+    h.append('<td width="10"></td>')
+    h.append('<td width="50%" valign="top" bgcolor="#fbfbfb" style="border:1px solid #e6e6e6;padding:8px 6px;">')
+    h.append(render_stack_trend_svg(stack_level_history, SOC_BUCKET, 'SOC Level'))
+    h.append('</td>')
+    h.append('</tr></table>')
+    h.append('</td></tr>')
+
+    h.append('<tr><td style="padding:0 20px 16px;">')
     h.append(f'<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:10px;"><tr><td style="{FONT}">')
     h.append(f'<span style="font-size:16px;font-weight:bold;color:#333;{FONT}">PARTITION LEVEL HISTORICAL TRENDS</span>')
     h.append('</td></tr></table>')
@@ -1189,23 +1231,6 @@ def generate_general_report_html(all_rows):
     h.append('</tr></table>')
     h.append('</td></tr>')
 
-    # ── SOC historical trends (standalone — kept apart from the stack trends) ──
-    # Left: SOC Partition Level (has data). Right: SOC Level (no data yet).
-    h.append('<tr><td style="padding:0 20px 16px;">')
-    h.append(f'<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:10px;"><tr><td style="{FONT}">')
-    h.append(f'<span style="font-size:16px;font-weight:bold;color:#333;{FONT}">SOC HISTORICAL TRENDS</span>')
-    h.append('</td></tr></table>')
-    h.append('<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr>')
-    h.append('<td width="50%" valign="top" bgcolor="#fbfbfb" style="border:1px solid #e6e6e6;padding:8px 6px;">')
-    h.append(render_stack_trend_svg(stack_history, SOC_BUCKET, 'SOC Partition Level'))
-    h.append('</td>')
-    h.append('<td width="10"></td>')
-    h.append('<td width="50%" valign="top" bgcolor="#fbfbfb" style="border:1px solid #e6e6e6;padding:8px 6px;">')
-    h.append(render_stack_trend_svg(stack_level_history, SOC_BUCKET, 'SOC Level'))
-    h.append('</td>')
-    h.append('</tr></table>')
-    h.append('</td></tr>')
-
     # ── Per-owner summary row ──
     h.append('<tr><td style="padding:0 32px 16px;">')
     h.append(f'<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:10px;"><tr><td style="{FONT}">')
@@ -1235,7 +1260,12 @@ def generate_general_report_html(all_rows):
     # ── Detailed test results per model ──
     # Rows for partitions in the `uioestack` bucket are pulled into their own
     # sub-table so they are not visually mixed with the main UIO stack rows.
-    for model in models_seen:
+    # SOC model tables are shown first.
+    ordered_models = (
+        [m for m in models_seen if get_model_type(m) == 'soc']
+        + [m for m in models_seen if get_model_type(m) != 'soc']
+    )
+    for model in ordered_models:
         model_rows = rows_by_model[model]
         main_rows = [r for r in model_rows if get_partition_type(r.get('partition', '')) != 'uioe']
         uioe_rows = [r for r in model_rows if get_partition_type(r.get('partition', '')) == 'uioe']
@@ -1418,9 +1448,12 @@ def generate_executive_summary(report_path):
     partition_rows = [r for r in rows if get_scope(r.get('partition', ''), r.get('test_type', '')) == 'Partition Level']
     stack_rows = [r for r in rows if get_scope(r.get('partition', ''), r.get('test_type', '')) == 'Stack Level']
     soc_rows = [r for r in rows if get_model_type(r.get('model', '')) == 'soc']
+    soc_partition_rows = [r for r in soc_rows if get_scope(r.get('partition', ''), r.get('test_type', '')) != 'Stack Level']
+    soc_level_rows = [r for r in soc_rows if get_scope(r.get('partition', ''), r.get('test_type', '')) == 'Stack Level']
     partition_summary = compute_summary(partition_rows)
     stack_summary = compute_summary(stack_rows)
-    soc_summary = compute_summary(soc_rows)
+    soc_partition_summary = compute_summary(soc_partition_rows)
+    soc_level_summary = compute_summary(soc_level_rows)
 
     report_date = _report_date_str(report_path)
     prev_date = _report_date_str(prev_report_path) if prev_report_path else None
@@ -1515,6 +1548,8 @@ def generate_executive_summary(report_path):
             cat_label, cat_color = 'UIO', '#6a1b9a'
         elif 'nio_d2d' in model:
             cat_label, cat_color = 'D2D', '#00695c'
+        elif 'nio_soc' in model:
+            cat_label, cat_color = 'SOC', '#b5651d'
         else:
             cat_label, cat_color = '?', '#555'
         is_new = model in new_models
@@ -1557,7 +1592,8 @@ def generate_executive_summary(report_path):
     h.append('<tr><td style="padding:24px 32px 16px;">')
     append_overall_summary_cards('OVERALL PARTITION LEVEL STATUS', partition_summary)
     append_overall_summary_cards('OVERALL STACK LEVEL STATUS', stack_summary)
-    append_overall_summary_cards('OVERALL SOC PARTITION LEVEL STATUS', soc_summary)
+    append_overall_summary_cards('OVERALL SOC PARTITION LEVEL STATUS', soc_partition_summary)
+    append_overall_summary_cards('OVERALL SOC LEVEL STATUS', soc_level_summary)
     h.append('</td></tr>')
 
     # ── Historical trends link ──
@@ -1739,9 +1775,18 @@ def generate_executive_summary(report_path):
     lines.append("  OVERALL SOC PARTITION LEVEL STATUS")
     lines.append("=" * 60)
     lines.append(
-        f"  Total: {soc_summary['total']} tests | "
-        f"{soc_summary['pass']} PASS | {soc_summary['fail']} FAIL | "
-        f"{soc_summary['missing']} MISSING | {soc_summary['pass_rate']:.1f}% pass rate"
+        f"  Total: {soc_partition_summary['total']} tests | "
+        f"{soc_partition_summary['pass']} PASS | {soc_partition_summary['fail']} FAIL | "
+        f"{soc_partition_summary['missing']} MISSING | {soc_partition_summary['pass_rate']:.1f}% pass rate"
+    )
+    lines.append("")
+    lines.append("=" * 60)
+    lines.append("  OVERALL SOC LEVEL STATUS")
+    lines.append("=" * 60)
+    lines.append(
+        f"  Total: {soc_level_summary['total']} tests | "
+        f"{soc_level_summary['pass']} PASS | {soc_level_summary['fail']} FAIL | "
+        f"{soc_level_summary['missing']} MISSING | {soc_level_summary['pass_rate']:.1f}% pass rate"
     )
     if owner_changes:
         lines.append(f"")

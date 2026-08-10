@@ -9,7 +9,7 @@ from datetime import datetime
 from pathlib import Path
 
 # --- Remote SSH Configuration ---
-REMOTE_HOST = "sccc06381314.zsc24.intel.com"
+REMOTE_HOST = "sccc06381308.zsc24.intel.com"
 REMOTE_USER = "eaarayag"
 REMOTE_WORK_DIR = "/nfs/site/disks/nwp_dft_fe_002/eaarayag/scripts"
 
