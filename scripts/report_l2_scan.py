@@ -598,8 +598,18 @@ def _write_stack_history_csv(file_path, entries):
 
 def rebuild_stack_history_csv():
     """Rebuild partition-level and stack-level history CSV files from all general reports."""
-    pattern = os.path.join(REPORTS_DIR, 'scan_general_report_*.csv')
-    report_paths = sorted(glob.glob(pattern))
+    try:
+        result = subprocess.run(
+            ['git', 'ls-files', '--', 'scan_reports/scan_general_report_*.csv'],
+            capture_output=True, text=True, cwd=ROOT_DIR
+        )
+        tracked_names = {os.path.basename(f.strip()) for f in result.stdout.splitlines() if f.strip()}
+        report_paths = sorted(
+            [p for p in glob.glob(os.path.join(REPORTS_DIR, 'scan_general_report_*.csv'))
+             if os.path.basename(p) in tracked_names]
+        )
+    except Exception:
+        report_paths = sorted(glob.glob(os.path.join(REPORTS_DIR, 'scan_general_report_*.csv')))
 
     partition_entries = []
     stack_entries = []
@@ -1839,11 +1849,23 @@ def generate_index_html():
 
     FONT = "font-family:Arial,Helvetica,sans-serif;"
 
-    # Discover all general report HTML files
-    html_reports = sorted(glob.glob(os.path.join(REPORTS_DIR, "scan_general_report_*.html")), reverse=True)
+    # Discover only git-tracked general report HTML files
+    try:
+        result = subprocess.run(
+            ['git', 'ls-files', '--', 'scan_reports/scan_general_report_*.html'],
+            capture_output=True, text=True, cwd=ROOT_DIR
+        )
+        tracked_names = {os.path.basename(f.strip()) for f in result.stdout.splitlines() if f.strip()}
+        html_reports = sorted(
+            [p for p in glob.glob(os.path.join(REPORTS_DIR, "scan_general_report_*.html"))
+             if os.path.basename(p) in tracked_names],
+            reverse=True
+        )
+    except Exception:
+        html_reports = sorted(glob.glob(os.path.join(REPORTS_DIR, "scan_general_report_*.html")), reverse=True)
 
     if not html_reports:
-        print("No HTML general reports found. Skipping index generation.")
+        print("No committed HTML general reports found. Skipping index generation.")
         return
 
     # For each HTML report, try to read stats from the companion CSV
@@ -2043,8 +2065,11 @@ def main():
     # Step 4: Regenerate index page with all reports
     generate_index_html()
 
-    # Step 5: Commit and push reports to GitHub
-    git_commit_and_push()
+    # Step 5: Commit and push reports to GitHub (skippable via SKIP_GIT_PUSH env var)
+    if os.environ.get('SKIP_GIT_PUSH', '').strip().lower() in ('1', 'true', 'yes'):
+        print("\n--- Git Commit & Push --- SKIPPED (SKIP_GIT_PUSH env var set)")
+    else:
+        git_commit_and_push()
 
 
 if __name__ == "__main__":

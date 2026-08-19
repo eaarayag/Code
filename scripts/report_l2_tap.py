@@ -599,8 +599,18 @@ def _write_stack_history_csv(file_path, entries):
 
 def rebuild_stack_history_csv():
     """Rebuild partition-level and stack-level history CSV files from all TAP general reports."""
-    pattern = os.path.join(REPORTS_DIR, 'tap_general_report_*.csv')
-    report_paths = sorted(glob.glob(pattern))
+    try:
+        result = subprocess.run(
+            ['git', 'ls-files', '--', 'tap_reports/tap_general_report_*.csv'],
+            capture_output=True, text=True, cwd=ROOT_DIR
+        )
+        tracked_names = {os.path.basename(f.strip()) for f in result.stdout.splitlines() if f.strip()}
+        report_paths = sorted(
+            [p for p in glob.glob(os.path.join(REPORTS_DIR, 'tap_general_report_*.csv'))
+             if os.path.basename(p) in tracked_names]
+        )
+    except Exception:
+        report_paths = sorted(glob.glob(os.path.join(REPORTS_DIR, 'tap_general_report_*.csv')))
 
     partition_entries = []
     stack_entries = []
@@ -827,27 +837,28 @@ def generate_general_report_for_models(selected_models):
 
         # ── MISSING detection derived from the ownership file ──────────────
         # Every ownership partition whose type this model hosts must appear at
-        # Stack Level. A data row "covers" an ownership partition when its
-        # canonical name maps back to that prefix; anything not covered is
-        # emitted as MISSING for each stack test type.
-        covered = set()
+        # Stack Level for every expected test type. Coverage is tracked at the
+        # (ownership_prefix, test_type) level so that a partition with data for
+        # one test type (e.g. `reset`) still gets MISSING rows for the others
+        # (e.g. `continuity`, `rw_access`) if those are absent.
+        covered = set()  # (ownership_prefix, test_type) pairs with data
         for r in stack_dedup.values():
             mp = match_ownership_prefix(r['partition'], ownership)
             if mp:
-                covered.add(mp)
+                covered.add((mp, r['test_type']))
         for _owner_name, prefix in ownership:
             ptype = get_partition_type(prefix)
             if ptype not in stack_ptypes:
                 continue
             if prefix in STACK_ROOT_PARTITIONS:
                 continue  # stack roots are not partition entries at Stack Level
-            if prefix in covered:
-                continue  # already represented by a data row
             _canonical, p_owner = find_stack_owner(prefix, ownership)
             for pvim_label, exp_test_type in STACK_PVIM_MAPPING:
                 key = (prefix, exp_test_type)
                 if key in stack_dedup:
                     continue
+                if (prefix, exp_test_type) in covered:
+                    continue  # covered by an aliased/canonicalized data row
                 effective_owner = get_effective_owner(exp_test_type, p_owner, test_type_overrides)
                 stack_dedup[key] = {
                     'scope': 'Stack Level',
@@ -1684,10 +1695,23 @@ def generate_index_html():
 
     FONT = "font-family:Arial,Helvetica,sans-serif;"
 
-    html_reports = sorted(glob.glob(os.path.join(REPORTS_DIR, "tap_general_report_*.html")), reverse=True)
+    # Discover only git-tracked general report HTML files
+    try:
+        result = subprocess.run(
+            ['git', 'ls-files', '--', 'tap_reports/tap_general_report_*.html'],
+            capture_output=True, text=True, cwd=ROOT_DIR
+        )
+        tracked_names = {os.path.basename(f.strip()) for f in result.stdout.splitlines() if f.strip()}
+        html_reports = sorted(
+            [p for p in glob.glob(os.path.join(REPORTS_DIR, "tap_general_report_*.html"))
+             if os.path.basename(p) in tracked_names],
+            reverse=True
+        )
+    except Exception:
+        html_reports = sorted(glob.glob(os.path.join(REPORTS_DIR, "tap_general_report_*.html")), reverse=True)
 
     if not html_reports:
-        print("No HTML TAP general reports found. Skipping index generation.")
+        print("No committed HTML TAP general reports found. Skipping index generation.")
         return
 
     entries = []
