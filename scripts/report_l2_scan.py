@@ -1352,12 +1352,19 @@ def generate_general_report_html(all_rows):
 
 
 def find_previous_report(current_report_path):
-    """Find the most recent general_report CSV before the current one."""
+    """Find the most recent general_report CSV from a different day than the current one."""
+    import re
     current_name = os.path.basename(current_report_path)
+    m = re.search(r'(\d{8})_\d{6}', current_name)
+    current_date = m.group(1) if m else None
     pattern = os.path.join(REPORTS_DIR, "scan_general_report_*.csv")
     reports = sorted(glob.glob(pattern))
-    # Filter out the current report and pick the latest remaining
-    previous = [r for r in reports if os.path.basename(r) != current_name]
+    # Filter out the current report and all reports from the same day
+    previous = [
+        r for r in reports
+        if os.path.basename(r) != current_name
+        and (current_date is None or not re.search(r'(\d{8})_\d{6}', os.path.basename(r)) or re.search(r'(\d{8})_\d{6}', os.path.basename(r)).group(1) != current_date)
+    ]
     return previous[-1] if previous else None
 
 
