@@ -451,3 +451,5 @@ pars3m_ijtag_basic_tap_tests_rw_access,PASS,PASS
 parscfmemch2s_ijtag_basic_tap_tests_rw_access,PASS,PASS
 pars3m_ijtag_basic_tap_tests_reset,PASS,PASS
 pars3m_ijtag_basic_tap_tests_tlr_reset,FAIL,Error between simulated and expected patterns
+parhwrsfuse_ijtag_basic_tap_tests_tlr_reset,FAIL,"Fail, RequiredText not found"
+parhwrsfuse_ijtag_basic_tap_tests_reset,FAIL,"Fail, RequiredText not found"
