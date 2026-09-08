@@ -596,7 +596,7 @@ def _write_stack_history_csv(file_path, entries):
             })
 
 
-def rebuild_stack_history_csv():
+def rebuild_stack_history_csv(extra_path=None):
     """Rebuild partition-level and stack-level history CSV files from all general reports."""
     try:
         result = subprocess.run(
@@ -608,6 +608,9 @@ def rebuild_stack_history_csv():
             [p for p in glob.glob(os.path.join(REPORTS_DIR, 'scan_general_report_*.csv'))
              if os.path.basename(p) in tracked_names]
         )
+        # Always include the current run's CSV even if not yet committed.
+        if extra_path and os.path.isfile(extra_path) and extra_path not in report_paths:
+            report_paths = sorted(report_paths + [extra_path])
     except Exception:
         report_paths = sorted(glob.glob(os.path.join(REPORTS_DIR, 'scan_general_report_*.csv')))
 
@@ -953,7 +956,7 @@ def generate_general_report_for_models(selected_models):
     print(f"Total test entries: {len(all_rows)} ({len(missing_rows)} MISSING)")
 
     # Rebuild stack-level historical percentages from all general reports.
-    rebuild_stack_history_csv()
+    rebuild_stack_history_csv(extra_path=OUTPUT_REPORT)
 
     # Also generate HTML version
     generate_general_report_html(all_rows)
