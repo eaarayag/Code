@@ -1,5 +1,5 @@
 # Partition-level ownership for TAP pipeline (format: Owner,partition_prefix)
-Sebastian Porras,phy_cluster
+Bhanu Vattikuti,phy_cluster
 Maria Perez,parmccore
 Sebastian Porras,parmcmse
 Natalia Abarca,pardfi
@@ -34,8 +34,6 @@ SathyahX Sv,parmioula_uio_1
 SathyahX Sv,parmiomisc_uio_1
 SathyahX Sv,parmiofblprxfcrarbmux_uio_1
 SathyahX Sv,uio_1
-
-Bhanu Vattikuti,@icl_verify_dft,exclude:Sebastian Porras,exclude:SathyahX Sv,exclude:Gaby Gomez,exclude:Natalia Abarca
 
 # ── SOC partitions (partition-type: soc; checked for completeness like the stack) ──
 Maria Perez,parswinf0,soc
@@ -185,6 +183,5 @@ SathyahX Sv,parscfcamisc,soc
 SathyahX Sv,parcachnl,soc
 Marco Salas,parcabhmaa,soc
 Marco Salas,parcabhmab,soc
-Marco Salas,parcabamab,soc
-Marco Salas,parcabamaflop,soc
+Marco Salas,parcabama,soc
 SathyahX Sv,parscfmemch3n,soc

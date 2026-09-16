@@ -192,6 +192,5 @@ KalthireddyX Gunasekhar,parscfcamisc,soc
 KalthireddyX Gunasekhar,parcachnl,soc
 Mauricio Segura,parcabhmaa,soc
 Mauricio Segura,parcabhmab,soc
-Mauricio Segura,parcabamab,soc
-Mauricio Segura,parcabamaflop,soc
+Mauricio Segura,parcabama,soc
 KalthireddyX Gunasekhar,parscfmemch3n,soc

@@ -19,6 +19,7 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))       # Directory where 
 ROOT_DIR = os.path.dirname(SCRIPT_DIR)                        # Project root (parent of scripts/)
 OWNERSHIP_FILE = os.path.join(SCRIPT_DIR, "scan_ownership.txt")  # Maps test prefixes to owners (SCAN pipeline)
 SOC_OWNERSHIP_PREFIXES = set()  # Populated from scan_ownership.txt ',soc'-tagged lines; lets get_partition_type classify SOC partitions
+_SOC_PREFIXES_LONGEST_FIRST = []  # SOC prefixes sorted longest-first; used to snap SOC partitions to their base name
 WEEKLY_REPORT_DIR = os.path.join(ROOT_DIR, "weekly_report")   # Folder with per-model regression CSVs
 REPORTS_DIR = os.path.join(ROOT_DIR, "scan_reports")            # Folder for generated SCAN reports
 PARSE_SCRIPT = os.path.join(SCRIPT_DIR, "parse_l2_regression.py")  # Parser script path
@@ -32,6 +33,13 @@ GITHUB_PAGES_BASE = "https://eaarayag.github.io/Code/scan_reports/"             
 SIH_TEST_TOKEN = "_sih_"
 SIH_PVIM_ITEM = "[NWP] SIH case val"
 SIH_OWNER = "Diego Matamoros"
+
+# Optional annotation for models whose input CSV was manually merged from
+# multiple report files (one-time exemptions). Set MERGED_MODELS (comma-separated
+# model names) to flag them; MERGED_INPUT_NOTE gives the source description shown
+# in the reports. Both empty by default, so normal runs are unaffected.
+MERGED_MODELS = {m.strip() for m in os.environ.get('MERGED_MODELS', '').split(',') if m.strip()}
+MERGED_INPUT_NOTE = os.environ.get('MERGED_INPUT_NOTE', '').strip()
 
 
 def load_ownership(filepath):
@@ -100,6 +108,28 @@ def split_soc_test_name(test_name):
     if m:
         return test_name[:m.start()], test_name[m.start() + 1:]
     return test_name, ''
+
+
+def normalize_soc_partition(partition):
+    """Snap a SOC partition to its base ownership partition.
+
+    Scan-controller tests carry a duplicated name plus the ULT instance segment
+    (e.g. `paruboxspk_paruboxspk_ub_i_ult`); collapsing the doubled form yields a
+    clean Region name (`paruboxspk`) and lets those rows reconcile with the
+    ownership-derived completeness/MISSING checks. Distinct siblings such as
+    `parcubrmiocha`/`parcubrmiochb` are preserved (no ownership entry required).
+    """
+    # Collapse the doubled scan-controller form `<P>_<P>_ub_i_ult` -> `<P>`.
+    m = re.fullmatch(r'(.+)_\1_ub_i_ult', partition)
+    if m:
+        return m.group(1)
+    # Non-doubled `<P>_ub_i_ult` fallback: snap to the owning SOC prefix.
+    if partition.endswith('_ub_i_ult'):
+        base = partition[:-len('_ub_i_ult')]
+        for prefix in _SOC_PREFIXES_LONGEST_FIRST:
+            if base == prefix or base.startswith(prefix + '_'):
+                return prefix
+    return partition
 
 
 def extract_model_from_filename(filename):
@@ -227,8 +257,16 @@ SCAN_PVIM_MAPPING = {
 }
 
 # Suffix-based PVIM mappings (for test types matched with '*' in EXPECTED_TESTS)
+# The `[NWP] scan: scandump` item is satisfied by EITHER scandump variant:
+#   scan_ctlr_stuckat_edt_bypass_low_internal_scandump   (canonical)
+#   stuckat_edt_bypass_low_internal_scandump             (alternative)
+# Both end with SCANDUMP_MATCH_SUFFIX, so one suffix entry maps them together.
+SCANDUMP_CANONICAL = 'scan_ctlr_stuckat_edt_bypass_low_internal_scandump'
+SCANDUMP_ALT = 'stuckat_edt_bypass_low_internal_scandump'
+SCANDUMP_MATCH_SUFFIX = SCANDUMP_ALT
+SCANDUMP_PVIM = '[NWP] scan: scandump'
 SCAN_PVIM_SUFFIX_MAPPING = {
-    'scan_ctlr_stuckat_edt_bypass_low_internal_scandump': '[NWP] scan: scandump',
+    SCANDUMP_MATCH_SUFFIX: SCANDUMP_PVIM,
 }
 
 
@@ -355,6 +393,17 @@ STACK_CHART_LABELS = {
 SOC_BUCKET = 'soc'
 SOC_LABEL = 'SOC'
 HISTORY_BUCKETS = STACK_BUCKETS + (SOC_BUCKET,)
+
+# Partition Level status is shown as a per-bucket breakdown (one tracker per
+# model/stack bucket) instead of a single overall card.
+PARTITION_LEVEL_BUCKET_ORDER = ('mc', 'uio', 'uioe', 'd2d', 'soc')
+PARTITION_LEVEL_BUCKET_LABELS = {
+    'mc': 'MC',
+    'uio': 'UIO',
+    'uioe': 'UIOe',
+    'd2d': 'D2D',
+    'soc': 'SOC',
+}
 
 def get_effective_owner(test_type, owner, test_type_overrides):
     """Return effective owner based on test-type-level overrides from ownership.txt.
@@ -495,6 +544,48 @@ def dedupe_and_normalize_rows(rows):
             prev['pvim_item'] = row['pvim_item']
 
     return list(deduped.values())
+
+
+def consolidate_scandump_rows(rows):
+    """Collapse the `[NWP] scan: scandump` PVIM item to a single row per
+    (model, partition).
+
+    Either scandump variant (canonical scan_ctlr or the plain stuckat form)
+    satisfies the item. A passing variant marks it PASS (priority PASS > FAIL >
+    MISSING, overriding the normal FAIL-first rule). Only when neither variant
+    has data is it reported MISSING against the canonical scan_ctlr name.
+    """
+    def is_scandump(tt):
+        return (tt or '').endswith(SCANDUMP_MATCH_SUFFIX)
+
+    status_rank = {'PASS': 3, 'FAIL': 2, 'MISSING': 1}
+
+    def name_rank(tt):
+        if tt == SCANDUMP_CANONICAL:
+            return 0
+        if tt == SCANDUMP_ALT:
+            return 1
+        return 2
+
+    groups = {}
+    result = []
+    for r in rows:
+        if is_scandump(r.get('test_type', '')):
+            groups.setdefault((r.get('model', ''), r.get('partition', '')), []).append(r)
+        else:
+            result.append(r)
+
+    for cands in groups.values():
+        best = max(status_rank.get((r.get('status') or '').upper(), 0) for r in cands)
+        winners = [r for r in cands
+                   if status_rank.get((r.get('status') or '').upper(), 0) == best]
+        rep = dict(sorted(winners, key=lambda r: name_rank(r.get('test_type', '')))[0])
+        if (rep.get('status') or '').upper() == 'MISSING':
+            rep['test_type'] = SCANDUMP_CANONICAL  # a truly-missing item flags the canonical name
+        rep['pvim_item'] = SCANDUMP_PVIM
+        result.append(rep)
+
+    return result
 
 
 def _extract_timestamp_from_report_name(report_name):
@@ -885,6 +976,10 @@ def check_test_completeness(all_rows, ownership, test_type_overrides, selected_m
 def generate_general_report_for_models(selected_models):
     """Read CSV files for the selected models and produce a consolidated general_report.csv."""
     ownership, test_type_overrides = load_ownership(OWNERSHIP_FILE)
+    # SOC prefixes sorted longest-first so normalize_soc_partition snaps to the
+    # most specific base partition (populated by load_ownership above).
+    global _SOC_PREFIXES_LONGEST_FIRST
+    _SOC_PREFIXES_LONGEST_FIRST = sorted(SOC_OWNERSHIP_PREFIXES, key=len, reverse=True)
 
     all_rows = []
     for model in selected_models:
@@ -904,6 +999,7 @@ def generate_general_report_for_models(selected_models):
                     continue
                 if is_soc:
                     partition, test_type = split_soc_test_name(test_name)
+                    partition = normalize_soc_partition(partition)
                 else:
                     partition, test_type = split_test_name(test_name, ownership)
                 # Exclude TAP-only test types (ijtag/icl) from SCAN for all models, SOC included.
@@ -929,6 +1025,10 @@ def generate_general_report_for_models(selected_models):
     if missing_rows:
         print(f"\nFound {len(missing_rows)} missing test(s) across partitions.")
         all_rows.extend(missing_rows)
+
+    # Collapse the scandump PVIM item (either variant satisfies it) to one row
+    # per (model, partition) before generic de-duplication.
+    all_rows = consolidate_scandump_rows(all_rows)
 
     # Consolidate repeated rows from source CSVs to keep one canonical entry per test.
     before_dedupe = len(all_rows)
@@ -1070,10 +1170,14 @@ def generate_general_report_html(all_rows):
 
     # ── Partition and stack-level summary cards ──
     h.append('<tr><td style="padding:24px 32px 16px;">')
-    append_summary_cards('SOC PARTITION LEVEL STATUS', soc_partition_summary)
-    append_summary_cards('SOC LEVEL STATUS', soc_level_summary)
-    append_summary_cards('PARTITION LEVEL STATUS', partition_summary)
+    # Partition Level broken down per model/stack bucket (one tracker each).
+    for _bucket in PARTITION_LEVEL_BUCKET_ORDER:
+        _bucket_rows = [r for r in partition_rows if bucket_for_row(r) == _bucket]
+        if not _bucket_rows:
+            continue
+        append_summary_cards(f'{PARTITION_LEVEL_BUCKET_LABELS[_bucket]} PARTITION LEVEL STATUS', compute_summary(_bucket_rows))
     append_summary_cards('STACK LEVEL STATUS', stack_summary)
+    append_summary_cards('SOC LEVEL STATUS', soc_level_summary)
     h.append('</td></tr>')
 
     # ── Historical stack trends (horizontal, 3-across) ──
@@ -1305,6 +1409,10 @@ def generate_general_report_html(all_rows):
             h.append('<tr><td style="padding:16px 32px 8px;">')
             h.append(f'<table cellpadding="0" cellspacing="0" border="0"><tr><td style="{FONT}">')
             h.append(f'<span style="font-size:15px;font-weight:bold;color:#333;{FONT}">{heading}</span> ')
+            if model in MERGED_MODELS:
+                merged_txt = 'merged input' + (f': {html_mod.escape(MERGED_INPUT_NOTE)}' if MERGED_INPUT_NOTE else '')
+                h.append(f'<span style="display:inline-block;background-color:#5e35b1;color:#ffffff;font-size:10px;'
+                         f'font-weight:bold;padding:1px 6px;{FONT}">{merged_txt}</span> ')
             h.append(f'<span style="font-size:12px;color:#888;{FONT}">')
             h.append(f'&mdash; {len(sub_rows)} tests: ')
             h.append(f'<span style="color:#2e7d32;">{m_pass} pass</span>, ')
@@ -1580,6 +1688,12 @@ def generate_executive_summary(report_path):
         if is_new:
             h.append(f' <span style="display:inline-block;background-color:#ff6f00;color:#ffffff;font-size:10px;'
                      f'font-weight:bold;padding:1px 6px;{FONT}">NEW</span>')
+        if model in MERGED_MODELS:
+            h.append(f' <span style="display:inline-block;background-color:#5e35b1;color:#ffffff;font-size:10px;'
+                     f'font-weight:bold;padding:1px 6px;{FONT}">MERGED INPUT</span>')
+            if MERGED_INPUT_NOTE:
+                h.append(f'<br><span style="font-size:11px;color:#777;{MONO}padding-left:4px;">'
+                         f'source: {html_mod.escape(MERGED_INPUT_NOTE)}</span>')
         h.append('</td></tr>')
     h.append('</table>')
     h.append('</td></tr>')
@@ -1610,9 +1724,13 @@ def generate_executive_summary(report_path):
 
     # ── Overall status sections ──
     h.append('<tr><td style="padding:24px 32px 16px;">')
-    append_overall_summary_cards('OVERALL PARTITION LEVEL STATUS', partition_summary)
+    # Partition Level broken down per model/stack bucket (one tracker each).
+    for _bucket in PARTITION_LEVEL_BUCKET_ORDER:
+        _bucket_rows = [r for r in partition_rows if bucket_for_row(r) == _bucket]
+        if not _bucket_rows:
+            continue
+        append_overall_summary_cards(f'{PARTITION_LEVEL_BUCKET_LABELS[_bucket]} PARTITION LEVEL STATUS', compute_summary(_bucket_rows))
     append_overall_summary_cards('OVERALL STACK LEVEL STATUS', stack_summary)
-    append_overall_summary_cards('OVERALL SOC PARTITION LEVEL STATUS', soc_partition_summary)
     append_overall_summary_cards('OVERALL SOC LEVEL STATUS', soc_level_summary)
     h.append('</td></tr>')
 
@@ -1773,15 +1891,20 @@ def generate_executive_summary(report_path):
     lines.append("")
     lines.append(f"  Models: {', '.join(models_used)}")
     lines.append("")
-    lines.append("=" * 60)
-    lines.append("  OVERALL PARTITION LEVEL STATUS")
-    lines.append("=" * 60)
-    lines.append(
-        f"  Total: {partition_summary['total']} tests | "
-        f"{partition_summary['pass']} PASS | {partition_summary['fail']} FAIL | "
-        f"{partition_summary['missing']} MISSING | {partition_summary['pass_rate']:.1f}% pass rate"
-    )
-    lines.append("")
+    for _bucket in PARTITION_LEVEL_BUCKET_ORDER:
+        _bucket_rows = [r for r in partition_rows if bucket_for_row(r) == _bucket]
+        if not _bucket_rows:
+            continue
+        _bs = compute_summary(_bucket_rows)
+        lines.append("=" * 60)
+        lines.append(f"  {PARTITION_LEVEL_BUCKET_LABELS[_bucket]} PARTITION LEVEL STATUS")
+        lines.append("=" * 60)
+        lines.append(
+            f"  Total: {_bs['total']} tests | "
+            f"{_bs['pass']} PASS | {_bs['fail']} FAIL | "
+            f"{_bs['missing']} MISSING | {_bs['pass_rate']:.1f}% pass rate"
+        )
+        lines.append("")
     lines.append("=" * 60)
     lines.append("  OVERALL STACK LEVEL STATUS")
     lines.append("=" * 60)
@@ -1789,15 +1912,6 @@ def generate_executive_summary(report_path):
         f"  Total: {stack_summary['total']} tests | "
         f"{stack_summary['pass']} PASS | {stack_summary['fail']} FAIL | "
         f"{stack_summary['missing']} MISSING | {stack_summary['pass_rate']:.1f}% pass rate"
-    )
-    lines.append("")
-    lines.append("=" * 60)
-    lines.append("  OVERALL SOC PARTITION LEVEL STATUS")
-    lines.append("=" * 60)
-    lines.append(
-        f"  Total: {soc_partition_summary['total']} tests | "
-        f"{soc_partition_summary['pass']} PASS | {soc_partition_summary['fail']} FAIL | "
-        f"{soc_partition_summary['missing']} MISSING | {soc_partition_summary['pass_rate']:.1f}% pass rate"
     )
     lines.append("")
     lines.append("=" * 60)
@@ -1866,6 +1980,10 @@ def generate_index_html():
             capture_output=True, text=True, cwd=ROOT_DIR
         )
         tracked_names = {os.path.basename(f.strip()) for f in result.stdout.splitlines() if f.strip()}
+        # Include the current run's report (tracked/pushed later in the same run).
+        current_report = f"scan_general_report_{TIMESTAMP}.html"
+        if os.path.isfile(os.path.join(REPORTS_DIR, current_report)):
+            tracked_names.add(current_report)
         html_reports = sorted(
             [p for p in glob.glob(os.path.join(REPORTS_DIR, "scan_general_report_*.html"))
              if os.path.basename(p) in tracked_names],

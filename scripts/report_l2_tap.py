@@ -33,6 +33,12 @@ SIH_TEST_TOKEN = "_sih_"
 SIH_PVIM_ITEM = "[NWP] SIH case val"
 SIH_OWNER = "Diego Matamoros"
 
+# Optional annotation for models whose input CSV was manually merged from
+# multiple report files (one-time exemptions). Set MERGED_MODELS (comma-separated
+# model names) to flag them; MERGED_INPUT_NOTE gives the source description shown
+# in the reports. Both empty by default, so normal runs are unaffected.
+MERGED_MODELS = {m.strip() for m in os.environ.get('MERGED_MODELS', '').split(',') if m.strip()}
+MERGED_INPUT_NOTE = os.environ.get('MERGED_INPUT_NOTE', '').strip()
 
 def load_ownership(filepath):
     """Load ownership file and return a list of (owner, prefix) tuples, sorted longest prefix first.
@@ -389,6 +395,17 @@ STACK_LABELS = {
 SOC_BUCKET = 'soc'
 SOC_LABEL = 'SOC'
 HISTORY_BUCKETS = STACK_BUCKETS + (SOC_BUCKET,)
+
+# Partition Level status is shown as a per-bucket breakdown (one tracker per
+# model/stack bucket) instead of a single overall card.
+PARTITION_LEVEL_BUCKET_ORDER = ('mc', 'uio', 'uioe', 'd2d', 'soc')
+PARTITION_LEVEL_BUCKET_LABELS = {
+    'mc': 'MC',
+    'uio': 'UIO',
+    'uioe': 'UIOe',
+    'd2d': 'D2D',
+    'soc': 'SOC',
+}
 
 
 def is_pvim_item_allowed_for_partition(pvim_item, partition):
@@ -1007,10 +1024,14 @@ def generate_general_report_html(all_rows):
 
     # ── Partition and stack-level summary cards ──
     h.append('<tr><td style="padding:24px 32px 16px;">')
-    append_summary_cards('SOC PARTITION LEVEL STATUS', soc_partition_summary)
-    append_summary_cards('SOC LEVEL STATUS', soc_level_summary)
-    append_summary_cards('PARTITION LEVEL STATUS', partition_summary)
+    # Partition Level broken down per model/stack bucket (one tracker each).
+    for _bucket in PARTITION_LEVEL_BUCKET_ORDER:
+        _bucket_rows = [r for r in partition_rows if bucket_for_row(r) == _bucket]
+        if not _bucket_rows:
+            continue
+        append_summary_cards(f'{PARTITION_LEVEL_BUCKET_LABELS[_bucket]} PARTITION LEVEL STATUS', compute_summary(_bucket_rows))
     append_summary_cards('STACK LEVEL STATUS', stack_summary)
+    append_summary_cards('SOC LEVEL STATUS', soc_level_summary)
     h.append('</td></tr>')
 
     # ── Historical stack trends (horizontal, 3-across) ──
@@ -1242,6 +1263,10 @@ def generate_general_report_html(all_rows):
             h.append('<tr><td style="padding:16px 32px 8px;">')
             h.append(f'<table cellpadding="0" cellspacing="0" border="0"><tr><td style="{FONT}">')
             h.append(f'<span style="font-size:15px;font-weight:bold;color:#333;{FONT}">{heading}</span> ')
+            if model in MERGED_MODELS:
+                merged_txt = 'merged input' + (f': {html_mod.escape(MERGED_INPUT_NOTE)}' if MERGED_INPUT_NOTE else '')
+                h.append(f'<span style="display:inline-block;background-color:#5e35b1;color:#ffffff;font-size:10px;'
+                         f'font-weight:bold;padding:1px 6px;{FONT}">{merged_txt}</span> ')
             h.append(f'<span style="font-size:12px;color:#888;{FONT}">')
             h.append(f'&mdash; {len(sub_rows)} tests: ')
             h.append(f'<span style="color:#2e7d32;">{m_pass} pass</span>, ')
@@ -1506,6 +1531,12 @@ def generate_executive_summary(report_path):
         if is_new:
             h.append(f' <span style="display:inline-block;background-color:#ff6f00;color:#ffffff;font-size:10px;'
                      f'font-weight:bold;padding:1px 6px;{FONT}">NEW</span>')
+        if model in MERGED_MODELS:
+            h.append(f' <span style="display:inline-block;background-color:#5e35b1;color:#ffffff;font-size:10px;'
+                     f'font-weight:bold;padding:1px 6px;{FONT}">MERGED INPUT</span>')
+            if MERGED_INPUT_NOTE:
+                h.append(f'<br><span style="font-size:11px;color:#777;{MONO}padding-left:4px;">'
+                         f'source: {html_mod.escape(MERGED_INPUT_NOTE)}</span>')
         h.append('</td></tr>')
     h.append('</table>')
     h.append('</td></tr>')
@@ -1536,9 +1567,13 @@ def generate_executive_summary(report_path):
         h.append('</td></tr></table>')
 
     h.append('<tr><td style="padding:24px 32px 16px;">')
-    append_overall_summary_cards('OVERALL PARTITION LEVEL STATUS', partition_summary)
+    # Partition Level broken down per model/stack bucket (one tracker each).
+    for _bucket in PARTITION_LEVEL_BUCKET_ORDER:
+        _bucket_rows = [r for r in partition_rows if bucket_for_row(r) == _bucket]
+        if not _bucket_rows:
+            continue
+        append_overall_summary_cards(f'{PARTITION_LEVEL_BUCKET_LABELS[_bucket]} PARTITION LEVEL STATUS', compute_summary(_bucket_rows))
     append_overall_summary_cards('OVERALL STACK LEVEL STATUS', stack_summary)
-    append_overall_summary_cards('OVERALL SOC PARTITION LEVEL STATUS', soc_partition_summary)
     append_overall_summary_cards('OVERALL SOC LEVEL STATUS', soc_level_summary)
     h.append('</td></tr>')
 
@@ -1713,6 +1748,10 @@ def generate_index_html():
             capture_output=True, text=True, cwd=ROOT_DIR
         )
         tracked_names = {os.path.basename(f.strip()) for f in result.stdout.splitlines() if f.strip()}
+        # Include the current run's report (tracked/pushed later in the same run).
+        current_report = f"tap_general_report_{TIMESTAMP}.html"
+        if os.path.isfile(os.path.join(REPORTS_DIR, current_report)):
+            tracked_names.add(current_report)
         html_reports = sorted(
             [p for p in glob.glob(os.path.join(REPORTS_DIR, "tap_general_report_*.html"))
              if os.path.basename(p) in tracked_names],
