@@ -1,0 +1,20 @@
+test_name,test_status,test_result
+parc2clink_stuckat_edt_bypass_low_internal_serial_chain,FAIL,"""TEXT_REPLACED_BY_POSTSIM/subip/sip/Newport_c2c_cluster/src/rtl/g_clkgate_test__c2ce_gphy.sv"", 2: parc2clink_stuckat_edt_bypass_low_internal_serial_chain.parc2clink_inst.u_ls_c2c_link.u_c2cvdd_wrap.u_c2cvdd_top.u_NV_C2C_LINK_dl.u_tx.u_SCANBYPASS_enc.PROTECTED.VError__g_clkgate_test__gtclk_is_xxx: started at 13477000ps failed at 13477000ps"
+parc2chip_icl_verify_dft,PASS,PASS
+parc2cscbra_ijtag_basic_tap_tests_continuity,FAIL,Error between simulated and expected patterns
+parc2chip_ijtag_basic_tap_tests_user_defined,PASS,PASS
+parc2cmhub_ijtag_basic_tap_tests_continuity,FAIL,ERROR: EndOfSim Check - parc2cmhub_ijtag_basic_tap_tests_continuity.parc2cmhub_inst.u_ls_chi_cif.u_chi_cif.u_slice.u_soc_part.u_core.u_transinfo.u_data.u_tags.PROTECTED: NV_MSS_GMHUB not idle at End of Sim time      66220.00ns
+parc2clink_icl_verify_dft,PASS,PASS
+parc2clink_atspeed_edt_edt_low_internal_serial_scan,FAIL,"""TEXT_REPLACED_BY_POSTSIM/subip/sip/Newport_c2c_cluster/src/rtl/g_clkgate_test__c2ce_gphy.sv"", 2: parc2clink_atspeed_edt_edt_low_internal_serial_scan.parc2clink_inst.u_ls_c2c_link.u_c2cvdd_wrap.u_c2cvdd_top.u_NV_C2C_LINK_dl.u_tx.u_SCANBYPASS_enc.PROTECTED.VError__g_clkgate_test__gtclk_is_xxx: started at 13477000ps failed at 13477000ps"
+parc2clink_stuckat_edt_bypass_low_internal_serial_scan,FAIL,"""TEXT_REPLACED_BY_POSTSIM/subip/sip/Newport_c2c_cluster/src/rtl/g_clkgate_test__c2ce_gphy.sv"", 2: parc2clink_stuckat_edt_bypass_low_internal_serial_scan.parc2clink_inst.u_ls_c2c_link.u_c2cvdd_wrap.u_c2cvdd_top.u_NV_C2C_LINK_dl.u_tx.u_SCANBYPASS_enc.PROTECTED.VError__g_clkgate_test__gtclk_is_xxx: started at 13477000ps failed at 13477000ps"
+parc2clink_stuckat_edt_edt_low_internal_serial_chain,FAIL,"""TEXT_REPLACED_BY_POSTSIM/subip/sip/Newport_c2c_cluster/src/rtl/g_clkgate_test__c2ce_gphy.sv"", 2: parc2clink_stuckat_edt_edt_low_internal_serial_chain.parc2clink_inst.u_ls_c2c_link.u_c2cvdd_wrap.u_c2cvdd_top.u_NV_C2C_LINK_dl.u_tx.u_SCANBYPASS_enc.PROTECTED.VError__g_clkgate_test__gtclk_is_xxx: started at 13477000ps failed at 13477000ps"
+parc2clink_ijtag_basic_tap_tests_rw_access,FAIL,Error between simulated and expected patterns
+parc2clink_ijtag_basic_tap_tests_tlr_reset,FAIL,"""TEXT_REPLACED_BY_POSTSIM/subip/sip/Newport_c2c_cluster/src/rtl/g_clkgate_test__c2ce_gphy.sv"", 2: parc2clink_ijtag_basic_tap_tests_tlr_reset.parc2clink_inst.u_ls_c2c_link.u_c2cvdd_wrap.u_c2cvdd_top.u_NV_C2C_LINK_dl.u_tx.u_SCANBYPASS_enc.PROTECTED.VError__g_clkgate_test__gtclk_is_xxx: started at 10082500000fs failed at 10082500000fs"
+parc2cscbra_ijtag_basic_tap_tests_tlr_reset,FAIL,Error between simulated and expected patterns
+parc2cmhub_ijtag_basic_tap_tests_user_defined,FAIL,ERROR: EndOfSim Check - parc2cmhub_ijtag_basic_tap_tests_user_defined.parc2cmhub_inst.u_ls_chi_cif.u_chi_cif.u_slice.u_soc_part.u_core.u_transinfo.u_data.u_tags.PROTECTED: NV_MSS_GMHUB not idle at End of Sim time         20.00ns
+parc2clink_stuckat_edt_edt_low_internal_serial_scan,FAIL,"""TEXT_REPLACED_BY_POSTSIM/subip/sip/Newport_c2c_cluster/src/rtl/g_clkgate_test__c2ce_gphy.sv"", 2: parc2clink_stuckat_edt_edt_low_internal_serial_scan.parc2clink_inst.u_ls_c2c_link.u_c2cvdd_wrap.u_c2cvdd_top.u_NV_C2C_LINK_dl.u_tx.u_SCANBYPASS_enc.PROTECTED.VError__g_clkgate_test__gtclk_is_xxx: started at 13477000ps failed at 13477000ps"
+parc2chip_ijtag_basic_tap_tests_continuity,PASS,PASS
+parc2chip_ijtag_basic_tap_tests_reset,PASS,PASS
+parc2clink_ijtag_basic_tap_tests_reset,FAIL,"""TEXT_REPLACED_BY_POSTSIM/subip/sip/Newport_c2c_cluster/src/rtl/g_clkgate_test__c2ce_gphy.sv"", 2: parc2clink_ijtag_basic_tap_tests_reset.parc2clink_inst.u_ls_c2c_link.u_c2cvdd_wrap.u_c2cvdd_top.u_NV_C2C_LINK_dl.u_tx.u_SCANBYPASS_enc.PROTECTED.VError__g_clkgate_test__gtclk_is_xxx: started at 11162500000fs failed at 11162500000fs"
+parc2cmhub_ijtag_basic_tap_tests_tlr_reset,PASS,PASS
+parc2clink_ijtag_basic_tap_tests_user_defined,PASS,PASS
