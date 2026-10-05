@@ -18,3 +18,16 @@ parc2chip_ijtag_basic_tap_tests_reset,PASS,PASS
 parc2clink_ijtag_basic_tap_tests_reset,FAIL,"""TEXT_REPLACED_BY_POSTSIM/subip/sip/Newport_c2c_cluster/src/rtl/g_clkgate_test__c2ce_gphy.sv"", 2: parc2clink_ijtag_basic_tap_tests_reset.parc2clink_inst.u_ls_c2c_link.u_c2cvdd_wrap.u_c2cvdd_top.u_NV_C2C_LINK_dl.u_tx.u_SCANBYPASS_enc.PROTECTED.VError__g_clkgate_test__gtclk_is_xxx: started at 11162500000fs failed at 11162500000fs"
 parc2cmhub_ijtag_basic_tap_tests_tlr_reset,PASS,PASS
 parc2clink_ijtag_basic_tap_tests_user_defined,PASS,PASS
+parc2cinfra_ijtag_basic_tap_tests_user_defined,PASS,PASS
+parc2cinfra_ijtag_basic_tap_tests_rw_access,FAIL,Error between simulated and expected patterns
+parc2cscbra_ijtag_basic_tap_tests_user_defined,FAIL,ERROR: EndOfSim Check - parc2cscbra_ijtag_basic_tap_tests_user_defined.parc2cscbra_inst.u_ls_scb_arm_wrap.u_scb_arm.u_scb_port_0.u_grs_ha_scb_wrap.u_ha_scb.u_SCF_GRS_HA_SCB_core_0.u_lrt.u_lrt_alloc.PROTECTED: NV_MSS_GMHUB not idle at End of Sim time         20.00ns
+parc2clink_ijtag_basic_tap_tests_continuity,PASS,PASS
+parc2cscbra_ijtag_basic_tap_tests_rw_access,FAIL,Error between simulated and expected patterns
+parc2chip_ijtag_basic_tap_tests_tlr_reset,PASS,PASS
+parc2chip_ijtag_basic_tap_tests_rw_access,PASS,PASS
+parc2cmhub_ijtag_basic_tap_tests_rw_access,FAIL,Error between simulated and expected patterns
+parc2cinfra_ijtag_basic_tap_tests_tlr_reset,FAIL,Error between simulated and expected patterns
+parc2cscbra_ijtag_basic_tap_tests_reset,FAIL,Error between simulated and expected patterns
+parc2cmhub_ijtag_basic_tap_tests_reset,PASS,PASS
+parc2cinfra_ijtag_basic_tap_tests_continuity,FAIL,Error between simulated and expected patterns
+parc2cinfra_ijtag_basic_tap_tests_reset,FAIL,Error between simulated and expected patterns
