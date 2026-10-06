@@ -42,3 +42,4 @@ parc2chip_ijtag_basic_tap_tests_continuity,PASS,PASS
 parc2cinfra_ijtag_basic_tap_tests_continuity,FAIL,Error between simulated and expected patterns
 parc2chip_ijtag_basic_tap_tests_reset,PASS,PASS
 parc2chip_ijtag_basic_tap_tests_tlr_reset,PASS,PASS
+parc2chip_ijtag_basic_tap_tests_rw_access,PASS,PASS
