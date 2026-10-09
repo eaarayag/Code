@@ -1,0 +1,39 @@
+test_name,test_status,test_result
+parscfmemch2s_ijtag_basic_tap_tests_rw_access,FAIL,Command './buildsimv.sh' returned exit status 2 !
+parscfmemch4_stuckat_edt_edt_low_internal_serial_chain,PASS,PASS
+parscfmemch3s_stuckat_edt_edt_low_internal_serial_scan,PASS,PASS
+parscfmemch3s_stuckat_edt_edt_low_internal_serial_chain,PASS,PASS
+parscfmemch3n_stuckat_edt_edt_low_internal_serial_scan,PASS,PASS
+parscfmemch3n_stuckat_edt_edt_low_internal_serial_chain,PASS,PASS
+parscfmemch2s_stuckat_edt_edt_low_internal_serial_scan,PASS,PASS
+parscfmemch2s_stuckat_edt_edt_low_internal_serial_chain,PASS,PASS
+parscfmemch2n_stuckat_edt_edt_low_internal_serial_scan,PASS,PASS
+parscfmemch2n_stuckat_edt_edt_low_internal_serial_chain,PASS,PASS
+parscfmemch1s_stuckat_edt_edt_low_internal_serial_scan,PASS,PASS
+parscfmemch1s_stuckat_edt_edt_low_internal_serial_chain,PASS,PASS
+parscfmemch1n_stuckat_edt_edt_low_internal_serial_scan,PASS,PASS
+parscfmemch1n_stuckat_edt_edt_low_internal_serial_chain,PASS,PASS
+parscfmemch0s_stuckat_edt_edt_low_internal_serial_scan,PASS,PASS
+parscfmemch0s_stuckat_edt_edt_low_internal_serial_chain,PASS,PASS
+parscfioinf2w_stuckat_edt_edt_low_internal_serial_scan,PASS,PASS
+parscfioinf2e_stuckat_edt_edt_low_internal_serial_scan,PASS,PASS
+parscfioinf2w_stuckat_edt_edt_low_internal_serial_chain,PASS,PASS
+parscfioinf2e_stuckat_edt_edt_low_internal_serial_chain,PASS,PASS
+parscfioinf1w_stuckat_edt_edt_low_internal_serial_scan,PASS,PASS
+parscfioinf1w_stuckat_edt_edt_low_internal_serial_chain,PASS,PASS
+parscfcrsmem_stuckat_edt_edt_low_internal_serial_scan,PASS,PASS
+parscfcrsmem_stuckat_edt_edt_low_internal_serial_chain,PASS,PASS
+parscfcmsdummy_stuckat_edt_edt_low_internal_serial_scan,PASS,PASS
+parscfmemch2n_ijtag_basic_tap_tests_rw_access,FAIL,Command './buildsimv.sh' returned exit status 2 !
+parscfmemch0s_ijtag_basic_tap_tests_rw_access,FAIL,Command './buildsimv.sh' returned exit status 2 !
+parocs_ijtag_basic_tap_tests_rw_access,FAIL,Command './buildsimv.sh' returned exit status 2 !
+parscfmemch2s_ijtag_basic_tap_tests_reset,FAIL,Command './buildsimv.sh' returned exit status 2 !
+parscfmemch2n_ijtag_basic_tap_tests_reset,FAIL,Command './buildsimv.sh' returned exit status 2 !
+parscfmemch0s_ijtag_basic_tap_tests_reset,FAIL,Command './buildsimv.sh' returned exit status 2 !
+parocs_ijtag_basic_tap_tests_reset,FAIL,Command './buildsimv.sh' returned exit status 2 !
+parscfmemch2s_ijtag_basic_tap_tests_continuity,FAIL,Command './buildsimv.sh' returned exit status 2 !
+parscfmemch2n_ijtag_basic_tap_tests_continuity,FAIL,Command './buildsimv.sh' returned exit status 2 !
+parscfmemch0s_ijtag_basic_tap_tests_continuity,FAIL,Command './buildsimv.sh' returned exit status 2 !
+parocs_ijtag_basic_tap_tests_continuity,FAIL,Command './buildsimv.sh' returned exit status 2 !
+parswinf2_ssn_continuity,PASS,PASS
+parswinf2_stuckat_edt_edt_low_internal_loopback,PASS,PASS

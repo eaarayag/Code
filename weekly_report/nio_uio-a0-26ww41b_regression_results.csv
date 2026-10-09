@@ -1,2 +1,3 @@
 test_name,test_status,test_result
 parmiofblptx_uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,PASS,PASS
+parmiohap_uio_0_uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,PASS,PASS
