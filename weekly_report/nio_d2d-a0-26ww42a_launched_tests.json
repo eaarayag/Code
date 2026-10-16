@@ -1,5 +1,5 @@
 {
-  "feeder_running": true,
+  "feeder_running": false,
   "launched": [
     "d2d1_icl_verify_dft",
     "d2d1_ijtag_basic_tap_tests_continuity",

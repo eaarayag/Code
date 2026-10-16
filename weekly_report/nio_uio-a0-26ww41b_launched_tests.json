@@ -1,5 +1,5 @@
 {
-  "feeder_running": true,
+  "feeder_running": false,
   "launched": [
     "parmioasf_uio_0_atspeed_edt_edt_low_internal_loopback",
     "parmioasf_uio_0_atspeed_edt_edt_low_internal_serial_chain",
@@ -466,7 +466,7 @@
     "uio_a_0_ssn_continuity"
   ],
   "stacklevel": {
-    "feeder_running": true,
+    "feeder_running": false,
     "launched": [
       "dft_svf_test_directed_UIO_A_BCAM_parallelallsteps___bp5",
       "dft_svf_test_directed_UIO_A_BCAM_parallelallsteps___bp9",
