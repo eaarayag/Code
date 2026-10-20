@@ -1406,84 +1406,92 @@ Partition Level,parubrd2dch,stuckat_edt_bypass_low_internal_serial_scan,[NWP] sc
 Partition Level,parubrd2dch,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,KalthireddyX Gunasekhar,nio-a0-rtl-26ww42g
 Partition Level,parubrd2dch,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,KalthireddyX Gunasekhar,nio-a0-rtl-26ww42g
 Partition Level,parubrd2dch,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,KalthireddyX Gunasekhar,nio-a0-rtl-26ww42g
-Partition Level,parc2cdfd,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Stack Level,parc2cdfd,c2c_stack_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Stack Level,parc2cdfd,c2c_stack_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,Jose Fonseca,nio_c2c-a0-26ww41g
-Stack Level,parc2cdfd,c2c_stack_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Stack Level,parc2cdfd,c2c_stack_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Partition Level,parc2cdfd,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Partition Level,parc2cdfd,ssn_continuity,[NWP] SSN: continuity,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Partition Level,parc2cdfd,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Partition Level,parc2cdfd,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Partition Level,parc2cdfd,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Partition Level,parc2cdfd,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,Jose Fonseca,nio_c2c-a0-26ww41g
-Partition Level,parc2cdfd,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Partition Level,parc2cdfd,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Partition Level,parc2chip,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Stack Level,parc2chip,c2c_stack_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Stack Level,parc2chip,c2c_stack_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Stack Level,parc2chip,c2c_stack_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Stack Level,parc2chip,c2c_stack_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Partition Level,parc2chip,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Partition Level,parc2chip,ssn_continuity,[NWP] SSN: continuity,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Partition Level,parc2chip,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Partition Level,parc2chip,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Partition Level,parc2chip,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Partition Level,parc2chip,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Partition Level,parc2chip,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Partition Level,parc2chip,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Partition Level,parc2cinfra,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,Mauricio Segura,nio_c2c-a0-26ww41g
-Stack Level,parc2cinfra,c2c_stack_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,Mauricio Segura,nio_c2c-a0-26ww41g
-Stack Level,parc2cinfra,c2c_stack_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,Diego Matamoros,nio_c2c-a0-26ww41g
-Stack Level,parc2cinfra,c2c_stack_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,Mauricio Segura,nio_c2c-a0-26ww41g
-Stack Level,parc2cinfra,c2c_stack_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,Mauricio Segura,nio_c2c-a0-26ww41g
-Partition Level,parc2cinfra,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Mauricio Segura,nio_c2c-a0-26ww41g
-Partition Level,parc2cinfra,ssn_continuity,[NWP] SSN: continuity,NOT_LAUNCHED,Mauricio Segura,nio_c2c-a0-26ww41g
-Partition Level,parc2cinfra,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,NOT_LAUNCHED,Mauricio Segura,nio_c2c-a0-26ww41g
-Partition Level,parc2cinfra,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,NOT_LAUNCHED,Mauricio Segura,nio_c2c-a0-26ww41g
-Partition Level,parc2cinfra,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,NOT_LAUNCHED,Mauricio Segura,nio_c2c-a0-26ww41g
-Partition Level,parc2cinfra,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,Diego Matamoros,nio_c2c-a0-26ww41g
-Partition Level,parc2cinfra,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,Mauricio Segura,nio_c2c-a0-26ww41g
-Partition Level,parc2cinfra,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,Mauricio Segura,nio_c2c-a0-26ww41g
-Partition Level,parc2clink,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,PASS,Emmanuel Araya,nio_c2c-a0-26ww41g
-Stack Level,parc2clink,c2c_stack_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Stack Level,parc2clink,c2c_stack_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Stack Level,parc2clink,c2c_stack_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Stack Level,parc2clink,c2c_stack_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Partition Level,parc2clink,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Partition Level,parc2clink,ssn_continuity,[NWP] SSN: continuity,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Partition Level,parc2clink,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Partition Level,parc2clink,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,QUEUED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Partition Level,parc2clink,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,QUEUED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Partition Level,parc2clink,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Partition Level,parc2clink,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Partition Level,parc2clink,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Partition Level,parc2cmhub,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Stack Level,parc2cmhub,c2c_stack_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Stack Level,parc2cmhub,c2c_stack_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Stack Level,parc2cmhub,c2c_stack_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Stack Level,parc2cmhub,c2c_stack_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Partition Level,parc2cmhub,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Partition Level,parc2cmhub,ssn_continuity,[NWP] SSN: continuity,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Partition Level,parc2cmhub,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Partition Level,parc2cmhub,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Partition Level,parc2cmhub,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Partition Level,parc2cmhub,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Partition Level,parc2cmhub,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Partition Level,parc2cmhub,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Partition Level,parc2cscbra,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Stack Level,parc2cscbra,c2c_stack_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Stack Level,parc2cscbra,c2c_stack_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,Sebastian Porras,nio_c2c-a0-26ww41g
-Stack Level,parc2cscbra,c2c_stack_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Stack Level,parc2cscbra,c2c_stack_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Partition Level,parc2cscbra,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Partition Level,parc2cscbra,ssn_continuity,[NWP] SSN: continuity,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Partition Level,parc2cscbra,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Partition Level,parc2cscbra,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Partition Level,parc2cscbra,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Partition Level,parc2cscbra,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,Sebastian Porras,nio_c2c-a0-26ww41g
-Partition Level,parc2cscbra,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
-Partition Level,parc2cscbra,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww41g
+Partition Level,parc2cdfd,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Stack Level,parc2cdfd,c2c_stack_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Stack Level,parc2cdfd,c2c_stack_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,Jose Fonseca,nio_c2c-a0-26ww42a
+Stack Level,parc2cdfd,c2c_stack_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Stack Level,parc2cdfd,c2c_stack_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2cdfd,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2cdfd,ssn_continuity,[NWP] SSN: continuity,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2cdfd,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2cdfd,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2cdfd,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2cdfd,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,Jose Fonseca,nio_c2c-a0-26ww42a
+Partition Level,parc2cdfd,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2cdfd,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2chip,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Stack Level,parc2chip,c2c_stack_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Stack Level,parc2chip,c2c_stack_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Stack Level,parc2chip,c2c_stack_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Stack Level,parc2chip,c2c_stack_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2chip,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2chip,ssn_continuity,[NWP] SSN: continuity,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2chip,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2chip,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2chip,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2chip,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2chip,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2chip,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2cinfra,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,Mauricio Segura,nio_c2c-a0-26ww42a
+Stack Level,parc2cinfra,c2c_stack_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,Mauricio Segura,nio_c2c-a0-26ww42a
+Stack Level,parc2cinfra,c2c_stack_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,Diego Matamoros,nio_c2c-a0-26ww42a
+Stack Level,parc2cinfra,c2c_stack_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,Mauricio Segura,nio_c2c-a0-26ww42a
+Stack Level,parc2cinfra,c2c_stack_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,Mauricio Segura,nio_c2c-a0-26ww42a
+Partition Level,parc2cinfra,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Mauricio Segura,nio_c2c-a0-26ww42a
+Partition Level,parc2cinfra,ssn_continuity,[NWP] SSN: continuity,NOT_LAUNCHED,Mauricio Segura,nio_c2c-a0-26ww42a
+Partition Level,parc2cinfra,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,NOT_LAUNCHED,Mauricio Segura,nio_c2c-a0-26ww42a
+Partition Level,parc2cinfra,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,NOT_LAUNCHED,Mauricio Segura,nio_c2c-a0-26ww42a
+Partition Level,parc2cinfra,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,NOT_LAUNCHED,Mauricio Segura,nio_c2c-a0-26ww42a
+Partition Level,parc2cinfra,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,Diego Matamoros,nio_c2c-a0-26ww42a
+Partition Level,parc2cinfra,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,Mauricio Segura,nio_c2c-a0-26ww42a
+Partition Level,parc2cinfra,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,Mauricio Segura,nio_c2c-a0-26ww42a
+Partition Level,parc2clink,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,PASS,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2clink,atspeed_edt_edt_low_internal_sti_serial_chain,,PASS,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2clink,atspeed_edt_edt_low_internal_sti_serial_scan,,PASS,Emmanuel Araya,nio_c2c-a0-26ww42a
+Stack Level,parc2clink,c2c_stack_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Stack Level,parc2clink,c2c_stack_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Stack Level,parc2clink,c2c_stack_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Stack Level,parc2clink,c2c_stack_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2clink,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2clink,ssn_continuity,[NWP] SSN: continuity,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2clink,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2clink,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,PASS,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2clink,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,PASS,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2clink,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2clink,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,PASS,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2clink,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,PASS,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2clink,stuckat_edt_edt_low_internal_sti_serial_chain,,PASS,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2clink,stuckat_edt_edt_low_internal_sti_serial_scan,,PASS,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2cmhub,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,FAIL,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2cmhub,atspeed_edt_edt_low_internal_sti_serial_chain,,PASS,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2cmhub,atspeed_edt_edt_low_internal_sti_serial_scan,,PASS,Emmanuel Araya,nio_c2c-a0-26ww42a
+Stack Level,parc2cmhub,c2c_stack_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Stack Level,parc2cmhub,c2c_stack_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Stack Level,parc2cmhub,c2c_stack_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Stack Level,parc2cmhub,c2c_stack_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2cmhub,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2cmhub,ssn_continuity,[NWP] SSN: continuity,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2cmhub,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2cmhub,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,PASS,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2cmhub,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,PASS,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2cmhub,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2cmhub,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,PASS,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2cmhub,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,PASS,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2cmhub,stuckat_edt_edt_low_internal_sti_serial_chain,,PASS,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2cmhub,stuckat_edt_edt_low_internal_sti_serial_scan,,PASS,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2cscbra,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Stack Level,parc2cscbra,c2c_stack_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Stack Level,parc2cscbra,c2c_stack_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,Sebastian Porras,nio_c2c-a0-26ww42a
+Stack Level,parc2cscbra,c2c_stack_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Stack Level,parc2cscbra,c2c_stack_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2cscbra,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2cscbra,ssn_continuity,[NWP] SSN: continuity,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2cscbra,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2cscbra,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2cscbra,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2cscbra,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,Sebastian Porras,nio_c2c-a0-26ww42a
+Partition Level,parc2cscbra,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
+Partition Level,parc2cscbra,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,Emmanuel Araya,nio_c2c-a0-26ww42a
 Stack Level,d2d1,ssn_continuity,[NWP] SSN: continuity,PASS,Emmanuel Araya,nio_d2d-a0-26ww42a
 Partition Level,pard2d1chnl,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,PASS,SathyahX Sv,nio_d2d-a0-26ww42a
 Stack Level,pard2d1chnl,d2d1_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,PASS,SathyahX Sv,nio_d2d-a0-26ww42a
@@ -1622,356 +1630,356 @@ Partition Level,phy_cluster,stuckat_edt_bypass_low_internal_serial_scan,[NWP] sc
 Partition Level,phy_cluster,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Sebastian Porras,nio_mc-a0-26ww41b
 Partition Level,phy_cluster,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Bhanu Vattikuti,nio_mc-a0-26ww41b
 Partition Level,phy_cluster,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Bhanu Vattikuti,nio_mc-a0-26ww41b
-Partition Level,parmioasf_uio_0,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmioasf_uio_0,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmioasf_uio_0,ssn_continuity,[NWP] SSN: continuity,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmioasf_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmioasf_uio_0,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmioasf_uio_0,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmioasf_uio_0,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Diego Matamoros,nio_uio-a0-26ww41d
-Partition Level,parmioasf_uio_0,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmioasf_uio_0,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Stack Level,parmioasf_uio_0,uio_a_0_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,PASS,Mauricio Segura,nio_uio-a0-26ww41d
-Stack Level,parmioasf_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Diego Matamoros,nio_uio-a0-26ww41d
-Stack Level,parmioasf_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,PASS,Mauricio Segura,nio_uio-a0-26ww41d
-Stack Level,parmioasf_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmioasf_uio_1,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmioasf_uio_1,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmioasf_uio_1,ssn_continuity,[NWP] SSN: continuity,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmioasf_uio_1,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmioasf_uio_1,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmioasf_uio_1,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmioasf_uio_1,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmioasf_uio_1,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmioasf_uio_1,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Stack Level,parmioasf_uio_1,uio_1_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Stack Level,parmioasf_uio_1,uio_1_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Stack Level,parmioasf_uio_1,uio_1_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Stack Level,parmioasf_uio_1,uio_1_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiocpc_uio_0,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmiocpc_uio_0,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmiocpc_uio_0,ssn_continuity,[NWP] SSN: continuity,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmiocpc_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,PASS,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmiocpc_uio_0,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmiocpc_uio_0,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmiocpc_uio_0,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Diego Matamoros,nio_uio-a0-26ww41d
-Partition Level,parmiocpc_uio_0,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmiocpc_uio_0,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Stack Level,parmiocpc_uio_0,uio_a_0_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Stack Level,parmiocpc_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Diego Matamoros,nio_uio-a0-26ww41d
-Stack Level,parmiocpc_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Stack Level,parmiocpc_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmiocxlrx_uio_0,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmiocxlrx_uio_0,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmiocxlrx_uio_0,ssn_continuity,[NWP] SSN: continuity,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmiocxlrx_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmiocxlrx_uio_0,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmiocxlrx_uio_0,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmiocxlrx_uio_0,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Diego Matamoros,nio_uio-a0-26ww41d
-Partition Level,parmiocxlrx_uio_0,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmiocxlrx_uio_0,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Stack Level,parmiocxlrx_uio_0,uio_a_0_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Stack Level,parmiocxlrx_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Diego Matamoros,nio_uio-a0-26ww41d
-Stack Level,parmiocxlrx_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,PASS,Mauricio Segura,nio_uio-a0-26ww41d
-Stack Level,parmiocxlrx_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,PASS,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmiocxltx_uio_0,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiocxltx_uio_0,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiocxltx_uio_0,ssn_continuity,[NWP] SSN: continuity,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiocxltx_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiocxltx_uio_0,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiocxltx_uio_0,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiocxltx_uio_0,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Sebastian Porras,nio_uio-a0-26ww41d
-Partition Level,parmiocxltx_uio_0,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiocxltx_uio_0,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Stack Level,parmiocxltx_uio_0,uio_a_0_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Stack Level,parmiocxltx_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Sebastian Porras,nio_uio-a0-26ww41d
-Stack Level,parmiocxltx_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Stack Level,parmiocxltx_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,PASS,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiofblprxfcrarbmux,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmiofblprxfcrarbmux,parmiofblprxfcrarbmux_ub_i_ult_scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,PASS,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmiofblprxfcrarbmux,ssn_continuity,[NWP] SSN: continuity,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmiofblprxfcrarbmux,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,PASS,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmiofblprxfcrarbmux,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmiofblprxfcrarbmux,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmiofblprxfcrarbmux,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmiofblprxfcrarbmux,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmiofblprxfcrarbmux,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Stack Level,parmiofblprxfcrarbmux,uio_a_0_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Stack Level,parmiofblprxfcrarbmux,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Stack Level,parmiofblprxfcrarbmux,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Stack Level,parmiofblprxfcrarbmux,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmiofblprxfcrarbmux_uio_0,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmiofblprxfcrarbmux_uio_0,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmiofblprxfcrarbmux_uio_0,ssn_continuity,[NWP] SSN: continuity,NOT_LAUNCHED,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmiofblprxfcrarbmux_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,NOT_LAUNCHED,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmiofblprxfcrarbmux_uio_0,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,NOT_LAUNCHED,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmiofblprxfcrarbmux_uio_0,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,NOT_LAUNCHED,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmiofblprxfcrarbmux_uio_0,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,Diego Matamoros,nio_uio-a0-26ww41d
-Partition Level,parmiofblprxfcrarbmux_uio_0,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmiofblprxfcrarbmux_uio_0,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,Emmanuel Araya,nio_uio-a0-26ww41d
-Stack Level,parmiofblprxfcrarbmux_uio_0,uio_a_0_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,Emmanuel Araya,nio_uio-a0-26ww41d
-Stack Level,parmiofblprxfcrarbmux_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,Diego Matamoros,nio_uio-a0-26ww41d
-Stack Level,parmiofblprxfcrarbmux_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,Emmanuel Araya,nio_uio-a0-26ww41d
-Stack Level,parmiofblprxfcrarbmux_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmiofblprxfcrarbmux_uio_1,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiofblprxfcrarbmux_uio_1,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiofblprxfcrarbmux_uio_1,ssn_continuity,[NWP] SSN: continuity,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiofblprxfcrarbmux_uio_1,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiofblprxfcrarbmux_uio_1,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiofblprxfcrarbmux_uio_1,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiofblprxfcrarbmux_uio_1,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiofblprxfcrarbmux_uio_1,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiofblprxfcrarbmux_uio_1,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Stack Level,parmiofblprxfcrarbmux_uio_1,uio_1_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Stack Level,parmiofblprxfcrarbmux_uio_1,uio_1_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Stack Level,parmiofblprxfcrarbmux_uio_1,uio_1_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Stack Level,parmiofblprxfcrarbmux_uio_1,uio_1_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiofblptx,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiofblptx,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiofblptx,ssn_continuity,[NWP] SSN: continuity,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiofblptx,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiofblptx,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiofblptx,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiofblptx,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiofblptx,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiofblptx,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Stack Level,parmiofblptx,uio_a_0_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Stack Level,parmiofblptx,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Stack Level,parmiofblptx,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Stack Level,parmiofblptx,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiofblptx_uio_0,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiofblptx_uio_0,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiofblptx_uio_0,ssn_continuity,[NWP] SSN: continuity,NOT_LAUNCHED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiofblptx_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,NOT_LAUNCHED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiofblptx_uio_0,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,NOT_LAUNCHED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiofblptx_uio_0,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,NOT_LAUNCHED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiofblptx_uio_0,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,Sebastian Porras,nio_uio-a0-26ww41d
-Partition Level,parmiofblptx_uio_0,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiofblptx_uio_0,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,Mario Alpizar,nio_uio-a0-26ww41d
-Stack Level,parmiofblptx_uio_0,uio_a_0_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,Mario Alpizar,nio_uio-a0-26ww41d
-Stack Level,parmiofblptx_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,Sebastian Porras,nio_uio-a0-26ww41d
-Stack Level,parmiofblptx_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,Mario Alpizar,nio_uio-a0-26ww41d
-Stack Level,parmiofblptx_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiofblptx_uio_1,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiofblptx_uio_1,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiofblptx_uio_1,ssn_continuity,[NWP] SSN: continuity,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiofblptx_uio_1,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiofblptx_uio_1,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiofblptx_uio_1,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiofblptx_uio_1,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiofblptx_uio_1,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiofblptx_uio_1,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Stack Level,parmiofblptx_uio_1,uio_1_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Stack Level,parmiofblptx_uio_1,uio_1_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Stack Level,parmiofblptx_uio_1,uio_1_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Stack Level,parmiofblptx_uio_1,uio_1_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiofblpvnpipeac_uio_0,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmiofblpvnpipeac_uio_0,ssn_continuity,[NWP] SSN: continuity,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmiofblpvnpipeac_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmiofblpvnpipeac_uio_0,stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,PASS,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmiofblpvnpipeac_uio_0,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmiofblpvnpipeac_uio_0,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmiofblpvnpipeac_uio_0,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Diego Matamoros,nio_uio-a0-26ww41d
-Partition Level,parmiofblpvnpipeac_uio_0,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmiofblpvnpipeac_uio_0,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Stack Level,parmiofblpvnpipeac_uio_0,uio_a_0_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Stack Level,parmiofblpvnpipeac_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Diego Matamoros,nio_uio-a0-26ww41d
-Stack Level,parmiofblpvnpipeac_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Stack Level,parmiofblpvnpipeac_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmiofblpvnpipeac_uio_1,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiofblpvnpipeac_uio_1,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiofblpvnpipeac_uio_1,ssn_continuity,[NWP] SSN: continuity,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiofblpvnpipeac_uio_1,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiofblpvnpipeac_uio_1,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiofblpvnpipeac_uio_1,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiofblpvnpipeac_uio_1,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiofblpvnpipeac_uio_1,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiofblpvnpipeac_uio_1,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Stack Level,parmiofblpvnpipeac_uio_1,uio_1_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Stack Level,parmiofblpvnpipeac_uio_1,uio_1_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Stack Level,parmiofblpvnpipeac_uio_1,uio_1_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Stack Level,parmiofblpvnpipeac_uio_1,uio_1_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiohap_uio_0,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiohap_uio_0,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiohap_uio_0,ssn_continuity,[NWP] SSN: continuity,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiohap_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiohap_uio_0,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiohap_uio_0,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiohap_uio_0,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Diego Matamoros,nio_uio-a0-26ww41d
-Partition Level,parmiohap_uio_0,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiohap_uio_0,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Stack Level,parmiohap_uio_0,uio_a_0_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Stack Level,parmiohap_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,PASS,Diego Matamoros,nio_uio-a0-26ww41d
-Stack Level,parmiohap_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,PASS,Mario Alpizar,nio_uio-a0-26ww41d
-Stack Level,parmiohap_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,PASS,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmioiommu_uio_0,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmioiommu_uio_0,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmioiommu_uio_0,ssn_continuity,[NWP] SSN: continuity,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmioiommu_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmioiommu_uio_0,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmioiommu_uio_0,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmioiommu_uio_0,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Diego Matamoros,nio_uio-a0-26ww41d
-Partition Level,parmioiommu_uio_0,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmioiommu_uio_0,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Stack Level,parmioiommu_uio_0,uio_a_0_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Stack Level,parmioiommu_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,PASS,Diego Matamoros,nio_uio-a0-26ww41d
-Stack Level,parmioiommu_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Stack Level,parmioiommu_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmioitc_uio_0,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmioitc_uio_0,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmioitc_uio_0,ssn_continuity,[NWP] SSN: continuity,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmioitc_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmioitc_uio_0,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmioitc_uio_0,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmioitc_uio_0,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Diego Matamoros,nio_uio-a0-26ww41d
-Partition Level,parmioitc_uio_0,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmioitc_uio_0,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Stack Level,parmioitc_uio_0,uio_a_0_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Stack Level,parmioitc_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,PASS,Diego Matamoros,nio_uio-a0-26ww41d
-Stack Level,parmioitc_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Stack Level,parmioitc_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiomisc_uio_0,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiomisc_uio_0,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiomisc_uio_0,ssn_continuity,[NWP] SSN: continuity,QUEUED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiomisc_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,QUEUED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiomisc_uio_0,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,QUEUED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiomisc_uio_0,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,QUEUED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiomisc_uio_0,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiomisc_uio_0,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiomisc_uio_0,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,SathyahX Sv,nio_uio-a0-26ww41d
-Stack Level,parmiomisc_uio_0,uio_a_0_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,PASS,SathyahX Sv,nio_uio-a0-26ww41d
-Stack Level,parmiomisc_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,SathyahX Sv,nio_uio-a0-26ww41d
-Stack Level,parmiomisc_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,PASS,SathyahX Sv,nio_uio-a0-26ww41d
-Stack Level,parmiomisc_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,PASS,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiomisc_uio_1,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiomisc_uio_1,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiomisc_uio_1,ssn_continuity,[NWP] SSN: continuity,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiomisc_uio_1,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiomisc_uio_1,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiomisc_uio_1,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiomisc_uio_1,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiomisc_uio_1,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiomisc_uio_1,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Stack Level,parmiomisc_uio_1,uio_1_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Stack Level,parmiomisc_uio_1,uio_1_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Stack Level,parmiomisc_uio_1,uio_1_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Stack Level,parmiomisc_uio_1,uio_1_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiootc_uio_0,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmiootc_uio_0,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmiootc_uio_0,ssn_continuity,[NWP] SSN: continuity,PASS,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmiootc_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmiootc_uio_0,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmiootc_uio_0,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmiootc_uio_0,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Sebastian Porras,nio_uio-a0-26ww41d
-Partition Level,parmiootc_uio_0,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmiootc_uio_0,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Stack Level,parmiootc_uio_0,uio_a_0_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Stack Level,parmiootc_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Sebastian Porras,nio_uio-a0-26ww41d
-Stack Level,parmiootc_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Stack Level,parmiootc_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,PASS,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6trcore_uio_0,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6trcore_uio_0,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6trcore_uio_0,ssn_continuity,[NWP] SSN: continuity,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6trcore_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6trcore_uio_0,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6trcore_uio_0,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6trcore_uio_0,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Sebastian Porras,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6trcore_uio_0,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6trcore_uio_0,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Stack Level,parmiopcie6trcore_uio_0,uio_a_0_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Stack Level,parmiopcie6trcore_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Sebastian Porras,nio_uio-a0-26ww41d
-Stack Level,parmiopcie6trcore_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Stack Level,parmiopcie6trcore_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6tridelldp_uio_0,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6tridelldp_uio_0,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6tridelldp_uio_0,ssn_continuity,[NWP] SSN: continuity,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6tridelldp_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6tridelldp_uio_0,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6tridelldp_uio_0,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6tridelldp_uio_0,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Sebastian Porras,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6tridelldp_uio_0,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6tridelldp_uio_0,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,PASS,Emmanuel Araya,nio_uio-a0-26ww41d
-Stack Level,parmiopcie6tridelldp_uio_0,uio_a_0_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Stack Level,parmiopcie6tridelldp_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,PASS,Sebastian Porras,nio_uio-a0-26ww41d
-Stack Level,parmiopcie6tridelldp_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,PASS,Emmanuel Araya,nio_uio-a0-26ww41d
-Stack Level,parmiopcie6tridelldp_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,PASS,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6ttcore_uio_0,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6ttcore_uio_0,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6ttcore_uio_0,ssn_continuity,[NWP] SSN: continuity,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6ttcore_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6ttcore_uio_0,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6ttcore_uio_0,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6ttcore_uio_0,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Diego Matamoros,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6ttcore_uio_0,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,PASS,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6ttcore_uio_0,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Stack Level,parmiopcie6ttcore_uio_0,uio_a_0_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Stack Level,parmiopcie6ttcore_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Diego Matamoros,nio_uio-a0-26ww41d
-Stack Level,parmiopcie6ttcore_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,PASS,Mario Alpizar,nio_uio-a0-26ww41d
-Stack Level,parmiopcie6ttcore_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6ttidecee_uio_0,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6ttidecee_uio_0,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6ttidecee_uio_0,ssn_continuity,[NWP] SSN: continuity,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6ttidecee_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6ttidecee_uio_0,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6ttidecee_uio_0,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,PASS,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6ttidecee_uio_0,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Diego Matamoros,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6ttidecee_uio_0,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6ttidecee_uio_0,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Stack Level,parmiopcie6ttidecee_uio_0,uio_a_0_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41d
-Stack Level,parmiopcie6ttidecee_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,PASS,Diego Matamoros,nio_uio-a0-26ww41d
-Stack Level,parmiopcie6ttidecee_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,PASS,Emmanuel Araya,nio_uio-a0-26ww41d
-Stack Level,parmiopcie6ttidecee_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,PASS,Emmanuel Araya,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6ttidecee_uio_1,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6ttidecee_uio_1,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6ttidecee_uio_1,ssn_continuity,[NWP] SSN: continuity,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6ttidecee_uio_1,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6ttidecee_uio_1,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6ttidecee_uio_1,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6ttidecee_uio_1,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6ttidecee_uio_1,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiopcie6ttidecee_uio_1,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Stack Level,parmiopcie6ttidecee_uio_1,uio_1_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Stack Level,parmiopcie6ttidecee_uio_1,uio_1_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Stack Level,parmiopcie6ttidecee_uio_1,uio_1_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Stack Level,parmiopcie6ttidecee_uio_1,uio_1_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiostaticmux_uio_0,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiostaticmux_uio_0,parmiostaticmux_uio_0_ub_i_ult_scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,PASS,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiostaticmux_uio_0,ssn_continuity,[NWP] SSN: continuity,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiostaticmux_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiostaticmux_uio_0,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiostaticmux_uio_0,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,PASS,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiostaticmux_uio_0,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmiostaticmux_uio_0,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmiostaticmux_uio_0,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Stack Level,parmiostaticmux_uio_0,uio_a_0_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41d
-Stack Level,parmiostaticmux_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,SathyahX Sv,nio_uio-a0-26ww41d
-Stack Level,parmiostaticmux_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,PASS,Mario Alpizar,nio_uio-a0-26ww41d
-Stack Level,parmiostaticmux_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,PASS,Mario Alpizar,nio_uio-a0-26ww41d
-Partition Level,parmioula_uio_0,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,PASS,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmioula_uio_0,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmioula_uio_0,ssn_continuity,[NWP] SSN: continuity,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmioula_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmioula_uio_0,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmioula_uio_0,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmioula_uio_0,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Sebastian Porras,nio_uio-a0-26ww41d
-Partition Level,parmioula_uio_0,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,PASS,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmioula_uio_0,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Stack Level,parmioula_uio_0,uio_a_0_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
-Stack Level,parmioula_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,PASS,Sebastian Porras,nio_uio-a0-26ww41d
-Stack Level,parmioula_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,PASS,Mauricio Segura,nio_uio-a0-26ww41d
-Stack Level,parmioula_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,PASS,Mauricio Segura,nio_uio-a0-26ww41d
-Partition Level,parmioula_uio_1,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmioula_uio_1,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmioula_uio_1,ssn_continuity,[NWP] SSN: continuity,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmioula_uio_1,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmioula_uio_1,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmioula_uio_1,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmioula_uio_1,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmioula_uio_1,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Partition Level,parmioula_uio_1,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Stack Level,parmioula_uio_1,uio_1_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Stack Level,parmioula_uio_1,uio_1_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Stack Level,parmioula_uio_1,uio_1_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Stack Level,parmioula_uio_1,uio_1_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41d
-Stack Level,uio_1,ssn_continuity,[NWP] SSN: continuity,NOT_LAUNCHED,KalthireddyX Gunasekhar,nio_uio-a0-26ww41d
-Stack Level,uio_a_0,ssn_continuity,[NWP] SSN: continuity,QUEUED,Mauricio Segura,nio_uio-a0-26ww41d
+Partition Level,parmioasf_uio_0,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,PASS,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmioasf_uio_0,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmioasf_uio_0,ssn_continuity,[NWP] SSN: continuity,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmioasf_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmioasf_uio_0,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmioasf_uio_0,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmioasf_uio_0,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Diego Matamoros,nio_uio-a0-26ww41b
+Partition Level,parmioasf_uio_0,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmioasf_uio_0,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Stack Level,parmioasf_uio_0,uio_a_0_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Stack Level,parmioasf_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Diego Matamoros,nio_uio-a0-26ww41b
+Stack Level,parmioasf_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Stack Level,parmioasf_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmioasf_uio_1,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmioasf_uio_1,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmioasf_uio_1,ssn_continuity,[NWP] SSN: continuity,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmioasf_uio_1,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmioasf_uio_1,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmioasf_uio_1,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmioasf_uio_1,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmioasf_uio_1,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmioasf_uio_1,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Stack Level,parmioasf_uio_1,uio_1_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Stack Level,parmioasf_uio_1,uio_1_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Stack Level,parmioasf_uio_1,uio_1_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Stack Level,parmioasf_uio_1,uio_1_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiocpc_uio_0,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmiocpc_uio_0,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmiocpc_uio_0,ssn_continuity,[NWP] SSN: continuity,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmiocpc_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,PASS,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmiocpc_uio_0,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmiocpc_uio_0,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmiocpc_uio_0,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Diego Matamoros,nio_uio-a0-26ww41b
+Partition Level,parmiocpc_uio_0,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmiocpc_uio_0,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Stack Level,parmiocpc_uio_0,uio_a_0_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Stack Level,parmiocpc_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Diego Matamoros,nio_uio-a0-26ww41b
+Stack Level,parmiocpc_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Stack Level,parmiocpc_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmiocxlrx_uio_0,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmiocxlrx_uio_0,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmiocxlrx_uio_0,ssn_continuity,[NWP] SSN: continuity,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmiocxlrx_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmiocxlrx_uio_0,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmiocxlrx_uio_0,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmiocxlrx_uio_0,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,PASS,Diego Matamoros,nio_uio-a0-26ww41b
+Partition Level,parmiocxlrx_uio_0,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmiocxlrx_uio_0,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Stack Level,parmiocxlrx_uio_0,uio_a_0_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Stack Level,parmiocxlrx_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Diego Matamoros,nio_uio-a0-26ww41b
+Stack Level,parmiocxlrx_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Stack Level,parmiocxlrx_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmiocxltx_uio_0,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiocxltx_uio_0,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiocxltx_uio_0,ssn_continuity,[NWP] SSN: continuity,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiocxltx_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,PASS,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiocxltx_uio_0,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiocxltx_uio_0,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiocxltx_uio_0,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Sebastian Porras,nio_uio-a0-26ww41b
+Partition Level,parmiocxltx_uio_0,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiocxltx_uio_0,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Stack Level,parmiocxltx_uio_0,uio_a_0_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,PASS,Mario Alpizar,nio_uio-a0-26ww41b
+Stack Level,parmiocxltx_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Sebastian Porras,nio_uio-a0-26ww41b
+Stack Level,parmiocxltx_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Stack Level,parmiocxltx_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiofblprxfcrarbmux,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmiofblprxfcrarbmux,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmiofblprxfcrarbmux,ssn_continuity,[NWP] SSN: continuity,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmiofblprxfcrarbmux,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmiofblprxfcrarbmux,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmiofblprxfcrarbmux,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmiofblprxfcrarbmux,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmiofblprxfcrarbmux,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmiofblprxfcrarbmux,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Stack Level,parmiofblprxfcrarbmux,uio_a_0_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Stack Level,parmiofblprxfcrarbmux,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Stack Level,parmiofblprxfcrarbmux,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Stack Level,parmiofblprxfcrarbmux,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,PASS,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmiofblprxfcrarbmux_uio_0,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmiofblprxfcrarbmux_uio_0,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmiofblprxfcrarbmux_uio_0,ssn_continuity,[NWP] SSN: continuity,NOT_LAUNCHED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmiofblprxfcrarbmux_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,NOT_LAUNCHED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmiofblprxfcrarbmux_uio_0,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,NOT_LAUNCHED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmiofblprxfcrarbmux_uio_0,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,NOT_LAUNCHED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmiofblprxfcrarbmux_uio_0,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,Diego Matamoros,nio_uio-a0-26ww41b
+Partition Level,parmiofblprxfcrarbmux_uio_0,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmiofblprxfcrarbmux_uio_0,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,Emmanuel Araya,nio_uio-a0-26ww41b
+Stack Level,parmiofblprxfcrarbmux_uio_0,uio_a_0_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,Emmanuel Araya,nio_uio-a0-26ww41b
+Stack Level,parmiofblprxfcrarbmux_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,Diego Matamoros,nio_uio-a0-26ww41b
+Stack Level,parmiofblprxfcrarbmux_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,Emmanuel Araya,nio_uio-a0-26ww41b
+Stack Level,parmiofblprxfcrarbmux_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmiofblprxfcrarbmux_uio_1,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiofblprxfcrarbmux_uio_1,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiofblprxfcrarbmux_uio_1,ssn_continuity,[NWP] SSN: continuity,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiofblprxfcrarbmux_uio_1,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiofblprxfcrarbmux_uio_1,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiofblprxfcrarbmux_uio_1,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiofblprxfcrarbmux_uio_1,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiofblprxfcrarbmux_uio_1,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiofblprxfcrarbmux_uio_1,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Stack Level,parmiofblprxfcrarbmux_uio_1,uio_1_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Stack Level,parmiofblprxfcrarbmux_uio_1,uio_1_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Stack Level,parmiofblprxfcrarbmux_uio_1,uio_1_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Stack Level,parmiofblprxfcrarbmux_uio_1,uio_1_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiofblptx,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,PASS,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiofblptx,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiofblptx,ssn_continuity,[NWP] SSN: continuity,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiofblptx,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiofblptx,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,PASS,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiofblptx,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiofblptx,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiofblptx,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiofblptx,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Stack Level,parmiofblptx,uio_a_0_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Stack Level,parmiofblptx,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Stack Level,parmiofblptx,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,PASS,Mario Alpizar,nio_uio-a0-26ww41b
+Stack Level,parmiofblptx,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiofblptx_uio_0,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiofblptx_uio_0,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiofblptx_uio_0,ssn_continuity,[NWP] SSN: continuity,NOT_LAUNCHED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiofblptx_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,NOT_LAUNCHED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiofblptx_uio_0,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,NOT_LAUNCHED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiofblptx_uio_0,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,NOT_LAUNCHED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiofblptx_uio_0,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,Sebastian Porras,nio_uio-a0-26ww41b
+Partition Level,parmiofblptx_uio_0,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiofblptx_uio_0,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,Mario Alpizar,nio_uio-a0-26ww41b
+Stack Level,parmiofblptx_uio_0,uio_a_0_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,Mario Alpizar,nio_uio-a0-26ww41b
+Stack Level,parmiofblptx_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,Sebastian Porras,nio_uio-a0-26ww41b
+Stack Level,parmiofblptx_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,Mario Alpizar,nio_uio-a0-26ww41b
+Stack Level,parmiofblptx_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiofblptx_uio_1,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiofblptx_uio_1,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiofblptx_uio_1,ssn_continuity,[NWP] SSN: continuity,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiofblptx_uio_1,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiofblptx_uio_1,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiofblptx_uio_1,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiofblptx_uio_1,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiofblptx_uio_1,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiofblptx_uio_1,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Stack Level,parmiofblptx_uio_1,uio_1_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Stack Level,parmiofblptx_uio_1,uio_1_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Stack Level,parmiofblptx_uio_1,uio_1_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Stack Level,parmiofblptx_uio_1,uio_1_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiofblpvnpipeac_uio_0,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmiofblpvnpipeac_uio_0,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmiofblpvnpipeac_uio_0,ssn_continuity,[NWP] SSN: continuity,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmiofblpvnpipeac_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmiofblpvnpipeac_uio_0,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmiofblpvnpipeac_uio_0,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmiofblpvnpipeac_uio_0,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Diego Matamoros,nio_uio-a0-26ww41b
+Partition Level,parmiofblpvnpipeac_uio_0,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmiofblpvnpipeac_uio_0,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Stack Level,parmiofblpvnpipeac_uio_0,uio_a_0_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Stack Level,parmiofblpvnpipeac_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Diego Matamoros,nio_uio-a0-26ww41b
+Stack Level,parmiofblpvnpipeac_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Stack Level,parmiofblpvnpipeac_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmiofblpvnpipeac_uio_1,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiofblpvnpipeac_uio_1,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiofblpvnpipeac_uio_1,ssn_continuity,[NWP] SSN: continuity,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiofblpvnpipeac_uio_1,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiofblpvnpipeac_uio_1,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiofblpvnpipeac_uio_1,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiofblpvnpipeac_uio_1,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiofblpvnpipeac_uio_1,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiofblpvnpipeac_uio_1,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Stack Level,parmiofblpvnpipeac_uio_1,uio_1_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Stack Level,parmiofblpvnpipeac_uio_1,uio_1_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Stack Level,parmiofblpvnpipeac_uio_1,uio_1_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Stack Level,parmiofblpvnpipeac_uio_1,uio_1_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiohap_uio_0,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiohap_uio_0,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiohap_uio_0,ssn_continuity,[NWP] SSN: continuity,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiohap_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiohap_uio_0,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiohap_uio_0,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiohap_uio_0,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Diego Matamoros,nio_uio-a0-26ww41b
+Partition Level,parmiohap_uio_0,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiohap_uio_0,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Stack Level,parmiohap_uio_0,uio_a_0_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Stack Level,parmiohap_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,PASS,Diego Matamoros,nio_uio-a0-26ww41b
+Stack Level,parmiohap_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Stack Level,parmiohap_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,PASS,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmioiommu_uio_0,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmioiommu_uio_0,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmioiommu_uio_0,ssn_continuity,[NWP] SSN: continuity,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmioiommu_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmioiommu_uio_0,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmioiommu_uio_0,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmioiommu_uio_0,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Diego Matamoros,nio_uio-a0-26ww41b
+Partition Level,parmioiommu_uio_0,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmioiommu_uio_0,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Stack Level,parmioiommu_uio_0,uio_a_0_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,PASS,Emmanuel Araya,nio_uio-a0-26ww41b
+Stack Level,parmioiommu_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Diego Matamoros,nio_uio-a0-26ww41b
+Stack Level,parmioiommu_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Stack Level,parmioiommu_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,PASS,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmioitc_uio_0,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmioitc_uio_0,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmioitc_uio_0,ssn_continuity,[NWP] SSN: continuity,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmioitc_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,PASS,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmioitc_uio_0,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmioitc_uio_0,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmioitc_uio_0,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Diego Matamoros,nio_uio-a0-26ww41b
+Partition Level,parmioitc_uio_0,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,PASS,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmioitc_uio_0,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Stack Level,parmioitc_uio_0,uio_a_0_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Stack Level,parmioitc_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Diego Matamoros,nio_uio-a0-26ww41b
+Stack Level,parmioitc_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Stack Level,parmioitc_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiomisc_uio_0,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiomisc_uio_0,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiomisc_uio_0,ssn_continuity,[NWP] SSN: continuity,QUEUED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiomisc_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,QUEUED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiomisc_uio_0,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,QUEUED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiomisc_uio_0,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,QUEUED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiomisc_uio_0,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiomisc_uio_0,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiomisc_uio_0,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,SathyahX Sv,nio_uio-a0-26ww41b
+Stack Level,parmiomisc_uio_0,uio_a_0_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,PASS,SathyahX Sv,nio_uio-a0-26ww41b
+Stack Level,parmiomisc_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,SathyahX Sv,nio_uio-a0-26ww41b
+Stack Level,parmiomisc_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,SathyahX Sv,nio_uio-a0-26ww41b
+Stack Level,parmiomisc_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiomisc_uio_1,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiomisc_uio_1,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiomisc_uio_1,ssn_continuity,[NWP] SSN: continuity,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiomisc_uio_1,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiomisc_uio_1,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiomisc_uio_1,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiomisc_uio_1,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiomisc_uio_1,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiomisc_uio_1,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Stack Level,parmiomisc_uio_1,uio_1_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Stack Level,parmiomisc_uio_1,uio_1_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Stack Level,parmiomisc_uio_1,uio_1_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Stack Level,parmiomisc_uio_1,uio_1_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiootc_uio_0,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmiootc_uio_0,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmiootc_uio_0,ssn_continuity,[NWP] SSN: continuity,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmiootc_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmiootc_uio_0,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmiootc_uio_0,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmiootc_uio_0,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Sebastian Porras,nio_uio-a0-26ww41b
+Partition Level,parmiootc_uio_0,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmiootc_uio_0,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Stack Level,parmiootc_uio_0,uio_a_0_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Stack Level,parmiootc_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,PASS,Sebastian Porras,nio_uio-a0-26ww41b
+Stack Level,parmiootc_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,PASS,Mauricio Segura,nio_uio-a0-26ww41b
+Stack Level,parmiootc_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6trcore_uio_0,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6trcore_uio_0,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6trcore_uio_0,ssn_continuity,[NWP] SSN: continuity,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6trcore_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6trcore_uio_0,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6trcore_uio_0,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,PASS,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6trcore_uio_0,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Sebastian Porras,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6trcore_uio_0,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6trcore_uio_0,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Stack Level,parmiopcie6trcore_uio_0,uio_a_0_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Stack Level,parmiopcie6trcore_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Sebastian Porras,nio_uio-a0-26ww41b
+Stack Level,parmiopcie6trcore_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Stack Level,parmiopcie6trcore_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6tridelldp_uio_0,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6tridelldp_uio_0,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6tridelldp_uio_0,ssn_continuity,[NWP] SSN: continuity,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6tridelldp_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6tridelldp_uio_0,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6tridelldp_uio_0,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6tridelldp_uio_0,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Sebastian Porras,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6tridelldp_uio_0,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6tridelldp_uio_0,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Stack Level,parmiopcie6tridelldp_uio_0,uio_a_0_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Stack Level,parmiopcie6tridelldp_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Sebastian Porras,nio_uio-a0-26ww41b
+Stack Level,parmiopcie6tridelldp_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,PASS,Emmanuel Araya,nio_uio-a0-26ww41b
+Stack Level,parmiopcie6tridelldp_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6ttcore_uio_0,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6ttcore_uio_0,parmiopcie6ttcore_uio_0_ub_i_ult_scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,PASS,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6ttcore_uio_0,ssn_continuity,[NWP] SSN: continuity,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6ttcore_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6ttcore_uio_0,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6ttcore_uio_0,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6ttcore_uio_0,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Diego Matamoros,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6ttcore_uio_0,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6ttcore_uio_0,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Stack Level,parmiopcie6ttcore_uio_0,uio_a_0_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Stack Level,parmiopcie6ttcore_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Diego Matamoros,nio_uio-a0-26ww41b
+Stack Level,parmiopcie6ttcore_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Stack Level,parmiopcie6ttcore_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6ttidecee_uio_0,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6ttidecee_uio_0,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6ttidecee_uio_0,ssn_continuity,[NWP] SSN: continuity,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6ttidecee_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6ttidecee_uio_0,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6ttidecee_uio_0,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6ttidecee_uio_0,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Diego Matamoros,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6ttidecee_uio_0,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6ttidecee_uio_0,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Stack Level,parmiopcie6ttidecee_uio_0,uio_a_0_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Stack Level,parmiopcie6ttidecee_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Diego Matamoros,nio_uio-a0-26ww41b
+Stack Level,parmiopcie6ttidecee_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Emmanuel Araya,nio_uio-a0-26ww41b
+Stack Level,parmiopcie6ttidecee_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,PASS,Emmanuel Araya,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6ttidecee_uio_1,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6ttidecee_uio_1,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6ttidecee_uio_1,ssn_continuity,[NWP] SSN: continuity,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6ttidecee_uio_1,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6ttidecee_uio_1,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6ttidecee_uio_1,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6ttidecee_uio_1,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6ttidecee_uio_1,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiopcie6ttidecee_uio_1,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Stack Level,parmiopcie6ttidecee_uio_1,uio_1_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Stack Level,parmiopcie6ttidecee_uio_1,uio_1_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Stack Level,parmiopcie6ttidecee_uio_1,uio_1_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Stack Level,parmiopcie6ttidecee_uio_1,uio_1_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiostaticmux_uio_0,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiostaticmux_uio_0,parmiostaticmux_uio_0_ub_i_ult_scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,PASS,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiostaticmux_uio_0,ssn_continuity,[NWP] SSN: continuity,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiostaticmux_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiostaticmux_uio_0,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiostaticmux_uio_0,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiostaticmux_uio_0,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmiostaticmux_uio_0,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmiostaticmux_uio_0,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Stack Level,parmiostaticmux_uio_0,uio_a_0_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Stack Level,parmiostaticmux_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,PASS,SathyahX Sv,nio_uio-a0-26ww41b
+Stack Level,parmiostaticmux_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Mario Alpizar,nio_uio-a0-26ww41b
+Stack Level,parmiostaticmux_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,PASS,Mario Alpizar,nio_uio-a0-26ww41b
+Partition Level,parmioula_uio_0,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmioula_uio_0,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmioula_uio_0,ssn_continuity,[NWP] SSN: continuity,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmioula_uio_0,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,PASS,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmioula_uio_0,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmioula_uio_0,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmioula_uio_0,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Sebastian Porras,nio_uio-a0-26ww41b
+Partition Level,parmioula_uio_0,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmioula_uio_0,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Stack Level,parmioula_uio_0,uio_a_0_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,QUEUED,Mauricio Segura,nio_uio-a0-26ww41b
+Stack Level,parmioula_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,QUEUED,Sebastian Porras,nio_uio-a0-26ww41b
+Stack Level,parmioula_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,PASS,Mauricio Segura,nio_uio-a0-26ww41b
+Stack Level,parmioula_uio_0,uio_a_0_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,PASS,Mauricio Segura,nio_uio-a0-26ww41b
+Partition Level,parmioula_uio_1,atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmioula_uio_1,scan_ctlr_stuckat_edt_bypass_low_internal_scandump,[NWP] scan: scandump,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmioula_uio_1,ssn_continuity,[NWP] SSN: continuity,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmioula_uio_1,stuckat_edt_bypass_low_internal_burnin_togcnt_cap_off,[NWP] scan: Burnin,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmioula_uio_1,stuckat_edt_bypass_low_internal_serial_chain,[NWP] scan: edtbyp cont proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmioula_uio_1,stuckat_edt_bypass_low_internal_serial_scan,[NWP] scan: edtbyp stuckat proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmioula_uio_1,stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmioula_uio_1,stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Partition Level,parmioula_uio_1,stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Stack Level,parmioula_uio_1,uio_1_retarget_atspeed_edt_edt_low_internal_serial_scan,[NWP] scan: edten atspeed proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Stack Level,parmioula_uio_1,uio_1_retarget_stuckat_edt_edt_low_internal_loopback,[NWP] SSN: endpoint loopback,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Stack Level,parmioula_uio_1,uio_1_retarget_stuckat_edt_edt_low_internal_serial_chain,[NWP] scan: edten cont proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Stack Level,parmioula_uio_1,uio_1_retarget_stuckat_edt_edt_low_internal_serial_scan,[NWP] scan: edten stuckat proxy,NOT_LAUNCHED,SathyahX Sv,nio_uio-a0-26ww41b
+Stack Level,uio_1,ssn_continuity,[NWP] SSN: continuity,NOT_LAUNCHED,KalthireddyX Gunasekhar,nio_uio-a0-26ww41b
+Stack Level,uio_a_0,ssn_continuity,[NWP] SSN: continuity,PASS,Mauricio Segura,nio_uio-a0-26ww41b
