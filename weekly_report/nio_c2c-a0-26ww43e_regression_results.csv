@@ -1,0 +1,75 @@
+test_name,test_status,test_result
+parc2cdfd_stuckat_edt_edt_low_internal_sti_serial_scan,PASS,PASS
+parc2cdfd_ijtag_basic_tap_tests_user_defined,PASS,PASS
+parc2chip_icl_verify_dft,PASS,PASS
+parc2cdfd_stuckat_edt_edt_low_internal_sti_loopback,PASS,PASS
+parc2cdfd_atspeed_edt_edt_low_internal_sti_loopback,PASS,PASS
+parc2chip_ijtag_basic_tap_tests_user_defined,PASS,PASS
+parc2cdfd_ijtag_basic_tap_tests_rw_access,FAIL,"1.3124e+06ps: Mismatch at pin           0 name          JTAG_C0_tdo, Simulated 0, Expected 1"
+parc2cdfd_ijtag_basic_tap_tests_tlr_reset,FAIL,"1.7024e+06ps: Mismatch at pin           0 name          JTAG_C0_tdo, Simulated 0, Expected 1"
+parc2cdfd_ijtag_basic_tap_tests_continuity,FAIL,"1.3424e+06ps: Mismatch at pin           0 name          JTAG_C0_tdo, Simulated 0, Expected 1"
+parc2cdfd_atspeed_edt_edt_low_internal_sti_serial_scan,FAIL,"2.39824e+08ps: Mismatch at pin           0 name IJTAG_IN_C0_scan_out, Simulated 0, Expected 1"
+parc2clink_ijtag_basic_tap_tests_tlr_reset,PASS,PASS
+parc2cdfd_stuckat_edt_edt_low_internal_sti_serial_chain,PASS,PASS
+parc2clink_ijtag_basic_tap_tests_continuity,PASS,PASS
+parc2clink_ijtag_basic_tap_tests_user_defined,PASS,PASS
+parc2cmhub_ijtag_basic_tap_tests_continuity,PASS,PASS
+parc2clink_ijtag_basic_tap_tests_rw_access,FAIL,"4.72624e+07ps: Mismatch at pin           0 name IJTAG_IN_C0_scan_out, Simulated x, Expected 0"
+parc2cdfd_atspeed_edt_edt_low_internal_sti_serial_chain,PASS,PASS
+parc2clink_icl_verify_dft,PASS,PASS
+parc2cmhub_icl_verify_dft,PASS,PASS
+parc2cdfd_ijtag_basic_tap_tests_reset,FAIL,"1.7024e+06ps: Mismatch at pin           0 name          JTAG_C0_tdo, Simulated 0, Expected 1"
+parc2cmhub_ijtag_basic_tap_tests_user_defined,PASS,PASS
+parc2clink_atspeed_edt_edt_low_internal_serial_scan,PASS,PASS
+parc2clink_ijtag_basic_tap_tests_reset,FAIL,"1.09922e+08ps: Mismatch at pin           0 name IJTAG_IN_C0_scan_out, Simulated x, Expected 0"
+parc2clink_stuckat_edt_bypass_low_internal_serial_chain,PASS,PASS
+parc2clink_atspeed_edt_edt_low_internal_sti_serial_scan,PASS,PASS
+parc2cscbra_icl_verify_dft,PASS,PASS
+parc2cscbra_ijtag_basic_tap_tests_user_defined,PASS,PASS
+parc2cscbra_ijtag_basic_tap_tests_rw_access,FAIL,"8.04224e+07ps: Mismatch at pin           0 name IJTAG_IN_C0_scan_out, Simulated x, Expected 0"
+parc2cscbra_ijtag_basic_tap_tests_continuity,PASS,PASS
+parc2cmhub_ijtag_basic_tap_tests_tlr_reset,PASS,PASS
+parc2clink_stuckat_edt_edt_low_internal_serial_scan,FAIL,"""TEXT_REPLACED_BY_POSTSIM/subip/sip/Newport_c2c_cluster/src/sim/g_multi_cycle_interface_check__c2ce_gphy__desc0c2ce_in_control_desc__c2c_type_gphy__async_reset1.sv"", 2: parc2clink_stuckat_edt_edt_low_internal_serial_scan.parc2clink_inst.u_ls_c2c_link.u_c2cvdd_wrap.u_c2cvdd_top.u_NV_C2C_LINK_dl.u_tx.u_SCANBYPASS_enc.PROTECTED.VError__g_multi_cycle_interface_check__valid_can_t_fall_during_multi_cycle_transaction: started at 15787000ps failed at 15787000ps"
+parc2cmhub_ijtag_basic_tap_tests_reset,PASS,PASS
+parc2clink_stuckat_edt_edt_low_internal_sti_serial_scan,FAIL,"""TEXT_REPLACED_BY_POSTSIM/subip/sip/Newport_c2c_cluster/src/sim/g_multi_cycle_interface_check__c2ce_gphy__desc0c2ce_in_control_desc__c2c_type_gphy__async_reset1.sv"", 2: parc2clink_stuckat_edt_edt_low_internal_sti_serial_scan.parc2clink_inst.u_ls_c2c_link.u_c2cvdd_wrap.u_c2cvdd_top.u_NV_C2C_LINK_dl.u_tx.u_SCANBYPASS_enc.PROTECTED.VError__g_multi_cycle_interface_check__valid_can_t_fall_during_multi_cycle_transaction: started at 16557000ps failed at 16557000ps"
+parc2cscbra_stuckat_edt_edt_low_internal_loopback,PASS,PASS
+parc2clink_atspeed_edt_edt_low_internal_sti_serial_chain,PASS,PASS
+parc2clink_stuckat_edt_edt_low_internal_sti_serial_chain,PASS,PASS
+parc2cscbra_stuckat_edt_bypass_low_internal_serial_chain,PASS,PASS
+parc2clink_stuckat_edt_edt_low_internal_serial_chain,PASS,PASS
+parc2cscbra_stuckat_edt_edt_low_internal_sti_serial_scan,PASS,PASS
+parc2cscbra_ssn_continuity,PASS,PASS
+parc2cscbra_stuckat_edt_edt_low_internal_sti_loopback,PASS,PASS
+parc2cscbra_stuckat_edt_edt_low_internal_serial_scan,PASS,PASS
+parc2cinfra_ijtag_basic_tap_tests_user_defined,PASS,PASS
+parc2cscbra_atspeed_edt_edt_low_internal_sti_serial_scan,FAIL,"3.37524e+08ps: Mismatch at pin           0 name IJTAG_IN_C0_scan_out, Simulated 1, Expected 0"
+parc2cscbra_atspeed_edt_edt_low_internal_sti_loopback,PASS,PASS
+parc2cscbra_stuckat_edt_bypass_low_internal_serial_scan,PASS,PASS
+parc2cmhub_stuckat_edt_edt_low_internal_sti_serial_scan,PASS,PASS
+parc2cmhub_stuckat_edt_bypass_low_internal_serial_chain,PASS,PASS
+parc2clink_stuckat_edt_bypass_low_internal_serial_scan,FAIL,"""TEXT_REPLACED_BY_POSTSIM/subip/sip/Newport_c2c_cluster/src/sim/g_multi_cycle_interface_check__c2ce_gphy__desc0c2ce_in_control_desc__c2c_type_gphy__async_reset1.sv"", 2: parc2clink_stuckat_edt_bypass_low_internal_serial_scan.parc2clink_inst.u_ls_c2c_link.u_c2cvdd_wrap.u_c2cvdd_top.u_NV_C2C_LINK_dl.u_tx.u_SCANBYPASS_enc.PROTECTED.VError__g_multi_cycle_interface_check__valid_can_t_fall_during_multi_cycle_transaction: started at 16437000ps failed at 16437000ps"
+parc2cscbra_atspeed_edt_edt_low_internal_serial_scan,FAIL,"1.7644e+08ps: Mismatch at pin           0 name  SSN_OUT_C0_P_bus_data_out[0], Simulated 0, Expected 1"
+parc2cinfra_stuckat_edt_edt_low_internal_sti_serial_scan,PASS,PASS
+parc2cscbra_stuckat_edt_edt_low_internal_serial_chain,PASS,PASS
+parc2cinfra_stuckat_edt_edt_low_internal_sti_loopback,PASS,PASS
+parc2cinfra_atspeed_edt_edt_low_internal_sti_loopback,PASS,PASS
+parc2cscbra_stuckat_edt_edt_low_internal_sti_serial_chain,PASS,PASS
+parc2cmhub_stuckat_edt_edt_low_internal_serial_scan,PASS,PASS
+parc2cinfra_atspeed_edt_edt_low_internal_sti_serial_scan,FAIL,"3.04124e+08ps: Mismatch at pin           0 name JTAG_C0_tdo, Simulated 0, Expected 1"
+parc2cinfra_ijtag_basic_tap_tests_rw_access,FAIL,"4.28747e+09ps: Mismatch at pin           0 name JTAG_C0_tdo, Simulated 1, Expected 0"
+parc2cscbra_ijtag_basic_tap_tests_tlr_reset,PASS,PASS
+parc2cscbra_ijtag_basic_tap_tests_reset,FAIL,"1.65262e+08ps: Mismatch at pin           0 name IJTAG_IN_C0_scan_out, Simulated x, Expected 0"
+parc2cinfra_stuckat_edt_edt_low_internal_sti_serial_chain,PASS,PASS
+parc2cmhub_atspeed_edt_edt_low_internal_sti_serial_scan,PASS,PASS
+parc2cscbra_atspeed_edt_edt_low_internal_sti_serial_chain,PASS,PASS
+parc2cmhub_atspeed_edt_edt_low_internal_serial_scan,FAIL,"1.5296e+07ps: Mismatch at pin           0 name   USC_C0_uscan_so[0], Simulated 1, Expected 0"
+parc2cmhub_stuckat_edt_bypass_low_internal_serial_scan,PASS,PASS
+parc2cinfra_ijtag_basic_tap_tests_continuity,FAIL,"1.64408e+10ps: Mismatch at pin           0 name JTAG_C0_tdo, Simulated 1, Expected 0"
+parc2cinfra_atspeed_edt_edt_low_internal_sti_serial_chain,PASS,PASS
+parc2cmhub_stuckat_edt_edt_low_internal_sti_serial_chain,PASS,PASS
+parc2cmhub_stuckat_edt_edt_low_internal_serial_chain,PASS,PASS
+parc2cmhub_atspeed_edt_edt_low_internal_sti_serial_chain,PASS,PASS
+parc2cinfra_ijtag_basic_tap_tests_tlr_reset,FAIL,"8.18756e+09ps: Mismatch at pin           0 name JTAG_C0_tdo, Simulated 1, Expected 0"
+parc2cinfra_ijtag_basic_tap_tests_reset,FAIL,"8.497e+09ps: Mismatch at pin           0 name JTAG_C0_tdo, Simulated 1, Expected 0"
+parc2cmhub_ijtag_basic_tap_tests_rw_access,FAIL,"1.11092e+08ps: Mismatch at pin           0 name IJTAG_IN_C0_scan_out, Simulated 0, Expected 1"
+parc2chip_ijtag_basic_tap_tests_continuity,PASS,PASS
