@@ -73,3 +73,6 @@ parc2cinfra_ijtag_basic_tap_tests_tlr_reset,FAIL,"8.18756e+09ps: Mismatch at pin
 parc2cinfra_ijtag_basic_tap_tests_reset,FAIL,"8.497e+09ps: Mismatch at pin           0 name JTAG_C0_tdo, Simulated 1, Expected 0"
 parc2cmhub_ijtag_basic_tap_tests_rw_access,FAIL,"1.11092e+08ps: Mismatch at pin           0 name IJTAG_IN_C0_scan_out, Simulated 0, Expected 1"
 parc2chip_ijtag_basic_tap_tests_continuity,PASS,PASS
+parc2chip_ijtag_basic_tap_tests_tlr_reset,PASS,PASS
+parc2chip_ijtag_basic_tap_tests_reset,PASS,PASS
+parc2chip_ijtag_basic_tap_tests_rw_access,PASS,PASS
