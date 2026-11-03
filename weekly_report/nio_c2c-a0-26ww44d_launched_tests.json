@@ -1,5 +1,5 @@
 {
-  "feeder_running": true,
+  "feeder_running": false,
   "launched": [
     "parc2cdfd_atspeed_edt_edt_low_internal_loopback",
     "parc2cdfd_atspeed_edt_edt_low_internal_parc2cdfd_ub_parc2cdfd_rtl2_tessent_ssn_scan_host_ssh_inst_on_chip_compare",
