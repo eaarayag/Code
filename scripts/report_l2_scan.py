@@ -4,6 +4,7 @@
 # Usage: python report_l2_scan.py
 
 import csv
+import fnmatch
 import glob
 import json
 import os
@@ -30,9 +31,11 @@ STACK_HISTORY_FILE = os.path.join(REPORTS_DIR, "scan_stack_status_history.csv") 
 STACK_LEVEL_HISTORY_FILE = os.path.join(REPORTS_DIR, "scan_stack_level_status_history.csv")  # Historical percentages for stack-level plots
 GITHUB_PAGES_INDEX = "https://eaarayag.github.io/Code/scan_reports/scan_index.html"     # Report history on GitHub Pages
 GITHUB_PAGES_BASE = "https://eaarayag.github.io/Code/scan_reports/"               # Base URL for individual reports
+# Case-validation tests (ownership lives in scan_ownership.txt via @*_sih_* / @*_sti_*)
 SIH_TEST_TOKEN = "_sih_"
 SIH_PVIM_ITEM = "[NWP] SIH case val"
-SIH_OWNER = "Diego Matamoros"
+STI_TEST_TOKEN = "_sti_"
+STI_PVIM_ITEM = "[NWP] STI case val"
 
 # Optional annotation for models whose input CSV was manually merged from
 # multiple report files (one-time exemptions). Set MERGED_MODELS (comma-separated
@@ -42,12 +45,99 @@ MERGED_MODELS = {m.strip() for m in os.environ.get('MERGED_MODELS', '').split(',
 MERGED_INPUT_NOTE = os.environ.get('MERGED_INPUT_NOTE', '').strip()
 
 
+# ── MISSING sub-states ─────────────────────────────────────────────────────
+# A MISSING test (expected by ownership, absent from the regression rpt) is
+# split into two sub-states using the NetBatch submission plan captured by
+# parse_l2_regression.py (`<model>_launched_tests.json`):
+#   QUEUED       — the test was submitted to NetBatch but has not finished yet.
+#   NOT_LAUNCHED — the test was never submitted.
+# Both count as "missing" for aggregate metrics / trend charts (combined
+# Missing%); they are only shown split in the detail tables and test listings.
+# When a model has no launch data, rows fall back to the generic MISSING status.
+MISSING_STATUSES = frozenset({'MISSING', 'QUEUED', 'NOT_LAUNCHED'})
+STATUS_DISPLAY_LABELS = {
+    'QUEUED': 'On queue',
+    'NOT_LAUNCHED': 'Not launched',
+    'MISSING': 'Missing',
+}
+# Status colors (background, foreground) for HTML cells.
+STATUS_BG_COLORS = {
+    'PASS': '#e8f5e9', 'FAIL': '#ffebee', 'MISSING': '#fff3e0',
+    'QUEUED': '#fff8e1', 'NOT_LAUNCHED': '#eceff1',
+}
+STATUS_FG_COLORS = {
+    'PASS': '#2e7d32', 'FAIL': '#c62828', 'MISSING': '#e65100',
+    'QUEUED': '#f9a825', 'NOT_LAUNCHED': '#607d8b',
+}
+
+
+def is_missing_status(status):
+    """True if the status is any MISSING sub-state (MISSING/QUEUED/NOT_LAUNCHED)."""
+    return (status or '').strip().upper() in MISSING_STATUSES
+
+
+def status_label(status):
+    """Human-friendly display label for a status (e.g. QUEUED -> 'On queue')."""
+    return STATUS_DISPLAY_LABELS.get((status or '').strip().upper(), status)
+
+
+def _normalize_tag(name):
+    """Normalize a test tag for matching: lowercase, strip trailing `.N` rerun suffix."""
+    s = (name or '').strip().lower()
+    return re.sub(r'\.\d+$', '', s)
+
+
+def load_launched_tests(model):
+    """Return (set_of_launched_tags, feeder_running) for a model.
+
+    Reads `weekly_report/<model>_launched_tests.json` written by the parser.
+    Tags from both the partition-level and stack-level submission plans are
+    merged. Returns an empty set when no data file exists, which makes the
+    report fall back to the generic MISSING status.
+    """
+    path = os.path.join(WEEKLY_REPORT_DIR, f"{model}_launched_tests.json")
+    tags = set()
+    feeder_running = False
+    if os.path.isfile(path):
+        try:
+            with open(path, 'r', encoding='utf-8') as f:
+                d = json.load(f)
+            for t in d.get('launched', []) or []:
+                tags.add(_normalize_tag(t))
+            sl = d.get('stacklevel') or {}
+            for t in sl.get('launched', []) or []:
+                tags.add(_normalize_tag(t))
+            feeder_running = bool(d.get('feeder_running')) or bool(sl.get('feeder_running'))
+        except (OSError, json.JSONDecodeError, ValueError):
+            pass
+    return tags, feeder_running
+
+
+def classify_missing(partition, test_type, launched_tags):
+    """Classify an absent (MISSING) test as QUEUED or NOT_LAUNCHED.
+
+    Falls back to the generic 'MISSING' when the model has no launch data.
+    """
+    if not launched_tags:
+        return 'MISSING'
+    name = f"{partition}_{test_type}" if test_type else partition
+    return 'QUEUED' if _normalize_tag(name) in launched_tags else 'NOT_LAUNCHED'
+
+
+# Per-partition test-type overrides: list of (owner, partition_prefix, test_type).
+# Populated by load_ownership from lines of the form: Owner,partition_prefix,@test_type
+# These override the partition's base owner for one specific test type only.
+PARTITION_TEST_TYPE_OVERRIDES = []
+
+
 def load_ownership(filepath):
     """Load ownership.txt and return a list of (owner, prefix) tuples, sorted longest prefix first.
-    Also parses test-type-level overrides (lines with '@' prefix) into a separate structure."""
+    Also parses global test-type overrides (lines with '@' in field 2) and per-partition
+    test-type overrides (Owner,partition_prefix,@test_type) into PARTITION_TEST_TYPE_OVERRIDES."""
     ownership = []
     test_type_overrides = []  # List of (owner, test_type, excluded_owners)
-    with open(filepath, 'r', encoding='utf-8') as f:
+    PARTITION_TEST_TYPE_OVERRIDES.clear()
+    with open(filepath, 'r', encoding='utf-8-sig') as f:
         for line in f:
             line = line.strip()
             if not line or line.startswith('#'):
@@ -64,6 +154,9 @@ def load_ownership(filepath):
                     if extra.startswith('exclude:'):
                         excluded_owners.add(extra[len('exclude:'):].strip())
                 test_type_overrides.append((owner, test_type, excluded_owners))
+            elif len(parts) > 2 and parts[2].strip().startswith('@'):
+                # Per-partition test-type override: Owner,partition_prefix,@test_type
+                PARTITION_TEST_TYPE_OVERRIDES.append((owner, target, parts[2].strip()[1:]))
             else:
                 # Partition-level ownership. An optional trailing ',soc' field
                 # marks a SOC-model partition so get_partition_type classifies
@@ -203,23 +296,32 @@ def prompt_model_selection(category, remote_models=None, timestamps=None):
     if timestamps is None:
         timestamps = {}
 
-    print(f"\n  Available {category.upper()} models:")
+    # SOC models carry their real on-disk prefix 'nio-a0-'; show a friendly label.
+    label = 'NIO_SOC' if category == 'nio-a0-' else category.upper()
+    print(f"\n  Available {label} models:")
     for i, model in enumerate(models, 1):
         ts = timestamps.get(model, "")
         if ts:
             print(f"    {i}. {model}  (last modified: {ts})")
         else:
             print(f"    {i}. {model}")
-    print(f"    0. Skip {category.upper()}")
+    print(f"    0. Skip {label}")
 
     while True:
-        choice = input(f"  Select {category.upper()} model [1-{len(models)}, 0 to skip]: ").strip()
+        choice = input(f"  Select {label} model [1-{len(models)}, 0 to skip]: ").strip()
         if choice == '0':
             return None
         if choice.isdigit() and 1 <= int(choice) <= len(models):
             return models[int(choice) - 1]
         print(f"  Invalid choice. Enter 0-{len(models)}.")
 
+
+# Partitions to exclude from reporting entirely (matched against the partition
+# name after it is derived from the test name / ownership prefix).
+EXCLUDED_PARTITIONS = {
+    'parcabinf23e',
+    'parcabinf23w',
+}
 
 # Test types to exclude from reporting entirely (exact match against test_type after partition split).
 EXCLUDED_TEST_TYPES = {
@@ -291,12 +393,13 @@ def get_scan_pvim_item(test_type):
     return ''
 
 
-def apply_sih_override(row):
-    """Force SIH rows to the required item/owner mapping."""
+def apply_case_val_item(row):
+    """Map SIH/STI case-validation rows to their PVIM Item."""
     test_type = (row.get('test_type') or '').lower()
     if SIH_TEST_TOKEN in test_type:
         row['pvim_item'] = SIH_PVIM_ITEM
-        row['owner'] = SIH_OWNER
+    elif STI_TEST_TOKEN in test_type:
+        row['pvim_item'] = STI_PVIM_ITEM
 
 
 # Expected test cases for every partition. '*' prefix means suffix match.
@@ -345,6 +448,7 @@ STACK_ROOT_BY_TYPE = {
     'mc': 'memstack',
     'uio': 'uio_a_0',
     'uioe': 'uio_1',
+    'c2c': 'c2c_stack',
 }
 
 # Partitions classified under the new `uioestack` bucket. These partitions
@@ -368,22 +472,25 @@ PARTITION_TYPES_FOR_MODEL = {
     'uio': ('uio', 'uioe'),
     'd2d': ('d2d',),
     'soc': ('soc',),
+    'c2c': ('c2c',),
 }
 
 # Ordered list of stack buckets and their display labels used for trend
 # charts, history CSVs, and per-model detail tables.
-STACK_BUCKETS = ('mc', 'uio', 'd2d', 'uioe')
+STACK_BUCKETS = ('mc', 'uio', 'd2d', 'uioe', 'c2c')
 STACK_LABELS = {
     'mc': 'MC Stack',
     'uio': 'UIO Stack',
     'd2d': 'D2D Stack',
     'uioe': 'UIOe Stack',
+    'c2c': 'C2C Stack',
 }
 STACK_CHART_LABELS = {
     'mc': 'MEMSTACK',
     'uio': 'UIO',
     'd2d': 'D2D',
     'uioe': 'UIOe Stack',
+    'c2c': 'C2C',
 }
 
 # SOC is a standalone model bucket (its own model category + trend section),
@@ -396,24 +503,35 @@ HISTORY_BUCKETS = STACK_BUCKETS + (SOC_BUCKET,)
 
 # Partition Level status is shown as a per-bucket breakdown (one tracker per
 # model/stack bucket) instead of a single overall card.
-PARTITION_LEVEL_BUCKET_ORDER = ('mc', 'uio', 'uioe', 'd2d', 'soc')
+PARTITION_LEVEL_BUCKET_ORDER = ('mc', 'uio', 'uioe', 'd2d', 'c2c', 'soc')
 PARTITION_LEVEL_BUCKET_LABELS = {
     'mc': 'MC',
     'uio': 'UIO',
     'uioe': 'UIOe',
     'd2d': 'D2D',
+    'c2c': 'C2C',
     'soc': 'SOC',
 }
 
-def get_effective_owner(test_type, owner, test_type_overrides):
-    """Return effective owner based on test-type-level overrides from ownership.txt.
-    If the test_type matches an override and the current owner is not excluded, return the override owner."""
+def get_effective_owner(partition, test_type, owner, test_type_overrides):
+    """Return effective owner, honoring per-partition test-type overrides first,
+    then global test-type overrides, else the partition base owner."""
+    for ov_owner, ov_partition, ov_test_type in PARTITION_TEST_TYPE_OVERRIDES:
+        if partition == ov_partition and (test_type == ov_test_type or test_type.endswith(ov_test_type)):
+            return ov_owner
     for override_owner, override_test_type, excluded_owners in test_type_overrides:
-        if test_type == override_test_type or test_type.endswith(override_test_type):
+        if _test_type_matches(test_type, override_test_type):
             if owner in excluded_owners:
                 return owner
             return override_owner
     return owner
+
+
+def _test_type_matches(test_type, pattern):
+    """Match an @test_type override: glob if it contains '*', else exact/suffix."""
+    if '*' in pattern:
+        return fnmatch.fnmatchcase(test_type.lower(), pattern.lower())
+    return test_type == pattern or test_type.endswith(pattern)
 
 
 def get_scope(partition, test_type=''):
@@ -427,8 +545,8 @@ def get_scope(partition, test_type=''):
          `uio_a_0_retarget_*`, `uio_1_retarget_*`).
     Everything else is classified as Partition Level.
     """
-    stack_root_names = ('d2d1', 'memstack', 'uio_a_0', 'uio_1')
-    retarget_roots = ('d2d1', 'memstack', 'uio_a_0', 'uio_1')
+    stack_root_names = ('d2d1', 'memstack', 'uio_a_0', 'uio_1', 'c2c_stack')
+    retarget_roots = ('d2d1', 'memstack', 'uio_a_0', 'uio_1', 'c2c_stack')
     region = (partition or '').strip().lower()
     if region in stack_root_names:
         return 'Stack Level'
@@ -445,6 +563,9 @@ def get_partition_type(partition):
     # because their names overlap stack prefixes (pard2d*, parmio*).
     if partition in SOC_OWNERSHIP_PREFIXES:
         return 'soc'
+    # C2C stack: partitions `parc2c*` plus the `c2c_stack` root.
+    if partition == 'c2c_stack' or partition.startswith('parc2c'):
+        return 'c2c'
     if partition.startswith('memstack'):
         return 'mc'
     if partition.startswith('d2d1'):
@@ -484,7 +605,9 @@ def get_model_type(model_name):
         return 'uio'
     elif model_name.startswith('nio_d2d'):
         return 'd2d'
-    elif model_name.startswith('nio_soc'):
+    elif model_name.startswith('nio_c2c'):
+        return 'c2c'
+    elif model_name.startswith('nio-a0-') or model_name.startswith('nio_soc'):
         return 'soc'
     return None
 
@@ -507,6 +630,8 @@ def _status_priority(status):
         'FAIL': 3,
         'PASS': 2,
         'MISSING': 1,
+        'QUEUED': 1,
+        'NOT_LAUNCHED': 1,
     }
     return order.get((status or '').strip().upper(), 0)
 
@@ -558,7 +683,7 @@ def consolidate_scandump_rows(rows):
     def is_scandump(tt):
         return (tt or '').endswith(SCANDUMP_MATCH_SUFFIX)
 
-    status_rank = {'PASS': 3, 'FAIL': 2, 'MISSING': 1}
+    status_rank = {'PASS': 3, 'FAIL': 2, 'MISSING': 1, 'QUEUED': 1, 'NOT_LAUNCHED': 1}
 
     def name_rank(tt):
         if tt == SCANDUMP_CANONICAL:
@@ -580,7 +705,7 @@ def consolidate_scandump_rows(rows):
         winners = [r for r in cands
                    if status_rank.get((r.get('status') or '').upper(), 0) == best]
         rep = dict(sorted(winners, key=lambda r: name_rank(r.get('test_type', '')))[0])
-        if (rep.get('status') or '').upper() == 'MISSING':
+        if is_missing_status(rep.get('status')):
             rep['test_type'] = SCANDUMP_CANONICAL  # a truly-missing item flags the canonical name
         rep['pvim_item'] = SCANDUMP_PVIM
         result.append(rep)
@@ -882,9 +1007,12 @@ def _render_trend_png(history_data, output_path):
     plt.close(fig)
 
 
-def check_test_completeness(all_rows, ownership, test_type_overrides, selected_models):
+def check_test_completeness(all_rows, ownership, test_type_overrides, selected_models, launched_by_model=None):
     """For each (partition, model), add MISSING rows for any expected test not found.
-    Checks ALL partitions from ownership.txt, but only against their matching model type."""
+    Checks ALL partitions from ownership.txt, but only against their matching model type.
+    MISSING rows are classified as QUEUED / NOT_LAUNCHED using each model's
+    NetBatch submission plan (launched_by_model: {model: set_of_tags})."""
+    launched_by_model = launched_by_model or {}
     # Group existing test_types by (partition, model)
     existing = {}
     for row in all_rows:
@@ -900,6 +1028,8 @@ def check_test_completeness(all_rows, ownership, test_type_overrides, selected_m
         p_type = get_partition_type(prefix)
         if p_type is None:
             unmapped_prefixes.append(prefix)
+            continue
+        if prefix in EXCLUDED_PARTITIONS:
             continue
         for model in selected_models:
             m_type = get_model_type(model)
@@ -923,12 +1053,12 @@ def check_test_completeness(all_rows, ownership, test_type_overrides, selected_m
                 if is_stack_level and suffix in STACK_LEVEL_EXCLUDED_EXPECTED_TESTS:
                     continue
                 if not any(tt.endswith(suffix) for tt in test_types):
-                    effective_owner = get_effective_owner(suffix, owner, test_type_overrides)
+                    effective_owner = get_effective_owner(partition, suffix, owner, test_type_overrides)
                     missing_rows.append({
                         'owner': effective_owner,
                         'partition': partition,
                         'test_type': suffix,
-                        'status': 'MISSING',
+                        'status': classify_missing(partition, suffix, launched_by_model.get(model, set())),
                         'model': model,
                     })
             else:
@@ -936,12 +1066,12 @@ def check_test_completeness(all_rows, ownership, test_type_overrides, selected_m
                 if is_stack_level and expected in STACK_LEVEL_EXCLUDED_EXPECTED_TESTS:
                     continue
                 if expected not in test_types:
-                    effective_owner = get_effective_owner(expected, owner, test_type_overrides)
+                    effective_owner = get_effective_owner(partition, expected, owner, test_type_overrides)
                     missing_rows.append({
                         'owner': effective_owner,
                         'partition': partition,
                         'test_type': expected,
-                        'status': 'MISSING',
+                        'status': classify_missing(partition, expected, launched_by_model.get(model, set())),
                         'model': model,
                     })
 
@@ -961,12 +1091,12 @@ def check_test_completeness(all_rows, ownership, test_type_overrides, selected_m
             expected_tt = f'{stack_root}_retarget_{base}'
             if expected_tt in test_types:
                 continue
-            effective_owner = get_effective_owner(expected_tt, owner, test_type_overrides)
+            effective_owner = get_effective_owner(partition, expected_tt, owner, test_type_overrides)
             missing_rows.append({
                 'owner': effective_owner,
                 'partition': partition,
                 'test_type': expected_tt,
-                'status': 'MISSING',
+                'status': classify_missing(partition, expected_tt, launched_by_model.get(model, set())),
                 'model': model,
             })
 
@@ -1002,11 +1132,14 @@ def generate_general_report_for_models(selected_models):
                     partition = normalize_soc_partition(partition)
                 else:
                     partition, test_type = split_test_name(test_name, ownership)
+                # Drop partitions that are explicitly excluded from all reports.
+                if partition in EXCLUDED_PARTITIONS:
+                    continue
                 # Exclude TAP-only test types (ijtag/icl) from SCAN for all models, SOC included.
                 if is_excluded_test_type(test_type):
                     continue
                 # Override owner if test_type is owned at the test-type level
-                effective_owner = get_effective_owner(test_type, owner, test_type_overrides)
+                effective_owner = get_effective_owner(partition, test_type, owner, test_type_overrides)
                 all_rows.append({
                     'owner': effective_owner,
                     'partition': partition,
@@ -1021,7 +1154,8 @@ def generate_general_report_for_models(selected_models):
         return
 
     # Check for missing expected tests and add MISSING rows (checks ALL ownership partitions)
-    missing_rows = check_test_completeness(all_rows, ownership, test_type_overrides, selected_models)
+    launched_by_model = {m: load_launched_tests(m)[0] for m in selected_models}
+    missing_rows = check_test_completeness(all_rows, ownership, test_type_overrides, selected_models, launched_by_model)
     if missing_rows:
         print(f"\nFound {len(missing_rows)} missing test(s) across partitions.")
         all_rows.extend(missing_rows)
@@ -1043,7 +1177,7 @@ def generate_general_report_for_models(selected_models):
             r['pvim_item'] = get_scan_pvim_item(r['test_type'])
         # Populate validation scope so downstream consumers can group rows.
         r['scope'] = get_scope(r.get('partition', ''), r.get('test_type', ''))
-        apply_sih_override(r)
+        apply_case_val_item(r)
 
     all_rows.sort(key=lambda r: (r['model'], r['partition'], r['test_type'], r['owner']))
 
@@ -1062,10 +1196,42 @@ def generate_general_report_for_models(selected_models):
     generate_general_report_html(all_rows)
 
 
+# Client-side filter for the per-model detail tables. Rendered into the general
+# report HTML; runs only where JavaScript is allowed (browser / GitHub Pages),
+# and is harmlessly ignored by email clients that strip <script>.
+_TEST_FILTER_SCRIPT = """<script>
+function filterTests(){
+  var q=(document.getElementById('testFilter').value||'').toLowerCase().trim();
+  var terms=q.split(' ').filter(Boolean);
+  var rows=document.getElementsByClassName('detail-row');
+  var shown=0;
+  for(var i=0;i<rows.length;i++){
+    var t=(rows[i].textContent||rows[i].innerText||'').toLowerCase();
+    var ok=true;
+    for(var j=0;j<terms.length;j++){if(t.indexOf(terms[j])===-1){ok=false;break;}}
+    rows[i].style.display=ok?'':'none';
+    if(ok){shown++;}
+  }
+  var tables=document.getElementsByClassName('detail-table');
+  for(var k=0;k<tables.length;k++){
+    var trs=tables[k].getElementsByClassName('detail-row');
+    var any=false;
+    for(var m=0;m<trs.length;m++){if(trs[m].style.display!=='none'){any=true;break;}}
+    var outer=tables[k].closest('tr');
+    if(!outer){continue;}
+    outer.style.display=any?'':'none';
+    var head=outer.previousElementSibling;
+    if(head&&head.className&&head.className.indexOf('detail-heading')>-1){head.style.display=any?'':'none';}
+  }
+  var c=document.getElementById('filterCount');
+  if(c){c.textContent=q===''?'':(shown+' matching row(s)');}
+}
+</script>"""
+
+
 def generate_general_report_html(all_rows):
     """Generate an Outlook-compatible HTML version of the general report."""
     import html as html_mod
-
     FONT = "font-family:Arial,Helvetica,sans-serif;"
     MONO = "font-family:Consolas,'Courier New',monospace;"
     html_path = os.path.join(REPORTS_DIR, f"scan_general_report_{TIMESTAMP}.html")
@@ -1098,13 +1264,17 @@ def generate_general_report_html(all_rows):
         total = len(rows)
         total_pass = sum(1 for r in rows if r['status'] == 'PASS')
         total_fail = sum(1 for r in rows if r['status'] == 'FAIL')
-        total_missing = sum(1 for r in rows if r['status'] == 'MISSING')
+        total_missing = sum(1 for r in rows if is_missing_status(r['status']))
+        total_queued = sum(1 for r in rows if (r['status'] or '').upper() == 'QUEUED')
+        total_notlaunched = sum(1 for r in rows if (r['status'] or '').upper() == 'NOT_LAUNCHED')
         pass_rate = (total_pass / total * 100) if total else 0.0
         return {
             'total': total,
             'pass': total_pass,
             'fail': total_fail,
             'missing': total_missing,
+            'queued': total_queued,
+            'not_launched': total_notlaunched,
             'pass_rate': pass_rate,
         }
 
@@ -1119,10 +1289,10 @@ def generate_general_report_html(all_rows):
     soc_level_summary = compute_summary(soc_level_rows)
 
     def status_bg(s):
-        return {'PASS': '#e8f5e9', 'FAIL': '#ffebee', 'MISSING': '#fff3e0'}.get(s, '#ffffff')
+        return STATUS_BG_COLORS.get((s or '').strip().upper(), '#ffffff')
 
     def status_fg(s):
-        return {'PASS': '#2e7d32', 'FAIL': '#c62828', 'MISSING': '#e65100'}.get(s, '#333333')
+        return STATUS_FG_COLORS.get((s or '').strip().upper(), '#333333')
 
     h = []
     h.append('<!DOCTYPE html>')
@@ -1153,14 +1323,15 @@ def generate_general_report_html(all_rows):
             (str(summary['total']), 'TOTAL', '#f0f7ff', '#0071c5'),
             (str(summary['pass']), 'PASS', '#e8f5e9', '#2e7d32'),
             (str(summary['fail']), 'FAIL', '#ffebee', '#c62828'),
-            (str(summary['missing']), 'MISSING', '#fff3e0', '#e65100'),
+            (str(summary.get('queued', 0)), 'ON QUEUE', '#fff8e1', '#f9a825'),
+            (str(summary.get('not_launched', 0)), 'NOT LAUNCHED', '#eceff1', '#607d8b'),
         ]
         for i, (val, label, bg, fg) in enumerate(stats):
             if i > 0:
                 h.append('<td width="8"></td>')
-            h.append(f'<td width="25%" align="center" bgcolor="{bg}" style="padding:14px 8px;">')
-            h.append(f'<span style="font-size:28px;font-weight:bold;color:{fg};{FONT}">{val}</span><br>')
-            h.append(f'<span style="font-size:11px;color:#666;text-transform:uppercase;{FONT}">{label}</span>')
+            h.append(f'<td width="18%" align="center" bgcolor="{bg}" style="padding:14px 6px;">')
+            h.append(f'<span style="font-size:22px;font-weight:bold;color:{fg};{FONT}">{val}</span><br>')
+            h.append(f'<span style="font-size:10px;color:#666;text-transform:uppercase;{FONT}">{label}</span>')
             h.append('</td>')
         h.append('</tr></table>')
         h.append(f'<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:10px;margin-bottom:14px;">')
@@ -1374,6 +1545,15 @@ def generate_general_report_html(all_rows):
     h.append('</table>')
     h.append('</td></tr>')
 
+    # ── Interactive test filter (works when viewed in a browser / GitHub Pages) ──
+    h.append('<tr><td style="padding:16px 32px 0;">')
+    h.append(f'<input type="text" id="testFilter" onkeyup="filterTests()" '
+             f'placeholder="Filter tests \u2014 type to search region / item / test / status / owner (space = AND)" '
+             f'style="width:100%;box-sizing:border-box;padding:10px 12px;font-size:13px;'
+             f'border:1px solid #ccc;border-radius:4px;{FONT}">')
+    h.append(f'<div id="filterCount" style="font-size:11px;color:#888;padding:4px 2px;{FONT}"></div>')
+    h.append('</td></tr>')
+
     # ── Detailed test results per model ──
     # Rows for partitions in the `uioestack` bucket are pulled into their own
     # sub-table so they are not visually mixed with the main UIO stack rows.
@@ -1400,13 +1580,15 @@ def generate_general_report_html(all_rows):
             sub_rows = sorted(sub_rows, key=_scope_sort_key)
             m_pass = sum(1 for r in sub_rows if r['status'] == 'PASS')
             m_fail = sum(1 for r in sub_rows if r['status'] == 'FAIL')
-            m_miss = sum(1 for r in sub_rows if r['status'] == 'MISSING')
+            m_queued = sum(1 for r in sub_rows if (r['status'] or '').upper() == 'QUEUED')
+            m_notlaunched = sum(1 for r in sub_rows if (r['status'] or '').upper() == 'NOT_LAUNCHED')
+            m_miss = sum(1 for r in sub_rows if (r['status'] or '').upper() == 'MISSING')
 
             heading = html_mod.escape(model)
             if sub_label:
                 heading = f"{heading} &mdash; {html_mod.escape(sub_label)}"
 
-            h.append('<tr><td style="padding:16px 32px 8px;">')
+            h.append('<tr class="detail-heading"><td style="padding:16px 32px 8px;">')
             h.append(f'<table cellpadding="0" cellspacing="0" border="0"><tr><td style="{FONT}">')
             h.append(f'<span style="font-size:15px;font-weight:bold;color:#333;{FONT}">{heading}</span> ')
             if model in MERGED_MODELS:
@@ -1417,12 +1599,15 @@ def generate_general_report_html(all_rows):
             h.append(f'&mdash; {len(sub_rows)} tests: ')
             h.append(f'<span style="color:#2e7d32;">{m_pass} pass</span>, ')
             h.append(f'<span style="color:#c62828;">{m_fail} fail</span>, ')
-            h.append(f'<span style="color:#e65100;">{m_miss} missing</span>')
+            h.append(f'<span style="color:#f9a825;">{m_queued} on queue</span>, ')
+            h.append(f'<span style="color:#607d8b;">{m_notlaunched} not launched</span>')
+            if m_miss:
+                h.append(f', <span style="color:#e65100;">{m_miss} missing</span>')
             h.append('</span></td></tr></table>')
             h.append('</td></tr>')
 
             h.append('<tr><td style="padding:0 32px 16px;">')
-            h.append('<table width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #e0e0e0;">')
+            h.append('<table class="detail-table" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #e0e0e0;">')
             # Table header
             h.append(f'<tr bgcolor="#f0f0f0">')
             for col in ['Scope', 'Region name', 'Item', 'Test', 'Status', 'Owner']:
@@ -1434,12 +1619,12 @@ def generate_general_report_html(all_rows):
                 st = r['status']
                 pvim = html_mod.escape(r.get('pvim_item', ''))
                 scope_val = html_mod.escape(r.get('scope') or get_scope(r.get('partition', ''), r.get('test_type', '')))
-                h.append(f'<tr bgcolor="{bg}">')
+                h.append(f'<tr class="detail-row" bgcolor="{bg}">')
                 h.append(f'<td style="padding:6px 10px;font-size:12px;color:#333;white-space:nowrap;{FONT}border-bottom:1px solid #eee;">{scope_val}</td>')
                 h.append(f'<td style="padding:6px 10px;font-size:12px;color:#333;white-space:nowrap;{MONO}border-bottom:1px solid #eee;">{html_mod.escape(r["partition"])}</td>')
                 h.append(f'<td style="padding:6px 10px;font-size:12px;color:#333;white-space:nowrap;{MONO}border-bottom:1px solid #eee;">{pvim}</td>')
                 h.append(f'<td style="padding:6px 10px;font-size:12px;color:#333;white-space:nowrap;{MONO}border-bottom:1px solid #eee;">{html_mod.escape(r["test_type"])}</td>')
-                h.append(f'<td align="center" bgcolor="{status_bg(st)}" style="padding:6px 10px;font-size:12px;font-weight:bold;white-space:nowrap;color:{status_fg(st)};{FONT}border-bottom:1px solid #eee;">{st}</td>')
+                h.append(f'<td align="center" bgcolor="{status_bg(st)}" style="padding:6px 10px;font-size:12px;font-weight:bold;white-space:nowrap;color:{status_fg(st)};{FONT}border-bottom:1px solid #eee;">{html_mod.escape(status_label(st))}</td>')
                 h.append(f'<td style="padding:6px 10px;font-size:12px;color:#555;white-space:nowrap;{FONT}border-bottom:1px solid #eee;">{html_mod.escape(r["owner"])}</td>')
                 h.append('</tr>')
             h.append('</table>')
@@ -1455,6 +1640,7 @@ def generate_general_report_html(all_rows):
     h.append('</span></td></tr></table>')
     h.append('</td></tr>')
 
+    h.append(_TEST_FILTER_SCRIPT)
     h.append('</table></td></tr></table></body></html>')
 
     with open(html_path, 'w', encoding='utf-8') as f:
@@ -1506,7 +1692,7 @@ def load_report_as_dict(report_path):
 
 def _status_color(status):
     """Return inline CSS color for a test status."""
-    return {'PASS': '#2e7d32', 'FAIL': '#c62828', 'MISSING': '#e65100'}.get(status, '#333')
+    return STATUS_FG_COLORS.get((status or '').strip().upper(), '#333')
 
 
 def _change_border_color(new_status):
@@ -1525,7 +1711,9 @@ def _new_border_color(status):
         'PASS': '#4caf50',
         'FAIL': '#e53935',
         'MISSING': '#fb8c00',
-    }.get(status, '#9e9e9e')
+        'QUEUED': '#f9a825',
+        'NOT_LAUNCHED': '#90a4ae',
+    }.get((status or '').strip().upper(), '#9e9e9e')
 
 
 def _new_bg_color(status):
@@ -1534,7 +1722,9 @@ def _new_bg_color(status):
         'PASS': '#e8f5e9',
         'FAIL': '#ffebee',
         'MISSING': '#fff3e0',
-    }.get(status, '#f5f5f5')
+        'QUEUED': '#fff8e1',
+        'NOT_LAUNCHED': '#eceff1',
+    }.get((status or '').strip().upper(), '#f5f5f5')
 
 
 def generate_executive_summary(report_path):
@@ -1563,13 +1753,17 @@ def generate_executive_summary(report_path):
         total = len(all_rows)
         total_pass = sum(1 for r in all_rows if r['status'] == 'PASS')
         total_fail = sum(1 for r in all_rows if r['status'] == 'FAIL')
-        total_missing = sum(1 for r in all_rows if r['status'] == 'MISSING')
+        total_missing = sum(1 for r in all_rows if is_missing_status(r['status']))
+        total_queued = sum(1 for r in all_rows if (r['status'] or '').upper() == 'QUEUED')
+        total_notlaunched = sum(1 for r in all_rows if (r['status'] or '').upper() == 'NOT_LAUNCHED')
         pass_rate = (total_pass / total * 100) if total else 0.0
         return {
             'total': total,
             'pass': total_pass,
             'fail': total_fail,
             'missing': total_missing,
+            'queued': total_queued,
+            'not_launched': total_notlaunched,
             'pass_rate': pass_rate,
         }
 
@@ -1676,7 +1870,9 @@ def generate_executive_summary(report_path):
             cat_label, cat_color = 'UIO', '#6a1b9a'
         elif 'nio_d2d' in model:
             cat_label, cat_color = 'D2D', '#00695c'
-        elif 'nio_soc' in model:
+        elif 'nio_c2c' in model:
+            cat_label, cat_color = 'C2C', '#ad1457'
+        elif 'nio-a0-' in model or 'nio_soc' in model:
             cat_label, cat_color = 'SOC', '#b5651d'
         else:
             cat_label, cat_color = '?', '#555'
@@ -1707,14 +1903,15 @@ def generate_executive_summary(report_path):
             (str(summary['total']), 'TOTAL', '#f0f7ff', '#0071c5'),
             (str(summary['pass']), 'PASS', '#e8f5e9', '#2e7d32'),
             (str(summary['fail']), 'FAIL', '#ffebee', '#c62828'),
-            (str(summary['missing']), 'MISSING', '#fff3e0', '#e65100'),
+            (str(summary.get('queued', 0)), 'ON QUEUE', '#fff8e1', '#f9a825'),
+            (str(summary.get('not_launched', 0)), 'NOT LAUNCHED', '#eceff1', '#607d8b'),
         ]
         for i, (val, label, bg, fg) in enumerate(stats):
             if i > 0:
                 h.append('<td width="8"></td>')
-            h.append(f'<td width="25%" align="center" bgcolor="{bg}" style="padding:14px 8px;">')
-            h.append(f'<span style="font-size:26px;font-weight:bold;color:{fg};{FONT}">{val}</span><br>')
-            h.append(f'<span style="font-size:11px;color:#666;text-transform:uppercase;{FONT}">{label}</span>')
+            h.append(f'<td width="18%" align="center" bgcolor="{bg}" style="padding:14px 6px;">')
+            h.append(f'<span style="font-size:20px;font-weight:bold;color:{fg};{FONT}">{val}</span><br>')
+            h.append(f'<span style="font-size:10px;color:#666;text-transform:uppercase;{FONT}">{label}</span>')
             h.append('</td>')
         h.append('</tr></table>')
         h.append('<table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:10px;margin-bottom:14px;">')
@@ -1788,9 +1985,9 @@ def generate_executive_summary(report_path):
                 h.append(f'<tr><td bgcolor="{bg}" style="padding:9px 12px;border-left:4px solid {border_color};'
                          f'font-size:13px;color:#333;{MONO}mso-line-height-rule:exactly;line-height:20px;">')
                 h.append(f'[{model}] {partition} / {test_type}: '
-                         f'<span style="color:{_status_color(prev_status)};{MONO}">{prev_status}</span> '
+                         f'<span style="color:{_status_color(prev_status)};{MONO}">{html_mod.escape(status_label(prev_status))}</span> '
                          f'&#8594; '
-                         f'<b style="color:{_status_color(new_status)};{MONO}">{new_status}</b>')
+                         f'<b style="color:{_status_color(new_status)};{MONO}">{html_mod.escape(status_label(new_status))}</b>')
                 h.append('</td></tr>')
                 h.append('<tr><td style="font-size:0;line-height:0;height:4px;">&nbsp;</td></tr>')
             h.append('</table>')
@@ -1799,7 +1996,10 @@ def generate_executive_summary(report_path):
 
     # ── Current Failing & Missing Tests ──
     fail_rows = [r for r in rows if r['status'] == 'FAIL']
-    missing_rows = [r for r in rows if r['status'] == 'MISSING']
+    missing_rows = [r for r in rows if is_missing_status(r['status'])]
+    queued_rows = [r for r in missing_rows if (r['status'] or '').upper() == 'QUEUED']
+    notlaunched_rows = [r for r in missing_rows if (r['status'] or '').upper() == 'NOT_LAUNCHED']
+    plain_missing_rows = [r for r in missing_rows if (r['status'] or '').upper() == 'MISSING']
     if fail_rows or missing_rows:
         h.append('<tr><td style="padding:8px 32px 24px;">')
         h.append(f'<table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:12px;"><tr>'
@@ -1807,7 +2007,10 @@ def generate_executive_summary(report_path):
         h.append(f'<span style="font-size:16px;font-weight:bold;color:#e65100;text-transform:uppercase;{FONT}">'
                  f'CURRENT FAILING &amp; MISSING TESTS</span> ')
         h.append(f'<span style="font-size:13px;color:#888;{FONT}">'
-                 f'({len(fail_rows)} FAIL, {len(missing_rows)} MISSING)</span>')
+                 f'({len(fail_rows)} FAIL, {len(queued_rows)} ON QUEUE, '
+                 f'{len(notlaunched_rows)} NOT LAUNCHED'
+                 + (f', {len(plain_missing_rows)} MISSING' if plain_missing_rows else '')
+                 + ')</span>')
         h.append('</td></tr></table>')
 
         # FAIL tests grouped by owner
@@ -1835,30 +2038,35 @@ def generate_executive_summary(report_path):
                     h.append('<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>')
             h.append('</table>')
 
-        # MISSING tests grouped by owner
-        if missing_rows:
-            missing_by_owner = {}
-            for r in missing_rows:
-                owner = r.get('owner', 'UNKNOWN')
-                missing_by_owner.setdefault(owner, []).append(r)
+        # MISSING sub-states grouped by owner (On queue / Not launched / Missing)
+        def _append_missing_group(group_rows, group_label, fg_color, bg_color):
+            if not group_rows:
+                return
+            by_owner = {}
+            for r in group_rows:
+                by_owner.setdefault(r.get('owner', 'UNKNOWN'), []).append(r)
             h.append(f'<table cellpadding="0" cellspacing="0" border="0" style="margin-top:16px;margin-bottom:8px;"><tr><td style="{FONT}">')
-            h.append(f'<span style="font-size:14px;font-weight:bold;color:#e65100;{FONT}">MISSING ({len(missing_rows)})</span>')
+            h.append(f'<span style="font-size:14px;font-weight:bold;color:{fg_color};{FONT}">{group_label} ({len(group_rows)})</span>')
             h.append('</td></tr></table>')
             h.append('<table width="100%" cellpadding="0" cellspacing="0" border="0">')
-            for owner in sorted(missing_by_owner.keys()):
-                tests = sorted(missing_by_owner[owner], key=lambda x: (x['model'], x['partition'], x['test_type']))
+            for owner in sorted(by_owner.keys()):
+                tests = sorted(by_owner[owner], key=lambda x: (x['model'], x['partition'], x['test_type']))
                 h.append(f'<tr><td style="padding:6px 0 2px;font-size:13px;font-weight:bold;color:#333;{FONT}">'
                          f'{html_mod.escape(owner)} ({len(tests)})</td></tr>')
                 for r in tests:
                     partition = html_mod.escape(r['partition'])
                     test_type = html_mod.escape(r['test_type'])
                     model = html_mod.escape(r['model'])
-                    h.append(f'<tr><td bgcolor="#fff3e0" style="padding:6px 12px;border-left:4px solid #e65100;'
+                    h.append(f'<tr><td bgcolor="{bg_color}" style="padding:6px 12px;border-left:4px solid {fg_color};'
                              f'font-size:12px;color:#333;{MONO}mso-line-height-rule:exactly;line-height:18px;">')
                     h.append(f'[{model}] {partition} / {test_type}')
                     h.append('</td></tr>')
                     h.append('<tr><td style="font-size:0;line-height:0;height:3px;">&nbsp;</td></tr>')
             h.append('</table>')
+
+        _append_missing_group(queued_rows, 'ON QUEUE', '#f9a825', '#fff8e1')
+        _append_missing_group(notlaunched_rows, 'NOT LAUNCHED', '#607d8b', '#eceff1')
+        _append_missing_group(plain_missing_rows, 'MISSING', '#e65100', '#fff3e0')
 
         h.append('</td></tr>')
 
@@ -1902,7 +2110,7 @@ def generate_executive_summary(report_path):
         lines.append(
             f"  Total: {_bs['total']} tests | "
             f"{_bs['pass']} PASS | {_bs['fail']} FAIL | "
-            f"{_bs['missing']} MISSING | {_bs['pass_rate']:.1f}% pass rate"
+            f"{_bs['queued']} ON QUEUE | {_bs['not_launched']} NOT LAUNCHED | {_bs['pass_rate']:.1f}% pass rate"
         )
         lines.append("")
     lines.append("=" * 60)
@@ -1911,7 +2119,7 @@ def generate_executive_summary(report_path):
     lines.append(
         f"  Total: {stack_summary['total']} tests | "
         f"{stack_summary['pass']} PASS | {stack_summary['fail']} FAIL | "
-        f"{stack_summary['missing']} MISSING | {stack_summary['pass_rate']:.1f}% pass rate"
+        f"{stack_summary['queued']} ON QUEUE | {stack_summary['not_launched']} NOT LAUNCHED | {stack_summary['pass_rate']:.1f}% pass rate"
     )
     lines.append("")
     lines.append("=" * 60)
@@ -1920,7 +2128,7 @@ def generate_executive_summary(report_path):
     lines.append(
         f"  Total: {soc_level_summary['total']} tests | "
         f"{soc_level_summary['pass']} PASS | {soc_level_summary['fail']} FAIL | "
-        f"{soc_level_summary['missing']} MISSING | {soc_level_summary['pass_rate']:.1f}% pass rate"
+        f"{soc_level_summary['queued']} ON QUEUE | {soc_level_summary['not_launched']} NOT LAUNCHED | {soc_level_summary['pass_rate']:.1f}% pass rate"
     )
     if owner_changes:
         lines.append(f"")
@@ -1950,10 +2158,13 @@ def generate_executive_summary(report_path):
             lines.append(f"  FAIL ({len(fail_rows)}):")
             for r in sorted(fail_rows, key=lambda x: (x['owner'], x['model'], x['partition'], x['test_type'])):
                 lines.append(f"    [{r['model']}] {r['partition']} / {r['test_type']} ({r.get('owner','UNKNOWN')})")
-        if missing_rows:
-            lines.append(f"  MISSING ({len(missing_rows)}):")
-            for r in sorted(missing_rows, key=lambda x: (x['owner'], x['model'], x['partition'], x['test_type'])):
-                lines.append(f"    [{r['model']}] {r['partition']} / {r['test_type']} ({r.get('owner','UNKNOWN')})")
+        for _grp_rows, _grp_label in ((queued_rows, 'ON QUEUE'),
+                                      (notlaunched_rows, 'NOT LAUNCHED'),
+                                      (plain_missing_rows, 'MISSING')):
+            if _grp_rows:
+                lines.append(f"  {_grp_label} ({len(_grp_rows)}):")
+                for r in sorted(_grp_rows, key=lambda x: (x['owner'], x['model'], x['partition'], x['test_type'])):
+                    lines.append(f"    [{r['model']}] {r['partition']} / {r['test_type']} ({r.get('owner','UNKNOWN')})")
         lines.append("")
         lines.append("=" * 60)
 
@@ -2169,7 +2380,7 @@ def main():
     timestamps = load_report_timestamps()
 
     # Step 1: Let user select one model per category from local CSVs
-    categories = ['nio_mc', 'nio_uio', 'nio_d2d', 'nio_soc']
+    categories = ['nio_mc', 'nio_uio', 'nio_d2d', 'nio_c2c', 'nio-a0-']
     print("\n--- Model Selection ---")
     selected = []
     for cat in categories:

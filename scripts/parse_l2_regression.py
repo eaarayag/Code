@@ -19,6 +19,12 @@ BASE_PATHS = [
     "/nfs/site/disks/nwp_vmgr_testresults_016/NWP_DFT_Regressions",
 ]
 
+# --- C2C regression storage (separate roots; host nio_c2c-* models) ---
+C2C_BASE_PATHS = [
+    "/nfs/site/disks/nwp_vmgr_testresults_016/NWP_DFT_C2C_Regressions",
+    "/nfs/site/disks/nwp_vmgr_testresults_016/NWP_DFT_SOC_Regressions/NWP_DFT_C2C_Regressions",
+]
+
 # --- Stack-level TAP report paths (relative to <base>/<model>/) ---
 # nio_d2d intentionally excluded — no stacklevel rpt for d2d.
 STACKLEVEL_SUBPATHS = {
@@ -29,6 +35,19 @@ STACKLEVEL_SUBPATHS = {
 # --- TAP stacklevel filter: only keep tests whose test_name contains one of these substrings (case-insensitive) ---
 TAP_STACKLEVEL_KEYWORDS = ('rw', 'reset', 'continuity')
 
+# --- NetBatch submission tracking ---
+# A regression run dir carries a `<base>.list.teststat` JSON (the list of every
+# test submitted to NetBatch) and a `.ifeed_is_running` marker while the feeder
+# is still dispatching jobs. These let the report classify a MISSING test as
+# "On queue" (submitted, not finished) vs "Not launched" (never submitted).
+FEEDER_RUNNING_MARKER = '.ifeed_is_running'
+
+# --- SOC on-disk directory naming schemes ---
+# SOC models are identified by these dir name schemes and keep their real
+# on-disk directory name as the model id (e.g. 'nio-a0-rtl-26ww41f'), with no
+# extrapolation. Keep this list in sync with build_report_path()/discover_models().
+SOC_DIR_SCHEMES = ('0p5_refresh', 'rtl')
+
 # --- Local Configuration ---
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = os.path.dirname(SCRIPT_DIR)
@@ -37,43 +56,46 @@ WEEKLY_REPORT_DIR = os.path.join(ROOT_DIR, "weekly_report")
 def parse_l2_regression_report(file_path, output_csv='regression_results.csv', filter_keywords=None):
     """
     Parse L2_regression.rpt file and extract test information to CSV
-    
+
     Args:
         file_path (str): Path to the L2_regression.rpt file
         output_csv (str): Output CSV file name
         filter_keywords (tuple|list|None): Optional case-insensitive substrings; if provided,
             only tests whose test_name contains at least one keyword are kept.
+
+    Returns:
+        int: number of test rows written to the CSV (0 when the report has no tests).
     """
-    
+
     test_results = []  # List to hold parsed test result dictionaries
     lowered_keywords = tuple(k.lower() for k in filter_keywords) if filter_keywords else None
-    
+
     try:
         # Read the entire report file into memory
         with open(file_path, 'r', encoding='utf-8') as file:
             content = file.read()
-        
+
         # Split the report into individual test sections using the
         # "T E S T    R E P O R T   F I L E" header as a delimiter
         test_sections = re.split(r'T E S T    R E P O R T   F I L E\s*#+', content)
-        
+
         # Iterate over each test section and extract relevant fields
         for section in test_sections:
             # Skip empty sections (e.g., text before the first delimiter)
             if not section.strip():
                 continue
-                
+
             # Extract test name from "TEST NAME: <name>" line
             test_name_match = re.search(r'TEST NAME:\s*(.+)', section)
             if not test_name_match:
                 continue  # Skip sections without a test name
-                
+
             test_name = test_name_match.group(1).strip()
-            
+
             # Extract test status from "TEST STATUS: <status>" line
             test_status_match = re.search(r'TEST STATUS:\s*(.+)', section)
             test_status = test_status_match.group(1).strip() if test_status_match else 'UNKNOWN'
-            
+
             # Extract test result from "TEST RESULT: ... PASS/FAIL: PASS" line
             test_result_match = re.search(r'TEST RESULT:\s*(.+)', section)
             if test_result_match:
@@ -83,11 +105,11 @@ def parse_l2_regression_report(file_path, output_csv='regression_results.csv', f
                 test_result = final_result_match.group(1).strip() if final_result_match else result_line
             else:
                 test_result = 'UNKNOWN'
-            
+
             # Strip the ".v" Verilog file extension from test names if present
             if test_name.endswith('.v'):
                 test_name = test_name[:-2]
-            
+
             # Filter out test cases with these suffixes
             excluded_suffixes = (
                 'atspeed_edt_bypass_low_internal_loopback',
@@ -112,46 +134,49 @@ def parse_l2_regression_report(file_path, output_csv='regression_results.csv', f
                 'test_status': test_status,
                 'test_result': test_result
             })
-        
-        # Write all parsed results to a CSV file
+
+        # Always write a CSV (header-only when empty) so every discovered model
+        # produces a downloadable artifact and remains a selectable report option.
+        with open(output_csv, 'w', newline='', encoding='utf-8') as csvfile:
+            fieldnames = ['test_name', 'test_status', 'test_result']
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+            writer.writeheader()
+            for result in test_results:
+                writer.writerow(result)
+
         if test_results:
-            with open(output_csv, 'w', newline='', encoding='utf-8') as csvfile:
-                fieldnames = ['test_name', 'test_status', 'test_result']
-                writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-                
-                writer.writeheader()
-                for result in test_results:
-                    writer.writerow(result)
-            
             print(f"Successfully parsed {len(test_results)} tests and saved to {output_csv}")
-            
+
             # Display a formatted summary table to the console
             print("\nTest Results Summary:")
             print("-" * 80)
             print(f"{'Test Name':<50} {'Status':<10} {'Result':<10}")
             print("-" * 80)
-            
+
             # Count PASS, FAIL, and other (unknown/unexpected) results
             pass_count = sum(1 for r in test_results if r['test_result'] == 'PASS')
             fail_count = sum(1 for r in test_results if r['test_result'] == 'FAIL')
             other_count = len(test_results) - pass_count - fail_count
-            
+
             for result in test_results:
                 # Truncate long test names to fit the 50-char column width
                 display_name = result['test_name'][:47] + "..." if len(result['test_name']) > 50 else result['test_name']
                 print(f"{display_name:<50} {result['test_status']:<10} {result['test_result']:<10}")
-            
+
             print("-" * 80)
             print(f"Summary: {pass_count} PASSED, {fail_count} FAILED, {other_count} OTHER")
             print(f"Total Tests: {len(test_results)}")
-                        
         else:
-            print("No test results found. Please check the file format.")
-                        
+            print(f"No test results found in {file_path} — wrote header-only CSV {output_csv}.")
+
+        return len(test_results)
+
     except FileNotFoundError:
         print(f"Error: File '{file_path}' not found.")
+        return 0
     except Exception as e:
         print(f"Error parsing file: {str(e)}")
+        return 0
 
 
 def parse_stacklevel_report(file_path, output_csv, filter_keywords=None):
@@ -240,6 +265,88 @@ def parse_stacklevel_report(file_path, output_csv, filter_keywords=None):
           f"({pass_count} PASS, {fail_count} FAIL, {other_count} OTHER) -> {output_csv}")
 
 
+def _teststat_path_for_rpt(rpt_path):
+    """Derive the `<base>.list.teststat` path that sits next to an L2 rpt file.
+
+    e.g. `.../L2_regression.list.latest/L2_regression.rpt`
+      -> `.../L2_regression.list.latest/L2_regression.list.teststat`
+    """
+    run_dir = os.path.dirname(rpt_path)
+    base = os.path.basename(rpt_path)
+    if base.endswith('.rpt'):
+        base = base[:-4]
+    return os.path.join(run_dir, f"{base}.list.teststat")
+
+
+def collect_launch_status(rpt_path):
+    """Read a regression run dir's NetBatch submission plan next to `rpt_path`.
+
+    Returns {'feeder_running': bool, 'launched': [unique_tag, ...]} where
+    `launched` is the set of tests that were submitted to NetBatch (from the
+    `<base>.list.teststat` JSON). On any error, returns empty/`False` values so
+    the report falls back to the generic MISSING status.
+    """
+    out = {'feeder_running': False, 'launched': []}
+    run_dir = os.path.dirname(rpt_path)
+    try:
+        out['feeder_running'] = os.path.exists(os.path.join(run_dir, FEEDER_RUNNING_MARKER))
+    except OSError:
+        pass
+
+    teststat_path = _teststat_path_for_rpt(rpt_path)
+    try:
+        with open(teststat_path, 'r', encoding='utf-8', errors='replace') as f:
+            data = json.load(f)
+    except (OSError, json.JSONDecodeError, ValueError):
+        return out
+
+    tags = set()
+    if isinstance(data, list):
+        for entry in data:
+            if not isinstance(entry, dict):
+                continue
+            tag = (entry.get('unique_tag') or '').strip()
+            if tag:
+                tags.add(tag)
+    out['launched'] = sorted(tags)
+    return out
+
+
+def _write_launched_tests_json(model_name, launch_status):
+    """Write `<model>_launched_tests.json` (in cwd) for download by the report scripts."""
+    out_path = f"{model_name}_launched_tests.json"
+    try:
+        with open(out_path, 'w', encoding='utf-8') as f:
+            json.dump(launch_status, f, indent=2)
+        print(f"[launch] Wrote submission plan -> {out_path}")
+    except OSError as e:
+        print(f"[launch] Warning: could not write {out_path}: {e}")
+
+
+def _pick_c2c_list_dir(list_parent):
+    """Pick the newest `L2_regression.list*` dir under a C2C dft_model folder.
+
+    Prefers `.latest`, then the highest-numbered `.N`, then the bare name.
+    Returns the directory name or None if none exist / the parent is unreadable.
+    """
+    try:
+        entries = os.listdir(list_parent)
+    except OSError:
+        return None
+    if 'L2_regression.list.latest' in entries:
+        return 'L2_regression.list.latest'
+    numbered = []
+    for e in entries:
+        m = re.fullmatch(r'L2_regression\.list\.(\d+)', e)
+        if m:
+            numbered.append((int(m.group(1)), e))
+    if numbered:
+        return max(numbered)[1]
+    if 'L2_regression.list' in entries:
+        return 'L2_regression.list'
+    return None
+
+
 def build_report_path(model_name):
     """
     Build the full path to the L2_regression.rpt file from the model name.
@@ -250,18 +357,38 @@ def build_report_path(model_name):
     Returns:
         str: Full path to the L2_regression.rpt file, or None on error
     """
-    # SOC models: canonical 'nio_soc-a0-<week>' -> on-disk 'nio-a0-0p5_refresh-<week>/imh/'
-    if model_name.startswith('nio_soc'):
-        m = re.match(r'^nio_soc-a0-(.+)$', model_name)
-        if not m:
-            print(f"Error: Could not parse SOC model name '{model_name}'.")
-            return None
-        dir_name = f"nio-a0-0p5_refresh-{m.group(1)}"
+    # SOC models: the model id IS the on-disk directory name
+    # (e.g. 'nio-a0-rtl-26ww41f' or 'nio-a0-0p5_refresh-26ww38a'), no extrapolation.
+    if model_name.startswith('nio-a0-'):
         for base_path in BASE_PATHS:
-            model_dir = f"{base_path}/{dir_name}"
+            model_dir = f"{base_path}/{model_name}"
             if os.path.isdir(model_dir):
+                # Prefer the '.latest' list dir; fall back to plain 'L2_regression.list'
+                for list_dir in ("L2_regression.list.latest", "L2_regression.list"):
+                    rpt = f"{model_dir}/imh/{list_dir}/L2_regression.rpt"
+                    if os.path.exists(rpt):
+                        return rpt
+                # Neither exists — return the '.latest' path so callers report it as missing
                 return f"{model_dir}/imh/L2_regression.list.latest/L2_regression.rpt"
-        print(f"Error: SOC model directory '{dir_name}' not found in any base path.")
+        print(f"Error: SOC model directory '{model_name}' not found in any base path.")
+        _print_available_models()
+        return None
+
+    # C2C models live under a dedicated regression root with a nested
+    # c2c_stack/dft_model/L2_regression.list.<N> layout (list dir is numbered,
+    # not '.latest'); pick the newest available list dir.
+    if model_name.startswith('nio_c2c'):
+        for base_path in C2C_BASE_PATHS:
+            model_dir = f"{base_path}/{model_name}"
+            if os.path.isdir(model_dir):
+                list_parent = f"{model_dir}/c2c_stack/dft_model"
+                chosen = _pick_c2c_list_dir(list_parent)
+                if chosen:
+                    rpt = f"{list_parent}/{chosen}/L2_regression.rpt"
+                    if os.path.exists(rpt):
+                        return rpt
+                return f"{list_parent}/L2_regression.list.latest/L2_regression.rpt"
+        print(f"Error: C2C model directory '{model_name}' not found in any C2C base path.")
         _print_available_models()
         return None
 
@@ -325,7 +452,7 @@ def build_stacklevel_report_path(model_name):
 def _print_available_models():
     """List available model directories under all base paths."""
     print("\nAvailable models:")
-    for base_path in BASE_PATHS:
+    for base_path in BASE_PATHS + C2C_BASE_PATHS:
         try:
             entries = sorted(os.listdir(base_path))
             dirs = [e for e in entries if os.path.isdir(os.path.join(base_path, e))]
@@ -350,7 +477,8 @@ def discover_models(base_paths=None):
     if base_paths is None:
         base_paths = BASE_PATHS
     subfolder_prefixes = ('nio_mc', 'nio_uio', 'nio_d2d')
-    soc_pattern = re.compile(r'^nio-a0-0p5_refresh-(.+)$')
+    # SOC dirs use multiple naming schemes (legacy '0p5_refresh' and 'rtl' branch).
+    soc_pattern = re.compile(r'^nio-a0-(?:' + '|'.join(SOC_DIR_SCHEMES) + r')-(.+)$')
     all_models = set()
     for base_path in base_paths:
         try:
@@ -362,9 +490,17 @@ def discover_models(base_paths=None):
                 if any(e.startswith(p) for p in subfolder_prefixes):
                     all_models.add(e)
                 else:
-                    m = soc_pattern.match(e)
-                    if m:
-                        all_models.add(f"nio_soc-a0-{m.group(1)}")
+                    # SOC models keep their real on-disk directory name (no extrapolation).
+                    if soc_pattern.match(e):
+                        all_models.add(e)
+        except OSError as e:
+            print(f"Warning: Could not list models in {base_path}: {e}")
+    # C2C models live under their own regression root (C2C_BASE_PATHS).
+    for base_path in C2C_BASE_PATHS:
+        try:
+            for e in os.listdir(base_path):
+                if os.path.isdir(os.path.join(base_path, e)) and e.startswith('nio_c2c'):
+                    all_models.add(e)
         except OSError as e:
             print(f"Warning: Could not list models in {base_path}: {e}")
     return sorted(all_models)
@@ -386,7 +522,7 @@ def run_remote_parsing(model_filter=None):
     model_names = discover_models()
 
     if not model_names:
-        print("No models found matching known prefixes (nio_mc, nio_uio, nio_d2d, nio_soc).")
+        print("No models found matching known prefixes (nio_mc, nio_uio, nio_d2d, nio_c2c, nio_soc).")
         _print_available_models()
         return
 
@@ -450,12 +586,19 @@ def run_remote_parsing(model_filter=None):
 
         parse_l2_regression_report(input_file, output_file)
 
+        # --- NetBatch submission plan (launched vs not-launched classification) ---
+        launch_status = collect_launch_status(input_file)
+        print(f"[launch] feeder_running={launch_status['feeder_running']}, "
+              f"submitted tests={len(launch_status['launched'])}")
+
         # --- TAP stack-level rpt (uio/mc only; d2d has none) ---
         stacklevel_path = build_stacklevel_report_path(model_name)
         if stacklevel_path is None:
+            _write_launched_tests_json(model_name, launch_status)
             continue
         if not Path(stacklevel_path).exists():
             print(f"\n[stacklevel] Skipping — file not found: {stacklevel_path}")
+            _write_launched_tests_json(model_name, launch_status)
             continue
 
         try:
@@ -469,6 +612,10 @@ def run_remote_parsing(model_filter=None):
         print(f"[stacklevel] Last modified: {sl_mtime}")
         print(f"[stacklevel] Keyword filter: {', '.join(TAP_STACKLEVEL_KEYWORDS)}")
         parse_stacklevel_report(stacklevel_path, sl_output, filter_keywords=TAP_STACKLEVEL_KEYWORDS)
+
+        # Stack-level submission plan (separate list dir from the partition-level run).
+        launch_status['stacklevel'] = collect_launch_status(stacklevel_path)
+        _write_launched_tests_json(model_name, launch_status)
 
     # Re-write timestamps JSON so it includes stacklevel entries
     with open(timestamps_file, 'w', encoding='utf-8') as f:
@@ -546,6 +693,15 @@ def run_from_windows(models=None):
             if scp_down.returncode != 0:
                 print(f"Warning: Could not download {csv_name} (exit code {scp_down.returncode}).")
 
+            # NetBatch submission plan (launched vs not-launched classification).
+            launched_name = f"{model}_launched_tests.json"
+            scp_launched = subprocess.run([
+                "scp", f"{remote}:{REMOTE_WORK_DIR}/{launched_name}",
+                WEEKLY_REPORT_DIR,
+            ])
+            if scp_launched.returncode != 0:
+                print(f"Warning: Could not download {launched_name} (exit code {scp_launched.returncode}).")
+
             # Also try to download the stacklevel CSV (uio/mc only; d2d won't have one)
             if any(model.startswith(p) for p in STACKLEVEL_SUBPATHS.keys()):
                 sl_csv_name = f"{model}_stacklevel_regression_results.csv"
@@ -563,6 +719,14 @@ def run_from_windows(models=None):
         if scp_down.returncode != 0:
             print(f"Error: SCP download failed (exit code {scp_down.returncode}).")
             sys.exit(scp_down.returncode)
+
+        # NetBatch submission plans for all models.
+        scp_launched = subprocess.run([
+            "scp", f"{remote}:{REMOTE_WORK_DIR}/*_launched_tests.json",
+            WEEKLY_REPORT_DIR,
+        ])
+        if scp_launched.returncode != 0:
+            print(f"Warning: SCP of *_launched_tests.json failed (exit code {scp_launched.returncode}).")
 
     # Download report_timestamps.json
     timestamps_dest = os.path.join(WEEKLY_REPORT_DIR, "report_timestamps.json")

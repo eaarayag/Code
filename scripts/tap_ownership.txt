@@ -4,8 +4,8 @@ Maria Perez,parmccore
 Sebastian Porras,parmcmse
 Natalia Abarca,pardfi
 Sebastian Porras,parmcmisc
-Natalia Abarca,pard2d1chnl
-Sebastian Porras,pard2d1misc
+SathyahX Sv,pard2d1chnl
+SathyahX Sv,pard2d1misc
 SathyahX Sv,pard2d1uladda1
 SathyahX Sv,pard2d1uladda0
 Maria Perez,parmiostaticmux_uio_0
@@ -20,7 +20,7 @@ Sebastian Porras,parmiofblprxfcrarbmux
 Sebastian Porras,parmioitc_uio_0
 Sebastian Porras,parmiopcie6tridelldp_uio_0
 Sebastian Porras,parmiopcie6ttcore_uio_0
-Sebastian Porras,parmiofblpvnpipeac_uio_0
+Maria Perez,parmiofblpvnpipeac_uio_0
 Natalia Abarca,parmioula_uio_0
 Sebastian Porras,parmiocxlrx_uio_0
 Bhanu Vattikuti,parmiomisc_uio_0
@@ -34,6 +34,14 @@ SathyahX Sv,parmioula_uio_1
 SathyahX Sv,parmiomisc_uio_1
 SathyahX Sv,parmiofblprxfcrarbmux_uio_1
 SathyahX Sv,uio_1
+
+# ── C2C stack partitions (partition-type: c2c) ──
+Marco Salas,parc2chip
+Marco Salas,parc2cinfra
+Marco Salas,parc2clink
+Marco Salas,parc2cmhub
+Marco Salas,parc2cscbra
+Marco Salas,parc2cdfd
 
 # ── SOC partitions (partition-type: soc; checked for completeness like the stack) ──
 Maria Perez,parswinf0,soc
@@ -64,7 +72,6 @@ Marco Salas,parcabinf11,soc
 SathyahX Sv,parscfmeminf0w,soc
 SathyahX Sv,parscfhsf,soc
 SathyahX Sv,paraccchassis,soc
-Marco Salas,parcabinf22e,soc
 SathyahX Sv,parscfioinf1w,soc
 Marco Salas,parcabinf21w,soc
 SathyahX Sv,parscfubruiodatatype1,soc
@@ -83,12 +90,10 @@ Marco Salas,parhwrsfuse,soc
 SathyahX Sv,parscftqp2p,soc
 SathyahX Sv,parscftqio,soc
 SathyahX Sv,paracchap,soc
-Marco Salas,parcabinf23e,soc
-Sebastian Porras,pargpios5,soc
+Marco Salas,pargpios5,soc
 Natalia Abarca,parocs,soc
 Marco Salas,pargpios0,soc
 SathyahX Sv,parscfioinf2w,soc
-SathyahX Sv,parcubrmioch,soc
 SathyahX Sv,parcinffivrw,soc
 SathyahX Sv,parscfmeminf1w,soc
 SathyahX Sv,paracciommu,soc
@@ -97,7 +102,6 @@ SathyahX Sv,parscfmeminf1e,soc
 SathyahX Sv,parpsf0npktam,soc
 SathyahX Sv,paraccitc,soc
 Maria Perez,pard2dch0,soc
-Marco Salas,parcabinf22w,soc
 Natalia Abarca,paridfttop,soc
 Marco Salas,parcabmisce,soc
 SathyahX Sv,parscfcmsdummy,soc
@@ -112,7 +116,6 @@ SathyahX Sv,parscfmeminf2e,soc
 Marco Salas,parcabmiscw,soc
 SathyahX Sv,parscfmeminf3e,soc
 SathyahX Sv,parscfmeminf2w,soc
-Marco Salas,parcabinf23w,soc
 SathyahX Sv,parscfcrsd2d,soc
 SathyahX Sv,parscfcrsmem,soc
 Marco Salas,parcabubrcab,soc
@@ -120,7 +123,6 @@ SathyahX Sv,parscfmeminffivr0e,soc
 Natalia Abarca,paroobip,soc
 Natalia Abarca,pars3m,soc
 SathyahX Sv,parscfmeminf3w,soc
-SathyahX Sv,parpla,soc
 SathyahX Sv,parcd2dtq,soc
 SathyahX Sv,paraccotc,soc
 SathyahX Sv,parscfcrsuio,soc
@@ -148,10 +150,10 @@ Natalia Abarca,parseinf1,soc
 SathyahX Sv,parscfmeminffivr2w,soc
 SathyahX Sv,parscftqcab,soc
 Maria Perez,pard2dinf0e,soc
-Sebastian Porras,pard2dinf1w,soc
+SathyahX Sv,pard2dinf1w,soc
 SathyahX Sv,parcinf2,soc
 Marco Salas,pard2dinf0w,soc
-Sebastian Porras,parsocmiofivrmisc,soc
+Marco Salas,parsocmiofivrmisc,soc
 SathyahX Sv,parscfubrd2d,soc
 Maria Perez,pard2dinf1e,soc
 SathyahX Sv,parscfmemch4,soc
@@ -185,3 +187,38 @@ Marco Salas,parcabhmaa,soc
 Marco Salas,parcabhmab,soc
 Marco Salas,parcabama,soc
 SathyahX Sv,parscfmemch3n,soc
+
+# ── Added from xlsx reconciliation (2026-10-09) ──
+SathyahX Sv,parcubrmiocha,soc
+SathyahX Sv,parcubrmiochb,soc
+SathyahX Sv,parcubrmiochc,soc
+Sebastian Porras,parmiofblprxfcrarbmux_uio_0
+Marco Salas,parsocmiofivrmisc_e,soc
+Natalia Abarca,parmemdfi0
+Sebastian Porras,parmiofblptx_uio_0
+
+# ── Test-type-level ownership (format: Owner,@test_type; '*' enables glob match) ──
+# Diego Matamoros owns all SIH / STI case-validation tests.
+Diego Matamoros,@*_sih_*
+Diego Matamoros,@*_sti_*
+
+# ── Per-partition per-test-case ownership overrides (from xlsx, 2026-10-09) ──
+# Format: Owner,partition_prefix,@test_type  (overrides the partition base owner for that test type only)
+Marco Salas,parfws,@ijtag_basic_tap_tests_reset
+Marco Salas,parfws,@ijtag_basic_tap_tests_tlr_reset
+Sebastian Porras,parfws,@icl_verify_dft
+Sebastian Porras,pargpios5,@icl_verify_dft
+Natalia Abarca,paridfttop,@icl_verify_dft
+SathyahX Sv,parmcmisc,@ijtag_basic_tap_tests_continuity
+Sebastian Porras,parmemdfi0,@ijtag_basic_tap_tests_rw_access
+Sebastian Porras,parmiocpc_uio_0,@ijtag_basic_tap_tests_rw_access
+Mario Alpizar,parmiocxltx_uio_0,@ijtag_basic_tap_tests_rw_access
+Mario Alpizar,parmiofblptx_uio_0,@ijtag_basic_tap_tests_rw_access
+SathyahX Sv,parmiofblptx_uio_0,@icl_verify_dft
+SathyahX Sv,parmiofblpvnpipeac_uio_0,@icl_verify_dft
+Mario Alpizar,parmiohap_uio_0,@ijtag_basic_tap_tests_rw_access
+SathyahX Sv,parmiomisc_uio_0,@icl_verify_dft
+SathyahX Sv,parmiopcie6trcore_uio_0,@icl_verify_dft
+Mario Alpizar,parmiopcie6ttcore_uio_0,@ijtag_basic_tap_tests_rw_access
+SathyahX Sv,parmioula_uio_0,@icl_verify_dft
+Sebastian Porras,parmioula_uio_0,@ijtag_basic_tap_tests_rw_access
