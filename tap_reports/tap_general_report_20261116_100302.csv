@@ -784,61 +784,61 @@ Partition Level,pard2d1uladda1,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests 
 Partition Level,pard2d1uladda1,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,PASS,SathyahX Sv,nio_d2d-a0-26ww46a
 Partition Level,pard2d1uladda1,ijtag_basic_tap_tests_continuity,[NWP] TAP: tap tests continuity,PASS,SathyahX Sv,nio_d2d-a0-26ww46a
 Partition Level,pard2d1uladda1,icl_verify_dft,[NWP] TAP: icl verify dft,PASS,SathyahX Sv,nio_d2d-a0-26ww46a
-Stack Level,memstack,memstack_mc_cluster_parmcmse_ijtag_basic_tap_tests_tlr_reset,memstack_mc_cluster_parmcmse_ijtag_basic_tap_tests_tlr_reset,FAIL,UNKNOWN,nio_mc-a0-26ww46b
-Stack Level,memstack,memstack_mc_cluster_parmcmisc_ijtag_basic_tap_tests_tlr_reset,memstack_mc_cluster_parmcmisc_ijtag_basic_tap_tests_tlr_reset,FAIL,UNKNOWN,nio_mc-a0-26ww46b
-Stack Level,memstack,memstack_pardfi_ijtag_basic_tap_tests_tlr_reset,memstack_pardfi_ijtag_basic_tap_tests_tlr_reset,FAIL,UNKNOWN,nio_mc-a0-26ww46b
-Stack Level,memstack,memstack_mc_cluster_parmccore_ijtag_basic_tap_tests_tlr_reset,memstack_mc_cluster_parmccore_ijtag_basic_tap_tests_tlr_reset,FAIL,UNKNOWN,nio_mc-a0-26ww46b
-Stack Level,memstack,memstack_phy_cluster_ijtag_basic_tap_tests_tlr_reset,memstack_phy_cluster_ijtag_basic_tap_tests_tlr_reset,FAIL,UNKNOWN,nio_mc-a0-26ww46b
-Partition Level,pardfi,ijtag_basic_tap_tests_tlr_reset,[NWP] TAP: tap tests tlr reset,QUEUED,Natalia Abarca,nio_mc-a0-26ww46b
-Partition Level,pardfi,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests reset,QUEUED,Natalia Abarca,nio_mc-a0-26ww46b
-Partition Level,pardfi,ijtag_basic_tap_tests_user_defined,[NWP] TAP: IDCODE all taps in the partition,QUEUED,Natalia Abarca,nio_mc-a0-26ww46b
-Partition Level,pardfi,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,QUEUED,Natalia Abarca,nio_mc-a0-26ww46b
-Partition Level,pardfi,ijtag_basic_tap_tests_continuity,[NWP] TAP: tap tests continuity,PASS,Natalia Abarca,nio_mc-a0-26ww46b
-Partition Level,pardfi,icl_verify_dft,[NWP] TAP: icl verify dft,QUEUED,Natalia Abarca,nio_mc-a0-26ww46b
-Stack Level,pardfi,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,FAIL,Natalia Abarca,nio_mc-a0-26ww46b
-Stack Level,pardfi,ijtag_basic_tap_tests_continuity,[NWP] TAP: tap tests continuity,FAIL,Natalia Abarca,nio_mc-a0-26ww46b
-Stack Level,pardfi,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests reset,QUEUED,Natalia Abarca,nio_mc-a0-26ww46b
-Partition Level,parmccore,ijtag_basic_tap_tests_tlr_reset,[NWP] TAP: tap tests tlr reset,QUEUED,Maria Perez,nio_mc-a0-26ww46b
-Partition Level,parmccore,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests reset,QUEUED,Maria Perez,nio_mc-a0-26ww46b
-Partition Level,parmccore,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,QUEUED,Maria Perez,nio_mc-a0-26ww46b
-Partition Level,parmccore,ijtag_basic_tap_tests_continuity,[NWP] TAP: tap tests continuity,QUEUED,Maria Perez,nio_mc-a0-26ww46b
-Partition Level,parmccore,icl_verify_dft,[NWP] TAP: icl verify dft,QUEUED,Maria Perez,nio_mc-a0-26ww46b
-Stack Level,parmccore,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,PASS,Maria Perez,nio_mc-a0-26ww46b
-Stack Level,parmccore,ijtag_basic_tap_tests_continuity,[NWP] TAP: tap tests continuity,PASS,Maria Perez,nio_mc-a0-26ww46b
-Stack Level,parmccore,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests reset,QUEUED,Maria Perez,nio_mc-a0-26ww46b
-Partition Level,parmcmisc,ijtag_basic_tap_tests_continuity,[NWP] TAP: tap tests continuity,QUEUED,SathyahX Sv,nio_mc-a0-26ww46b
-Stack Level,parmcmisc,ijtag_basic_tap_tests_continuity,[NWP] TAP: tap tests continuity,FAIL,SathyahX Sv,nio_mc-a0-26ww46b
-Partition Level,parmcmisc,ijtag_basic_tap_tests_tlr_reset,[NWP] TAP: tap tests tlr reset,QUEUED,Sebastian Porras,nio_mc-a0-26ww46b
-Partition Level,parmcmisc,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests reset,QUEUED,Sebastian Porras,nio_mc-a0-26ww46b
-Partition Level,parmcmisc,ijtag_basic_tap_tests_user_defined,[NWP] TAP: IDCODE all taps in the partition,QUEUED,Sebastian Porras,nio_mc-a0-26ww46b
-Partition Level,parmcmisc,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,QUEUED,Sebastian Porras,nio_mc-a0-26ww46b
-Partition Level,parmcmisc,icl_verify_dft,[NWP] TAP: icl verify dft,QUEUED,Sebastian Porras,nio_mc-a0-26ww46b
-Stack Level,parmcmisc,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,FAIL,Sebastian Porras,nio_mc-a0-26ww46b
-Stack Level,parmcmisc,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests reset,QUEUED,Sebastian Porras,nio_mc-a0-26ww46b
-Partition Level,parmcmse,ijtag_basic_tap_tests_tlr_reset,[NWP] TAP: tap tests tlr reset,QUEUED,Sebastian Porras,nio_mc-a0-26ww46b
-Partition Level,parmcmse,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests reset,QUEUED,Sebastian Porras,nio_mc-a0-26ww46b
-Partition Level,parmcmse,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,QUEUED,Sebastian Porras,nio_mc-a0-26ww46b
-Partition Level,parmcmse,ijtag_basic_tap_tests_continuity,[NWP] TAP: tap tests continuity,QUEUED,Sebastian Porras,nio_mc-a0-26ww46b
-Partition Level,parmcmse,icl_verify_dft,[NWP] TAP: icl verify dft,QUEUED,Sebastian Porras,nio_mc-a0-26ww46b
-Stack Level,parmcmse,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,PASS,Sebastian Porras,nio_mc-a0-26ww46b
-Stack Level,parmcmse,ijtag_basic_tap_tests_continuity,[NWP] TAP: tap tests continuity,PASS,Sebastian Porras,nio_mc-a0-26ww46b
-Stack Level,parmcmse,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests reset,QUEUED,Sebastian Porras,nio_mc-a0-26ww46b
-Partition Level,parmemdfi0,ijtag_basic_tap_tests_tlr_reset,[NWP] TAP: tap tests tlr reset,NOT_LAUNCHED,Natalia Abarca,nio_mc-a0-26ww46b
-Partition Level,parmemdfi0,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests reset,NOT_LAUNCHED,Natalia Abarca,nio_mc-a0-26ww46b
-Partition Level,parmemdfi0,ijtag_basic_tap_tests_continuity,[NWP] TAP: tap tests continuity,NOT_LAUNCHED,Natalia Abarca,nio_mc-a0-26ww46b
-Partition Level,parmemdfi0,icl_verify_dft,[NWP] TAP: icl verify dft,NOT_LAUNCHED,Natalia Abarca,nio_mc-a0-26ww46b
-Stack Level,parmemdfi0,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests reset,NOT_LAUNCHED,Natalia Abarca,nio_mc-a0-26ww46b
-Stack Level,parmemdfi0,ijtag_basic_tap_tests_continuity,[NWP] TAP: tap tests continuity,NOT_LAUNCHED,Natalia Abarca,nio_mc-a0-26ww46b
-Partition Level,parmemdfi0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,NOT_LAUNCHED,Sebastian Porras,nio_mc-a0-26ww46b
-Stack Level,parmemdfi0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,NOT_LAUNCHED,Sebastian Porras,nio_mc-a0-26ww46b
-Partition Level,phy_cluster,ijtag_basic_tap_tests_tlr_reset,[NWP] TAP: tap tests tlr reset,QUEUED,Bhanu Vattikuti,nio_mc-a0-26ww46b
-Partition Level,phy_cluster,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests reset,QUEUED,Bhanu Vattikuti,nio_mc-a0-26ww46b
-Partition Level,phy_cluster,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,QUEUED,Bhanu Vattikuti,nio_mc-a0-26ww46b
-Partition Level,phy_cluster,ijtag_basic_tap_tests_continuity,[NWP] TAP: tap tests continuity,QUEUED,Bhanu Vattikuti,nio_mc-a0-26ww46b
-Partition Level,phy_cluster,icl_verify_dft,[NWP] TAP: icl verify dft,QUEUED,Bhanu Vattikuti,nio_mc-a0-26ww46b
-Stack Level,phy_cluster,ijtag_basic_tap_tests_continuity,[NWP] TAP: tap tests continuity,PASS,Bhanu Vattikuti,nio_mc-a0-26ww46b
-Stack Level,phy_cluster,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,PASS,Bhanu Vattikuti,nio_mc-a0-26ww46b
-Stack Level,phy_cluster,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests reset,QUEUED,Bhanu Vattikuti,nio_mc-a0-26ww46b
+Stack Level,memstack,memstack_mc_cluster_parmcmisc_ijtag_basic_tap_tests_tlr_reset,memstack_mc_cluster_parmcmisc_ijtag_basic_tap_tests_tlr_reset,FAIL,UNKNOWN,nio_mc-a0-26ww45b
+Stack Level,memstack,memstack_pardfi_ijtag_basic_tap_tests_tlr_reset,memstack_pardfi_ijtag_basic_tap_tests_tlr_reset,FAIL,UNKNOWN,nio_mc-a0-26ww45b
+Stack Level,memstack,memstack_mc_cluster_parmcmse_ijtag_basic_tap_tests_tlr_reset,memstack_mc_cluster_parmcmse_ijtag_basic_tap_tests_tlr_reset,FAIL,UNKNOWN,nio_mc-a0-26ww45b
+Stack Level,memstack,memstack_mc_cluster_parmccore_ijtag_basic_tap_tests_tlr_reset,memstack_mc_cluster_parmccore_ijtag_basic_tap_tests_tlr_reset,FAIL,UNKNOWN,nio_mc-a0-26ww45b
+Stack Level,memstack,memstack_phy_cluster_ijtag_basic_tap_tests_tlr_reset,memstack_phy_cluster_ijtag_basic_tap_tests_tlr_reset,FAIL,UNKNOWN,nio_mc-a0-26ww45b
+Partition Level,pardfi,ijtag_basic_tap_tests_tlr_reset,[NWP] TAP: tap tests tlr reset,FAIL,Natalia Abarca,nio_mc-a0-26ww45b
+Partition Level,pardfi,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests reset,FAIL,Natalia Abarca,nio_mc-a0-26ww45b
+Partition Level,pardfi,ijtag_basic_tap_tests_user_defined,[NWP] TAP: IDCODE all taps in the partition,FAIL,Natalia Abarca,nio_mc-a0-26ww45b
+Partition Level,pardfi,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,FAIL,Natalia Abarca,nio_mc-a0-26ww45b
+Partition Level,pardfi,ijtag_basic_tap_tests_continuity,[NWP] TAP: tap tests continuity,PASS,Natalia Abarca,nio_mc-a0-26ww45b
+Partition Level,pardfi,icl_verify_dft,[NWP] TAP: icl verify dft,PASS,Natalia Abarca,nio_mc-a0-26ww45b
+Stack Level,pardfi,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,FAIL,Natalia Abarca,nio_mc-a0-26ww45b
+Stack Level,pardfi,ijtag_basic_tap_tests_continuity,[NWP] TAP: tap tests continuity,FAIL,Natalia Abarca,nio_mc-a0-26ww45b
+Stack Level,pardfi,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests reset,QUEUED,Natalia Abarca,nio_mc-a0-26ww45b
+Partition Level,parmccore,ijtag_basic_tap_tests_tlr_reset,[NWP] TAP: tap tests tlr reset,PASS,Maria Perez,nio_mc-a0-26ww45b
+Partition Level,parmccore,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests reset,PASS,Maria Perez,nio_mc-a0-26ww45b
+Partition Level,parmccore,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,PASS,Maria Perez,nio_mc-a0-26ww45b
+Partition Level,parmccore,ijtag_basic_tap_tests_continuity,[NWP] TAP: tap tests continuity,PASS,Maria Perez,nio_mc-a0-26ww45b
+Partition Level,parmccore,icl_verify_dft,[NWP] TAP: icl verify dft,PASS,Maria Perez,nio_mc-a0-26ww45b
+Stack Level,parmccore,ijtag_basic_tap_tests_continuity,[NWP] TAP: tap tests continuity,PASS,Maria Perez,nio_mc-a0-26ww45b
+Stack Level,parmccore,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,PASS,Maria Perez,nio_mc-a0-26ww45b
+Stack Level,parmccore,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests reset,QUEUED,Maria Perez,nio_mc-a0-26ww45b
+Partition Level,parmcmisc,ijtag_basic_tap_tests_continuity,[NWP] TAP: tap tests continuity,PASS,SathyahX Sv,nio_mc-a0-26ww45b
+Stack Level,parmcmisc,ijtag_basic_tap_tests_continuity,[NWP] TAP: tap tests continuity,FAIL,SathyahX Sv,nio_mc-a0-26ww45b
+Partition Level,parmcmisc,ijtag_basic_tap_tests_tlr_reset,[NWP] TAP: tap tests tlr reset,FAIL,Sebastian Porras,nio_mc-a0-26ww45b
+Partition Level,parmcmisc,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests reset,PASS,Sebastian Porras,nio_mc-a0-26ww45b
+Partition Level,parmcmisc,ijtag_basic_tap_tests_user_defined,[NWP] TAP: IDCODE all taps in the partition,PASS,Sebastian Porras,nio_mc-a0-26ww45b
+Partition Level,parmcmisc,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,PASS,Sebastian Porras,nio_mc-a0-26ww45b
+Partition Level,parmcmisc,icl_verify_dft,[NWP] TAP: icl verify dft,PASS,Sebastian Porras,nio_mc-a0-26ww45b
+Stack Level,parmcmisc,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,FAIL,Sebastian Porras,nio_mc-a0-26ww45b
+Stack Level,parmcmisc,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests reset,QUEUED,Sebastian Porras,nio_mc-a0-26ww45b
+Partition Level,parmcmse,ijtag_basic_tap_tests_tlr_reset,[NWP] TAP: tap tests tlr reset,PASS,Sebastian Porras,nio_mc-a0-26ww45b
+Partition Level,parmcmse,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests reset,PASS,Sebastian Porras,nio_mc-a0-26ww45b
+Partition Level,parmcmse,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,PASS,Sebastian Porras,nio_mc-a0-26ww45b
+Partition Level,parmcmse,ijtag_basic_tap_tests_continuity,[NWP] TAP: tap tests continuity,PASS,Sebastian Porras,nio_mc-a0-26ww45b
+Partition Level,parmcmse,icl_verify_dft,[NWP] TAP: icl verify dft,PASS,Sebastian Porras,nio_mc-a0-26ww45b
+Stack Level,parmcmse,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,PASS,Sebastian Porras,nio_mc-a0-26ww45b
+Stack Level,parmcmse,ijtag_basic_tap_tests_continuity,[NWP] TAP: tap tests continuity,PASS,Sebastian Porras,nio_mc-a0-26ww45b
+Stack Level,parmcmse,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests reset,QUEUED,Sebastian Porras,nio_mc-a0-26ww45b
+Partition Level,parmemdfi0,ijtag_basic_tap_tests_tlr_reset,[NWP] TAP: tap tests tlr reset,NOT_LAUNCHED,Natalia Abarca,nio_mc-a0-26ww45b
+Partition Level,parmemdfi0,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests reset,NOT_LAUNCHED,Natalia Abarca,nio_mc-a0-26ww45b
+Partition Level,parmemdfi0,ijtag_basic_tap_tests_continuity,[NWP] TAP: tap tests continuity,NOT_LAUNCHED,Natalia Abarca,nio_mc-a0-26ww45b
+Partition Level,parmemdfi0,icl_verify_dft,[NWP] TAP: icl verify dft,NOT_LAUNCHED,Natalia Abarca,nio_mc-a0-26ww45b
+Stack Level,parmemdfi0,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests reset,NOT_LAUNCHED,Natalia Abarca,nio_mc-a0-26ww45b
+Stack Level,parmemdfi0,ijtag_basic_tap_tests_continuity,[NWP] TAP: tap tests continuity,NOT_LAUNCHED,Natalia Abarca,nio_mc-a0-26ww45b
+Partition Level,parmemdfi0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,NOT_LAUNCHED,Sebastian Porras,nio_mc-a0-26ww45b
+Stack Level,parmemdfi0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,NOT_LAUNCHED,Sebastian Porras,nio_mc-a0-26ww45b
+Partition Level,phy_cluster,ijtag_basic_tap_tests_tlr_reset,[NWP] TAP: tap tests tlr reset,PASS,Bhanu Vattikuti,nio_mc-a0-26ww45b
+Partition Level,phy_cluster,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests reset,PASS,Bhanu Vattikuti,nio_mc-a0-26ww45b
+Partition Level,phy_cluster,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,PASS,Bhanu Vattikuti,nio_mc-a0-26ww45b
+Partition Level,phy_cluster,ijtag_basic_tap_tests_continuity,[NWP] TAP: tap tests continuity,PASS,Bhanu Vattikuti,nio_mc-a0-26ww45b
+Partition Level,phy_cluster,icl_verify_dft,[NWP] TAP: icl verify dft,PASS,Bhanu Vattikuti,nio_mc-a0-26ww45b
+Stack Level,phy_cluster,ijtag_basic_tap_tests_continuity,[NWP] TAP: tap tests continuity,PASS,Bhanu Vattikuti,nio_mc-a0-26ww45b
+Stack Level,phy_cluster,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,PASS,Bhanu Vattikuti,nio_mc-a0-26ww45b
+Stack Level,phy_cluster,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests reset,QUEUED,Bhanu Vattikuti,nio_mc-a0-26ww45b
 Partition Level,parmioasf_uio_0,ijtag_basic_tap_tests_tlr_reset,[NWP] TAP: tap tests tlr reset,PASS,Natalia Abarca,nio_uio-a0-26ww44b
 Partition Level,parmioasf_uio_0,ijtag_basic_tap_tests_reset,[NWP] TAP: tap tests reset,PASS,Natalia Abarca,nio_uio-a0-26ww44b
 Partition Level,parmioasf_uio_0,ijtag_basic_tap_tests_rw_access,[NWP] TAP: tap tests rw access,PASS,Natalia Abarca,nio_uio-a0-26ww44b
