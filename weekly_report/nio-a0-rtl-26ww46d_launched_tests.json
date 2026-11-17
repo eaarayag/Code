@@ -1,5 +1,5 @@
 {
-  "feeder_running": true,
+  "feeder_running": false,
   "launched": [
     "paraccasf_atspeed_edt_edt_low_internal_loopback",
     "paraccasf_atspeed_edt_edt_low_internal_serial_chain",
